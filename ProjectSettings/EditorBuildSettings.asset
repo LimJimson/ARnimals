@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TitleScreen.unity
+    guid: 4f528fbc751a94049aff8c0d01a396fc
+  - enabled: 1
+    path: Assets/Scenes/GuideSelector.unity
+    guid: 4fe1e4c301546454a9818ce8abe06f0d
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 5bfb3a76203590644b45ecee821be5f7
+  - enabled: 1
+    path: Assets/Scenes/Animal Information.unity
+    guid: e7a589c956e862249a54fd348cb02248
+  - enabled: 1
+    path: Assets/Scenes/Animal Selector AR.unity
+    guid: f0fe97c0d5bd9334a86be439687ab4d1
+  - enabled: 1
+    path: Assets/Scenes/AR.unity
+    guid: 6bdce89659816455b9f906fc62d19910
+  - enabled: 1
+    path: Assets/Scenes/ModeSelect.unity
+    guid: ea1061ad9522d79458e89aa6c871740c
+  - enabled: 1
+    path: Assets/Scenes/MiniGamesSelect.unity
+    guid: 2b7651e141b056a42820ec61b244b954
+  - enabled: 1
+    path: Assets/Scenes/FindTheAnimal/FTA_lvlSelect.unity
+    guid: b5a233d26e90b3447af1c75c9d365ddd
+  - enabled: 1
+    path: Assets/Scenes/GuessTheAnimalFromSound/GTAFS_lvlSelect.unity
+    guid: a3123e04f17397f47899e1629d5d17ae
+  - enabled: 1
+    path: Assets/Scenes/CatchTheFood/CTF_LevelSelector.unity
+    guid: 4d118e9efb723da4ebcd5bada4ed5e44
+  - enabled: 1
+    path: Assets/Scenes/GuessTheAnimalFromSound/GTAFS_Game.unity
+    guid: 230b67b9de8740b4687bad247730409a
+  - enabled: 1
+    path: Assets/Scenes/CatchTheFood/CTF_Game.unity
+    guid: ba7afa1f5331ebd41bcbca6dc8fa03fb
+  m_configObjects:
+    Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
+      type: 2}
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 89a6d18d3df8d3e4fa917b0f9a963bc0,
+      type: 2}
+    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: de8a8e4f987434338a4b1062feb8d069,
+      type: 2}
+    com.unity.xr.arcore.PlayerSettings: {fileID: 11400000, guid: c2f7b8d7c0bff4d10874cbcf3f24af78,
+      type: 2}
+    com.unity.xr.arkit.PlayerSettings: {fileID: 11400000, guid: b27ec7d82a91a48e69fd689ad6808e5e,
+      type: 2}
+    com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: 1eb95d77acb39444e8cf44313496a874,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 58f40b12bbc864f3c96c6505a9a1e1e3,
+      type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 6bb381a8ba31f114d9724357633b4625,
+      type: 2}

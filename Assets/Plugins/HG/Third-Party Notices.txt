@@ -1,0 +1,17 @@
+This asset is governed by the Asset Store EULA; however, the following components are governed by the licenses indicated below:
+
+A. IonicZip
+Ms-PL
+Please see Zip/License.txt for details.
+
+B. BZIP2
+Apache 2.0
+Please see Zip/License.BZip2.txt for details.
+
+C. jzlib
+jzlib License
+Please see Zip/License.zlib.txt for details.
+
+D. zlib
+zlib License
+Please see Zip/License.zlib.txt for details.

@@ -51,10 +51,10 @@ public class ARPlacement : MonoBehaviour
 
         //Main AR
         
-        GameObject clearUp = GameObject.FindGameObjectWithTag("ARMultiModel");
-        Destroy(clearUp);
-        Destroy(spawnedObject);
-        spawnedObject = null;
+        // GameObject clearUp = GameObject.FindGameObjectWithTag("ARMultiModel");
+        // Destroy(clearUp);
+        // Destroy(spawnedObject);
+        // spawnedObject = null;
 
     }
 

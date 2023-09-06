@@ -77,8 +77,6 @@ public class CTF_TutorialManager : MonoBehaviour
         startGamePanel.SetActive(false);
         pauseAndHpCanvas.SetActive(false);
 
-        PlayerPrefs.SetInt("IsTutorialDone", 0);
-
         bool isTutorialDone = PlayerPrefs.GetInt("IsTutorialDone", 0) == 1;
         if (isTutorialDone) {
             tutorialCanvas.SetActive(false);

@@ -71,10 +71,13 @@ public class CTF_TutorialManager : MonoBehaviour
     {
         checkGuide();
         pagesContents();
+        disableAllGameObjects();
         backButton.SetActive(false);
         tutorialCanvas.SetActive(true);
         startGamePanel.SetActive(false);
-        pauseAndHpCanvas.SetActive(false);        
+        pauseAndHpCanvas.SetActive(false);
+
+        PlayerPrefs.SetInt("IsTutorialDone", 0);
 
         bool isTutorialDone = PlayerPrefs.GetInt("IsTutorialDone", 0) == 1;
         if (isTutorialDone) {
@@ -135,14 +138,20 @@ public class CTF_TutorialManager : MonoBehaviour
         tutorialCanvas.SetActive(false);
         startGamePanel.SetActive(true);
         pauseAndHpCanvas.SetActive(true);
-        PlayerPrefs.SetInt("IsTutorialDone", 1);
+
+        if (PlayerPrefs.GetInt("IsTutorialDone", 0) == 0) {
+            gameResumeTimerManager.SetActive(false);
+        }
+        else {
+            gameResumeTimerManager.SetActive(true);
+        }
 
         if (gameStartManager.GetGameStarted() == true) 
         {
             startGamePanel.SetActive(false);
         }
 
-        gameResumeTimerManager.SetActive(true);
+        PlayerPrefs.SetInt("IsTutorialDone", 1);
     }
 
     public void clickToNext()
@@ -160,14 +169,19 @@ public class CTF_TutorialManager : MonoBehaviour
             startGamePanel.SetActive(true);
             pauseAndHpCanvas.SetActive(true);
 
-            PlayerPrefs.SetInt("IsTutorialDone", 1);
+            if (PlayerPrefs.GetInt("IsTutorialDone", 0) == 0) {
+            gameResumeTimerManager.SetActive(false);
+            }
+            else {
+                gameResumeTimerManager.SetActive(true);
+            }
 
             if (gameStartManager.GetGameStarted() == true) 
             {
                 startGamePanel.SetActive(false);
             }
 
-            gameResumeTimerManager.SetActive(true);
+            PlayerPrefs.SetInt("IsTutorialDone", 1);
         }
 
         if (pageNum > 1) 
@@ -191,12 +205,12 @@ public class CTF_TutorialManager : MonoBehaviour
             dialogBox.transform.localPosition = new Vector3(-238.421f, 199f, 0f);
             dialogBox.transform.localScale = new Vector3(1f, 1.4f, 1f);
 
-            dialogText.transform.localPosition = new Vector3(-248.31f, 258f, 0f);
+            dialogText.transform.localPosition = new Vector3(-248.31f, 235f, 0f);
         }
         else if (pageNum == 1) 
         {
             dialogText.fontSize = 39f;
-            dialogText.text = "Introducing your <color=yellow> animal character </color>! You can help this special animal move left and right to catch the yummy food falling from above.";
+            dialogText.text = "Introducing your <color=yellow>animal character</color>! You can help this special animal move left and right to catch the yummy food falling from above.";
 
             tutorial.transform.localPosition = (new Vector3(0f, -160.0615f, 0f));
 
@@ -226,10 +240,13 @@ public class CTF_TutorialManager : MonoBehaviour
         {
 
             dialogText.fontSize = 44f;
-            dialogText.text = "Here's your <color=yellow>animal's score</color>! Each correct answer will earn you one point. Aim for a high score!";
+            dialogText.text = "Here's your <color=yellow>animal's score</color>! Each correct food caught will earn you one point. Aim for a high score!";
             tutorial.transform.localPosition = (new Vector3(576f, -39f, 0f));
 
             dialogText.transform.localPosition = new Vector3(-248.31f, 220f, 0f);
+
+            dialogBox.transform.localPosition = new Vector3(-238.421f, 186f, 0f);
+            dialogBox.transform.localScale = new Vector3(1f, 1.2f, 1f);
 
             showComponent(score, scoreGameObject);
         }

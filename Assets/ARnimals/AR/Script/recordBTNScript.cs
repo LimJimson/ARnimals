@@ -70,6 +70,13 @@ public class recordBTNScript : MonoBehaviour
         }
     }
 
+    public void stopRecord(){
+        if(isRecording){
+        ScreenRecorderBridge.StopScreenRecording();
+        isRecording = false;
+        }
+    }
+
     public void getVideoPath()
     {
         DirPath = "/storage/emulated/0/Movies/";

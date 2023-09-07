@@ -34,8 +34,6 @@ public class ARPlacement : MonoBehaviour
 
     void Start()
     {
-
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
         modelIndex = StateNameController.animalIndexChosen;
 
         //UI and Canvas
@@ -63,10 +61,6 @@ public class ARPlacement : MonoBehaviour
         return modelIndex;
     }
 
-    void FixedUpdate()
-    {
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
-    }
 
 
     void ARPlaceObject()

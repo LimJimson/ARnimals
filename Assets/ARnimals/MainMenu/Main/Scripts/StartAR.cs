@@ -46,6 +46,7 @@ public class StartAR : MonoBehaviour
     }
     public void ResetGameClickedYes()
     {
+        PlayerPrefs.SetInt("CTF_IsTutorialDone", 0);
         SaveManager.DeleteFile();
     }
     

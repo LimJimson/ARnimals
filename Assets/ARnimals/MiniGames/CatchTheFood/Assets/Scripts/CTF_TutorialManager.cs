@@ -77,7 +77,7 @@ public class CTF_TutorialManager : MonoBehaviour
         startGamePanel.SetActive(false);
         pauseAndHpCanvas.SetActive(false);
 
-        bool isTutorialDone = PlayerPrefs.GetInt("IsTutorialDone", 0) == 1;
+        bool isTutorialDone = PlayerPrefs.GetInt("CTF_IsTutorialDone", 0) == 1;
         if (isTutorialDone) {
             tutorialCanvas.SetActive(false);
             startGamePanel.SetActive(true);
@@ -137,7 +137,7 @@ public class CTF_TutorialManager : MonoBehaviour
         startGamePanel.SetActive(true);
         pauseAndHpCanvas.SetActive(true);
 
-        if (PlayerPrefs.GetInt("IsTutorialDone", 0) == 0) {
+        if (PlayerPrefs.GetInt("CTF_IsTutorialDone", 0) == 0) {
             gameResumeTimerManager.SetActive(false);
         }
         else {
@@ -149,7 +149,7 @@ public class CTF_TutorialManager : MonoBehaviour
             startGamePanel.SetActive(false);
         }
 
-        PlayerPrefs.SetInt("IsTutorialDone", 1);
+        PlayerPrefs.SetInt("CTF_IsTutorialDone", 1);
     }
 
     public void clickToNext()
@@ -167,7 +167,7 @@ public class CTF_TutorialManager : MonoBehaviour
             startGamePanel.SetActive(true);
             pauseAndHpCanvas.SetActive(true);
 
-            if (PlayerPrefs.GetInt("IsTutorialDone", 0) == 0) {
+            if (PlayerPrefs.GetInt("CTF_IsTutorialDone", 0) == 0) {
             gameResumeTimerManager.SetActive(false);
             }
             else {
@@ -179,7 +179,7 @@ public class CTF_TutorialManager : MonoBehaviour
                 startGamePanel.SetActive(false);
             }
 
-            PlayerPrefs.SetInt("IsTutorialDone", 1);
+            PlayerPrefs.SetInt("CTF_IsTutorialDone", 1);
         }
 
         if (pageNum > 1) 

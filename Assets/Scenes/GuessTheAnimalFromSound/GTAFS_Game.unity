@@ -357,8 +357,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Elephant
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ce2b4c8bea39be9418cd75ab38f4a75b, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: d62d74fca18cc5d4faf80a81244ec67e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -382,7 +382,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 171.45
+  m_fontSize: 175.9
   m_fontSizeBase: 84.36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7763,8 +7763,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -567, y: -32}
-  m_SizeDelta: {x: 757.1559, y: 330.1142}
+  m_AnchoredPosition: {x: 1.9916, y: 18}
+  m_SizeDelta: {x: 757.1559, y: 198.3452}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1285704235
 Animator:
@@ -7808,16 +7808,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: Wait for the sound to finish
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ce2b4c8bea39be9418cd75ab38f4a75b, type: 2}
-  m_sharedMaterial: {fileID: -1888159535324298133, guid: ce2b4c8bea39be9418cd75ab38f4a75b,
+  m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
+  m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294901990
-  m_fontColor: {r: 0.9037957, g: 0, b: 1, a: 1}
+    rgba: 4294934245
+  m_fontColor: {r: 0.8982938, g: 0.495283, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7834,15 +7834,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 79.09
+  m_fontSize: 77.3
   m_fontSizeBase: 195.4
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 79.09
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -8355,8 +8355,7 @@ MonoBehaviour:
   m_text: Question # _
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
-  m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: c857b1a7e597d6d499e4ccc522122d45, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8386,7 +8385,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 39.7
   m_fontSizeMax: 99.33
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535

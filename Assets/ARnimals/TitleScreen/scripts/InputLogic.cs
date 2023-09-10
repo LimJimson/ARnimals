@@ -41,7 +41,7 @@ public class InputLogic : MonoBehaviour
 
         else if (input.text.Length <= minCharCount)
         {
-            error.text = "Name must be 4-10 characters long";
+            error.text = "Name must be 2-10 characters long";
 
         }
         else

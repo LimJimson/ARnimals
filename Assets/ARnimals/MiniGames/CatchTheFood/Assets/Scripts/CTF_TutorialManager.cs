@@ -13,11 +13,6 @@ public class CTF_TutorialManager : MonoBehaviour
 
     [SerializeField] private CTF_GameStartManager gameStartManager;
 
-    [Header("Trivias")]
-    [SerializeField] private GameObject trivia1;
-    [SerializeField] private GameObject trivia2;
-    [SerializeField] private GameObject trivia3;
-
     [Header("Game Objects")]
 
     [SerializeField] private GameObject scoreGameObject;
@@ -43,6 +38,8 @@ public class CTF_TutorialManager : MonoBehaviour
     [SerializeField] private GameObject backButton;
     [SerializeField] private TextMeshProUGUI click2NextTxtRight;
     [SerializeField] private TextMeshProUGUI click2NextTxtLeft;
+    [SerializeField] private TextMeshProUGUI click2NextTxtBottm;
+    [SerializeField] private GameObject click2NextTxtBottomGameObject;
     [SerializeField] private GameObject click2NextTxtRightGameObject;
     [SerializeField] private GameObject click2NextTxtLeftGameObject;
 
@@ -59,6 +56,11 @@ public class CTF_TutorialManager : MonoBehaviour
     [SerializeField] private Sprite[] spriteForGuide;
     [SerializeField] private TextMeshProUGUI pageNumTxt;
     [SerializeField] private Sprite[] spriteForDialogBox;
+
+    [Header("Trivias")]
+    [SerializeField] private GameObject[] trivias;
+    [SerializeField] private GameObject click2NxtPanelForTrivia;
+    [SerializeField] private GameObject panelForTrivia;
 
     [SerializeField] private int pageNum = 0;
 
@@ -85,7 +87,7 @@ public class CTF_TutorialManager : MonoBehaviour
         tutorialCanvas.SetActive(true);
         startGamePanel.SetActive(false);
         pauseAndHpCanvas.SetActive(false);
-
+        
         bool isTutorialDone = PlayerPrefs.GetInt("CTF_IsTutorialDone", 0) == 1;
         if (isTutorialDone) {
             tutorialCanvas.SetActive(false);
@@ -126,7 +128,7 @@ public class CTF_TutorialManager : MonoBehaviour
     {
         hideAllComponents();
         
-        if (pageNum > 1)
+        if (pageNum >= 1)
         {
             pageNum--;
             pagesContents();
@@ -197,10 +199,8 @@ public class CTF_TutorialManager : MonoBehaviour
         pageNumTxt.text = pageNum.ToString() + "/7";
     }
 
-    public void pagesContents() 
+    private void tutorialIntro() 
     {
-        if(pageNum == 0) 
-        {
             hideAllComponents();
             pageNumTxt.text = "";
             dialogText.fontSize = 41.8f;
@@ -213,9 +213,58 @@ public class CTF_TutorialManager : MonoBehaviour
             dialogBox.transform.localScale = new Vector3(1f, 1.4f, 1f);
 
             dialogText.transform.localPosition = new Vector3(-248.31f, 235f, 0f);
+    }
+
+    public void pagesContents() 
+    {
+        if(pageNum == 0) 
+        {
+            if (PlayerPrefs.GetInt("CTF_IsTutorialDone", 0) == 0) 
+            {
+                tutorialIntro();
+            }
+            else 
+            {
+                tutorial.SetActive(false);
+                click2NxtPanelForTrivia.SetActive(true);
+                panelForTrivia.SetActive(true);            
+                hideAllComponents();
+                showClickToNextTxt(click2NextTxtBottomGameObject,click2NextTxtBottm, 1);
+
+                // Retrieve the selected level from PlayerPrefs
+                string selectedLevel = PlayerPrefs.GetString("SelectedLevel");
+
+                // Change the background based on the selected level
+                switch (selectedLevel)
+                {
+                    case "Level 1":
+                        trivias[0].SetActive(true);
+                        break;
+                    case "Level 2":
+                        trivias[1].SetActive(true);
+                        break;
+                    case "Level 3":
+                        trivias[2].SetActive(true);
+                        break;
+                }
+            }
+
+            backButton.SetActive(false);
         }
         else if (pageNum == 1) 
         {
+            tutorial.SetActive(true);
+            trivias[0].SetActive(false);
+            trivias[1].SetActive(false);
+            trivias[2].SetActive(false);
+            click2NxtPanelForTrivia.SetActive(false);
+            panelForTrivia.SetActive(false);
+
+            if (PlayerPrefs.GetInt("CTF_IsTutorialDone", 1) == 1) 
+            {
+                backButton.SetActive(true);
+            }
+
             dialogText.fontSize = 39f;
             dialogText.text = "Introducing your <color=yellow>animal character</color>! You can help this special animal move left and right to catch the yummy food falling from above.";
 
@@ -326,6 +375,7 @@ public class CTF_TutorialManager : MonoBehaviour
     {
         click2NextTxtLeftGameObject.SetActive(false);
         click2NextTxtRightGameObject.SetActive(false);
+        click2NextTxtBottomGameObject.SetActive(false);
 
         gameObject.SetActive(true);
 

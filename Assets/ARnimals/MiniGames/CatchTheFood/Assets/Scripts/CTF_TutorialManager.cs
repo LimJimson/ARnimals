@@ -13,11 +13,6 @@ public class CTF_TutorialManager : MonoBehaviour
 
     [SerializeField] private CTF_GameStartManager gameStartManager;
 
-    [Header("Trivias")]
-    [SerializeField] private GameObject trivia1;
-    [SerializeField] private GameObject trivia2;
-    [SerializeField] private GameObject trivia3;
-
     [Header("Game Objects")]
 
     [SerializeField] private GameObject scoreGameObject;
@@ -41,10 +36,6 @@ public class CTF_TutorialManager : MonoBehaviour
     [Header("TutorialComponents")]
     [SerializeField] private GameObject skipButton;
     [SerializeField] private GameObject backButton;
-    [SerializeField] private TextMeshProUGUI click2NextTxtRight;
-    [SerializeField] private TextMeshProUGUI click2NextTxtLeft;
-    [SerializeField] private GameObject click2NextTxtRightGameObject;
-    [SerializeField] private GameObject click2NextTxtLeftGameObject;
 
     private string guideChosen;
 
@@ -134,8 +125,9 @@ public class CTF_TutorialManager : MonoBehaviour
         if (pageNum == 1) 
         {
             backButton.SetActive(false);
-        }
 
+        }
+        
         pageNumTxt.text = pageNum.ToString() + "/7";
     }
     
@@ -204,10 +196,9 @@ public class CTF_TutorialManager : MonoBehaviour
             hideAllComponents();
             pageNumTxt.text = "";
             dialogText.fontSize = 41.8f;
-            dialogText.text = "Hello there! I'm <color=yellow>" + guide_name + "</color>, your trusty guide who will help you learn and navigate this game. Get ready for an exciting learning experience!";            
+            dialogText.text = "Hello there! I'm <color=yellow>" + guide_name + "</color>, your trusty guide who will help you learn and navigate this game. Get ready for an exciting learning experience!";
+            
             tutorial.transform.localPosition = (new Vector3(50.49997f, -160.5615f, 0f));
-
-            showClickToNextTxt(click2NextTxtRightGameObject, click2NextTxtRight, 1);
 
             dialogBox.transform.localPosition = new Vector3(-238.421f, 199f, 0f);
             dialogBox.transform.localScale = new Vector3(1f, 1.4f, 1f);
@@ -220,8 +211,6 @@ public class CTF_TutorialManager : MonoBehaviour
             dialogText.text = "Introducing your <color=yellow>animal character</color>! You can help this special animal move left and right to catch the yummy food falling from above.";
 
             tutorial.transform.localPosition = (new Vector3(0f, -160.0615f, 0f));
-
-            showClickToNextTxt(click2NextTxtRightGameObject, click2NextTxtRight, 1);
 
             dialogBox.transform.localPosition = new Vector3(-238.421f, 194f, 0f);
             dialogBox.transform.localScale = new Vector3(1f, 1.4f, 1f);
@@ -238,8 +227,6 @@ public class CTF_TutorialManager : MonoBehaviour
 
             tutorial.transform.localPosition = (new Vector3(-81f, -272.1f, 0f));
 
-            showClickToNextTxt(click2NextTxtRightGameObject, click2NextTxtRight, 1);
-
             dialogBox.transform.localPosition = new Vector3(-238.421f, 186f, 0f);
             dialogBox.transform.localScale = new Vector3(1f, 1.2f, 1f);
 
@@ -249,11 +236,10 @@ public class CTF_TutorialManager : MonoBehaviour
         }
         else if (pageNum == 3) 
         {
+
             dialogText.fontSize = 44f;
             dialogText.text = "Here's your <color=yellow>animal's score</color>! Each correct food caught will earn you one point. Aim for a high score!";
             tutorial.transform.localPosition = (new Vector3(576f, -39f, 0f));
-
-            showClickToNextTxt(click2NextTxtLeftGameObject, click2NextTxtLeft, 1);
 
             dialogText.transform.localPosition = new Vector3(-248.31f, 220f, 0f);
 
@@ -269,8 +255,6 @@ public class CTF_TutorialManager : MonoBehaviour
 
             tutorial.transform.localPosition = (new Vector3(502f, -72f, 0f));
 
-            showClickToNextTxt(click2NextTxtLeftGameObject, click2NextTxtLeft, 1);
-
             dialogBox.transform.localPosition = new Vector3(-238.421f, 200f, 0f);
             dialogBox.transform.localScale = new Vector3(1f, 1.4f, 1f);
 
@@ -282,10 +266,8 @@ public class CTF_TutorialManager : MonoBehaviour
         {
             dialogText.fontSize = 36.5f;
             dialogText.text = "Introducing the <color=yellow>game's timer</color>! You have 60 seconds to catch the falling foods. To earn a reward, aim to score 20 or more without losing all your hearts before time runs out. Good luck!";
-
+        
             tutorial.transform.localPosition = (new Vector3(371f, -110f, 0f));
-
-            showClickToNextTxt(click2NextTxtLeftGameObject, click2NextTxtLeft, 1);
 
             dialogBox.transform.localPosition = new Vector3(-238.421f, 207f, 0f);
             dialogBox.transform.localScale = new Vector3(1f, 1.5f, 1f);
@@ -300,8 +282,6 @@ public class CTF_TutorialManager : MonoBehaviour
             dialogText.text = "Introducing the <color=yellow>settings button</color>! If you want to adjust the volume, restart, or quit the game, simply click on this button. It gives you control over the game settings. Have fun!";
 
             tutorial.transform.localPosition = (new Vector3(52f, -84f, 0f));
-
-            showClickToNextTxt(click2NextTxtRightGameObject, click2NextTxtRight, 1);
             
             dialogBox.transform.localPosition = new Vector3(-238.421f, 216f, 0f);
             dialogBox.transform.localScale = new Vector3(1f, 1.5f, 1f);
@@ -317,28 +297,7 @@ public class CTF_TutorialManager : MonoBehaviour
 
             tutorial.transform.localPosition = (new Vector3(573f, -61f, 0f)); 
 
-            showClickToNextTxt(click2NextTxtLeftGameObject, click2NextTxtLeft, 2);
-
             showComponent(helpButton, helpButtonGameObject);
-        }
-    }
-    private void showClickToNextTxt(GameObject gameObject, TextMeshProUGUI tmpText, int choice) 
-    {
-        click2NextTxtLeftGameObject.SetActive(false);
-        click2NextTxtRightGameObject.SetActive(false);
-
-        gameObject.SetActive(true);
-
-        string clickToNext = "Tap anywhere to go next";
-        string clickToClose = "Tap anywhere to close the tutorial";
-
-        if (choice == 1) 
-        {
-            tmpText.text = clickToNext;
-        }
-        else if (choice == 2) 
-        {
-            tmpText.text = clickToClose;
         }
     }
 

@@ -196,7 +196,7 @@ public class CTF_GameManager : MonoBehaviour
     {
         pauseAndHPCanvas.SetActive(false);
         tutorialCanvas.SetActive(true);
-        int pageNum = tutorialManager.PageNum = 1;
+        int pageNum = tutorialManager.PageNum = 0;
         tutorialManager.PageNumTxt.text = pageNum.ToString() + "/7";
         tutorialManager.pagesContents();
         tutorialManager.disableAllGameObjects();

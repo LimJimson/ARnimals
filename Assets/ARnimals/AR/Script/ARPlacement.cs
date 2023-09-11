@@ -14,9 +14,9 @@ public class ARPlacement : MonoBehaviour
     public Canvas AR_UI;
 
     //Buttons
-    public GameObject _AnimalInteractionContainer;
-    public GameObject[] Animal_interactionsBtns;
+    public GameObject spawnAnimalContainer;
 
+    public GameObject interactionsDropDownContainer;
     public GameObject respawnBTN;
     public GameObject Gamepad;
 
@@ -38,22 +38,13 @@ public class ARPlacement : MonoBehaviour
 
         //UI and Canvas
         AR_UI.gameObject.SetActive(true);
-        _AnimalInteractionContainer.SetActive(true);
-        foreach (GameObject interactions in Animal_interactionsBtns)
-        {
-            interactions.SetActive(false);
-        }
+        spawnAnimalContainer.SetActive(true);
+
         //Buttons
         Gamepad.gameObject.SetActive(false);
         respawnBTN.gameObject.SetActive(true);
 
-        //Main AR
-        
-        // GameObject clearUp = GameObject.FindGameObjectWithTag("ARMultiModel");
-        // Destroy(clearUp);
-        // Destroy(spawnedObject);
-        // spawnedObject = null;
-
+        interactionsDropDownContainer.SetActive(false);
     }
 
     public int getAnimalIndex()
@@ -98,13 +89,7 @@ public class ARPlacement : MonoBehaviour
         // Display gamepad
         Gamepad.gameObject.SetActive(true);
 
-        _AnimalInteractionContainer.SetActive(true);
-
-        foreach (GameObject interactions in Animal_interactionsBtns)
-        {
-            interactions.SetActive(true);
-        }
-
+        interactionsDropDownContainer.SetActive(true);
     }
 
 

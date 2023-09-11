@@ -7338,11 +7338,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 77e665b46f9045a4b83eae4eb561a58b, type: 3}
   audioSrc: {fileID: 2032898682}
   AnimalSounds:
-  - {fileID: 8300000, guid: fa98f916ca4db3d4f8657171c31c3321, type: 3}
-  - {fileID: 8300000, guid: 48ff7b362bf0a524f9c755619ebeeb21, type: 3}
-  - {fileID: 8300000, guid: 70b3c6d2e1db0964cb4a47509e2e71e3, type: 3}
-  - {fileID: 8300000, guid: a20c41ebaf748c74bb5f5bfd6fe84f71, type: 3}
-  - {fileID: 8300000, guid: b9490447370768944b1d57058b088fc3, type: 3}
+  - {fileID: 8300000, guid: 423b1935a49076541b630e86e6adb17c, type: 3}
+  - {fileID: 8300000, guid: 1f90ff832e0c64d4eafb4afee39d130d, type: 3}
+  - {fileID: 8300000, guid: 8bdfae362cc384e498a818af558b7031, type: 3}
+  - {fileID: 8300000, guid: f8996d4dc60f06745b664b2c3703d061, type: 3}
+  - {fileID: 8300000, guid: 1db3fd305f54e8f4c969975b91f504e7, type: 3}
   soundBtns:
   - {fileID: 1405475310}
   - {fileID: 65435424}

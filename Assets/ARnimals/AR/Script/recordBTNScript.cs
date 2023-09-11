@@ -74,6 +74,7 @@ public class recordBTNScript : MonoBehaviour
         if(isRecording){
         ScreenRecorderBridge.StopScreenRecording();
         isRecording = false;
+        StartCoroutine(txtDelay());
         }
     }
 

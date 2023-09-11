@@ -67,7 +67,7 @@ public class ScriptHandler : MonoBehaviour
             StateNameController.successfullDataFetch = true;
             
             nameTxtField.SetActive(false);
-            playerNameLoggedIn.SetText("Currently, playing as: <color=#FFCD06><b><u>" + name + "</u></b></color>");
+            playerNameLoggedIn.SetText("Currently, playing as: <color=#FFCD06><b><u>\n<size=20>" + name + "</size></u></b></color>");
             
 
             

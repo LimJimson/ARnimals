@@ -11,12 +11,12 @@ public class runtimePerms : MonoBehaviour
     public GameObject PermissionDeniedUI;
     void Start()
     {
-        if (!PermissionManager.IsPermissionGranted(Permission.READ_EXTERNAL_STORAGE) || !PermissionManager.IsPermissionGranted(Permission.WRITE_EXTERNAL_STORAGE) || !PermissionManager.IsPermissionGranted(Permission.CAMERA) || !PermissionManager.IsPermissionGranted(Permission.RECORD_AUDIO))
+        if (/*!PermissionManager.IsPermissionGranted(Permission.READ_EXTERNAL_STORAGE) || */!PermissionManager.IsPermissionGranted(Permission.WRITE_EXTERNAL_STORAGE) || !PermissionManager.IsPermissionGranted(Permission.CAMERA) || !PermissionManager.IsPermissionGranted(Permission.RECORD_AUDIO))
         {
             TitleScreenUI.SetActive(false);
             PermissionDeniedUI.SetActive(true);
         }
-        else if (PermissionManager.IsPermissionGranted(Permission.READ_EXTERNAL_STORAGE) && PermissionManager.IsPermissionGranted(Permission.WRITE_EXTERNAL_STORAGE) && PermissionManager.IsPermissionGranted(Permission.CAMERA) && PermissionManager.IsPermissionGranted(Permission.RECORD_AUDIO))
+        else if (/*PermissionManager.IsPermissionGranted(Permission.READ_EXTERNAL_STORAGE) && */PermissionManager.IsPermissionGranted(Permission.WRITE_EXTERNAL_STORAGE) && PermissionManager.IsPermissionGranted(Permission.CAMERA) && PermissionManager.IsPermissionGranted(Permission.RECORD_AUDIO))
         {
             TitleScreenUI.SetActive(true);
             PermissionDeniedUI.SetActive(false);
@@ -27,9 +27,9 @@ public class runtimePerms : MonoBehaviour
 
     public void requestPerms()
     {
-        if (!PermissionManager.IsPermissionGranted(Permission.READ_EXTERNAL_STORAGE)){
-            PermissionManager.RequestPermission(Permission.READ_EXTERNAL_STORAGE, OnPermissionGranted, OnPermissionDenied);
-        }
+        //if (!PermissionManager.IsPermissionGranted(Permission.READ_EXTERNAL_STORAGE)){
+        //    PermissionManager.RequestPermission(Permission.READ_EXTERNAL_STORAGE, OnPermissionGranted, OnPermissionDenied);
+        //}
         if (!PermissionManager.IsPermissionGranted(Permission.WRITE_EXTERNAL_STORAGE))
         {
             PermissionManager.RequestPermission(Permission.WRITE_EXTERNAL_STORAGE, OnPermissionGranted, OnPermissionDenied);
@@ -54,13 +54,13 @@ public class runtimePerms : MonoBehaviour
     }
     public void reloadScene()
     {
-        if (!PermissionManager.IsPermissionGranted(Permission.READ_EXTERNAL_STORAGE) && !PermissionManager.IsPermissionGranted(Permission.WRITE_EXTERNAL_STORAGE) && !PermissionManager.IsPermissionGranted(Permission.CAMERA) && !PermissionManager.IsPermissionGranted(Permission.RECORD_AUDIO))
+        if (/*!PermissionManager.IsPermissionGranted(Permission.READ_EXTERNAL_STORAGE) && */!PermissionManager.IsPermissionGranted(Permission.WRITE_EXTERNAL_STORAGE) && !PermissionManager.IsPermissionGranted(Permission.CAMERA) && !PermissionManager.IsPermissionGranted(Permission.RECORD_AUDIO))
         {
             TitleScreenUI.SetActive(false);
             PermissionDeniedUI.SetActive(true);
             requestPerms();
         }
-        else if (PermissionManager.IsPermissionGranted(Permission.READ_EXTERNAL_STORAGE) && PermissionManager.IsPermissionGranted(Permission.WRITE_EXTERNAL_STORAGE) && PermissionManager.IsPermissionGranted(Permission.CAMERA) && PermissionManager.IsPermissionGranted(Permission.RECORD_AUDIO))
+        else if (/*PermissionManager.IsPermissionGranted(Permission.READ_EXTERNAL_STORAGE) && */PermissionManager.IsPermissionGranted(Permission.WRITE_EXTERNAL_STORAGE) && PermissionManager.IsPermissionGranted(Permission.CAMERA) && PermissionManager.IsPermissionGranted(Permission.RECORD_AUDIO))
         {
             SceneManager.LoadScene("TitleScreen");
         }
@@ -69,7 +69,7 @@ public class runtimePerms : MonoBehaviour
     private void OnPermissionGranted(string grantedPerm)
     {
         Debug.Log("Permission Granted");
-        if (PermissionManager.IsPermissionGranted(Permission.READ_EXTERNAL_STORAGE) && PermissionManager.IsPermissionGranted(Permission.WRITE_EXTERNAL_STORAGE) && PermissionManager.IsPermissionGranted(Permission.CAMERA) && PermissionManager.IsPermissionGranted(Permission.RECORD_AUDIO))
+        if (/*PermissionManager.IsPermissionGranted(Permission.READ_EXTERNAL_STORAGE) && */PermissionManager.IsPermissionGranted(Permission.WRITE_EXTERNAL_STORAGE) && PermissionManager.IsPermissionGranted(Permission.CAMERA) && PermissionManager.IsPermissionGranted(Permission.RECORD_AUDIO))
         {
             SceneManager.LoadScene("TitleScreen");
         }

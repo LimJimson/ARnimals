@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class buttonScripts : MonoBehaviour
 {
@@ -16,19 +17,56 @@ public class buttonScripts : MonoBehaviour
     public GameObject GalleryVidUI;
 
     public GameObject LeanTouchScript;
+    public GameObject noteCanvas;
+
+    public Animator continueBtnNoteAnim;
+    public Button continueBtnNote;
+
+    public GameObject animalBook;
+
     private void Start()
     {
         OptionsUI.SetActive(false);
         GalleryVidUI.SetActive(false);
         GalleryImgUI.SetActive(false);
         GalleryUI.SetActive(false);
+        noteCanvas.SetActive(true);
+        continueBtnNote.interactable = false;
+        StartCoroutine(WaitForAnimation());
     }
 
-    //return button
+    
     public void returnToMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
     }
+
+    private IEnumerator WaitForAnimation()
+    {
+
+        // Wait for the animation to finish
+        float animationDuration = continueBtnNoteAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+        yield return new WaitForSeconds(animationDuration);
+
+        // Enable the button after the animation is complete
+        continueBtnNote.interactable = true;
+        StopAllCoroutines();
+    }
+
+
+    public void showAnimalInfo()
+    {
+        animalBook.SetActive(true);
+    }
+    public void hideAnimalInfo()
+    {
+        animalBook.SetActive(false);
+    }
+    public void hideNote()
+    {
+        noteCanvas.SetActive(false);
+    }
+
     public void openOptions()
     {
         LeanTouchScript.SetActive(false);
@@ -39,6 +77,10 @@ public class buttonScripts : MonoBehaviour
     {
         LeanTouchScript.SetActive(true);
         OptionsUI.SetActive(false);
+    }
+    public void returnToAnimalSelectBTN()
+    {
+        SceneManager.LoadScene("Animal Selector AR");
     }
 
     public void showImgGallery()

@@ -18,6 +18,8 @@ public class ScreenshotPreview : MonoBehaviour {
     public Button deleteBtn;
 	int whichScreenShotIsShown= 0;
 
+    public TMP_Text fileNameImgTxt;
+
 	// Use this for initialization
 	void Start () {
         errorTxtNoImg.gameObject.SetActive(false);
@@ -44,14 +46,19 @@ public class ScreenshotPreview : MonoBehaviour {
         #endif
 
     }
+    string ImgFileName;
 	void GetPictureAndShowIt()
 	{
-		string pathToFile = files [whichScreenShotIsShown];
+        ImgFileName = Path.GetFileName(files[whichScreenShotIsShown]);
+        fileNameImgTxt.text = ImgFileName;
+        string pathToFile = files [whichScreenShotIsShown];
 		imgCounter.text = whichScreenShotIsShown+1+"/"+files.Length;
 		Texture2D texture = GetScreenshotImage (pathToFile);
 		Sprite sp = Sprite.Create (texture, new Rect (0, 0, texture.width, texture.height),
 			new Vector2 (0.5f, 0.5f));
 		Image.GetComponent<Image> ().sprite = sp;
+
+
 	}
 
 	Texture2D GetScreenshotImage(string filePath)

@@ -46,7 +46,7 @@ public class TakeScreenshot : MonoBehaviour {
             ss.Apply();
 
             // Save the screenshot to Gallery/Photos
-            string name = string.Format("{0}_Capture{1}_{2}.png", Application.productName, "{0}", System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"));
+            string name = string.Format("{0}_Capture_{1}.png", Application.productName ,System.DateTime.Now.ToString("yyyy -MM-dd_HH-mm-ss"));
             Debug.Log("Permission result: " + NativeGallery.SaveImageToGallery(ss, Application.productName + " Captures", name));
             takingScreenshot = false;
             AR_UI.SetActive(true);
@@ -54,6 +54,6 @@ public class TakeScreenshot : MonoBehaviour {
 
             yield return new WaitForSeconds(2f);
             text.text = "";
-
+        StopAllCoroutines();
     }
 }

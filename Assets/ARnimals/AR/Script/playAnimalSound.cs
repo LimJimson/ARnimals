@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class playAnimalSound : MonoBehaviour
@@ -9,9 +10,28 @@ public class playAnimalSound : MonoBehaviour
     public AudioSource audioSrc;
     public AudioClip[] clip;
 
-    public void playSound()
+    public GameObject animalSndBtn;
+
+    private void Awake()
     {
         animalIndex = _arPlacementScript.getAnimalIndex();
+
+    }
+
+    private void Start()
+    {
+        if (clip[animalIndex] == null)
+        {
+            animalSndBtn.SetActive(false);
+        }
+        else
+        {
+            animalSndBtn.SetActive(true);
+        }
+    }
+    public void playSound()
+    {
+        
         if (!audioSrc.isPlaying)
         {
             audioSrc.PlayOneShot(clip[animalIndex]);

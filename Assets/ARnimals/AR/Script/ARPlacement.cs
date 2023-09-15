@@ -16,82 +16,139 @@ public class ARPlacement : MonoBehaviour
     //Buttons
     public GameObject spawnAnimalContainer;
 
-    public GameObject interactionsDropDownContainer;
-    public GameObject respawnBTN;
-    public GameObject Gamepad;
 
     //Main AR
     public GameObject Ar_holder;
     private GameObject spawnedObject;
-    private Pose PlacementPose;
 
-    //private bool placementPoseIsValid = false;
 
     //Objects to spawn container
     public GameObject[] arModels;
+    public GameObject[] arModelsCopy;
     int modelIndex;
 
+    public Camera arCamera;
+    bool didInitialAnimalSpawn = false;
+
+    public GameObject limitAnimalTXT;
+    public Animator limitAnimalTXTAnim;
+
+    private void Awake()
+    {
+        modelIndex = StateNameController.animalIndexChosen;
+        
+    }
 
     void Start()
     {
-        modelIndex = StateNameController.animalIndexChosen;
-
+        
         //UI and Canvas
         AR_UI.gameObject.SetActive(true);
         spawnAnimalContainer.SetActive(true);
-
-        //Buttons
-        Gamepad.gameObject.SetActive(false);
-        respawnBTN.gameObject.SetActive(true);
-
-        interactionsDropDownContainer.SetActive(false);
     }
+    
+    float desiredRotationDegrees = 180.0f;
+    Vector3 spawnPosition;
+
+    private void Update()
+    {
+       if(!didInitialAnimalSpawn)
+        {
+            // Get the camera's position and rotation
+            Vector3 cameraPosition = Camera.main.transform.position;
+            Quaternion cameraRotation = Camera.main.transform.rotation;
+
+            // Set the height below the camera where you want to spawn the object
+            float spawnHeight = 0.5f;
+
+            // Set the distance in front of the camera where you want to spawn the object
+            float spawnDistance = 3f;
+
+            // Calculate the center of the screen in viewport coordinates (0.5, 0.5)
+            Vector3 screenCenter = new Vector3(0.5f, 0.5f, Camera.main.nearClipPlane);
+
+            // Calculate the spawn position based on the screen center
+            spawnPosition = Camera.main.ViewportToWorldPoint(screenCenter);
+
+            // Adjust the spawn position by moving it downward by the specified height
+            spawnPosition -= Vector3.up * spawnHeight;
+
+            // Move the spawn position forward by the specified distance
+            spawnPosition += cameraRotation * Vector3.forward * spawnDistance;
+
+            // Spawn the object at the calculated position with the camera's rotation
+            spawnedObject = Instantiate(arModels[modelIndex], spawnPosition, cameraRotation);
+            spawnedObject.transform.rotation = Quaternion.Euler(0.0f, desiredRotationDegrees, 0.0f);
+
+            didInitialAnimalSpawn = true;
+        }
+
+
+    }
+
 
     public int getAnimalIndex()
     {
         return modelIndex;
     }
 
+    Quaternion newRotation;
 
-
-    void ARPlaceObject()
-    {
-
-            GameObject clearUp = GameObject.FindGameObjectWithTag("ARMultiModel");
-            Destroy(clearUp);
-            Quaternion newRotation = PlacementPose.rotation * Quaternion.Euler(0, 180f, 0);
-            spawnedObject = Instantiate(arModels[modelIndex], PlacementPose.position, newRotation);
-
-    }
-
-    public void returnToAnimalSelectBTN()
-    {
-        SceneManager.LoadScene("Animal Selector AR");
-    }
+    int spawnedAnimalCtr;
 
     public void respawnAnimal()
     {
-        // Get the main camera in the AR world
-        Camera arCamera = FindObjectOfType<ARSessionOrigin>().camera;
 
-        // Calculate the position for the respawned object
-        Vector3 respawnPosition = arCamera.transform.position + (arCamera.transform.forward * 4.0f) - new Vector3(0.0f, 0.4f, 0.0f);
+        if (spawnedAnimalCtr >= 2)
+        {
+            showAnimalLimit();
+            return;
+        }
 
-        // Calculate the rotation for the spawned object to face towards the player
-        Quaternion newRotation = Quaternion.LookRotation(arCamera.transform.position - respawnPosition, Vector3.up);
+        // Calculate the position for the spawned animal based on the initial position.
+        Vector3 spawnPositionCopy = spawnPosition + (spawnedAnimalCtr == 0 ? Vector3.left : Vector3.right) * 1.5f;
 
-        // Destroy the old spawned object
-        Destroy(spawnedObject);
+        GameObject spawnedAnimal = Instantiate(arModelsCopy[modelIndex], spawnPositionCopy, newRotation);
 
-        // Spawn the animal
-        spawnedObject = Instantiate(arModels[modelIndex], respawnPosition, newRotation);
+        if (spawnedAnimalCtr == 0)
+        {
 
-        // Display gamepad
-        Gamepad.gameObject.SetActive(true);
+            moveAnimalScript animalMovement1 = spawnedAnimal.AddComponent<moveAnimalScript>();
+        }
+        else if (spawnedAnimalCtr == 1)
+        {
 
-        interactionsDropDownContainer.SetActive(true);
+            moveAnimalScript2 animalMovement2 = spawnedAnimal.AddComponent<moveAnimalScript2>();
+        }
+
+
+        spawnedAnimalCtr++;
     }
 
+    bool isLimitAnimalTxtShown;
+    void showAnimalLimit()
+    {
+        if (!isLimitAnimalTxtShown)
+        {
+            StartCoroutine(WaitForAnimation());
+        }
+    }
+
+    private IEnumerator WaitForAnimation()
+    {
+        
+
+        
+        limitAnimalTXT.SetActive(true);
+        isLimitAnimalTxtShown = true;
+        float animationDuration = limitAnimalTXTAnim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+        yield return new WaitForSeconds(animationDuration);
+
+
+        limitAnimalTXT.SetActive(false);
+        isLimitAnimalTxtShown = false;
+        StopAllCoroutines();
+    }
 
 
 }

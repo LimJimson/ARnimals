@@ -7,13 +7,14 @@ using UnityEngine.UI;
 public class animalSelection : MonoBehaviour
 {
     public Image[] animalImgs;
+    public Button[] animalBtns;
+
     public TMP_Text selectAnimalTxt;
     public TMP_Text AnimalNameTxt;
 
     public GameObject StartBtn;
     public GameObject guideBtn;
     public GameObject backBtn;
-    public Toggle showHabitatToggle;
 
     int animalIndex;
     bool animalClicked = false;
@@ -22,20 +23,23 @@ public class animalSelection : MonoBehaviour
         "Octopus", "Pigeon", "Piranha", "Rhinoceros", "Seagull",
         "Shark", "Owl", "Tiger", "Zebra"};
 
+
+
     void Start()
     {
         backBtn.SetActive(true);
         guideBtn.SetActive(true);
         StartBtn.SetActive(false);
-        showHabitatToggle.gameObject.SetActive(true);
         selectAnimalTxt.gameObject.SetActive(true);
         loadingScreen.SetActive(false);
         AnimalNameTxt.gameObject.SetActive(false);
         disableAllAnimalImgs();
     }
+
     private void Update() {
 
     }
+
     public void selectedAnimal(int num)
     {
         animalIndex = num;
@@ -45,7 +49,22 @@ public class animalSelection : MonoBehaviour
         selectAnimalTxt.gameObject.SetActive(false);
         animalClicked = true;
         animalImgs[num].gameObject.SetActive(true);
+
+        foreach(Button button in animalBtns)
+        {
+            if (button.Equals(animalBtns[num]))
+            {
+                button.image.color = Color.yellow;
+            }
+            else
+            {
+                button.image.color = Color.white;
+            }
+        }
     }
+
+    
+
     void showAnimalName()
     {
         AnimalNameTxt.gameObject.SetActive(true);
@@ -55,7 +74,6 @@ public class animalSelection : MonoBehaviour
     }
     void disableAllAnimalImgs()
     {
-
         foreach (var animal in animalImgs)
         {
             animal.gameObject.SetActive(false);
@@ -67,38 +85,49 @@ public class animalSelection : MonoBehaviour
         if (animalClicked == true)
         {
             StateNameController.animalIndexChosen = animalIndex;
-            StateNameController.showHabitat = showHabitatToggle.isOn;
-            Debug.Log(showHabitatToggle.isOn);
             LoadLevelAR();
         }
     }
+
     public void goToModeSelect()
     {
         SceneManager.LoadScene("ModeSelect");
     }
+
     //LOADING UI
     public GameObject loadingScreen;
     public Slider slider;
     public TMP_Text progressTxt;
     public void LoadLevelAR()
     {
-        StartCoroutine(LoadAsync());
+        StartCoroutine(LoadAsyncWithDelay());
     }
 
-    IEnumerator LoadAsync()
+    IEnumerator LoadAsyncWithDelay()
     {
         backBtn.SetActive(false);
         guideBtn.SetActive(false);
-        showHabitatToggle.gameObject.SetActive(false);
         loadingScreen.SetActive(true);
+
+        // Load the scene in the background without activating it.
         AsyncOperation operation = SceneManager.LoadSceneAsync("AR");
+        operation.allowSceneActivation = false;
 
         while (!operation.isDone)
         {
-            float progress = Mathf.Clamp01(operation.progress / .9f);
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
             slider.value = progress;
-            progressTxt.text = progress * 100f + "%";
-            Debug.Log(progress);
+            progressTxt.text = (progress * 100f).ToString("F0") + "%";
+
+            // Check if the loading progress is nearly complete.
+            if (operation.progress >= 0.9f)
+            {
+                // Wait for an additional delay (2 seconds in your case) before activating the scene.
+                yield return new WaitForSeconds(2.0f);
+
+                // Activate the loaded scene.
+                operation.allowSceneActivation = true;
+            }
 
             yield return null;
         }

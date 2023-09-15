@@ -14,7 +14,7 @@ public class AnimalMovement : MonoBehaviour, IDragHandler, IPointerDownHandler, 
 
     bool walking;
 
-    void Start()
+    void Awake()
     {
         arObject = GameObject.FindGameObjectWithTag("ARMultiModel");
     }

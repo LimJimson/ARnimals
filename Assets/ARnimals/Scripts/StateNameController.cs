@@ -21,6 +21,4 @@ public class StateNameController : MonoBehaviour
     public static int animalIndexChosen;
     public static string animalCategoryChosen;
     public static string animalChosen;
-
-    public static bool showHabitat;
 }

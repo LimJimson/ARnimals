@@ -2100,8 +2100,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00000047684, y: 16}
-  m_SizeDelta: {x: 492.3661, y: 70.6234}
+  m_AnchoredPosition: {x: 0, y: -19.4964}
+  m_SizeDelta: {x: 551.5597, y: 113.2394}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &546034267
 MonoBehaviour:
@@ -2123,10 +2123,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'NOTE: These will delete all of your saved data.'
+  m_text: 'NOTE: These will <color=green>delete all</color> of your saved data.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ce2b4c8bea39be9418cd75ab38f4a75b, type: 2}
-  m_sharedMaterial: {fileID: -1888159535324298133, guid: ce2b4c8bea39be9418cd75ab38f4a75b,
+  m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
+  m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2151,7 +2151,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26.6
+  m_fontSize: 42.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2615,8 +2615,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00000047684, y: 130}
-  m_SizeDelta: {x: 492.3661, y: 124.0014}
+  m_AnchoredPosition: {x: 0, y: 128.59}
+  m_SizeDelta: {x: 673.748, y: 217.4406}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &639177055
 MonoBehaviour:
@@ -2638,10 +2638,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Are you sure you want to <color="red">RESET</color> your Progress?
+  m_text: Are you sure you want to <color="green">RESET</color> your Progress?
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ce2b4c8bea39be9418cd75ab38f4a75b, type: 2}
-  m_sharedMaterial: {fileID: -1888159535324298133, guid: ce2b4c8bea39be9418cd75ab38f4a75b,
+  m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
+  m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2666,7 +2666,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 41.3
+  m_fontSize: 56.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3027,8 +3027,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000011444, y: 27}
-  m_SizeDelta: {x: 639.6466, y: 386.6871}
+  m_AnchoredPosition: {x: 4.03, y: -0.0000026226}
+  m_SizeDelta: {x: 755.0715, y: 474.6299}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &660543262
 MonoBehaviour:
@@ -4412,7 +4412,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 148, y: -75}
+  m_AnchoredPosition: {x: 189, y: -138}
   m_SizeDelta: {x: 86.0656, y: 89.7051}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1212448347
@@ -5236,7 +5236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -138, y: -75}
+  m_AnchoredPosition: {x: -185, y: -138}
   m_SizeDelta: {x: 80, y: 89.705}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1496846202

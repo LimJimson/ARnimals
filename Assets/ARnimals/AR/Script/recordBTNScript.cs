@@ -27,6 +27,8 @@ public class recordBTNScript : MonoBehaviour
     public TMP_Text errorTxtDelVid;
     public Button deleteBtn;
 
+    public TMP_Text vidFileName;
+
     void Start()
     {
         #if UNITY_ANDROID && !UNITY_EDITOR
@@ -77,7 +79,7 @@ public class recordBTNScript : MonoBehaviour
         StartCoroutine(txtDelay());
         }
     }
-
+    string videoFileName;
     public void getVideoPath()
     {
         DirPath = "/storage/emulated/0/Movies/";
@@ -93,6 +95,8 @@ public class recordBTNScript : MonoBehaviour
         try
         {
             VidPlayer.url = videoFiles[currentVideoIndex];
+            
+
             GetVideos();
         }
         catch
@@ -102,67 +106,19 @@ public class recordBTNScript : MonoBehaviour
         }
 
     }
-    //public void DeleteVideo()
-    //{
-    //    if (videoFiles.Length > 0)
-    //    {
-    //        if (VidPlayer.isPlaying)
-    //        {
-    //            VidPlayer.Stop();
-    //            play_pause_vid.image.sprite = play_btn[1];
-    //        }
-    //        StartCoroutine(showTextDelVid());
-    //        string pathToFile = videoFiles[currentVideoIndex];
-    //        if (File.Exists(pathToFile)) 
-    //        { 
-    //            File.Delete(pathToFile);
-
-    //        }
-    //        if (videoFiles.Length > 0)
-    //        {
-    //            PlayNextVideo();
-    //        }
-    //        else
-    //        {
-    //            GetVideos();
-    //        }
-    //    }
-    //    else if (videoFiles.Length <= 0)
-    //    {
-    //        StartCoroutine(showTextNoVid());
-    //    }
-    //    GetVideos();
-
-    //}
-
-    //IEnumerator showTextNoVid()
-    //{
-    //    deleteBtn.interactable = false;
-    //    errorTxtNoVid.gameObject.SetActive(true);
-    //    yield return new WaitForSeconds(1f);
-    //    errorTxtNoVid.gameObject.SetActive(false);
-    //    deleteBtn.interactable = true;
-    //}
-
-    //IEnumerator showTextDelVid()
-    //{
-    //    deleteBtn.interactable = false;
-    //    errorTxtDelVid.gameObject.SetActive(true);
-    //    yield return new WaitForSeconds(1f);
-    //    errorTxtDelVid.gameObject.SetActive(false);
-    //    deleteBtn.interactable = true;
-    //}
 
     public void GetVideos()
     {
         if (videoFiles.Length > 0)
         {
+            videoFileName = Path.GetFileName(videoFiles[currentVideoIndex]);
             if (VidPlayer.isPlaying)
             {
                 VidPlayer.Stop();
             }
             videoCount.gameObject.SetActive(true);
             VidPlayer.gameObject.SetActive(true);
+            vidFileName.text = videoFileName;
             RawImg.SetActive(true);
             VidPlayer.url = videoFiles[currentVideoIndex];
             videoCount.text = currentVideoIndex + 1 + "/" + videoFiles.Length.ToString();
@@ -233,6 +189,60 @@ public class recordBTNScript : MonoBehaviour
         _txt.text = "";
 
     }
+
+
+    //delete video script
+
+    //public void DeleteVideo()
+    //{
+    //    if (videoFiles.Length > 0)
+    //    {
+    //        if (VidPlayer.isPlaying)
+    //        {
+    //            VidPlayer.Stop();
+    //            play_pause_vid.image.sprite = play_btn[1];
+    //        }
+    //        StartCoroutine(showTextDelVid());
+    //        string pathToFile = videoFiles[currentVideoIndex];
+    //        if (File.Exists(pathToFile)) 
+    //        { 
+    //            File.Delete(pathToFile);
+
+    //        }
+    //        if (videoFiles.Length > 0)
+    //        {
+    //            PlayNextVideo();
+    //        }
+    //        else
+    //        {
+    //            GetVideos();
+    //        }
+    //    }
+    //    else if (videoFiles.Length <= 0)
+    //    {
+    //        StartCoroutine(showTextNoVid());
+    //    }
+    //    GetVideos();
+
+    //}
+
+    //IEnumerator showTextNoVid()
+    //{
+    //    deleteBtn.interactable = false;
+    //    errorTxtNoVid.gameObject.SetActive(true);
+    //    yield return new WaitForSeconds(1f);
+    //    errorTxtNoVid.gameObject.SetActive(false);
+    //    deleteBtn.interactable = true;
+    //}
+
+    //IEnumerator showTextDelVid()
+    //{
+    //    deleteBtn.interactable = false;
+    //    errorTxtDelVid.gameObject.SetActive(true);
+    //    yield return new WaitForSeconds(1f);
+    //    errorTxtDelVid.gameObject.SetActive(false);
+    //    deleteBtn.interactable = true;
+    //}
 
 
 }

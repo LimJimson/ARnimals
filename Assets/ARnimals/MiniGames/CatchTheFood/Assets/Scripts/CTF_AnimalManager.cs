@@ -31,28 +31,28 @@ public class CTF_AnimalManager : MonoBehaviour
 
     private void Start()
     {
-        selectedAnimal = PlayerPrefs.GetString("SelectedAnimal");
+        selectedAnimal = PlayerPrefs.GetString("CTF_SelectedAnimal");
         ShowAnimalAndFoods(selectedAnimal);
 
         // Retrieve the selected level from PlayerPrefs
-        string selectedLevel = PlayerPrefs.GetString("SelectedLevel");
+        string selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel");
 
         // Change the background based on the selected level
         switch (selectedLevel)
         {
-            case "Level 1":
+            case "1":
                 background.sprite = animalHabitatBackgrounds[0];
                 scoreHolder.sprite = scoreAndTimerHolder[0];
                 timerHolder.sprite = scoreAndTimerHolder[0];
                 trivias[0].SetActive(true);
                 break;
-            case "Level 2":
+            case "2":
                 background.sprite = animalHabitatBackgrounds[1];
                 scoreHolder.sprite = scoreAndTimerHolder[1];
                 timerHolder.sprite = scoreAndTimerHolder[1];
                 trivias[1].SetActive(true);
                 break;
-            case "Level 3":
+            case "3":
                 background.sprite = animalHabitatBackgrounds[2];
                 scoreHolder.sprite = scoreAndTimerHolder[2];
                 timerHolder.sprite = scoreAndTimerHolder[2];
@@ -67,13 +67,13 @@ public class CTF_AnimalManager : MonoBehaviour
                 scoreGameObject.transform.Translate(new Vector3(0f, 25f, 0f));
                 timerGameObject.transform.Translate(new Vector3(-5f, 25f, 0f));
                 break;
-            case "Level 4":
+            case "4":
                 background.sprite = animalHabitatBackgrounds[3];
                 scoreHolder.sprite = scoreAndTimerHolder[3];
                 timerHolder.sprite = scoreAndTimerHolder[3];
                 trivias[3].SetActive(true);
                 break;
-            case "Level 5":
+            case "5":
                 background.sprite = animalHabitatBackgrounds[4];
                 scoreHolder.sprite = scoreAndTimerHolder[4];
                 timerHolder.sprite = scoreAndTimerHolder[4];

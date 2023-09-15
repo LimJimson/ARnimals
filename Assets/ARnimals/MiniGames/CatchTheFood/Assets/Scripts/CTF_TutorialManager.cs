@@ -232,24 +232,24 @@ public class CTF_TutorialManager : MonoBehaviour
                 showClickToNextTxt(click2NextTxtBottomGameObject,click2NextTxtBottm, 1);
 
                 // Retrieve the selected level from PlayerPrefs
-                string selectedLevel = PlayerPrefs.GetString("SelectedLevel");
+                string selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel");
 
                 // Change the background based on the selected level
                 switch (selectedLevel)
                 {
-                    case "Level 1":
+                    case "1":
                         trivias[0].SetActive(true);
                         break;
-                    case "Level 2":
+                    case "2":
                         trivias[1].SetActive(true);
                         break;
-                    case "Level 3":
+                    case "3":
                         trivias[2].SetActive(true);
                         break;
-                    case "Level 4":
+                    case "4":
                         trivias[3].SetActive(true);
                         break;
-                    case "Level 5":
+                    case "5":
                         trivias[4].SetActive(true);
                         break;
                 }

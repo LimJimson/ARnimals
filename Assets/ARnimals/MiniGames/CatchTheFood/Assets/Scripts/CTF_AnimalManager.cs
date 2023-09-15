@@ -67,6 +67,27 @@ public class CTF_AnimalManager : MonoBehaviour
                 scoreGameObject.transform.Translate(new Vector3(0f, 25f, 0f));
                 timerGameObject.transform.Translate(new Vector3(-5f, 25f, 0f));
                 break;
+            case "Level 4":
+                background.sprite = animalHabitatBackgrounds[3];
+                scoreHolder.sprite = scoreAndTimerHolder[3];
+                timerHolder.sprite = scoreAndTimerHolder[3];
+                trivias[3].SetActive(true);
+                break;
+            case "Level 5":
+                background.sprite = animalHabitatBackgrounds[4];
+                scoreHolder.sprite = scoreAndTimerHolder[4];
+                timerHolder.sprite = scoreAndTimerHolder[4];
+                trivias[4].SetActive(true);
+
+                scoreText.color = Color.red; scoreText.outlineColor = Color.white;
+                timerText.color = Color.red; timerText.outlineColor = Color.white;
+
+                score.color = Color.black; score.outlineColor = Color.white;
+                timer.color = Color.black; timer.outlineColor = Color.white;
+
+                scoreGameObject.transform.Translate(new Vector3(0f, 25f, 0f));
+                timerGameObject.transform.Translate(new Vector3(-5f, 25f, 0f));
+                break;
             default:
                 Debug.LogError("Invalid level: " + selectedLevel);
                 break;
@@ -77,7 +98,9 @@ public class CTF_AnimalManager : MonoBehaviour
     {
         { "Elephant", new int[] { 0, 1, 2, 3, 4, 5 } },
         { "Pigeon", new int[] { 6, 7, 8, 9, 10, 11 } },
-        { "Koi", new int[] { 12, 13, 14, 15, 16, 17 } }
+        { "Koi", new int[] { 12, 13, 14, 15, 16, 17 } },
+        { "Camel", new int[] { 18, 19, 20, 21, 22, 23} },
+        { "Crab", new int[] { 24, 25, 26, 27, 28, 29} },
         // Add more animal-food mappings here if needed
     };
 

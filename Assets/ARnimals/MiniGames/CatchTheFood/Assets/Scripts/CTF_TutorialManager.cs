@@ -246,6 +246,12 @@ public class CTF_TutorialManager : MonoBehaviour
                     case "Level 3":
                         trivias[2].SetActive(true);
                         break;
+                    case "Level 4":
+                        trivias[3].SetActive(true);
+                        break;
+                    case "Level 5":
+                        trivias[4].SetActive(true);
+                        break;
                 }
             }
 
@@ -257,12 +263,18 @@ public class CTF_TutorialManager : MonoBehaviour
             trivias[0].SetActive(false);
             trivias[1].SetActive(false);
             trivias[2].SetActive(false);
+            trivias[3].SetActive(false);
+            trivias[4].SetActive(false);
             click2NxtPanelForTrivia.SetActive(false);
             panelForTrivia.SetActive(false);
 
             if (PlayerPrefs.GetInt("CTF_IsTutorialDone", 1) == 1) 
             {
                 backButton.SetActive(true);
+            }
+            else 
+            {
+                backButton.SetActive(false);
             }
 
             dialogText.fontSize = 39f;

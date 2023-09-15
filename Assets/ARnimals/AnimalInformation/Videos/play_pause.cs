@@ -12,7 +12,7 @@ public class play_pause : MonoBehaviour
     public Sprite stopSprite;
     void Start()
     {
-
+        player = GetComponent<VideoPlayer>();
     }
 
     void Update()

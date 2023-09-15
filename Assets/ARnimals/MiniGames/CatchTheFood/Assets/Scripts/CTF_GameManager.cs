@@ -38,12 +38,21 @@ public class CTF_GameManager : MonoBehaviour
     
     private bool isGameOver = false;
 
+    [SerializeField] private string selectedLevel;
+
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
         else
             Destroy(gameObject);
+
+        selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel");
+    }
+
+    private void UnlockedNextLevel() 
+    {
+        PlayerPrefs.SetInt("CTF_Lvl" + selectedLevel, 1);
     }
 
     public void IncreaseScore(int amount)
@@ -79,6 +88,12 @@ public class CTF_GameManager : MonoBehaviour
                 finalScore = scoreManager.GetScore();
                 addStar(finalScore);
                 starsCountText.text = "x" + starsCount.ToString();
+
+                if (starsCount >= 1) 
+                {
+                    UnlockedNextLevel();
+                }
+
                 finalScoreText.text = finalScore.ToString();
                 levelCompleteCanvas.SetActive(true);
             }
@@ -177,7 +192,33 @@ public class CTF_GameManager : MonoBehaviour
     public void LevelCompleteQuitButtonFunction()
     {
         pauseManager.ResumeGame();
-        SceneManager.LoadScene("CTF_LevelSelector");
+
+        switch(selectedLevel)
+        {
+            case "1":
+                PlayerPrefs.SetString("CTF_SelectedLevel", "2");
+                PlayerPrefs.SetString("CTF_SelectedAnimal", "Pigeon");
+                SceneManager.LoadScene("CTF_Game");
+                break;
+            case "2":
+                PlayerPrefs.SetString("CTF_SelectedLevel", "3");
+                PlayerPrefs.SetString("CTF_SelectedAnimal", "Koi");
+                SceneManager.LoadScene("CTF_Game");
+                break;
+            case "3":
+                PlayerPrefs.SetString("CTF_SelectedLevel", "4");
+                PlayerPrefs.SetString("CTF_SelectedAnimal", "Camel");
+                SceneManager.LoadScene("CTF_Game");
+                break;
+            case "4":
+                PlayerPrefs.SetString("CTF_SelectedLevel", "5");
+                PlayerPrefs.SetString("CTF_SelectedAnimal", "Crab");
+                SceneManager.LoadScene("CTF_Game");
+                break;
+            case "5":
+                SceneManager.LoadScene("CTF_LevelSelector");
+                break;
+        }
     }
 
     public void ConfirmationPlayAgainYesButtonFunction()

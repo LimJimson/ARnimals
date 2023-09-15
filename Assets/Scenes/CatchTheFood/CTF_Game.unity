@@ -1390,7 +1390,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: QUIT
+  m_text: Continue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: c677042c8c8c80f459434edb5a55a51e, type: 2}
@@ -1456,7 +1456,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &72146909
@@ -1591,7 +1591,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -232.64944, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &80407343
@@ -11401,7 +11401,7 @@ GameObject:
   - component: {fileID: 464524954}
   - component: {fileID: 464524953}
   m_Layer: 5
-  m_Name: Quit
+  m_Name: Continue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11474,7 +11474,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1286526055}
         m_TargetAssemblyTypeName: CTF_GameManager, Assembly-CSharp
-        m_MethodName: GameOverQuitButtonFunction
+        m_MethodName: LevelCompleteQuitButtonFunction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -28758,7 +28758,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1324396920
@@ -29946,7 +29946,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1401587266
@@ -32587,7 +32587,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: -41.380825}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1540935150

@@ -19,6 +19,17 @@ public class CTF_HealthManager : MonoBehaviour
         UpdateHealthUI();
     }
 
+    public void IncreaseHealth(int amount)
+    {
+        currentHealth += amount;
+
+        if (currentHealth > 3) 
+        {
+            currentHealth = 3;
+        }
+        UpdateHealthUI();
+    }
+
     public int GetHealth()
     {
         return currentHealth;

@@ -9,6 +9,8 @@ public class CTF_AnimalMovement : MonoBehaviour
     private Vector2 screenOffset;
     [SerializeField] private CTF_PauseManager pauseManager;
     [SerializeField] private GameObject gameResumeTimerCanvas;
+    [SerializeField] private Animator animator; 
+    [SerializeField] private CTF_HealthManager healthManager;
 
     private void Start()
     {
@@ -30,7 +32,13 @@ public class CTF_AnimalMovement : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Incorrect"))
         {
+            animator.SetTrigger("ShowRedPanel");
             CTF_GameManager.Instance.ReduceHealth(1);
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.CompareTag("heart")) 
+        {
+            healthManager.IncreaseHealth(1);
             Destroy(collision.gameObject);
         }
     }

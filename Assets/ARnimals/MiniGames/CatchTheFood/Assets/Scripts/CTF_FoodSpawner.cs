@@ -10,6 +10,8 @@ public class CTF_FoodSpawner : MonoBehaviour
 
     [SerializeField] private float spawnTimer;
 
+    [SerializeField] private CTF_HealthManager healthManager;
+
     private void Update()
     {
         spawnTimer += Time.deltaTime;
@@ -30,6 +32,15 @@ public class CTF_FoodSpawner : MonoBehaviour
         {
             Debug.LogWarning("No enabled foodPrefabs to spawn.");
             return;
+        }
+
+        if (healthManager.GetHealth()  == 1) 
+        {
+            foods[30].SetActive(true);
+        }
+        else if (healthManager.GetHealth() > 1) 
+        {
+            foods[30].SetActive(false);
         }
 
         int randomIndex = Random.Range(0, enabledFoodPrefabs.Length);

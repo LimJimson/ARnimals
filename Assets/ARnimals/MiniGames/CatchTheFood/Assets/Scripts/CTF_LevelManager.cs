@@ -34,19 +34,19 @@ public class CTF_LevelManager : MonoBehaviour
         if  (PlayerPrefs.GetInt("CTF_Lvl2", 0) == 1) 
         {
             locks[1].SetActive(false);
-            level3Button.onClick.AddListener(OnLevel2ButtonClick);
+            level3Button.onClick.AddListener(OnLevel3ButtonClick);
             buttonBlocks[1].SetActive(false);
         }
         if  (PlayerPrefs.GetInt("CTF_Lvl3", 0) == 1) 
         {
             locks[2].SetActive(false);
-            level4Button.onClick.AddListener(OnLevel2ButtonClick);
+            level4Button.onClick.AddListener(OnLevel4ButtonClick);
             buttonBlocks[2].SetActive(false);
         }
         if  (PlayerPrefs.GetInt("CTF_Lvl4", 0) == 1) 
         {
             locks[3].SetActive(false);
-            level5Button.onClick.AddListener(OnLevel2ButtonClick);
+            level5Button.onClick.AddListener(OnLevel5ButtonClick);
             buttonBlocks[3].SetActive(false);
         }
         if  (PlayerPrefs.GetInt("CTF_Lvl5", 0) == 1) 

@@ -121,12 +121,7 @@ public class StartAR : MonoBehaviour
     }
     public void ResetGameClickedYes()
     {
-        PlayerPrefs.SetInt("CTF_IsTutorialDone", 0);
-        PlayerPrefs.SetInt("CTF_Lvl1", 0);
-        PlayerPrefs.SetInt("CTF_Lvl2", 0);
-        PlayerPrefs.SetInt("CTF_Lvl3", 0);
-        PlayerPrefs.SetInt("CTF_Lvl4", 0);
-        PlayerPrefs.SetInt("CTF_Lvl5", 0);
+        CTF_Reset.CTF_ResetProgress();
         SaveManager.DeleteFile();
     }
 

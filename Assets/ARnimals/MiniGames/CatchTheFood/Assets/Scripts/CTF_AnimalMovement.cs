@@ -91,24 +91,43 @@ public class CTF_AnimalMovement : MonoBehaviour
                 currentPosition.y = initialYPosition;
 
                 // Clamp the position to the screen boundaries
-                Vector3 clampedPosition = ClampToScreen(currentPosition);
+                Vector3 clampedPosition = ClampToScreen(currentPosition, 95f);
 
                 transform.position = clampedPosition;
             }
         }
     }
 
-    private Vector3 ClampToScreen(Vector3 position)
-    {
-        Vector3 clampedPosition = position;
-        Vector3 viewportPosition = mainCamera.WorldToViewportPoint(position);
+    private Vector3 ClampToScreen(Vector3 position, float edgeOffset)
+{
+    // Create a new vector to store the clamped position, initially set to the input position.
+    Vector3 clampedPosition = position;
 
-        viewportPosition.x = Mathf.Clamp01(viewportPosition.x);
-        viewportPosition.y = Mathf.Clamp01(viewportPosition.y);
+    // Convert the world-space position to viewport coordinates (values between 0 and 1).
+    Vector3 viewportPosition = mainCamera.WorldToViewportPoint(position);
 
-        clampedPosition = mainCamera.ViewportToWorldPoint(viewportPosition);
-        clampedPosition.y = initialYPosition;
+    // Clamp the x and y coordinates of the viewportPosition, considering the edge offset.
+    viewportPosition.x = Mathf.Clamp01(viewportPosition.x);
+    viewportPosition.y = Mathf.Clamp01(viewportPosition.y);
 
-        return clampedPosition;
-    }
+    // Calculate the screen edges considering the edge offset.
+    float minX = edgeOffset / mainCamera.pixelWidth;
+    float minY = edgeOffset / mainCamera.pixelHeight;
+    float maxX = 1 - minX;
+    float maxY = 1 - minY;
+
+    // Clamp the viewportPosition considering the edge offset.
+    viewportPosition.x = Mathf.Clamp(viewportPosition.x, minX, maxX);
+    viewportPosition.y = Mathf.Clamp(viewportPosition.y, minY, maxY);
+
+    // Convert the clamped viewport position back to world-space coordinates.
+    clampedPosition = mainCamera.ViewportToWorldPoint(viewportPosition);
+
+    // Set the y-coordinate of the clamped position to the initial Y position.
+    clampedPosition.y = initialYPosition;
+
+    // Return the clamped position.
+    return clampedPosition;
+}
+
 }

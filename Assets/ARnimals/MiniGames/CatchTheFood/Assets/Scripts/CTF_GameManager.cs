@@ -13,6 +13,7 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private CTF_HealthManager healthManager;
     [SerializeField] private CTF_PauseManager pauseManager;
     [SerializeField] private CTF_TutorialManager tutorialManager;
+    [SerializeField] private CTF_HighScoreManager highScoreManager;
 
     [Header("Game Objects Needed")]
 
@@ -95,6 +96,7 @@ public class CTF_GameManager : MonoBehaviour
                 }
 
                 finalScoreText.text = finalScore.ToString();
+                highScoreManager.SaveHighScore(scoreManager.GetScore());
                 levelCompleteCanvas.SetActive(true);
             }
             else

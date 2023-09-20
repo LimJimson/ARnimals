@@ -11,12 +11,22 @@ public class StartAR : MonoBehaviour
     public Canvas MainMenu;
     public Canvas Settings;
     public Canvas MainMenuGuide;
-    public GameObject ConfirmGuideChange;
-    public GameObject ConfirmResetGame;
-    public GameObject ConfirmQuit;
+
+    SaveObject loaddata;
+
+    string guide_chosen;
+
+
+
 
     void Start()
     {
+        guide_chosen = StateNameController.guide_chosen;
+        loaddata = SaveManager.Load();
+        if (string.IsNullOrEmpty(guide_chosen))
+        {
+            guide_chosen = "boy_guide";
+        }
         Screen.orientation = ScreenOrientation.LandscapeLeft;
         MainMenu.gameObject.SetActive(true);
         Settings.gameObject.SetActive(false);
@@ -26,19 +36,84 @@ public class StartAR : MonoBehaviour
         ConfirmQuit.SetActive(false);
     }
 
-// Button Scripts
-    
+    // Button Scripts
+    public void goToModeSelect()
+    {
+        SceneManager.LoadScene("ModeSelect");
+    }
+
+    public void goToAnimalSelectionScene()
+    {
+
+        SceneManager.LoadScene("Animal Information");
+    }
+
+    public void goToSettingsMenu()
+    {
+        Settings.gameObject.SetActive(true);
+        MainMenu.gameObject.SetActive(false);
+
+    }
+
+
+    public void goToMainMenu()
+    {
+        Settings.gameObject.SetActive(false);
+        MainMenu.gameObject.SetActive(true);
+    }
+
+    // -----CHANGE GUIDE CONFIRMATION -----
+
+    public GameObject changeGuideMale;
+    public GameObject changeGuideFemale;
+    public GameObject ConfirmGuideChange;
     public void openChangeGuideConfirmationWindow()
     {
-        ConfirmGuideChange.SetActive(true);
+        if (guide_chosen == "boy_guide")
+        {
+            changeGuideMale.SetActive(true);
+            changeGuideFemale.SetActive(false);
+            ConfirmGuideChange.SetActive(true);
+        }
+        else if(guide_chosen == "girl_guide")
+        {
+            changeGuideFemale.SetActive(true);
+            changeGuideMale.SetActive(false);
+            ConfirmGuideChange.SetActive(true);
+        }
+        
     }
+
     public void closeChangeGuideConfirmationWindow()
     {
         ConfirmGuideChange.SetActive(false);
     }
+
+    public void goToGuideSelect()
+    {
+        SceneManager.LoadScene("GuideSelector");
+    }
+
+    // -----RESET GAME CONFIRMATION -----
+
+    public GameObject resetGuideMale;
+    public GameObject resetGuideFemale;
+    public GameObject ConfirmResetGame;
     public void openResetGameConfirmationWindow()
     {
-        ConfirmResetGame.SetActive(true);
+        
+        if (guide_chosen == "boy_guide")
+        {
+            resetGuideMale.SetActive(true);
+            resetGuideFemale.SetActive(false);
+            ConfirmResetGame.SetActive(true);
+        }
+        else if (guide_chosen == "girl_guide")
+        {
+            resetGuideFemale.SetActive(true);
+            resetGuideMale.SetActive(false);
+            ConfirmResetGame.SetActive(true);
+        }
     }
     public void closeResetGameConfirmationWindow()
     {
@@ -54,27 +129,62 @@ public class StartAR : MonoBehaviour
         PlayerPrefs.SetInt("CTF_Lvl5", 0);
         SaveManager.DeleteFile();
     }
-    
-    public void goToGuideSelect()
+
+    // -----CHANGE NAME CONFIRMATION -----
+
+    public GameObject changeNameGuideMale;
+    public GameObject changeNameGuideFemale;
+    public GameObject ConfirmChangeName;
+
+    public void openChangeNameConfirmationWindow()
     {
-        SceneManager.LoadScene("GuideSelector");
+
+        if (guide_chosen == "boy_guide")
+        {
+            changeNameGuideMale.SetActive(true);
+            changeNameGuideFemale.SetActive(false);
+            ConfirmChangeName.SetActive(true);
+        }
+        else if (guide_chosen == "girl_guide")
+        {
+            changeNameGuideFemale.SetActive(true);
+            changeNameGuideMale.SetActive(false);
+            ConfirmChangeName.SetActive(true);
+        }
     }
-    public void goToModeSelect()
+    public void closeChangeNameConfirmationWindow()
     {
-        SceneManager.LoadScene("ModeSelect");
+        ConfirmChangeName.SetActive(false);
+    }
+    public void changeNameClickedYes ()
+    {
+        loaddata.setName("");
+        SceneManager.LoadScene("Title_Screen");
     }
 
-    public void goToAnimalSelectionScene()
+    // -----QUIT GAME CONFIRMATION -----
+    public GameObject quitGuideMale;
+    public GameObject quitGuideFemale;
+    public GameObject ConfirmQuit;
+    public void showQuitConfirm()
     {
-        
-        SceneManager.LoadScene("Animal Information");
-    }
-    
-    public void goToSettingsMenu()
-    {
-        Settings.gameObject.SetActive(true);
-        MainMenu.gameObject.SetActive(false);
+        if (guide_chosen == "boy_guide")
+        {
+            quitGuideMale.SetActive(true);
+            quitGuideFemale.SetActive(false);
+            ConfirmQuit.gameObject.SetActive(true);
+        }
+        else if (guide_chosen == "girl_guide")
+        {
+            quitGuideFemale.SetActive(true);
+            quitGuideMale.SetActive(false);
+            ConfirmQuit.gameObject.SetActive(true);
+        }
 
+    }
+    public void hideQuitConfirm()
+    {
+        ConfirmQuit.gameObject.SetActive(false);
     }
 
     public void closeApplication()
@@ -82,22 +192,5 @@ public class StartAR : MonoBehaviour
         Application.Quit();
         Debug.Log("Application Quit!");
     }
-    public void goToMainMenu()
-    {
-        Settings.gameObject.SetActive(false);
-        MainMenu.gameObject.SetActive(true);
-    }
-
-    public void showQuitConfirm()
-    {
-        ConfirmQuit.gameObject.SetActive(true);
-    }
-    public void hideQuitConfirm()
-    {
-        ConfirmQuit.gameObject.SetActive(false);
-    }
-
-
-
 
 }

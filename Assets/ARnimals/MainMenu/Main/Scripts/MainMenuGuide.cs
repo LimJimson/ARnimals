@@ -69,6 +69,7 @@ public class MainMenuGuide : MonoBehaviour
     {
         showDialogs();
     }
+
     public void checkGuideGender()
     {
         if (GuideChosen == "boy_guide")
@@ -241,4 +242,7 @@ public class MainMenuGuide : MonoBehaviour
         }
         
     }
+    //settings guide
+
+    
 }

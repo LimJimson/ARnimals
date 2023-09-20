@@ -1,3 +1,4 @@
+using HG.Extensions;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -26,7 +27,13 @@ public class ScriptHandler : MonoBehaviour
    
     public GameObject nameTxtField;
     public GameObject OptionsCanvas;
-    public GameObject confirmationWindow;
+   
+
+    public GameObject changeNameBtn;
+
+    
+
+    SaveObject loadedData;
     void Start()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
@@ -35,11 +42,13 @@ public class ScriptHandler : MonoBehaviour
         optionsBtn.interactable = false;
 
         //canvas
-        confirmationWindow.SetActive(false);
+        resetGameconfirmationWindow.SetActive(false);
+        changeNameConfirmWindow.SetActive(false);
+
         OptionsCanvas.SetActive(false);
 
         // Load the saved data
-        SaveObject loadedData = SaveManager.Load();
+        loadedData = SaveManager.Load();
         name = loadedData.getName();
         guideChosen = loadedData.getGuide();
 
@@ -53,6 +62,7 @@ public class ScriptHandler : MonoBehaviour
         {
             StartCoroutine(WaitForAnimationFinish());
             ResetGameBtn.gameObject.SetActive(true);
+            changeNameBtn.gameObject.SetActive(true);
             // If the name is not null or empty, hide the name text field and show the player name text
             if (string.IsNullOrEmpty(guideChosen))
             {
@@ -77,10 +87,95 @@ public class ScriptHandler : MonoBehaviour
             // If the name is null or empty, show the name text field and hide the player name text
             continueBtn.onClick.AddListener(inputLogicScript.continueBtnClickedNoSave);
             ResetGameBtn.gameObject.SetActive(false);
+            changeNameBtn.gameObject.SetActive(false);
             nameTxtField.SetActive(true);
             playerNameLoggedIn.gameObject.SetActive(false);
         }
     }
+
+    // ----- CHANGE NAME -----
+    public void changeName()
+    {
+        loadedData.setName("");
+        SceneManager.LoadScene("TitleScreen");
+    }
+    public GameObject changeNameConfirmWindow;
+    public GameObject changeNameGuideMale;
+    public GameObject changeNameGuideFemale;
+    public void openChangeNameConfirmWindow()
+    {
+        if (guideChosen == "boy_guide") 
+        {
+            changeNameGuideMale.SetActive(true);
+            changeNameGuideFemale.SetActive(false);
+            changeNameConfirmWindow.SetActive(true);
+        }
+        else if(guideChosen == "girl_guide")
+        {
+            changeNameGuideFemale.SetActive(true);
+            changeNameGuideMale.SetActive(false);
+            changeNameConfirmWindow.SetActive(true);
+        }
+        else if (string.IsNullOrEmpty(guideChosen))
+        {
+            changeNameGuideMale.SetActive(true);
+            changeNameGuideFemale.SetActive(false);
+            changeNameConfirmWindow.SetActive(true);
+        }
+
+    }
+    public void closeChangeNameConfirmWindow()
+    {
+        changeNameConfirmWindow.SetActive(false);
+    }
+
+    // ----- RESET GAME -----
+    public GameObject resetGameconfirmationWindow;
+    public GameObject resetGameconfirmationGuideMale;
+    public GameObject resetGameconfirmationFemale;
+    public void openResetGameConfirmationWindow()
+    {
+
+        if (guideChosen == "boy_guide")
+        {
+            resetGameconfirmationGuideMale.SetActive(true);
+            resetGameconfirmationFemale.SetActive(false);
+            resetGameconfirmationWindow.SetActive(true);
+        }
+        else if (guideChosen == "girl_guide")
+        {
+            resetGameconfirmationFemale.SetActive(true);
+            resetGameconfirmationGuideMale.SetActive(false);
+            resetGameconfirmationWindow.SetActive(true);
+        }else if (string.IsNullOrEmpty(guideChosen))
+        {
+            resetGameconfirmationGuideMale.SetActive(true);
+            resetGameconfirmationFemale.SetActive(false);
+            resetGameconfirmationWindow.SetActive(true);
+        }
+    }
+
+    public void closeResetGameConfirmationWindow()
+    {
+        resetGameconfirmationWindow.SetActive(false);
+    }
+
+
+    public void resetGame()
+    {
+        SaveManager.DeleteFile();
+    }
+
+    //Button Scripts
+    public void openSettings()
+    {
+        OptionsCanvas.SetActive(true);
+    }
+    public void closeSettings()
+    {
+        OptionsCanvas.SetActive(false);
+    }
+
 
     IEnumerator WaitForAnimationFinish()
     {
@@ -99,25 +194,6 @@ public class ScriptHandler : MonoBehaviour
         optionsBtn.interactable = true;
     }
 
-    //Button Scripts
-    public void openSettings()
-    {
-        OptionsCanvas.SetActive(true);
-    }
-    public void closeSettings()
-    {
-        OptionsCanvas.SetActive(false);
-    }
-    public void closeConfirmationWindow()
-    {
-        confirmationWindow.SetActive(false);
-    }
-    public void openConfirmationWindow()
-    {
-        confirmationWindow.SetActive(true);
-    }
-    public void resetGame()
-    {
-        SaveManager.DeleteFile();
-    }
+
+
 }

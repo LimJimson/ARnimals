@@ -9,6 +9,8 @@ TagManager:
   - Incorrect
   - ARMultiModelCopy
   - heart
+  - shield
+  - x2Points
   layers:
   - Default
   - TransparentFX

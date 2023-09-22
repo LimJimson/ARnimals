@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class CTF_GameManager : MonoBehaviour
 {
@@ -33,6 +34,21 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI starsCountText;
     [SerializeField] private int minimumScoreToWin;
 
+    [Header("PowerUps")]
+    [SerializeField] private GameObject shield;
+    [SerializeField] private GameObject points2X;
+    [SerializeField] private GameObject shieldImg;
+    [SerializeField] private GameObject points2XImg;
+    [SerializeField] private GameObject shieldContainer;
+    [SerializeField] private GameObject points2XContainer;
+    [SerializeField] private GameObject shieldDurationGameObject;
+    [SerializeField] private GameObject points2XDurationGameObject;
+    [SerializeField] private TextMeshProUGUI shieldDurationTxt;
+    [SerializeField] private TextMeshProUGUI points2XDurationTxt;
+    [SerializeField] private GameObject [] animalShieldState;
+    [SerializeField] private GameObject [] animalX2State;
+    [SerializeField] private Animator [] x2StateAnimator;
+
     private int finalScore;
 
     private int starsCount = 0;
@@ -40,6 +56,12 @@ public class CTF_GameManager : MonoBehaviour
     private bool isGameOver = false;
 
     [SerializeField] private string selectedLevel;
+
+    [SerializeField] private bool inX2PointsState = false;
+    [SerializeField] private bool inShieldState = false;
+
+    private float shieldDuration = 10f;
+    private float points2XDuration = 10f;
 
     private void Awake()
     {
@@ -49,6 +71,175 @@ public class CTF_GameManager : MonoBehaviour
             Destroy(gameObject);
 
         selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel");
+        shieldDurationTimer();
+        Points2XDurationTimer();
+    }
+
+    private void Update() 
+    {
+        shieldDurationTimer();
+        Points2XDurationTimer();
+        UpdatePowerUpsUI();
+    }
+
+    public float ShieldDuration 
+    {
+        get { return shieldDuration; }
+        set { shieldDuration = value; }
+    }
+
+    public float Points2XDuration 
+    {
+        get { return points2XDuration; }
+        set { points2XDuration = value; }
+    }
+
+    public bool InShieldState
+    {
+        get { return inShieldState; } 
+        set { inShieldState = value; }
+    }
+
+    public bool InX2PointsState 
+    {
+        get { return inX2PointsState; }
+        set { inX2PointsState = value; } 
+    }
+
+    public IEnumerator DisableShieldAfterdelay(float delay) 
+    {
+        yield return new WaitForSeconds(delay);
+        InShieldState = false;
+        shield.SetActive(true);
+    }
+
+    public IEnumerator DisableX2PointsAfterdelay(float delay) 
+    {
+        yield return new WaitForSeconds(delay);
+        InX2PointsState = false;
+        points2X.SetActive(true);
+    }
+
+    public void shieldDurationTimer() 
+    {
+
+        if (InShieldState) 
+        {
+            shieldContainer.SetActive(true);
+            shieldDuration -= Time.deltaTime;
+
+            for(int i = 0; i < animalShieldState.Length ; i++) 
+            {
+                animalShieldState[i].SetActive(true);
+            }
+
+            if (shieldDuration <= 0) 
+            {
+                shieldContainer.SetActive(false);
+                
+                for(int i = 0; i < animalShieldState.Length ; i++) 
+                {
+                    animalShieldState[i].SetActive(false);
+                }
+            }
+            else 
+            {
+                shieldDurationTxt.text = shieldDuration.ToString("F0");
+            }
+        }
+        else 
+        {
+            shieldContainer.SetActive(false);
+
+            for(int i = 0; i < animalShieldState.Length ; i++) 
+            {
+                animalShieldState[i].SetActive(false);
+            }
+        }
+    }
+
+    public void Points2XDurationTimer() 
+    {
+
+        if (InX2PointsState) 
+        {
+            points2XContainer.SetActive(true);
+            points2XDuration -= Time.deltaTime;
+
+            for(int i = 0; i < animalX2State.Length ; i++) 
+            {
+                animalX2State[i].SetActive(true);
+            }
+
+            if (points2XDuration <= 0) 
+            {
+                points2XContainer.SetActive(false);
+
+                for(int i = 0; i < animalX2State.Length ; i++) 
+                {
+                    animalX2State[i].SetActive(false);
+                }
+            }
+            else 
+            {
+                points2XDurationTxt.text = points2XDuration.ToString("F0");
+            }
+        }
+        else 
+        {
+            points2XContainer.SetActive(false);
+
+            for(int i = 0; i < animalX2State.Length ; i++) 
+            {
+                animalX2State[i].SetActive(false);
+            }
+        }
+    }
+
+    private void PowerUpsUIPosition(GameObject firstPowerUp, GameObject firstText, GameObject secondPowerUp, GameObject secondText) 
+    {
+        Vector3 firstPositionForIcon = new Vector3(-416f, 457f, 0f);
+        Vector3 secondPositionForIcon = new Vector3(-246.5f, 458.5f, 0f);
+
+        Vector3 firstPositionForText = new Vector3(-332.3f, 459.1f, 0f);
+        Vector3 secondPositionForText = new Vector3(-162.6f, 460.9f, 0f);
+
+        firstPowerUp.transform.localPosition = firstPositionForIcon;
+        firstText.transform.localPosition = firstPositionForText;
+
+        secondPowerUp.transform.localPosition = secondPositionForIcon;
+        secondText.transform.localPosition = secondPositionForText;
+    }
+
+    private void UpdatePowerUpsUI() 
+    {
+
+        if (points2XContainer.activeSelf == true && shieldContainer.activeSelf == false) 
+        {
+            PowerUpsUIPosition(points2XImg, points2XDurationGameObject, shieldImg, shieldDurationGameObject);
+        }
+        else if (shieldContainer.activeSelf == true && points2XContainer.activeSelf == false) 
+        {
+            PowerUpsUIPosition(shieldImg, shieldDurationGameObject, points2XImg, points2XDurationGameObject);
+        }
+        else if (shieldContainer.activeSelf == true && points2XContainer.activeSelf == true) 
+        {
+            if (shieldDuration < points2XDuration) 
+            {
+                PowerUpsUIPosition(shieldImg, shieldDurationGameObject, points2XImg, points2XDurationGameObject);
+            }
+            else 
+            {
+                PowerUpsUIPosition(points2XImg, points2XDurationGameObject, shieldImg, shieldDurationGameObject);
+            }
+
+            x2StateAnimator[0].SetTrigger("X2Enabled");
+            x2StateAnimator[1].SetTrigger("X2Enabled");
+            x2StateAnimator[2].SetTrigger("X2Enabled");
+            x2StateAnimator[3].SetTrigger("X2Enabled");
+            x2StateAnimator[4].SetTrigger("X2Enabled");
+
+        }
     }
 
     private void UnlockedNextLevel() 
@@ -63,9 +254,9 @@ public class CTF_GameManager : MonoBehaviour
             scoreManager.IncreaseScore(amount);
         }
     }
-
     public void ReduceHealth(int amount)
     {
+
         if (!isGameOver)
         {
             healthManager.ReduceHealth(amount);
@@ -161,28 +352,10 @@ public class CTF_GameManager : MonoBehaviour
         optionsUICanvas.SetActive(true);
     }
 
-    public void confirmRetryYesButtonFunction()
-    {
-        pauseManager.ResumeGame();
-        SceneManager.LoadScene("CTF_Game");
-    }
-
     public void confirmRetryNoButtonFunction()
     {
         confirmationRetryCanvas.SetActive(false);
         optionsUICanvas.SetActive(true);
-    }
-
-    public void GameOverRetryButtonFunction()
-    {
-        pauseManager.ResumeGame();
-        SceneManager.LoadScene("CTF_Game");
-    }
-
-    public void GameOverQuitButtonFunction()
-    {
-        pauseManager.ResumeGame();
-        SceneManager.LoadScene("CTF_LevelSelector");
     }
 
     public void LevelCompletePlayAgainButtonFunction()
@@ -191,7 +364,7 @@ public class CTF_GameManager : MonoBehaviour
         levelCompleteCanvas.SetActive(false);
     }
 
-    public void LevelCompleteQuitButtonFunction()
+    public void LevelCompleteResumeButtonFunction()
     {
         pauseManager.ResumeGame();
 
@@ -218,18 +391,18 @@ public class CTF_GameManager : MonoBehaviour
                 SceneManager.LoadScene("CTF_Game");
                 break;
             case "5":
-                SceneManager.LoadScene("CTF_LevelSelector");
+                ConfirmQuit();
                 break;
         }
     }
 
-    public void ConfirmationPlayAgainYesButtonFunction()
+    public void ConfirmPlayAgain() 
     {
         pauseManager.ResumeGame();
         SceneManager.LoadScene("CTF_Game");
     }
 
-    public void ConfirmationPlayAgainNoButtonFunction()
+    public void ConfirmQuit() 
     {
         pauseManager.ResumeGame();
         SceneManager.LoadScene("CTF_LevelSelector");

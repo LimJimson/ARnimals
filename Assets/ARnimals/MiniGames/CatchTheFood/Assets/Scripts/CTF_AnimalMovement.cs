@@ -11,6 +11,11 @@ public class CTF_AnimalMovement : MonoBehaviour
     [SerializeField] private GameObject gameResumeTimerCanvas;
     [SerializeField] private Animator animator; 
     [SerializeField] private CTF_HealthManager healthManager;
+    [SerializeField] private CTF_GameManager gameManager;
+
+    [Header("PowerUps")]
+    [SerializeField] private GameObject shield;
+    [SerializeField] private GameObject points2X;
 
     private void Start()
     {
@@ -27,18 +32,52 @@ public class CTF_AnimalMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Correct"))
         {
-            CTF_GameManager.Instance.IncreaseScore(1);
+
+            if (gameManager.InX2PointsState) 
+            {
+                CTF_GameManager.Instance.IncreaseScore(2);
+            }
+            else 
+            {
+                CTF_GameManager.Instance.IncreaseScore(1);
+            }
+
             Destroy(collision.gameObject);
         }
         else if (collision.gameObject.CompareTag("Incorrect"))
         {
-            animator.SetTrigger("ShowRedPanel");
-            CTF_GameManager.Instance.ReduceHealth(1);
+
+            if (gameManager.InShieldState) 
+            {
+
+            }
+            else 
+            {
+                animator.SetTrigger("ShowRedPanel");
+                CTF_GameManager.Instance.ReduceHealth(1);
+            }
+
             Destroy(collision.gameObject);
         }
         else if (collision.gameObject.CompareTag("heart")) 
         {
             healthManager.IncreaseHealth(1);
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.CompareTag("shield")) 
+        {
+            gameManager.InShieldState = true;
+            shield.SetActive(false);
+            gameManager.ShieldDuration = 10f;
+            StartCoroutine(gameManager.DisableShieldAfterdelay(10));
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.CompareTag("x2Points")) 
+        {
+            gameManager.InX2PointsState = true;
+            points2X.SetActive(false);
+            gameManager.Points2XDuration = 10f;
+            StartCoroutine(gameManager.DisableX2PointsAfterdelay(10));
             Destroy(collision.gameObject);
         }
     }

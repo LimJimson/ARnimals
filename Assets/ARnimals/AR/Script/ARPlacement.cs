@@ -45,8 +45,6 @@ public class ARPlacement : MonoBehaviour
         //UI and Canvas
         AR_UI.gameObject.SetActive(true);
         spawnAnimalContainer.SetActive(true);
-        Destroy(spawnedObject);
-        //CalculateSpawnPosition();
     }
     
     float desiredRotationDegrees = 180.0f;
@@ -54,55 +52,38 @@ public class ARPlacement : MonoBehaviour
 
     private void Update()
     {
-        //if (!didInitialAnimalSpawn)
-        //{
-        //    // Spawn the object at the calculated position with the camera's rotation
-        //    spawnedObject = Instantiate(arModels[modelIndex], spawnPosition, Camera.main.transform.rotation);
-        //    spawnedObject.transform.rotation = Quaternion.Euler(0.0f, desiredRotationDegrees, 0.0f);
-
-        //    didInitialAnimalSpawn = true;
-        //}
-
-
-    }
-
-    public void spawnAnimal()
-    {
-        CalculateSpawnPosition();
-
-        if (!didInitialAnimalSpawn)
+       if(!didInitialAnimalSpawn)
         {
+            // Get the camera's position and rotation
+            Vector3 cameraPosition = Camera.main.transform.position;
+            Quaternion cameraRotation = Camera.main.transform.rotation;
+
+            // Set the height below the camera where you want to spawn the object
+            float spawnHeight = 0.5f;
+
+            // Set the distance in front of the camera where you want to spawn the object
+            float spawnDistance = 3f;
+
+            // Calculate the center of the screen in viewport coordinates (0.5, 0.5)
+            Vector3 screenCenter = new Vector3(0.5f, 0.5f, Camera.main.nearClipPlane);
+
+            // Calculate the spawn position based on the screen center
+            spawnPosition = Camera.main.ViewportToWorldPoint(screenCenter);
+
+            // Adjust the spawn position by moving it downward by the specified height
+            spawnPosition -= Vector3.up * spawnHeight;
+
+            // Move the spawn position forward by the specified distance
+            spawnPosition += cameraRotation * Vector3.forward * spawnDistance;
+
             // Spawn the object at the calculated position with the camera's rotation
-            spawnedObject = Instantiate(arModels[modelIndex], spawnPosition, Camera.main.transform.rotation);
+            spawnedObject = Instantiate(arModels[modelIndex], spawnPosition, cameraRotation);
             spawnedObject.transform.rotation = Quaternion.Euler(0.0f, desiredRotationDegrees, 0.0f);
 
             didInitialAnimalSpawn = true;
         }
 
-    }
-    private void CalculateSpawnPosition()
-    {
-        // Get the camera's position and rotation
-        Vector3 cameraPosition = Camera.main.transform.position;
-        Quaternion cameraRotation = Camera.main.transform.rotation;
 
-        // Set the height below the camera where you want to spawn the object
-        float spawnHeight = 0.5f;
-
-        // Set the distance in front of the camera where you want to spawn the object
-        float spawnDistance = 3f;
-
-        // Calculate the center of the screen in viewport coordinates (0.5, 0.5)
-        Vector3 screenCenter = new Vector3(0.5f, 0.5f, Camera.main.nearClipPlane);
-
-        // Calculate the spawn position based on the screen center
-        spawnPosition = Camera.main.ViewportToWorldPoint(screenCenter);
-
-        // Adjust the spawn position by moving it downward by the specified height
-        spawnPosition -= Vector3.up * spawnHeight;
-
-        // Move the spawn position forward by the specified distance
-        spawnPosition += cameraRotation * Vector3.forward * spawnDistance;
     }
 
 

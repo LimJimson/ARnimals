@@ -12,6 +12,11 @@ public class CTF_FoodSpawner : MonoBehaviour
 
     [SerializeField] private CTF_HealthManager healthManager;
 
+    [SerializeField] private GameObject[] powerUps;
+
+    private static System.Random random = new System.Random(); // Static random instance for synchronized randomization
+    private static object syncLock = new object(); // Lock object for thread safety
+
     private void Update()
     {
         spawnTimer += Time.deltaTime;
@@ -26,37 +31,77 @@ public class CTF_FoodSpawner : MonoBehaviour
     private void SpawnFood()
     {
         // Filter out disabled foodPrefabs
-        GameObject[] enabledFoodPrefabs = foods.Where(foodPrefab => foodPrefab.activeSelf).ToArray();
+        GameObject[] enabledFoods = foods.Where(food => food.activeSelf).ToArray();
 
-        if (enabledFoodPrefabs.Length == 0)
+        GameObject[] enabledPowerUps = powerUps.Where(powerUp => powerUp.activeSelf).ToArray();
+
+        GameObject heart = powerUps[0];
+
+        // Generate a random value between 0 and 1 using synchronized randomization
+        float randomValue;
+        lock (syncLock)
+        {
+            randomValue = (float)random.NextDouble();
+        }
+
+        if (enabledFoods.Length == 0)
         {
             Debug.LogWarning("No enabled foodPrefabs to spawn.");
             return;
         }
 
-        if (healthManager.GetHealth()  == 1) 
+        if (healthManager.GetHealth() < 3) 
         {
-            foods[30].SetActive(true);
+            heart.SetActive(true);
         }
-        else if (healthManager.GetHealth() > 1) 
+        else
         {
-            foods[30].SetActive(false);
+            heart.SetActive(false);
         }
 
-        int randomIndex = Random.Range(0, enabledFoodPrefabs.Length);
-        GameObject food = Instantiate(enabledFoodPrefabs[randomIndex], spawnPoint.position, Quaternion.identity);
-        Rigidbody2D foodRigidbody = food.GetComponent<Rigidbody2D>();
+        Debug.Log("Random Value: " + randomValue);
 
-        // Get the original scale of the food object
-        Vector3 originalScale = food.transform.localScale;
+        if (randomValue <= 0.10f)
+        {
+            if (enabledPowerUps.Length == 0) 
+            {
+                Debug.Log("Spawned Food through Powerup");
+                SpawnRandomFoodOrPowerUp(enabledFoods);
 
-        // Set the scale of the spawned food to a minimized version of the original scale
-        food.transform.localScale = originalScale * 0.13f; // Adjust the scale factor as needed
-
-        // Apply an initial force to make the food fall
-        foodRigidbody.AddForce(Vector2.down * spawnForce, ForceMode2D.Impulse);
-
-        Destroy(food, 5f);
+            }
+            else 
+            {
+                Debug.Log("Spawned PowerUp");
+                SpawnRandomFoodOrPowerUp(enabledPowerUps);
+            }
+        }
+        else
+        {
+            Debug.Log("Spawned Food");
+            SpawnRandomFoodOrPowerUp(enabledFoods);
+        }
     }
 
+    private void SpawnRandomFoodOrPowerUp(GameObject[] arrayOfFoodsOrPowerUps) 
+    {
+        int randomIndex;
+        lock (syncLock)
+        {
+            randomIndex = random.Next(0, arrayOfFoodsOrPowerUps.Length);
+        }
+        
+        GameObject spawnedObject = Instantiate(arrayOfFoodsOrPowerUps[randomIndex], spawnPoint.position, Quaternion.identity);
+        Rigidbody2D spawnedObjectRigidbody = spawnedObject.GetComponent<Rigidbody2D>();
+
+         // Get the original scale of the food object
+        Vector3 originalScale = spawnedObject.transform.localScale;
+
+        // Set the scale of the spawned spawnedObject to a minimized version of the original scale
+        spawnedObject.transform.localScale = originalScale * 0.13f; // Adjust the scale factor as needed
+
+        // Apply an initial force to make the spawnedObject fall
+        spawnedObjectRigidbody.AddForce(Vector2.down * spawnForce, ForceMode2D.Impulse);
+
+        Destroy(spawnedObject, 5f);    
+    }
 }

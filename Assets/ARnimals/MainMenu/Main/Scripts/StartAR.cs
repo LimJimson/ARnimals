@@ -45,7 +45,7 @@ public class StartAR : MonoBehaviour
     public void goToAnimalSelectionScene()
     {
 
-        SceneManager.LoadScene("Animal Information");
+        SceneManager.LoadScene("Animal_Information");
     }
 
     public void goToSettingsMenu()

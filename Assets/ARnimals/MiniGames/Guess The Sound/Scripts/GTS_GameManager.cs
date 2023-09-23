@@ -362,8 +362,8 @@ public class GTS_GameManager : MonoBehaviour
     {
         hideConfirmCorrect();
         stopSound();
-        
-        
+
+        audioSrc.PlayOneShot(AnimalSounds[animalIndex]);
         questionNum += 1;
         checkQuestion();
         
@@ -381,14 +381,23 @@ public class GTS_GameManager : MonoBehaviour
         randomizeChoiceBtnsAndPlaySndBtns();
 
     }
-
+    public Animator dmgEffect;
+    public GameObject damagePanel;
     public void wrongAnswer()
     {
+        StartCoroutine(dmgPlayer());
         hideConfirmWrong();
-        life-=1;
+        life -=1;
         lifeChecker();
-    }
 
+    }
+    
+    IEnumerator dmgPlayer()
+    {
+        damagePanel.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        damagePanel.SetActive(false);
+    }
     public void lifeChecker()
     {
         if (life == 3)
@@ -396,6 +405,7 @@ public class GTS_GameManager : MonoBehaviour
             heart_3.sprite = healthBarSprites[0];
             heart_2.sprite = healthBarSprites[0];
             heart_1.sprite = healthBarSprites[0];
+
         }
         else if (life == 2)
         {

@@ -58,28 +58,18 @@ public class GTS_GameManager : MonoBehaviour
     {
         existingSO = SaveManager.Load();
         levelSelected = StateNameController.levelClickedMG2;
-        guide_chosen = StateNameController.guide_chosen;
+
         confirmCorrect.SetActive(false);
         confirmWrong.SetActive(false);
         optionsUI.SetActive(false);
         GameUI.SetActive(false);
-
-        if ( levelSelected == 0)
-        {
-            levelSelected = 1;
-        }
-
-        if (string.IsNullOrEmpty(guide_chosen))
-        {
-            guide_chosen = "boy_guide";
-        }
 
         curr_lvl.text = "Level "+ levelSelected.ToString();
         curr_lvl.gameObject.SetActive(true);
         showCurrentLevel();
 
         questionNum = 1;
-        checkQuestion();
+        questionNumTxt.text = "Question #" + questionNum.ToString();
 
         randomizedAnimal();
         checkAnimal();
@@ -119,101 +109,54 @@ public class GTS_GameManager : MonoBehaviour
         }
     }
 
-    public Sprite[] starsSprites;
-    public Image _starWin;
-    public TMP_Text lvlCompleted;
-    void checkStar()
-    {
-        
-        winLevel.SetActive(true);
-        lvlCompleted.text = "LEVEL <color=yellow><b>" + levelSelected.ToString()+ "</b></color> COMPLETED!";
-        if(life == 3)
-        {
-            _starWin.sprite = starsSprites[3];
-        }
-        else if(life == 2)
-        {
-            _starWin.sprite = starsSprites[2];
-        }
-        else if(life == 1)
-        {
-            _starWin.sprite = starsSprites[1];
-        }
-    }
     void checkQuestion()
     {
         if(levelSelected == 1)
         {
-            questionNumTxt.text = "Question # " + questionNum.ToString() + " / 3";
             if (questionNum == 4)
             {
                 GameUI.SetActive(false);
                 compareCurrentLvl_UnlockLvl();
-                showNextLvlBtn();
-                checkStar();
+                winLevel.SetActive(true);
             }
         }
         else if(levelSelected == 2)
         {
-            questionNumTxt.text = "Question # " + questionNum.ToString() + " / 5";
+
             if (questionNum == 6)
             {
                 GameUI.SetActive(false);
                 compareCurrentLvl_UnlockLvl();
-                showNextLvlBtn();
-                checkStar();
+                winLevel.SetActive(true);
             }
         }
         else if (levelSelected == 3)
         {
-            questionNumTxt.text = "Question # " + questionNum.ToString() + " / 8";
             if (questionNum == 9)
             {
                 GameUI.SetActive(false);
                 compareCurrentLvl_UnlockLvl();
-                showNextLvlBtn();
-                checkStar();
+                winLevel.SetActive(true);
             }
         }
         else if (levelSelected == 4)
         {
-            questionNumTxt.text = "Question # " + questionNum.ToString() + " / 10";
             if (questionNum == 11)
             {
                 GameUI.SetActive(false);
                 compareCurrentLvl_UnlockLvl();
-                showNextLvlBtn();
-                checkStar();
+                winLevel.SetActive(true);
             }
         }
         else if (levelSelected == 5)
         {
-            questionNumTxt.text = "Question # " + questionNum.ToString() + " / 12";
-            if (questionNum == 13)
+           if (questionNum == 13)
             {
                 GameUI.SetActive(false);
                 compareCurrentLvl_UnlockLvl();
-                showNextLvlBtn();
-                checkStar();
+                winLevel.SetActive(true);
             }
         }
-    }
-    public GameObject nextLvlBtn;
-    void showNextLvlBtn()
-    {
-        if (levelSelected <= 5)
-        {
-            nextLvlBtn.SetActive(true);
-        }
-        else
-        {
-            nextLvlBtn.SetActive(false);
-        }
-    }
-    public void nextLevel()
-    {
-            StateNameController.levelClickedMG2 += 1;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void compareCurrentLvl_UnlockLvl()
@@ -224,6 +167,7 @@ public class GTS_GameManager : MonoBehaviour
         }
         else if (existingSO.getUnlockedLevelMG2() == 5)
         {
+
         }
         else if (levelSelected >= existingSO.getUnlockedLevelMG2())
         {
@@ -296,11 +240,7 @@ public class GTS_GameManager : MonoBehaviour
     {
         if (!audioSrc.isPlaying)
         {
-            if (!waitSndPlaying)
-            {
-                audioSrc.PlayOneShot(AnimalSounds[animalIndex]);
-            }
-            
+            audioSrc.PlayOneShot(AnimalSounds[animalIndex]);
 
         }
         else
@@ -314,47 +254,19 @@ public class GTS_GameManager : MonoBehaviour
     {
         if (!audioSrc.isPlaying)
         {
-            if (!waitSndPlaying)
-            {
-                audioSrc.PlayOneShot(AnimalSounds[soundIndex]);
-            }
+            audioSrc.PlayOneShot(AnimalSounds[soundIndex]);
         }
         else
         {
-            if (!waitSndPlaying)
-            {
-                StartCoroutine(waitForSountTxtDelay());
-            }
+            StartCoroutine(waitForSountTxtDelay());
         }
     }
-    bool waitSndPlaying;
-    public GameObject boy_guide_waitForSnd;
-    public GameObject girl_guide_waitForSnd;
-    string guide_chosen;
+
     IEnumerator waitForSountTxtDelay()
     {
-
-            if (guide_chosen == "boy_guide")
-            {
-                waitForSoundTxt.SetActive(true);
-                boy_guide_waitForSnd.SetActive(true);
-                waitSndPlaying = true;
-                yield return (new WaitForSeconds(1f));
-                waitForSoundTxt.SetActive(false);
-                boy_guide_waitForSnd.SetActive(false);
-                waitSndPlaying = false;
-            }
-            else if (guide_chosen == "girl_guide")
-            {
-                waitForSoundTxt.SetActive(true);
-                girl_guide_waitForSnd.SetActive(true);
-                waitSndPlaying = true;
-                yield return (new WaitForSeconds(1f));
-                waitForSoundTxt.SetActive(false);
-                girl_guide_waitForSnd.SetActive(false);
-                waitSndPlaying = false;
-            }
-
+        waitForSoundTxt.SetActive(true);
+        yield return (new WaitForSeconds(1f));
+        waitForSoundTxt.SetActive(false);
     }
 
 
@@ -362,11 +274,9 @@ public class GTS_GameManager : MonoBehaviour
     {
         hideConfirmCorrect();
         stopSound();
-        
-        
         questionNum += 1;
         checkQuestion();
-        
+        questionNumTxt.text = "Question #" + questionNum.ToString();
         
         randomizedAnimal();
         checkAnimal();
@@ -408,26 +318,10 @@ public class GTS_GameManager : MonoBehaviour
         else if (life == 0)
         {
             heart_1.sprite = healthBarSprites[1];
-            gameOverUI();
+            gameOver.SetActive(true);
         }
     }
-    public GameObject boy_guide_gameOver;
-    public GameObject girl_guide_gameOver;
-    void gameOverUI()
-    {
-        gameOver.SetActive(true);
-        if (guide_chosen == "boy_guide")
-        {
-            boy_guide_gameOver.SetActive(true);
-            girl_guide_gameOver.SetActive(false);
 
-        }
-        else if (guide_chosen == "girl_guide")
-        {
-            boy_guide_gameOver.SetActive(false);
-            girl_guide_gameOver.SetActive(true);
-        }
-    }
     private List<int> usedAnimalIndices = new List<int>();
 
     public void randomizedAnimal()
@@ -452,34 +346,7 @@ public class GTS_GameManager : MonoBehaviour
 
         animalIndex = randomIndex;
     }
-    public void goToAnimalInfo()
-    {
-        SceneManager.LoadScene("Animal_Information");
-    }
 
-    public GameObject exploreConfirm;
-    public GameObject boy_guide_explore;
-    public GameObject girl_guide_explore;
-    public void showConfirmExplore()
-    {
-        exploreConfirm.SetActive(true);
-        if (guide_chosen == "boy_guide")
-        {
-            boy_guide_explore.SetActive(true);
-            girl_guide_explore.SetActive(false);
-
-        }
-        else if (guide_chosen == "girl_guide")
-        {
-            boy_guide_explore.SetActive(false);
-            girl_guide_explore.SetActive(true);
-        }
-
-    }
-    public void hideConfirmExplore()
-    {
-        exploreConfirm.SetActive(false);
-    }
     public void retry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -498,114 +365,41 @@ public class GTS_GameManager : MonoBehaviour
     {
         optionsUI.SetActive(false);
     }
-
-    public GameObject boy_guide_correct;
-    public GameObject girl_guide_correct;
     public void showConfirmCorrect()
     {
         confirmCorrect.SetActive(true);
-        if (guide_chosen == "boy_guide")
-        {
-            boy_guide_correct.SetActive(true);
-            girl_guide_correct.SetActive(false);
-
-        }
-        else if (guide_chosen == "girl_guide")
-        {
-            boy_guide_correct.SetActive(false);
-            girl_guide_correct.SetActive(true);
-        }
     }
-
     public void hideConfirmCorrect()
     {
         confirmCorrect.SetActive(false);
     }
-    public GameObject boy_guide_playAgain;
-    public GameObject girl_guide_playAgain;
     public void showPlayAgainConfirm()
     {
         playAgainConfirm.SetActive(true);
-        if (guide_chosen == "boy_guide")
-        {
-            boy_guide_playAgain.SetActive(true);
-            girl_guide_playAgain.SetActive(false);
-
-        }
-        else if (guide_chosen == "girl_guide")
-        {
-            boy_guide_playAgain.SetActive(false);
-            girl_guide_playAgain.SetActive(true);
-        }
     }
     public void hidePlayAgainConfirm()
     {
         playAgainConfirm.SetActive(false);
     }
-
-    public GameObject boy_guide_retry;
-    public GameObject girl_guide_retry;
-
-
     public void showRetryAgainConfirm()
     {
         restartLevelConfirm.SetActive(true);
-        if (guide_chosen == "boy_guide")
-        {
-            boy_guide_retry.SetActive(true);
-            girl_guide_retry.SetActive(false);
-
-        }
-        else if (guide_chosen == "girl_guide")
-        {
-            boy_guide_retry.SetActive(false);
-            girl_guide_retry.SetActive(true);
-        }
-        
     }
-
     public void hideRetryAgainConfirm()
     {
         restartLevelConfirm.SetActive(false);
     }
-    public GameObject boy_guide_wrong;
-    public GameObject girl_guide_wrong;
     public void showConfirmWrong()
     {
         confirmWrong.SetActive(true);
-        if (guide_chosen == "boy_guide")
-        {
-            boy_guide_wrong.SetActive(true);
-            girl_guide_wrong.SetActive(false);
-
-        }
-        else if (guide_chosen == "girl_guide")
-        {
-            boy_guide_wrong.SetActive(false);
-            girl_guide_wrong.SetActive(true);
-        }
     }
     public void hideConfirmWrong()
     {
         confirmWrong.SetActive(false);
     }
-    public GameObject boy_guide_quit;
-    public GameObject girl_guide_quit;
     public void showConfirmQuit()
     {
         confirmationQuit.SetActive(true);
-        if (guide_chosen == "boy_guide")
-        {
-            boy_guide_quit.SetActive(true);
-            girl_guide_quit.SetActive(false);
-            
-        }
-        else if (guide_chosen == "girl_guide")
-        {
-            boy_guide_quit.SetActive(false);
-            girl_guide_quit.SetActive(true);
-        }
-        
     }
     public void hideConfirmQuit()
     {

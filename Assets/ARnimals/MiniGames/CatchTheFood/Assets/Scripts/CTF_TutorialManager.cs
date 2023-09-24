@@ -62,6 +62,9 @@ public class CTF_TutorialManager : MonoBehaviour
     [SerializeField] private GameObject click2NxtPanelForTrivia;
     [SerializeField] private GameObject panelForTrivia;
 
+    [SerializeField] private GameObject[] boyGuideForMenus;
+    [SerializeField] private GameObject[] girlGuideForMenus;
+
     [SerializeField] private int pageNum = 0;
 
     private string guide_name;
@@ -101,6 +104,16 @@ public class CTF_TutorialManager : MonoBehaviour
         pagesContents();
     }
 
+    private void showGuide(int guideSprite, int dialogBoxSprite, string name, GameObject[] guideForMenus)
+    {
+        guide.sprite = spriteForGuide[guideSprite];
+        dialogBox.sprite = spriteForDialogBox[dialogBoxSprite];
+        guide_name = name;
+        guideForMenus[0].SetActive(true);
+        guideForMenus[1].SetActive(true);
+        guideForMenus[2].SetActive(true);
+    } 
+
     private void checkGuide() 
     {
         guideChosen = StateNameController.guide_chosen;
@@ -110,17 +123,20 @@ public class CTF_TutorialManager : MonoBehaviour
             guideChosen = "boy_guide";
         }
 
+        boyGuideForMenus[0].SetActive(false);
+        boyGuideForMenus[1].SetActive(false);
+        boyGuideForMenus[2].SetActive(false);
+        girlGuideForMenus[0].SetActive(false);
+        girlGuideForMenus[1].SetActive(false);
+        girlGuideForMenus[2].SetActive(false);
+
         if (guideChosen == "boy_guide") 
         {
-            guide.sprite = spriteForGuide[0];
-            dialogBox.sprite = spriteForDialogBox[0];
-            guide_name = "Lorem";
+            showGuide(0, 0, "Lorem", boyGuideForMenus);
         }
         else if (guideChosen == "girl_guide") 
         {
-            guide.sprite = spriteForGuide[1];
-            dialogBox.sprite = spriteForDialogBox[1];
-            guide_name = "Ipsum";
+            showGuide(1, 1, "Ipsum", girlGuideForMenus);
         }
     }
 

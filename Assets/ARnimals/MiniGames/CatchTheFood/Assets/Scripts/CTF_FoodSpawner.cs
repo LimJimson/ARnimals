@@ -14,8 +14,6 @@ public class CTF_FoodSpawner : MonoBehaviour
 
     [SerializeField] private GameObject[] powerUps;
 
-    private static System.Random random = new System.Random(); // Static random instance for synchronized randomization
-    private static object syncLock = new object(); // Lock object for thread safety
 
     private void Update()
     {
@@ -37,12 +35,8 @@ public class CTF_FoodSpawner : MonoBehaviour
 
         GameObject heart = powerUps[0];
 
-        // Generate a random value between 0 and 1 using synchronized randomization
-        float randomValue;
-        lock (syncLock)
-        {
-            randomValue = (float)random.NextDouble();
-        }
+        // Generate a random value between 0 and 1.
+        float randomValue = Random.Range(0f, 1f);
 
         if (enabledFoods.Length == 0)
         {
@@ -61,9 +55,12 @@ public class CTF_FoodSpawner : MonoBehaviour
 
         Debug.Log("Random Value: " + randomValue);
 
-        if (randomValue <= 0.10f)
+        if (randomValue < 0.1f)
         {
-            if (enabledPowerUps.Length == 0) 
+
+            Debug.Log("Available PowerUps: " + enabledPowerUps.Length);
+
+            if (enabledPowerUps.Length <= 0) 
             {
                 Debug.Log("Spawned Food through Powerup");
                 SpawnRandomFoodOrPowerUp(enabledFoods);
@@ -84,12 +81,7 @@ public class CTF_FoodSpawner : MonoBehaviour
 
     private void SpawnRandomFoodOrPowerUp(GameObject[] arrayOfFoodsOrPowerUps) 
     {
-        int randomIndex;
-        lock (syncLock)
-        {
-            randomIndex = random.Next(0, arrayOfFoodsOrPowerUps.Length);
-        }
-        
+        int randomIndex = Random.Range(0, arrayOfFoodsOrPowerUps.Length);
         GameObject spawnedObject = Instantiate(arrayOfFoodsOrPowerUps[randomIndex], spawnPoint.position, Quaternion.identity);
         Rigidbody2D spawnedObjectRigidbody = spawnedObject.GetComponent<Rigidbody2D>();
 

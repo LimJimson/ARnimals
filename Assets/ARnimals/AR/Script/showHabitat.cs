@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
 public class showHabitat : MonoBehaviour
@@ -13,6 +16,8 @@ public class showHabitat : MonoBehaviour
     public GameObject sceneLighting;
     public Camera ARCam;
     public ARCameraBackground ARCameraBGScript;
+
+
     
 
     List<int> forestAnimals = new List<int>{0,1,5,6,8, 12, 15, 17,18};
@@ -23,11 +28,17 @@ public class showHabitat : MonoBehaviour
         modelIndex = StateNameController.animalIndexChosen;
         
      }
-    private void LateUpdate()
+    private void Update()
+    {
+        changeCameraBGColor();
+        countdownHabitat();
+    }
+
+    void changeCameraBGColor()
     {
         if (isHabitatEnabled)
         {
-            
+
             ARCam.backgroundColor = new Color(0.53f, 0.81f, 0.92f);
         }
         else
@@ -35,6 +46,45 @@ public class showHabitat : MonoBehaviour
             ARCam.backgroundColor = Color.black;
         }
     }
+
+    public TMP_Text timerHabitat;
+    bool isHabitatTimerCounting = false;
+    float countdownTime = 5.0f;
+    public Button habitatButton;
+
+    void countdownHabitat()
+    {
+        if (isHabitatTimerCounting)
+        {
+            countdownTime -= Time.deltaTime;
+
+            if (countdownTime <= 0)
+            {
+                countdownTime = 5.0f;
+                isHabitatTimerCounting = false;
+                timerHabitat.gameObject.SetActive(false);
+                habitatButton.interactable = true; 
+                
+            }
+
+            UpdateTimerText();
+        }
+    }
+
+    public void StartCountdown()
+    {
+        isHabitatTimerCounting = true;
+        countdownHabitat();
+        timerHabitat.gameObject.SetActive(true);
+        habitatButton.interactable = false;
+    }
+
+
+    private void UpdateTimerText()
+    {
+        timerHabitat.text = Convert.ToInt16(countdownTime).ToString();
+    }
+
     public void showAnimalHabitat()
     {
         if (isHabitatEnabled)

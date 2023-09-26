@@ -31,9 +31,6 @@ public class ScriptHandler : MonoBehaviour
 
     public GameObject changeNameBtn;
 
-    
-
-    SaveObject loadedData;
     void Start()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
@@ -48,29 +45,33 @@ public class ScriptHandler : MonoBehaviour
         OptionsCanvas.SetActive(false);
 
         // Load the saved data
-        loadedData = SaveManager.Load();
-        name = loadedData.getName();
-        guideChosen = loadedData.getGuide();
+        soScript = SaveManager.Load();
+        name = soScript.getName();
+        guideChosen = soScript.getGuide();
 
 
-        StateNameController.mainMenuGuide =loadedData.MainMenuTutorialDone;
-        StateNameController.modeSelectGuide =loadedData.ModeSelectTutorialDone;
-        StateNameController.animalSelectGuide =loadedData.AnimalSelectTutorialDone;
-        StateNameController.ARExperienceGuide =loadedData.ARExpTutorialDone;
+        StateNameController.mainMenuGuide =soScript.MainMenuTutorialDone;
+        StateNameController.modeSelectGuide =soScript.ModeSelectTutorialDone;
+        StateNameController.animalSelectGuide =soScript.AnimalSelectTutorialDone;
+        StateNameController.ARExperienceGuide =soScript.ARExpTutorialDone;
         StateNameController.player_name = name;
+        StateNameController.guide_chosen = guideChosen;
+
         if (!string.IsNullOrEmpty(name))
         {
             StartCoroutine(WaitForAnimationFinish());
             ResetGameBtn.gameObject.SetActive(true);
             changeNameBtn.gameObject.SetActive(true);
             // If the name is not null or empty, hide the name text field and show the player name text
-            if (string.IsNullOrEmpty(guideChosen))
+            if (string.IsNullOrEmpty(StateNameController.guide_chosen))
             {
+                continueBtn.onClick.RemoveAllListeners();
                 continueBtn.onClick.AddListener(inputLogicScript.NoGuideSelected);
+                
             }
             else
             {
-                StateNameController.guide_chosen = guideChosen;
+                continueBtn.onClick.RemoveAllListeners();
                 continueBtn.onClick.AddListener(inputLogicScript.GoToMainMenu);
             }
 
@@ -85,7 +86,17 @@ public class ScriptHandler : MonoBehaviour
         else
         {
             // If the name is null or empty, show the name text field and hide the player name text
-            continueBtn.onClick.AddListener(inputLogicScript.continueBtnClickedNoSave);
+            if (string.IsNullOrEmpty(StateNameController.guide_chosen))
+            {
+                continueBtn.onClick.RemoveAllListeners();
+                continueBtn.onClick.AddListener(inputLogicScript.continueBtnClickedNoSave);
+            }
+            else
+            {
+                continueBtn.onClick.RemoveAllListeners();
+                continueBtn.onClick.AddListener(inputLogicScript.continueBtnClickedWithSave);
+            }
+            
             ResetGameBtn.gameObject.SetActive(false);
             changeNameBtn.gameObject.SetActive(false);
             nameTxtField.SetActive(true);
@@ -96,9 +107,11 @@ public class ScriptHandler : MonoBehaviour
     // ----- CHANGE NAME -----
     public void changeName()
     {
-        loadedData.setName("");
+        soScript.setName("");
+        SaveManager.Save(soScript);
         SceneManager.LoadScene("TitleScreen");
     }
+
     public GameObject changeNameConfirmWindow;
     public GameObject changeNameGuideMale;
     public GameObject changeNameGuideFemale;

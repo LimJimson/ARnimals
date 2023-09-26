@@ -230,7 +230,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c69aa5f4dd1cee64e96b1081f7b89957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randNum: 0
   triviaDisp: {fileID: 1251816686}
 --- !u!1 &35226342
 GameObject:
@@ -1281,6 +1280,18 @@ MonoBehaviour:
       - m_Target: {fileID: 16181648}
         m_TargetAssemblyTypeName: showAnimalImg, Assembly-CSharp
         m_MethodName: startBtnClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 16181649}
+        m_TargetAssemblyTypeName: TriviaDisplay, Assembly-CSharp
+        m_MethodName: Trivia
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

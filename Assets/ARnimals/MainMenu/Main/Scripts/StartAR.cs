@@ -21,8 +21,8 @@ public class StartAR : MonoBehaviour
 
     void Start()
     {
-        guide_chosen = StateNameController.guide_chosen;
         loaddata = SaveManager.Load();
+        guide_chosen = StateNameController.guide_chosen;
         if (string.IsNullOrEmpty(guide_chosen))
         {
             guide_chosen = "boy_guide";
@@ -154,7 +154,8 @@ public class StartAR : MonoBehaviour
     public void changeNameClickedYes ()
     {
         loaddata.setName("");
-        SceneManager.LoadScene("Title_Screen");
+        SaveManager.Save(loaddata);
+        SceneManager.LoadScene("TitleScreen");
     }
 
     // -----QUIT GAME CONFIRMATION -----

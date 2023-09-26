@@ -43,14 +43,16 @@ public class animalSelection : MonoBehaviour
     public void selectedAnimal(int num)
     {
         animalIndex = num;
+        
         StartBtn.SetActive(true);
         disableAllAnimalImgs();
         showAnimalName();
         selectAnimalTxt.gameObject.SetActive(false);
         animalClicked = true;
         animalImgs[num].gameObject.SetActive(true);
+        StateNameController.animalIndexChosen = animalIndex;
 
-        foreach(Button button in animalBtns)
+        foreach (Button button in animalBtns)
         {
             if (button.Equals(animalBtns[num]))
             {
@@ -84,7 +86,6 @@ public class animalSelection : MonoBehaviour
     {
         if (animalClicked == true)
         {
-            StateNameController.animalIndexChosen = animalIndex;
             LoadLevelAR();
         }
     }

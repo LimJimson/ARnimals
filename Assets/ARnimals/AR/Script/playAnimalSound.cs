@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playAnimalSound : MonoBehaviour
 {
@@ -11,6 +14,8 @@ public class playAnimalSound : MonoBehaviour
     public AudioClip[] clip;
 
     public GameObject animalSndBtn;
+
+
 
     private void Awake()
     {
@@ -29,9 +34,13 @@ public class playAnimalSound : MonoBehaviour
             animalSndBtn.SetActive(true);
         }
     }
+    private void Update()
+    {
+        countdownSnd();
+    }
     public void playSound()
     {
-        
+
         if (!audioSrc.isPlaying)
         {
             audioSrc.PlayOneShot(clip[animalIndex]);
@@ -45,6 +54,42 @@ public class playAnimalSound : MonoBehaviour
         {
             audioSrc.Stop();
         }
-        
+
+    }
+    public TMP_Text timerSndTxt;
+    bool isSndTimerCounting = false;
+    float countdownTime = 3.0f;
+    public Button playSndBtn;
+
+    void countdownSnd()
+    {
+        if (isSndTimerCounting)
+        {
+            countdownTime -= Time.deltaTime;
+
+            if (countdownTime <= 0)
+            {
+                countdownTime = 3.0f;
+                isSndTimerCounting = false;
+                timerSndTxt.gameObject.SetActive(false);
+                playSndBtn.interactable = true;
+
+            }
+
+            UpdateTimerText();
+        }
+    }
+
+    public void StartCountdown()
+    {
+        isSndTimerCounting = true;
+        countdownSnd();
+        timerSndTxt.gameObject.SetActive(true);
+        playSndBtn.interactable = false;
+
+    }
+    private void UpdateTimerText()
+    {
+        timerSndTxt.text = Convert.ToInt16(countdownTime).ToString();
     }
 }

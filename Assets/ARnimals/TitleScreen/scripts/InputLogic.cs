@@ -68,6 +68,24 @@ public class InputLogic : MonoBehaviour
             SceneManager.LoadScene("GuideSelector");
         }
     }
+
+    public void continueBtnClickedWithSave()
+    {
+        if (input.text.Length == 0)
+        {
+            error.text = "Please Input a Name";
+        }
+        else if (input.text.Length <= minCharCount)
+        {
+        }
+        else
+        {
+            soScript.name = input.text.ToUpper();
+            StateNameController.player_name = input.text.ToUpper();
+            SaveManager.Save(soScript);
+            SceneManager.LoadScene("MainMenu");
+        }
+    }
     public void NoGuideSelected()
     {
         SceneManager.LoadScene("GuideSelector");

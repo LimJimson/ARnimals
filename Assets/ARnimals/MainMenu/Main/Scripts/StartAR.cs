@@ -153,7 +153,7 @@ public class StartAR : MonoBehaviour
     }
     public void changeNameClickedYes ()
     {
-        loaddata.setName("");
+        loaddata.name = "";
         SaveManager.Save(loaddata);
         SceneManager.LoadScene("TitleScreen");
     }

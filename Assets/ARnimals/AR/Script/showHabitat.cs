@@ -17,7 +17,7 @@ public class showHabitat : MonoBehaviour
     public Camera ARCam;
     public ARCameraBackground ARCameraBGScript;
 
-
+    public float skySpeed;
     
 
     List<int> forestAnimals = new List<int>{0,1,5,6,8, 12, 15, 17,18};
@@ -30,21 +30,9 @@ public class showHabitat : MonoBehaviour
      }
     private void Update()
     {
-        changeCameraBGColor();
         countdownHabitat();
-    }
-
-    void changeCameraBGColor()
-    {
-        if (isHabitatEnabled)
-        {
-
-            ARCam.backgroundColor = new Color(0.53f, 0.81f, 0.92f);
-        }
-        else
-        {
-            ARCam.backgroundColor = Color.black;
-        }
+        RenderSettings.skybox.SetFloat("_Rotation", Time.time * skySpeed);
+        
     }
 
     public TMP_Text timerHabitat;
@@ -90,8 +78,8 @@ public class showHabitat : MonoBehaviour
         if (isHabitatEnabled)
         {
             isHabitatEnabled = false;
+            ARCam.clearFlags = CameraClearFlags.SolidColor;
 
-            
             ARCameraBGScript.enabled = true;
             sceneLighting.SetActive(true);
             Underwater.SetActive(false);
@@ -101,12 +89,13 @@ public class showHabitat : MonoBehaviour
         else
         {
             isHabitatEnabled = true;
-            
-            
+
+            ARCam.clearFlags = CameraClearFlags.Skybox;
 
             ARCameraBGScript.enabled = false;
             if (forestAnimals.Contains(modelIndex))
             {
+
                 sceneLighting.SetActive(true);
                 Forest.SetActive(true);
                 Underwater.SetActive(false);

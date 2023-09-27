@@ -33,6 +33,7 @@ public static class SaveManager
             existingSO.unlockedLevelMG3 = so.unlockedLevelMG3;
             existingSO.MainMenuTutorialDone = so.MainMenuTutorialDone;
             existingSO.ModeSelectTutorialDone = so.ModeSelectTutorialDone;
+            existingSO.MiniGamesTutorialDone = so.MiniGamesTutorialDone;
             existingSO.AnimalInfoTutorialDone = so.AnimalInfoTutorialDone;
             existingSO.AnimalSelectTutorialDone = so.AnimalSelectTutorialDone;
             existingSO.ARExpTutorialDone = so.ARExpTutorialDone;

@@ -33,6 +33,7 @@ public class animalSelection : MonoBehaviour
         selectAnimalTxt.gameObject.SetActive(true);
         loadingScreen.SetActive(false);
         AnimalNameTxt.gameObject.SetActive(false);
+        AnimalNameTxt.text = "";
         disableAllAnimalImgs();
     }
 
@@ -40,10 +41,26 @@ public class animalSelection : MonoBehaviour
 
     }
 
+    public void resetSelection()
+    {
+        animalClicked = false;
+        StartBtn.SetActive(false);
+        AnimalNameTxt.gameObject.SetActive(false);
+        AnimalNameTxt.text = "";
+
+        disableAllAnimalImgs();
+
+        foreach (Button button in animalBtns)
+        {
+            button.image.color = Color.white;
+
+        }
+    }
     public void selectedAnimal(int num)
     {
+
         animalIndex = num;
-        
+
         StartBtn.SetActive(true);
         disableAllAnimalImgs();
         showAnimalName();
@@ -63,6 +80,8 @@ public class animalSelection : MonoBehaviour
                 button.image.color = Color.white;
             }
         }
+        
+       
     }
 
     

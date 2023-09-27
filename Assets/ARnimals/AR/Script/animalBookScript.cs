@@ -44,9 +44,12 @@ public class animalBookScript : MonoBehaviour
 
     void showAnimalInfo()
     {
+        animalHabitat1Img.gameObject.SetActive(true);
+        animalHabitat1Txt.gameObject.SetActive(true);
         animalHabitat2Img.gameObject.SetActive(true);
         animalHabitat2Txt.gameObject.SetActive(true);
         animalHabitat3Img.gameObject.SetActive(false);
+        animalHabitat3Txt.gameObject.SetActive(false);
         animalImg.sprite = animalImgContainer[animalIndex];
         animalNameTxt.text = animalNameContainer[animalIndex];
 
@@ -117,6 +120,8 @@ public class animalBookScript : MonoBehaviour
                 animalHabitat1Txt.gameObject.SetActive(false);
                 animalHabitat2Img.gameObject.SetActive(false);
                 animalHabitat2Txt.gameObject.SetActive(false);
+                animalHabitat3Img.gameObject.SetActive(true);
+                animalHabitat3Txt.gameObject.SetActive(true);
                 animalHabitat3Img.sprite = animalHabitat[0];
                 animalHabitat3Txt.text = animalHabitatTxt[0];
                 break;
@@ -136,10 +141,14 @@ public class animalBookScript : MonoBehaviour
                 break;
 
             case 8:
-                animalHabitat1Img.sprite = animalHabitat[0];
-                animalHabitat1Txt.text = animalHabitatTxt[0];
+                animalHabitat1Img.gameObject.SetActive(false);
+                animalHabitat1Txt.gameObject.SetActive(false);
                 animalHabitat2Img.gameObject.SetActive(false);
                 animalHabitat2Txt.gameObject.SetActive(false);
+                animalHabitat3Img.gameObject.SetActive(true);
+                animalHabitat3Txt.gameObject.SetActive(true);
+                animalHabitat3Img.sprite = animalHabitat[0];
+                animalHabitat3Txt.text = animalHabitatTxt[0];
                 break;
 
             case 9:
@@ -147,6 +156,8 @@ public class animalBookScript : MonoBehaviour
                 animalHabitat1Txt.gameObject.SetActive(false);
                 animalHabitat2Img.gameObject.SetActive(false);
                 animalHabitat2Txt.gameObject.SetActive(false);
+                animalHabitat3Img.gameObject.SetActive(true);
+                animalHabitat3Txt.gameObject.SetActive(true);
                 animalHabitat3Img.sprite = animalHabitat[8];
                 animalHabitat3Txt.text = animalHabitatTxt[8];
                 break;
@@ -177,6 +188,8 @@ public class animalBookScript : MonoBehaviour
                 animalHabitat1Txt.gameObject.SetActive(false);
                 animalHabitat2Img.gameObject.SetActive(false);
                 animalHabitat2Txt.gameObject.SetActive(false);
+                animalHabitat3Img.gameObject.SetActive(true);
+                animalHabitat3Txt.gameObject.SetActive(true);
                 animalHabitat3Img.sprite = animalHabitat[9];
                 animalHabitat3Txt.text = animalHabitatTxt[9];
                 break;
@@ -186,6 +199,8 @@ public class animalBookScript : MonoBehaviour
                 animalHabitat1Txt.gameObject.SetActive(false);
                 animalHabitat2Img.gameObject.SetActive(false);
                 animalHabitat2Txt.gameObject.SetActive(false);
+                animalHabitat3Img.gameObject.SetActive(true);
+                animalHabitat3Txt.gameObject.SetActive(true);
                 animalHabitat3Img.sprite = animalHabitat[3];
                 animalHabitat3Txt.text = animalHabitatTxt[3];
                 break;
@@ -195,6 +210,8 @@ public class animalBookScript : MonoBehaviour
                 animalHabitat1Txt.gameObject.SetActive(false);
                 animalHabitat2Img.gameObject.SetActive(false);
                 animalHabitat2Txt.gameObject.SetActive(false);
+                animalHabitat3Img.gameObject.SetActive(true);
+                animalHabitat3Txt.gameObject.SetActive(true);
                 animalHabitat3Img.sprite = animalHabitat[10];
                 animalHabitat3Txt.text = animalHabitatTxt[10];
                 break;
@@ -204,6 +221,8 @@ public class animalBookScript : MonoBehaviour
                 animalHabitat1Txt.gameObject.SetActive(false);
                 animalHabitat2Img.gameObject.SetActive(false);
                 animalHabitat2Txt.gameObject.SetActive(false);
+                animalHabitat3Img.gameObject.SetActive(true);
+                animalHabitat3Txt.gameObject.SetActive(true);
                 animalHabitat3Img.sprite = animalHabitat[2];
                 animalHabitat3Txt.text = animalHabitatTxt[2];
                 break;
@@ -213,6 +232,8 @@ public class animalBookScript : MonoBehaviour
                 animalHabitat1Txt.gameObject.SetActive(false);
                 animalHabitat2Img.gameObject.SetActive(false);
                 animalHabitat2Txt.gameObject.SetActive(false);
+                animalHabitat3Img.gameObject.SetActive(true);
+                animalHabitat3Txt.gameObject.SetActive(true);
                 animalHabitat3Img.sprite = animalHabitat[0];
                 animalHabitat3Txt.text = animalHabitatTxt[0];
                 break;
@@ -229,6 +250,8 @@ public class animalBookScript : MonoBehaviour
                 animalHabitat1Txt.gameObject.SetActive(false);
                 animalHabitat2Img.gameObject.SetActive(false);
                 animalHabitat2Txt.gameObject.SetActive(false);
+                animalHabitat3Img.gameObject.SetActive(true);
+                animalHabitat3Txt.gameObject.SetActive(true);
                 animalHabitat3Img.sprite = animalHabitat[0];
                 animalHabitat3Txt.text = animalHabitatTxt[0];
                 break;
@@ -237,6 +260,8 @@ public class animalBookScript : MonoBehaviour
                 animalHabitat1Txt.gameObject.SetActive(false);
                 animalHabitat2Img.gameObject.SetActive(false);
                 animalHabitat2Txt.gameObject.SetActive(false);
+                animalHabitat3Img.gameObject.SetActive(true);
+                animalHabitat3Txt.gameObject.SetActive(true);
                 animalHabitat3Img.sprite = animalHabitat[3];
                 animalHabitat3Txt.text = animalHabitatTxt[3];
                 break;

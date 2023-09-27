@@ -6,13 +6,27 @@ using UnityEngine.EventSystems;
 
 public class TouchToNextASGuide : MonoBehaviour, IPointerDownHandler
 {
-    public int pageCounter = 1;
+    SaveObject existingSO;
     public TMP_Text pageNum;
-    public GameObject AnimalSelectGuide;
+    public TMP_Text pageNum2;
+    public int pageCounter = 1;
+    public GameObject animalSelectGuide;
+
+    public GameObject animalName_txt;
+    public GameObject selectAnimal_txt;
+    public GameObject startBtnNoHighlight;
+    public GameObject animalExampleNoHighlight;
+
     public void OnPointerDown(PointerEventData eventData)
     {
         pageCounter++;
     }
+
+    void Start()
+    {
+        existingSO = SaveManager.Load();
+    }
+
     public void setPageCtr(int newCtr)
     {
         this.pageCounter = newCtr;
@@ -23,38 +37,72 @@ public class TouchToNextASGuide : MonoBehaviour, IPointerDownHandler
         pageCounter--;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-
         if (pageCounter == 1)
         {
-            pageNum.text = "1/6";
+            pageNum.gameObject.SetActive(true);
+            pageNum2.gameObject.SetActive(false);
+            pageNum.text = "1/7";
+            pageNum2.text = "1/7";
         }
         else if (pageCounter == 2)
         {
-            pageNum.text = "2/6";
+            pageNum.gameObject.SetActive(true);
+            pageNum2.gameObject.SetActive(false);
+            pageNum.text = "2/7";
+            pageNum2.text = "2/7";
         }
         else if (pageCounter == 3)
         {
-            pageNum.text = "3/6";
+            pageNum.gameObject.SetActive(true);
+            pageNum2.gameObject.SetActive(false);
+            pageNum.text = "3/7";
+            pageNum2.text = "3/7";
         }
         else if (pageCounter == 4)
         {
-            pageNum.text = "4/6";
+            pageNum.gameObject.SetActive(false);
+            pageNum2.gameObject.SetActive(true);
+            pageNum.text = "4/7";
+            pageNum2.text = "4/7";
         }
         else if (pageCounter == 5)
         {
-            pageNum.text = "5/6";
+            pageNum.gameObject.SetActive(false);
+            pageNum2.gameObject.SetActive(true);
+            pageNum.text = "5/7";
+            pageNum2.text = "5/7";
         }
         else if (pageCounter == 6)
         {
-            pageNum.text = "6/6";
+            pageNum.gameObject.SetActive(false);
+            pageNum2.gameObject.SetActive(true);
+            pageNum.text = "6/7";
+            pageNum2.text = "6/7";
+        }
+        else if (pageCounter == 7)
+        {
+            pageNum.gameObject.SetActive(false);
+            pageNum2.gameObject.SetActive(true);
+            pageNum.text = "7/7";
+            pageNum2.text = "7/7";
         }
         else
         {
             pageCounter = 1;
-            AnimalSelectGuide.SetActive(false);
+            animalSelectGuide.SetActive(false);
+            animalName_txt.gameObject.SetActive(true);
+            selectAnimal_txt.gameObject.SetActive(true);
+            startBtnNoHighlight.gameObject.SetActive(false);
+            animalExampleNoHighlight.gameObject.SetActive(false);
+
+            if (!existingSO.AnimalSelectTutorialDone)
+            {
+                existingSO.AnimalSelectTutorialDone = true;
+                SaveManager.Save(existingSO);
+            }
         }
     }
 }

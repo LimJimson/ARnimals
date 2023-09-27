@@ -11,6 +11,7 @@ public class StateNameController : MonoBehaviour
     public static string guide_chosen;
     public static bool mainMenuGuide;
     public static bool modeSelectGuide;
+    public static bool miniGamesSelectGuide;
     public static bool animalSelectGuide;
     public static bool ARExperienceGuide;
 

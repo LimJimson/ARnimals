@@ -54,6 +54,7 @@ public class ScriptHandler : MonoBehaviour
         StateNameController.modeSelectGuide =soScript.ModeSelectTutorialDone;
         StateNameController.animalSelectGuide =soScript.AnimalSelectTutorialDone;
         StateNameController.ARExperienceGuide =soScript.ARExpTutorialDone;
+        StateNameController.miniGamesSelectGuide = soScript.MiniGamesTutorialDone;
         StateNameController.player_name = name;
         StateNameController.guide_chosen = guideChosen;
 
@@ -107,7 +108,7 @@ public class ScriptHandler : MonoBehaviour
     // ----- CHANGE NAME -----
     public void changeName()
     {
-        soScript.setName("");
+        soScript.name = "";
         SaveManager.Save(soScript);
         SceneManager.LoadScene("TitleScreen");
     }

@@ -12,6 +12,7 @@ public class SaveObject
     public int unlockedLevelMG3 = 1; 
     public bool MainMenuTutorialDone = false;
     public bool ModeSelectTutorialDone = false;
+    public bool MiniGamesTutorialDone = false;
     public bool AnimalInfoTutorialDone = false;
     public bool AnimalSelectTutorialDone = false;
     public bool ARExpTutorialDone = false;

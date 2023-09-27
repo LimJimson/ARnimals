@@ -28,12 +28,14 @@ public class ARPlacement : MonoBehaviour
     int modelIndex;
 
     public Camera arCamera;
-    bool didInitialAnimalSpawn = false;
+    bool didAnimalSpawn = false;
 
     public GameObject limitAnimalTXT;
     public Animator limitAnimalTXTAnim;
 
     public Transform spawnPoint;
+
+    Vector3 spawnPosition;
 
     private void Awake()
     {
@@ -47,25 +49,58 @@ public class ARPlacement : MonoBehaviour
         //UI and Canvas
         AR_UI.gameObject.SetActive(true);
         spawnAnimalContainer.SetActive(true);
-        spawnAnimal();
-        //CalculateSpawnPosition();
     }
     
     private void Update()
     {
 
     }
+    private void CalculateSpawnPosition()
+    {
+        // Get the camera's position and rotation
+        Vector3 cameraPosition = Camera.main.transform.position;
+        Quaternion cameraRotation = Camera.main.transform.rotation;
+
+        // Set the height below the camera where you want to spawn the object
+        float spawnHeight = 0.5f;
+
+        // Set the distance in front of the camera where you want to spawn the object
+        float spawnDistance = 3f;
+
+        // Calculate the center of the screen in viewport coordinates (0.5, 0.5)
+        Vector3 screenCenter = new Vector3(0.5f, 0.5f, Camera.main.nearClipPlane);
+
+        // Calculate the spawn position based on the screen center
+        spawnPosition = Camera.main.ViewportToWorldPoint(screenCenter);
+
+        // Adjust the spawn position by moving it downward by the specified height
+        spawnPosition -= Vector3.up * spawnHeight;
+
+        // Move the spawn position forward by the specified distance
+        spawnPosition += cameraRotation * Vector3.forward * spawnDistance;
+    }
+
+    float desiredRotationDegrees = 180.0f;
+
+    void destroyObject()
+    {
+        Destroy(spawnedObject);
+        didAnimalSpawn = false;
+    }
 
     public void spawnAnimal()
     {
-        //CalculateSpawnPosition();
+        destroyObject();
+        CalculateSpawnPosition();
 
-        if (!didInitialAnimalSpawn)
+        if (!didAnimalSpawn)
         {
             Destroy(spawnedObject);
-            spawnedObject = Instantiate(arModels[modelIndex], spawnPoint.position, spawnPoint.rotation);
+            spawnedObject = Instantiate(arModels[modelIndex], spawnPosition, Camera.main.transform.rotation);
+            spawnedObject.transform.rotation = Quaternion.Euler(0.0f, desiredRotationDegrees, 0.0f);
 
-            didInitialAnimalSpawn = true;
+
+            didAnimalSpawn = true;
         }
 
     }
@@ -76,7 +111,6 @@ public class ARPlacement : MonoBehaviour
         return modelIndex;
     }
 
-    Quaternion newRotation;
 
     int spawnedAnimalCtr;
 
@@ -90,9 +124,9 @@ public class ARPlacement : MonoBehaviour
         }
 
         // Calculate the position for the spawned animal based on the initial position.
-        Vector3 spawnPositionCopy = spawnPoint.position + (spawnedAnimalCtr == 0 ? Vector3.left : Vector3.right) * 1.5f;
+        Vector3 spawnPositionCopy = spawnPosition + (spawnedAnimalCtr == 0 ? Vector3.left : Vector3.right) * 1.5f;
 
-        GameObject spawnedAnimal = Instantiate(arModelsCopy[modelIndex], spawnPositionCopy, spawnPoint.rotation);
+        GameObject spawnedAnimal = Instantiate(arModelsCopy[modelIndex], spawnPositionCopy, spawnedObject.transform.rotation);
 
         if (spawnedAnimalCtr == 0)
         {

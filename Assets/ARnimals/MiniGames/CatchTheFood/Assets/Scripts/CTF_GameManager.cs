@@ -66,14 +66,27 @@ public class CTF_GameManager : MonoBehaviour
     private float shieldDuration = 10f;
     private float points2XDuration = 10f;
 
+    [SerializeField] private TextMeshProUGUI triviaTxt;
+	[SerializeField] private GameObject fadeOutPanel;
+    [SerializeField] private Image fadeOutPanelImg;
+    [SerializeField] private GameObject fadeInPanel;
+    [SerializeField] private Image fadeInPanelImg;
+
+    private string buttonCode;
+
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
         else
             Destroy(gameObject);
+    }
 
+    private void Start() 
+    {
         selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel");
+        showRandomTrivia();
+        fadeInPanel.SetActive(true);
     }
 
     private void Update() 
@@ -81,6 +94,7 @@ public class CTF_GameManager : MonoBehaviour
         ShieldDurationTimer();
         X2PointsDurationTimer();
         UpdatePowerUpsUI();
+        checkIfFadeOutIsDone();
     }
 
     public float ShieldDuration 
@@ -284,6 +298,74 @@ public class CTF_GameManager : MonoBehaviour
             }
         }
     }
+
+    private void showRandomTrivia() 
+    {
+
+        string [] elephantTrivia = 
+        {
+            "<color=green>Did you know?</color> <color=yellow>Elephants</color> are the biggest land animals on Earth. They're even bigger than a school bus!",
+            "<color=green>Did you know?</color> <color=yellow>Elephants</color> have a super memory. They can remember things for a very long time, even if they met you years ago.",
+            "<color=green>Did you know?</color> <color=yellow>Elephants</color> love taking mud baths. They roll in the mud to cool down and protect their skin from the sun.",
+            "<color=green>Did you know?</color> <color=yellow>Baby elephants</color> are called calves. When they're born, they already weigh as much as a small car!",
+            "<color=green>Did you know?</color> An <color=yellow>elephant's</color> trunk has about 150,000 muscles, more than a whole human body! It can pick up tiny things and spray water."
+        };
+        string [] pigeonTrivia = 
+        {
+            "<color=green>Did you know?</color> <color=yellow>Pigeons</color> can do math! Researchers found that pigeons can learn abstract math rules and even understand concepts like zero.",
+            "<color=green>Did you know?</color> <color=yellow>Pigeons</color> have <color=#F86768>'super'</color> vision. They see ultra#FF0046 light, which we can't, helping them navigate and spot hidden things.",
+            "<color=green>Did you know?</color> <color=yellow>Pigeons</color> can recognize all 26 letters of the alphabet. They've even learned to tell them apart and spell simple words in studies!",
+            "<color=green>Did you know?</color> In some cultures, <color=yellow>pigeons</color> are considered symbols of love and peace. They've even been used in weddings to carry love notes.",
+            "<color=green>Did you know?</color> <color=yellow>Pigeons</color> show love with a cute dance called <color=#FF0046>'pigeon courtship'</color> to their feathered friend."
+        };
+        string [] koiTrivia = 
+        {
+            "<color=green>Did you know?</color> <color=yellow>Koi fish</color> can live for a very long time, sometimes more than 50 years! That's longer than most pets.",
+            "<color=green>Did you know?</color> <color=yellow>Koi fish</color> are like swimming rainbows! They come in lots of colors, including red, orange, yellow, and even sparkly metallic shades.",
+            "<color=green>Did you know?</color> <color=yellow>Koi fish</color> are excellent swimmers and can jump out of the water to catch bugs and nibble on leaves.",
+            "<color=green>Did you know?</color> <color=yellow>Koi fish</color> are very peaceful and social. They like to swim together in groups, making them wonderful pond companions.",
+            "<color=green>Did you know?</color> <color=yellow>Koi fish</color> have a special whisker on their lips called <color=#FF0046>'barbels'</color>. They use them to help sense food in the water."
+        };
+        string [] camelTrivia = 
+        {
+            "<color=green>Did you know?</color> <color=yellow>Camels</color> are often called the <color=#FF0046>'ships of the desert'</color> because they're great at carrying heavy loads, just like a ship carries cargo on the sea.",
+            "<color=green>Did you know?</color> Camels have humps, not filled with water, but with fat that provides energy when they can't find food.",
+            "<color=green>Did you know?</color> <color=yellow>Camels</color> make funny noises, like grunts and moans, to communicate with each other. It's their way of talking!",
+            "<color=green>Did you know?</color> <color=yellow>Camels</color> can close their nostrils during sandstorms to protect themselves from the blowing sand.",
+            "<color=green>Did you know?</color> <color=yellow>Camels</color> can go a long time without drinking water. They can survive up to two weeks without a sip!"
+        };
+        string [] crabTrivia = 
+        {
+            "<color=green>Did you know?</color> <color=yellow>Crabs</color> have a superpower - they can regenerate lost limbs! If they lose a claw or leg, they can grow it back over time.",
+            "<color=green>Did you know?</color> Some <color=yellow>crabs</color> are amazing architects, crafting intricate underwater homes from sand, shells, and more.",
+            "<color=green>Did you know?</color> Some <color=yellow>Crabs</color> wear tiny hats! Well, not real hats, but they put small things like shells or sponges on their heads to hide from predators.",
+            "<color=green>Did you know?</color> <color=yellow>Crabs</color> are skilled swimmers and masters at sideways walking, which helps them move swiftly and evade danger.",
+            "<color=green>Did you know?</color> <color=yellow>Crabs</color> have a special trick called <color=#FF0046>molting</color>. They shed their old shells and grow new, bigger ones when they get too tight."
+        };
+
+        int randomIndex = Random.Range(0, 5);
+
+
+        switch(selectedLevel)
+        {   
+            case "1":
+                triviaTxt.text = elephantTrivia[randomIndex];
+                break;
+            case "2":
+                triviaTxt.text = pigeonTrivia[randomIndex];
+                break;
+            case "3":
+                triviaTxt.text = koiTrivia[randomIndex];
+                break;
+            case "4":
+                triviaTxt.text = camelTrivia[randomIndex];
+                break;
+            case "5":
+                triviaTxt.text = crabTrivia[randomIndex];
+                break;
+        }
+    }
+
     public void TimeUp()
     {
         if (!isGameOver)
@@ -353,8 +435,8 @@ public class CTF_GameManager : MonoBehaviour
 
     public void confirmQuitYesButtonFunction()
     {
-        pauseManager.ResumeGame();
-        SceneManager.LoadScene("CTF_LevelSelector");
+        buttonCode = "quitButton";
+        fadeOutPanel.SetActive(true);
     }
 
     public void confirmQuitNoButtonFunction()
@@ -377,29 +459,31 @@ public class CTF_GameManager : MonoBehaviour
 
     public void LevelCompleteResumeButtonFunction()
     {
-        pauseManager.ResumeGame();
-
         switch(selectedLevel)
         {
             case "1":
                 PlayerPrefs.SetString("CTF_SelectedLevel", "2");
                 PlayerPrefs.SetString("CTF_SelectedAnimal", "Pigeon");
-                SceneManager.LoadScene("CTF_Game");
+                buttonCode = "restartButton";
+                fadeOutPanel.SetActive(true);
                 break;
             case "2":
                 PlayerPrefs.SetString("CTF_SelectedLevel", "3");
                 PlayerPrefs.SetString("CTF_SelectedAnimal", "Koi");
-                SceneManager.LoadScene("CTF_Game");
+                buttonCode = "restartButton";
+                fadeOutPanel.SetActive(true);
                 break;
             case "3":
                 PlayerPrefs.SetString("CTF_SelectedLevel", "4");
                 PlayerPrefs.SetString("CTF_SelectedAnimal", "Camel");
-                SceneManager.LoadScene("CTF_Game");
+                buttonCode = "restartButton";
+                fadeOutPanel.SetActive(true);
                 break;
             case "4":
                 PlayerPrefs.SetString("CTF_SelectedLevel", "5");
                 PlayerPrefs.SetString("CTF_SelectedAnimal", "Crab");
-                SceneManager.LoadScene("CTF_Game");
+                buttonCode = "restartButton";
+                fadeOutPanel.SetActive(true);
                 break;
             case "5":
                 ConfirmQuit();
@@ -409,14 +493,33 @@ public class CTF_GameManager : MonoBehaviour
 
     public void ConfirmPlayAgain() 
     {
-        pauseManager.ResumeGame();
-        SceneManager.LoadScene("CTF_Game");
+        buttonCode = "restartButton";
+        fadeOutPanel.SetActive(true);
     }
 
     public void ConfirmQuit() 
     {
-        pauseManager.ResumeGame();
-        SceneManager.LoadScene("CTF_LevelSelector");
+        buttonCode = "quitButton";
+		fadeOutPanel.SetActive(true);
+    }
+
+    private void checkIfFadeOutIsDone() 
+    {
+        if (fadeOutPanel.activeSelf && fadeOutPanelImg.color.a == 1 && buttonCode == "quitButton") 
+        {
+            pauseManager.ResumeGame();
+            SceneManager.LoadScene("CTF_LevelSelector");
+        }
+        else if (fadeOutPanel.activeSelf && fadeOutPanelImg.color.a == 1 && buttonCode == "restartButton")
+        {
+            pauseManager.ResumeGame();
+            SceneManager.LoadScene("CTF_Game");
+        }
+
+        if (fadeInPanel.activeSelf && fadeInPanelImg.color.a == 0) 
+        {
+            fadeInPanel.SetActive(false);
+        }
     }
 
     public void helpButtonFunction() 

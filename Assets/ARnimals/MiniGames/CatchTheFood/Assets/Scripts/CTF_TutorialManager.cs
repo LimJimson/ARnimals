@@ -106,12 +106,22 @@ public class CTF_TutorialManager : MonoBehaviour
 
     private void showGuide(int guideSprite, int dialogBoxSprite, string name, GameObject[] guideForMenus)
     {
+		boyGuideForMenus[0].SetActive(false);
+        boyGuideForMenus[1].SetActive(false);
+        boyGuideForMenus[2].SetActive(false);
+		boyGuideForMenus[3].SetActive(false);
+        girlGuideForMenus[0].SetActive(false);
+        girlGuideForMenus[1].SetActive(false);
+        girlGuideForMenus[2].SetActive(false);
+		girlGuideForMenus[3].SetActive(false);
+		
         guide.sprite = spriteForGuide[guideSprite];
         dialogBox.sprite = spriteForDialogBox[dialogBoxSprite];
         guide_name = name;
         guideForMenus[0].SetActive(true);
         guideForMenus[1].SetActive(true);
         guideForMenus[2].SetActive(true);
+		guideForMenus[3].SetActive(true);
     } 
 
     private void checkGuide() 
@@ -122,13 +132,6 @@ public class CTF_TutorialManager : MonoBehaviour
         {
             guideChosen = "boy_guide";
         }
-
-        boyGuideForMenus[0].SetActive(false);
-        boyGuideForMenus[1].SetActive(false);
-        boyGuideForMenus[2].SetActive(false);
-        girlGuideForMenus[0].SetActive(false);
-        girlGuideForMenus[1].SetActive(false);
-        girlGuideForMenus[2].SetActive(false);
 
         if (guideChosen == "boy_guide") 
         {

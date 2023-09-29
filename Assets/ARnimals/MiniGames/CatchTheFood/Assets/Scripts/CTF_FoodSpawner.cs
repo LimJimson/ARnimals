@@ -55,7 +55,7 @@ public class CTF_FoodSpawner : MonoBehaviour
 
         Debug.Log("Random Value: " + randomValue);
 
-        if (randomValue < 0.1f)
+        if (randomValue <= 0.05f)
         {
 
             Debug.Log("Available PowerUps: " + enabledPowerUps.Length);

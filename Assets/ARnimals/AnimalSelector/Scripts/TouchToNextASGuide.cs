@@ -92,6 +92,7 @@ public class TouchToNextASGuide : MonoBehaviour, IPointerDownHandler
         else
         {
             pageCounter = 1;
+            pageNum.text = "1/7";
             animalSelectGuide.SetActive(false);
             animalName_txt.gameObject.SetActive(true);
             selectAnimal_txt.gameObject.SetActive(true);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -19,6 +20,8 @@ public class animalSelectorGuide : MonoBehaviour
     public GameObject backButton;
     public GameObject animalExampleNoHighlight;
     public GameObject startBtnNoHighlight;
+
+    public GameObject[] gameObjectsToHide;
 
 
     [Header("GUIDE POSITION 1")]
@@ -67,7 +70,13 @@ public class animalSelectorGuide : MonoBehaviour
         }
     }
 
-
+    void hideGameObject()
+    {
+        foreach (GameObject items in gameObjectsToHide)
+        {
+            items.SetActive(false);
+        }
+    }
     public void skipTutorial()
     {
         pageNumPos1.text = "1/7";
@@ -123,7 +132,6 @@ public class animalSelectorGuide : MonoBehaviour
         animalName_txt.gameObject.SetActive(false);
         selectAnimal_txt.gameObject.SetActive(false);
         animalExampleNoHighlight.gameObject.SetActive(false);
-        startBtnNoHighlight.gameObject.SetActive(true);
         _animalSelectionScript.resetSelection();
 
         pos1_GO.SetActive(true);
@@ -271,8 +279,11 @@ public class animalSelectorGuide : MonoBehaviour
             animalExampleTxt.gameObject.SetActive(true);
             animalExampleHighlight.gameObject.SetActive(true);
 
+            animalExampleNoHighlight.gameObject.SetActive(false);
+
             startTxt.gameObject.SetActive(false);
             startHighlight.gameObject.SetActive(false);
+            startBtnNoHighlight.gameObject.SetActive(true);
 
             backTxt.gameObject.SetActive(false);
             backHighlight.gameObject.SetActive(false);
@@ -303,6 +314,7 @@ public class animalSelectorGuide : MonoBehaviour
 
             startTxt.gameObject.SetActive(true);
             startHighlight.gameObject.SetActive(true);
+            startBtnNoHighlight.gameObject.SetActive(false);
 
             backTxt.gameObject.SetActive(false);
             backHighlight.gameObject.SetActive(false);
@@ -328,6 +340,7 @@ public class animalSelectorGuide : MonoBehaviour
 
             startTxt.gameObject.SetActive(false);
             startHighlight.gameObject.SetActive(false);
+            startBtnNoHighlight.gameObject.SetActive(true);
 
             backTxt.gameObject.SetActive(true);
             backHighlight.gameObject.SetActive(true);
@@ -351,6 +364,7 @@ public class animalSelectorGuide : MonoBehaviour
 
             startTxt.gameObject.SetActive(false);
             startHighlight.gameObject.SetActive(false);
+            startBtnNoHighlight.gameObject.SetActive(true);
 
             backTxt.gameObject.SetActive(false);
             backHighlight.gameObject.SetActive(false);

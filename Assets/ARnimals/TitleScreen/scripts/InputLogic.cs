@@ -18,7 +18,7 @@ public class InputLogic : MonoBehaviour
 
     private void Start()
     {
-        
+        soScript = SaveManager.Load();
         StartCoroutine(StartDelay());
         
     }

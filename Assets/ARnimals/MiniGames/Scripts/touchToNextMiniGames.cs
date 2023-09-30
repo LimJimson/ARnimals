@@ -12,7 +12,7 @@ public class touchToNextMiniGames : MonoBehaviour, IPointerDownHandler
     public TMP_Text pageNum2;
     public int pageCounter = 1;
     public GameObject miniGameSelectGuide;
-
+    public GameObject realGuideBtn;
     public void OnPointerDown(PointerEventData eventData)
     {
         pageCounter++;
@@ -81,7 +81,12 @@ public class touchToNextMiniGames : MonoBehaviour, IPointerDownHandler
         else
         {
             pageCounter = 1;
+            pageNum.text = "1/6";
+            realGuideBtn.SetActive(true);
+
             miniGameSelectGuide.SetActive(false);
+            
+
             if (!existingSO.MiniGamesTutorialDone)
             {
                 existingSO.MiniGamesTutorialDone = true;

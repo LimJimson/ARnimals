@@ -27,6 +27,7 @@ public class GTS_GameManager : MonoBehaviour
     public GameObject playAgainConfirm;
     public GameObject restartLevelConfirm;
     public GameObject winLevel;
+    public GTS_Trivia GTS_TriviaScript;
 
     [Header("Animal")]
     public int animalIndex;
@@ -201,7 +202,7 @@ public class GTS_GameManager : MonoBehaviour
     public GameObject nextLvlBtn;
     void showNextLvlBtn()
     {
-        if (levelSelected <= 5)
+        if (levelSelected < 5)
         {
             nextLvlBtn.SetActive(true);
         }
@@ -357,19 +358,30 @@ public class GTS_GameManager : MonoBehaviour
 
     }
 
+    public GameObject factsGuideGO;
+    public Animator factsGuideAnim;
 
+
+    IEnumerator _showFacts()
+    {
+        GTS_TriviaScript.generateTrivia();
+        factsGuideGO.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        factsGuideAnim.SetTrigger("TriviaOut");
+        yield return new WaitForSeconds(1f);
+        factsGuideGO.SetActive(false);
+    }
     public void correctAnswer()
     {
         hideConfirmCorrect();
         stopSound();
-
         audioSrc.PlayOneShot(AnimalSounds[animalIndex]);
+        StartCoroutine(_showFacts());
+
         questionNum += 1;
-        checkQuestion();
-        
-        
-        randomizedAnimal();
-        checkAnimal();
+        Invoke("checkQuestion",2.8f);
+        Invoke("randomizedAnimal", 2.8f);
+        Invoke("checkAnimal", 2.8f);
 
 
         for (int i = 0; i < playSoundBtns.Length; i++)
@@ -378,7 +390,7 @@ public class GTS_GameManager : MonoBehaviour
             soundBtns[i].onClick.RemoveAllListeners();
         }
 
-        randomizeChoiceBtnsAndPlaySndBtns();
+        Invoke("randomizeChoiceBtnsAndPlaySndBtns", 2.8f);
 
     }
     public Animator dmgEffect;
@@ -395,7 +407,7 @@ public class GTS_GameManager : MonoBehaviour
     IEnumerator dmgPlayer()
     {
         damagePanel.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.15f);
         damagePanel.SetActive(false);
     }
     public void lifeChecker()

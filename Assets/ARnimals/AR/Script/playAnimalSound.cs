@@ -25,6 +25,11 @@ public class playAnimalSound : MonoBehaviour
 
     private void Start()
     {
+
+    }
+
+    public void showSpeaker()
+    {
         if (clip[animalIndex] == null)
         {
             animalSndBtn.SetActive(false);

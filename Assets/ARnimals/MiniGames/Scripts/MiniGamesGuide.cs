@@ -11,6 +11,8 @@ public class MiniGamesGuide : MonoBehaviour
 
     public touchToNextMiniGames _TouchToNextMiniGameSelectScript;
     public GameObject backButton;
+    public GameObject realBackBtn;
+    public GameObject realGuideBtn;
 
     [Header("GUIDE POSITION 1")]
     public GameObject pos1_GO;
@@ -66,6 +68,8 @@ public class MiniGamesGuide : MonoBehaviour
         _TouchToNextMiniGameSelectScript.setPageCtr(1);
         disableAllGuideGameObjects();
         MiniGameSelectGuide.SetActive(false);
+        realGuideBtn.SetActive(true);
+
         if (!loaddata.MiniGamesTutorialDone)
         {
             loaddata.MiniGamesTutorialDone = true;
@@ -155,6 +159,7 @@ public class MiniGamesGuide : MonoBehaviour
         
         if (pageNumPos1.text == "1/6")
         {
+            realGuideBtn.SetActive(true);
             welcomeTxt.gameObject.SetActive(true);
             backButton.SetActive(false);
 
@@ -261,6 +266,7 @@ public class MiniGamesGuide : MonoBehaviour
 
             backTxt.gameObject.SetActive(true);
             backHighlight.gameObject.SetActive(true);
+            realBackBtn.SetActive(false);
 
             guideTxt.gameObject.SetActive(false);
             guideHighlight.gameObject.SetActive(false);
@@ -282,9 +288,11 @@ public class MiniGamesGuide : MonoBehaviour
 
             backTxt.gameObject.SetActive(false);
             backHighlight.gameObject.SetActive(false);
+            realBackBtn.SetActive(true);
 
             guideTxt.gameObject.SetActive(true);
             guideHighlight.gameObject.SetActive(true);
+            realGuideBtn.SetActive(false);
         }
 
     }

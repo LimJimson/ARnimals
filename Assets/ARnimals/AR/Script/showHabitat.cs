@@ -17,8 +17,7 @@ public class showHabitat : MonoBehaviour
     public Camera ARCam;
     public ARCameraBackground ARCameraBGScript;
 
-    public float skySpeed;
-    
+    public GameObject skyBox;
 
     List<int> forestAnimals = new List<int>{0,1,5,6,8, 12, 15, 17,18};
     List<int> underWaterAnimals = new List<int>{3,11,9,13,16};
@@ -31,7 +30,6 @@ public class showHabitat : MonoBehaviour
     private void Update()
     {
         countdownHabitat();
-        RenderSettings.skybox.SetFloat("_Rotation", Time.time * skySpeed);
         
     }
 
@@ -78,9 +76,9 @@ public class showHabitat : MonoBehaviour
         if (isHabitatEnabled)
         {
             isHabitatEnabled = false;
-            ARCam.clearFlags = CameraClearFlags.SolidColor;
-
-            ARCameraBGScript.enabled = true;
+            //ARCam.clearFlags = CameraClearFlags.SolidColor;
+            skyBox.gameObject.SetActive(false);
+            //ARCameraBGScript.enabled = true;
             sceneLighting.SetActive(true);
             Underwater.SetActive(false);
             Forest.SetActive(false);
@@ -89,10 +87,10 @@ public class showHabitat : MonoBehaviour
         else
         {
             isHabitatEnabled = true;
+            skyBox.gameObject.SetActive(true);
+            //ARCam.clearFlags = CameraClearFlags.Skybox;
 
-            ARCam.clearFlags = CameraClearFlags.Skybox;
-
-            ARCameraBGScript.enabled = false;
+            //ARCameraBGScript.enabled = false;
             if (forestAnimals.Contains(modelIndex))
             {
 

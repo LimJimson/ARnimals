@@ -30,9 +30,9 @@ public class showText : MonoBehaviour
 
     void dialogBoxTxt()
     {
-        boyDialog.text = "Hi, <color=#FFCD06><b>" + playerName(name) + "</color></b>! I'm <color=#FF0000><b>Lorem</b></color>. Let's explore the wildlife of the animals!";
-        girlDialog.text = "Hi, <color=#FFCD06><b>" + playerName(name) + "</color></b>! I'm <color=#C57EE0><b>Ipsum</b></color>. Let's explore the wildlife of the animals!";
-        boyDialogHighlight.text = "Hi, <color=#FFCD06><b>" + playerName(name) + "</color></b>! I'm <color=#FF0000><b>Lorem</b></color>. Let's explore the wildlife of the animals!";
-        girlDialogHighlight.text = "Hi, <color=#FFCD06><b>" + playerName(name) + "</color></b>! I'm <color=#C57EE0><b>Ipsum</b></color>. Let's explore the wildlife of the animals!";
+        boyDialog.text = "Hi, <color=#FFCD06><b>" + playerName(name) + "</color></b>! I'm <color=#FF2050><b>Patrick</b></color>. Let's explore the wildlife of the animals!";
+        girlDialog.text = "Hi, <color=#FFCD06><b>" + playerName(name) + "</color></b>! I'm <color=#C57EE0><b>Gigi</b></color>. Let's explore the wildlife of the animals!";
+        boyDialogHighlight.text = "Hi, <color=#FFCD06><b>" + playerName(name) + "</color></b>! I'm <color=#FF2050><b>Patrick</b></color>. Let's explore the wildlife of the animals!";
+        girlDialogHighlight.text = "Hi, <color=#FFCD06><b>" + playerName(name) + "</color></b>! I'm <color=#C57EE0><b>Gigi</b></color>. Let's explore the wildlife of the animals!";
     }
 }

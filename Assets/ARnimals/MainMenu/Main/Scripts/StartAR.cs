@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class StartAR : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class StartAR : MonoBehaviour
 
     string guide_chosen;
 
-
+    public TMP_Text playerName;
 
 
     void Start()
@@ -27,6 +28,8 @@ public class StartAR : MonoBehaviour
         {
             guide_chosen = "boy_guide";
         }
+
+        playerName.text = "Hi, <color=#FFCD06>" + StateNameController.player_name+"</color>!" ;
         Screen.orientation = ScreenOrientation.LandscapeLeft;
         MainMenu.gameObject.SetActive(true);
         Settings.gameObject.SetActive(false);
@@ -154,7 +157,13 @@ public class StartAR : MonoBehaviour
     public void changeNameClickedYes ()
     {
         loaddata.name = "";
+        StateNameController.player_name = "";
         SaveManager.Save(loaddata);
+        Invoke("loadTitleScreen",0.7f);
+    }
+    
+    void loadTitleScreen()
+    {
         SceneManager.LoadScene("TitleScreen");
     }
 

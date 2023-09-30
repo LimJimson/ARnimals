@@ -80,9 +80,7 @@ public class ScriptHandler : MonoBehaviour
             
             nameTxtField.SetActive(false);
             playerNameLoggedIn.SetText("Currently, playing as: <color=#FFCD06><b><u>\n<size=20>" + name + "</size></u></b></color>");
-            
 
-            
         }
         else
         {
@@ -109,7 +107,12 @@ public class ScriptHandler : MonoBehaviour
     public void changeName()
     {
         soScript.name = "";
+        StateNameController.player_name = "";
         SaveManager.Save(soScript);
+        Invoke("loadTitleScreen", 0.7f);
+    }
+    void loadTitleScreen()
+    {
         SceneManager.LoadScene("TitleScreen");
     }
 

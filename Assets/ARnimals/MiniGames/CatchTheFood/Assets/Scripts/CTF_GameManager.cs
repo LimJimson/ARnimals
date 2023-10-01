@@ -67,10 +67,11 @@ public class CTF_GameManager : MonoBehaviour
     private float points2XDuration = 10f;
 
     [SerializeField] private TextMeshProUGUI triviaTxt;
-	[SerializeField] private GameObject fadeOutPanel;
-    [SerializeField] private Image fadeOutPanelImg;
-    [SerializeField] private GameObject fadeInPanel;
-    [SerializeField] private Image fadeInPanelImg;
+	[SerializeField] private GameObject transitionToOut;
+    [SerializeField] private Image transitionToOutImg;
+    [SerializeField] private GameObject transitionToIn;
+    [SerializeField] private Image transitionToInImg;
+    [SerializeField] private GameObject plainBlackPanel;
 
     private string buttonCode;
 
@@ -80,13 +81,15 @@ public class CTF_GameManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+
+        plainBlackPanel.SetActive(true);
     }
 
     private void Start() 
     {
         selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel");
         showRandomTrivia();
-        fadeInPanel.SetActive(true);
+        StartCoroutine(showTransitionAfterDelay());
     }
 
     private void Update() 
@@ -94,7 +97,14 @@ public class CTF_GameManager : MonoBehaviour
         ShieldDurationTimer();
         X2PointsDurationTimer();
         UpdatePowerUpsUI();
-        checkIfFadeOutIsDone();
+        checkIfTransitionIsDone();
+    }
+
+    private IEnumerator showTransitionAfterDelay() 
+    {
+        yield return new WaitForSeconds(0.1f);
+        plainBlackPanel.SetActive(false);
+        transitionToIn.SetActive(true);
     }
 
     public float ShieldDuration 
@@ -436,7 +446,8 @@ public class CTF_GameManager : MonoBehaviour
     public void confirmQuitYesButtonFunction()
     {
         buttonCode = "quitButton";
-        fadeOutPanel.SetActive(true);
+        confirmationQuitCanvas.SetActive(false);
+        transitionToOut.SetActive(true);
     }
 
     public void confirmQuitNoButtonFunction()
@@ -459,31 +470,33 @@ public class CTF_GameManager : MonoBehaviour
 
     public void LevelCompleteResumeButtonFunction()
     {
+        levelCompleteCanvas.SetActive(false);
+
         switch(selectedLevel)
         {
             case "1":
                 PlayerPrefs.SetString("CTF_SelectedLevel", "2");
                 PlayerPrefs.SetString("CTF_SelectedAnimal", "Pigeon");
                 buttonCode = "restartButton";
-                fadeOutPanel.SetActive(true);
+                transitionToOut.SetActive(true);
                 break;
             case "2":
                 PlayerPrefs.SetString("CTF_SelectedLevel", "3");
                 PlayerPrefs.SetString("CTF_SelectedAnimal", "Koi");
                 buttonCode = "restartButton";
-                fadeOutPanel.SetActive(true);
+                transitionToOut.SetActive(true);
                 break;
             case "3":
                 PlayerPrefs.SetString("CTF_SelectedLevel", "4");
                 PlayerPrefs.SetString("CTF_SelectedAnimal", "Camel");
                 buttonCode = "restartButton";
-                fadeOutPanel.SetActive(true);
+                transitionToOut.SetActive(true);
                 break;
             case "4":
                 PlayerPrefs.SetString("CTF_SelectedLevel", "5");
                 PlayerPrefs.SetString("CTF_SelectedAnimal", "Crab");
                 buttonCode = "restartButton";
-                fadeOutPanel.SetActive(true);
+                transitionToOut.SetActive(true);
                 break;
             case "5":
                 ConfirmQuit();
@@ -494,31 +507,41 @@ public class CTF_GameManager : MonoBehaviour
     public void ConfirmPlayAgain() 
     {
         buttonCode = "restartButton";
-        fadeOutPanel.SetActive(true);
+        confirmationRetryCanvas.SetActive(false);
+        confirmationPlayAgainCanvas.SetActive(false);
+        transitionToOut.SetActive(true);
     }
 
     public void ConfirmQuit() 
     {
         buttonCode = "quitButton";
-		fadeOutPanel.SetActive(true);
+        confirmationQuitCanvas.SetActive(false);
+        confirmationPlayAgainCanvas.SetActive(false);
+        levelCompleteCanvas.SetActive(false);
+		transitionToOut.SetActive(true);
+        
     }
 
-    private void checkIfFadeOutIsDone() 
+    private void checkIfTransitionIsDone() 
     {
-        if (fadeOutPanel.activeSelf && fadeOutPanelImg.color.a == 1 && buttonCode == "quitButton") 
+
+        bool achievedImgPositionOut = transitionToOutImg.rectTransform.anchoredPosition.x <= -514.5f && transitionToOutImg.rectTransform.anchoredPosition.x >= -515.5f;
+        bool achievedImgPositionIn = transitionToInImg.rectTransform.anchoredPosition.x <= -1654.5f && transitionToInImg.rectTransform.anchoredPosition.x <= -1655.5f;
+
+        if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "quitButton") 
         {
             pauseManager.ResumeGame();
             SceneManager.LoadScene("CTF_LevelSelector");
         }
-        else if (fadeOutPanel.activeSelf && fadeOutPanelImg.color.a == 1 && buttonCode == "restartButton")
+        else if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "restartButton")
         {
             pauseManager.ResumeGame();
             SceneManager.LoadScene("CTF_Game");
         }
 
-        if (fadeInPanel.activeSelf && fadeInPanelImg.color.a == 0) 
+        if (transitionToIn.activeSelf && achievedImgPositionIn) 
         {
-            fadeInPanel.SetActive(false);
+            transitionToIn.SetActive(false);
         }
     }
 

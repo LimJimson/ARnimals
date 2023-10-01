@@ -16,10 +16,10 @@ public class CTF_LevelManager : MonoBehaviour
     [SerializeField] private GameObject [] buttonBlocks;
 
     [SerializeField] private Button backBtn;
-    [SerializeField] private GameObject fadeInPanel;
-    [SerializeField] private Image fadeInImage;
-    [SerializeField] private GameObject fadeOutPanel;
-    [SerializeField] private Image fadeOutImage;
+    [SerializeField] private GameObject transitionToOut;
+    [SerializeField] private Image transitionToOutImg;
+    [SerializeField] private GameObject transitionToIn;
+    [SerializeField] private Image transitionToInImg;
 
     private string selectedAnimal;
     private string selectedLevel;
@@ -63,29 +63,33 @@ public class CTF_LevelManager : MonoBehaviour
 
         backBtn.onClick.AddListener(GoBackToMiniGamesSelection);
 
-        fadeInPanel.SetActive(true);
+        transitionToIn.SetActive(true);
     }
 
     private void Update() 
     {
-        checkIfFadeAnimDone();
+        checkIfTransitionIsDone();
     }
 
-    private void checkIfFadeAnimDone() 
+    private void checkIfTransitionIsDone() 
     {
 
-        if (fadeInPanel.activeSelf && fadeInImage.color.a == 0) 
-        {
-            fadeInPanel.SetActive(false);
-        }
+        bool achievedImgPositionOut = transitionToOutImg.rectTransform.anchoredPosition.x <= -514.5f && transitionToOutImg.rectTransform.anchoredPosition.x >= -515.5f;
+        bool achievedImgPositionIn = transitionToInImg.rectTransform.anchoredPosition.x <= -1654.5f && transitionToInImg.rectTransform.anchoredPosition.x <= -1655.5f;
 
-        if (fadeOutPanel.activeSelf && fadeOutImage.color.a == 1 && buttonCode == "backButton") 
-        {
-            SceneManager.LoadScene("MiniGamesSelect");
-        }
-        else if (fadeOutPanel.activeSelf && fadeOutImage.color.a == 1 && buttonCode == "levelButton")
+        if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "levelButton") 
         {
             SceneManager.LoadScene("CTF_Game");
+        }
+        else if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "backButton")
+        {
+            Debug.Log("Back animation");
+            SceneManager.LoadScene("MiniGamesSelect");
+        }
+
+        if (transitionToIn.activeSelf && achievedImgPositionIn) 
+        {
+            transitionToIn.SetActive(false);
         }
     }
 
@@ -127,7 +131,7 @@ public class CTF_LevelManager : MonoBehaviour
     public void GoBackToMiniGamesSelection() 
     {
         buttonCode = "backButton";
-        fadeInPanel.SetActive(true);
+        transitionToOut.SetActive(true);
     }
 
     private void LoadNextScene()
@@ -137,6 +141,6 @@ public class CTF_LevelManager : MonoBehaviour
         PlayerPrefs.SetString("CTF_SelectedLevel", selectedLevel);
         
         buttonCode = "levelButton";
-        fadeOutPanel.SetActive(true);
+        transitionToOut.SetActive(true);
     }
 }

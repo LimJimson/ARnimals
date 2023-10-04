@@ -74,8 +74,8 @@ public class CTF_LevelManager : MonoBehaviour
     private void checkIfTransitionIsDone() 
     {
 
-        bool achievedImgPositionOut = transitionToOutImg.rectTransform.anchoredPosition.x <= -514.5f && transitionToOutImg.rectTransform.anchoredPosition.x >= -515.5f;
-        bool achievedImgPositionIn = transitionToInImg.rectTransform.anchoredPosition.x <= -1654.5f && transitionToInImg.rectTransform.anchoredPosition.x <= -1655.5f;
+        bool achievedImgPositionOut = transitionToOutImg.rectTransform.anchoredPosition.x <= -1070.5f && transitionToOutImg.rectTransform.anchoredPosition.x >= -1071.5f;
+        bool achievedImgPositionIn = transitionToInImg.rectTransform.anchoredPosition.x <= -2790.5f && transitionToInImg.rectTransform.anchoredPosition.x >= -2791.5f;
 
         if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "levelButton") 
         {

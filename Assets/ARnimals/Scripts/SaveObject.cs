@@ -17,6 +17,39 @@ public class SaveObject
     public bool AnimalSelectTutorialDone = false;
     public bool ARExpTutorialDone = false;
 
+    //GTS Stars
+    public int GTS_lvl1_star = 0;
+    public int GTS_lvl2_star = 0;
+    public int GTS_lvl3_star = 0;
+    public int GTS_lvl4_star = 0;
+    public int GTS_lvl5_star = 0;
+
+    //GTS Unlock Animal
+    public bool isRhinoUnlock = false;
+    public bool isCamelUnlock = false;
+    public bool isBatUnlock = false;
+    public bool isKoiUnlock = false;
+    public bool isCrabUnlock = false;
+
+    //CTF Unlock Animal
+    public bool isOctopusUnlock = false;
+    public bool isDeerUnlock = false;
+    public bool isSeagullUnlock = false;
+    public bool isSharkUnlock = false;
+    public bool isDuckUnlock = false;
+
+
+    //FTA Unlock Animal
+    public bool isLeopardUnlock = false;
+    public bool isPigeonUnlock = false;
+    public bool isPiranhaUnlock = false;
+    public bool isBearUnlock = false;
+    public bool isOwlUnlock = false;
+
+
+
+
+
     public void setName(string playerName)
     {
         this.name = playerName;

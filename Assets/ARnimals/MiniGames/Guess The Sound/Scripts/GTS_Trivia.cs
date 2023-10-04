@@ -243,7 +243,7 @@ public class GTS_Trivia : MonoBehaviour
                 }
                 else if (randomNum == 1)
                 {
-                    triviaTxt.text = "<color=#FFFF00>Pigeons</color> cood and flap their wings!";
+                    triviaTxt.text = "<color=#FFFF00>Pigeons</color> coop and flap their wings!";
                 }
                 else if (randomNum == 2)
                 {
@@ -261,7 +261,7 @@ public class GTS_Trivia : MonoBehaviour
                 }
                 else if (randomNum == 1)
                 {
-                    triviaTxt.text = "<color=#FFFF00>Rhinos</color> hae tough skins!";
+                    triviaTxt.text = "<color=#FFFF00>Rhinos</color> have tough skins!";
                 }
                 else if (randomNum == 2)
                 {
@@ -275,7 +275,7 @@ public class GTS_Trivia : MonoBehaviour
             case 13:
                 if (randomNum == 0)
                 {
-                    triviaTxt.text = "<color=#FFFF00>Seaguuls</color> love the beach!";
+                    triviaTxt.text = "<color=#FFFF00>Seagulls</color> love the beach!";
                 }
                 else if (randomNum == 1)
                 {
@@ -287,7 +287,7 @@ public class GTS_Trivia : MonoBehaviour
                 }
                 else if (randomNum == 3)
                 {
-                    triviaTxt.text = "<color=#FFFF00>Seaguls</color> can fly high!";
+                    triviaTxt.text = "<color=#FFFF00>Seagulls</color> can fly high!";
                 }
                 break;
             case 14:

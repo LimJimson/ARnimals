@@ -12,26 +12,16 @@ public class CTF_TutorialManager : MonoBehaviour
     [SerializeField] private GameObject pauseAndHpCanvas;
 
     [SerializeField] private CTF_GameStartManager gameStartManager;
+    [SerializeField] private GameObject gameResumeTimerManager;
 
     [Header("Game Objects")]
 
-    [SerializeField] private GameObject scoreGameObject;
-    [SerializeField] private GameObject timerGameObject;
-    [SerializeField] private GameObject helpButtonGameObject;
-    [SerializeField] private GameObject animalGameObject;
-    [SerializeField] private GameObject pauseButtonGameObject;
-    [SerializeField] private GameObject hpGameObject;
-    [SerializeField] private GameObject foodsGameObject;
-    [SerializeField] private GameObject gameResumeTimerManager;
+    [SerializeField] private GameObject[] tutorialGameObjects;
+
 
     [Header("Game Buttons and Components")]
-    [SerializeField] private Canvas score;
-    [SerializeField] private Canvas timer;
-    [SerializeField] private Canvas helpButton;
-    [SerializeField] private Canvas animal;
-    [SerializeField] private Canvas pauseButton;
-    [SerializeField] private Canvas hp;
-    [SerializeField] private Canvas foods;
+
+    [SerializeField] private Canvas[] tutorialGameObjectsCanvas;
 
     [Header("TutorialComponents")]
     [SerializeField] private GameObject skipButton;
@@ -157,7 +147,7 @@ public class CTF_TutorialManager : MonoBehaviour
             backButton.SetActive(false);
         }
 
-        pageNumTxt.text = pageNum.ToString() + "/7";
+        pageNumTxt.text = pageNum.ToString() + "/10";
     }
     
     public void skipBtnFunction() 
@@ -185,7 +175,7 @@ public class CTF_TutorialManager : MonoBehaviour
     {
         hideAllComponents();
 
-        if (pageNum < 7)
+        if (pageNum < 10)
         {
             pageNum++;
             pagesContents();
@@ -215,7 +205,7 @@ public class CTF_TutorialManager : MonoBehaviour
         {
             backButton.SetActive(true);
         }
-        pageNumTxt.text = pageNum.ToString() + "/7";
+        pageNumTxt.text = pageNum.ToString() + "/10";
     }
 
     private void tutorialIntro() 
@@ -308,7 +298,7 @@ public class CTF_TutorialManager : MonoBehaviour
 
             dialogText.transform.localPosition = new Vector3(-248.31f, 240f, 0f);
 
-            showComponent(animal, animalGameObject);
+            showComponent(tutorialGameObjectsCanvas[0], tutorialGameObjects[0]);
 
         }
         else if (pageNum == 2) 
@@ -325,9 +315,61 @@ public class CTF_TutorialManager : MonoBehaviour
 
             dialogText.transform.localPosition = new Vector3(-248.31f, 228f, 0f);
 
-            showComponent(foods, foodsGameObject);
+            showComponent(tutorialGameObjectsCanvas[1], tutorialGameObjects[1]);
         }
         else if (pageNum == 3) 
+        {
+            dialogText.fontSize = 38f;
+            dialogText.text = "See the foods with <color=green>green borders</color>? That's what the animal loves to munch on! But the ones with <color=red>red borders</color>? Those are no-go";
+
+            tutorial.transform.localPosition = (new Vector3(-81f, -272.1f, 0f));
+
+            showClickToNextTxt(click2NextTxtRightGameObject, click2NextTxtRight, 1);
+
+            dialogBox.transform.localPosition = new Vector3(-238.421f, 186f, 0f);
+            dialogBox.transform.localScale = new Vector3(1f, 1.2f, 1f);
+
+            dialogText.transform.localPosition = new Vector3(-248.31f, 228f, 0f);
+
+            tutorialGameObjects[2].SetActive(false);
+
+            showComponent(tutorialGameObjectsCanvas[1], tutorialGameObjects[1]);
+        }
+        else if (pageNum == 4) 
+        {
+            dialogText.fontSize = 38f;
+            dialogText.text = "Here are the <color=yellow>powerups</color>! They pop up randomly, so try to catch them when you see them. They'll give your animal a big boost!";
+            tutorial.transform.localPosition = (new Vector3(-81f, -272.1f, 0f));
+
+            showClickToNextTxt(click2NextTxtRightGameObject, click2NextTxtRight, 1);
+
+            dialogBox.transform.localPosition = new Vector3(-238.421f, 186f, 0f);
+            dialogBox.transform.localScale = new Vector3(1f, 1.2f, 1f);
+
+            dialogText.transform.localPosition = new Vector3(-248.31f, 228f, 0f);
+
+            tutorialGameObjects[1].SetActive(false);
+
+            showComponent(tutorialGameObjectsCanvas[2], tutorialGameObjects[2]);
+        }
+        else if (pageNum == 5) 
+        {
+            dialogText.fontSize = 38f;
+            dialogText.text = "These are the <color=yellow>powerup signs</color>. They show up when you catch a powerup, so you'll know how long the powerup will last.";
+            tutorial.transform.localPosition = (new Vector3(-81f, -272.1f, 0f));
+
+            showClickToNextTxt(click2NextTxtRightGameObject, click2NextTxtRight, 1);
+
+            dialogBox.transform.localPosition = new Vector3(-238.421f, 186f, 0f);
+            dialogBox.transform.localScale = new Vector3(1f, 1.2f, 1f);
+
+            dialogText.transform.localPosition = new Vector3(-248.31f, 228f, 0f);
+
+            tutorialGameObjects[2].SetActive(true);
+
+            showComponent(tutorialGameObjectsCanvas[3], tutorialGameObjects[3]);
+        }
+        else if (pageNum == 6) 
         {
             dialogText.fontSize = 44f;
             dialogText.text = "Here's your <color=yellow>animal's score</color>! Each correct food caught will earn you one point. Aim for a high score!";
@@ -340,9 +382,13 @@ public class CTF_TutorialManager : MonoBehaviour
             dialogBox.transform.localPosition = new Vector3(-238.421f, 186f, 0f);
             dialogBox.transform.localScale = new Vector3(1f, 1.2f, 1f);
 
-            showComponent(score, scoreGameObject);
+            tutorialGameObjects[1].SetActive(false); //Foods
+            tutorialGameObjects[2].SetActive(false); //PowerUps
+            tutorialGameObjects[3].SetActive(false); //PowerUpSigns
+
+            showComponent(tutorialGameObjectsCanvas[4], tutorialGameObjects[4]);
         }
-        else if (pageNum == 4) 
+        else if (pageNum == 7) 
         {
             dialogText.fontSize = 37f;
             dialogText.text = "Watch out for your <color=yellow>animal's health</color>! If you catch the wrong food, you'll lose a heart. Remember, your animal only has three hearts, so be careful!";
@@ -356,9 +402,9 @@ public class CTF_TutorialManager : MonoBehaviour
 
             dialogText.transform.localPosition = new Vector3(-248.31f, 239f, 0f);
 
-            showComponent(hp, hpGameObject);
+            showComponent(tutorialGameObjectsCanvas[5], tutorialGameObjects[5]);
         }
-        else if (pageNum == 5) 
+        else if (pageNum == 8) 
         {
             dialogText.fontSize = 36.5f;
             dialogText.text = "Introducing the <color=yellow>game's timer</color>! You have 60 seconds to catch the falling foods. To earn a reward, aim to score 20 or more without losing all your hearts before time runs out. Good luck!";
@@ -372,9 +418,9 @@ public class CTF_TutorialManager : MonoBehaviour
 
             dialogText.transform.localPosition = new Vector3(-248.31f, 241f, 0f);
 
-            showComponent(timer, timerGameObject);
+            showComponent(tutorialGameObjectsCanvas[6], tutorialGameObjects[6]);
         }
-        else if (pageNum == 6) 
+        else if (pageNum == 9) 
         {
             dialogText.fontSize = 37f;
             dialogText.text = "Introducing the <color=yellow>settings button</color>! If you want to adjust the volume, restart, or quit the game, simply click on this button. It gives you control over the game settings. Have fun!";
@@ -388,9 +434,9 @@ public class CTF_TutorialManager : MonoBehaviour
 
             dialogText.transform.localPosition = new Vector3(-248.31f, 260f, 0f);
 
-            showComponent(pauseButton, pauseButtonGameObject);
+            showComponent(tutorialGameObjectsCanvas[7], tutorialGameObjects[7]);
         }
-        else if (pageNum == 7) 
+        else if (pageNum == 10) 
         {
             dialogText.fontSize = 38f;
             dialogText.text = "Introducing the <color=yellow>help button</color>! If you need assistance, simply press this button and I'll be there to help you. Don't hesitate to call me whenever you need assistance.";
@@ -399,7 +445,7 @@ public class CTF_TutorialManager : MonoBehaviour
 
             showClickToNextTxt(click2NextTxtLeftGameObject, click2NextTxtLeft, 2);
 
-            showComponent(helpButton, helpButtonGameObject);
+            showComponent(tutorialGameObjectsCanvas[8], tutorialGameObjects[8]);
         }
     }
     private void showClickToNextTxt(GameObject gameObject, TextMeshProUGUI tmpText, int choice) 
@@ -425,13 +471,10 @@ public class CTF_TutorialManager : MonoBehaviour
 
     public void hideAllComponents() 
     {
-        animal.overrideSorting = false;
-        score.overrideSorting = false;
-        timer.overrideSorting = false;
-        pauseButton.overrideSorting = false;
-        hp.overrideSorting = false;
-        helpButton.overrideSorting = false;
-        foods.overrideSorting = false;
+        for (int i = 0; i < tutorialGameObjectsCanvas.Length; i++) 
+        {
+            tutorialGameObjectsCanvas[i].overrideSorting = false;
+        }
     }
 
     private void showComponent(Canvas canvas, GameObject gameObject) 
@@ -443,13 +486,10 @@ public class CTF_TutorialManager : MonoBehaviour
 
     public void disableAllGameObjects() 
     {
-        animalGameObject.SetActive(false);
-        scoreGameObject.SetActive(false);
-        timerGameObject.SetActive(false);
-        pauseButtonGameObject.SetActive(false);
-        hpGameObject.SetActive(false);
-        helpButtonGameObject.SetActive(false);
-        foodsGameObject.SetActive(false);
+        for (int i = 0; i < tutorialGameObjects.Length; i++) 
+        {
+            tutorialGameObjects[i].SetActive(false);
+        }
 
         backButton.SetActive(false);
     }

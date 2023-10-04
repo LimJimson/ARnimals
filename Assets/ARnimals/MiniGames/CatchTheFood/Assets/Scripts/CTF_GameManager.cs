@@ -339,7 +339,7 @@ public class CTF_GameManager : MonoBehaviour
         string [] camelTrivia = 
         {
             "<color=green>Did you know?</color> <color=yellow>Camels</color> are often called the <color=#FF0046>'ships of the desert'</color> because they're great at carrying heavy loads, just like a ship carries cargo on the sea.",
-            "<color=green>Did you know?</color> Camels have humps, not filled with water, but with fat that provides energy when they can't find food.",
+            "<color=green>Did you know?</color> <color=yellow>Camels</color> have humps, not filled with water, but with fat that provides energy when they can't find food.",
             "<color=green>Did you know?</color> <color=yellow>Camels</color> make funny noises, like grunts and moans, to communicate with each other. It's their way of talking!",
             "<color=green>Did you know?</color> <color=yellow>Camels</color> can close their nostrils during sandstorms to protect themselves from the blowing sand.",
             "<color=green>Did you know?</color> <color=yellow>Camels</color> can go a long time without drinking water. They can survive up to two weeks without a sip!"
@@ -525,8 +525,8 @@ public class CTF_GameManager : MonoBehaviour
     private void checkIfTransitionIsDone() 
     {
 
-        bool achievedImgPositionOut = transitionToOutImg.rectTransform.anchoredPosition.x <= -514.5f && transitionToOutImg.rectTransform.anchoredPosition.x >= -515.5f;
-        bool achievedImgPositionIn = transitionToInImg.rectTransform.anchoredPosition.x <= -1654.5f && transitionToInImg.rectTransform.anchoredPosition.x <= -1655.5f;
+        bool achievedImgPositionOut = transitionToOutImg.rectTransform.anchoredPosition.x <= -1070.5f && transitionToOutImg.rectTransform.anchoredPosition.x >= -1071.5f;
+        bool achievedImgPositionIn = transitionToInImg.rectTransform.anchoredPosition.x <= -2790.5f && transitionToInImg.rectTransform.anchoredPosition.x >= -2791.5f;
 
         if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "quitButton") 
         {
@@ -550,7 +550,7 @@ public class CTF_GameManager : MonoBehaviour
         pauseAndHPCanvas.SetActive(false);
         tutorialCanvas.SetActive(true);
         int pageNum = tutorialManager.PageNum = 0;
-        tutorialManager.PageNumTxt.text = pageNum.ToString() + "/7";
+        tutorialManager.PageNumTxt.text = pageNum.ToString() + "/10";
         tutorialManager.pagesContents();
         tutorialManager.disableAllGameObjects();
         pauseManager.PauseGame();

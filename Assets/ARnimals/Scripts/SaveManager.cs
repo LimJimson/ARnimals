@@ -37,6 +37,34 @@ public static class SaveManager
             existingSO.AnimalInfoTutorialDone = so.AnimalInfoTutorialDone;
             existingSO.AnimalSelectTutorialDone = so.AnimalSelectTutorialDone;
             existingSO.ARExpTutorialDone = so.ARExpTutorialDone;
+            existingSO.GTS_lvl1_star = so.GTS_lvl1_star;
+            existingSO.GTS_lvl2_star = so.GTS_lvl2_star;
+            existingSO.GTS_lvl3_star = so.GTS_lvl3_star;
+            existingSO.GTS_lvl4_star = so.GTS_lvl4_star;
+            existingSO.GTS_lvl5_star = so.GTS_lvl5_star;
+
+            //GTS Unlock Animal
+            existingSO.isRhinoUnlock = so.isRhinoUnlock;
+            existingSO.isCrabUnlock = so.isCrabUnlock;
+            existingSO.isKoiUnlock = so.isKoiUnlock;
+            existingSO.isBatUnlock = so.isBatUnlock;
+            existingSO.isCamelUnlock = so.isCamelUnlock;
+
+            //CTF Unlock Animal
+            existingSO.isOctopusUnlock = so.isOctopusUnlock;
+            existingSO.isDeerUnlock = so.isDeerUnlock;
+            existingSO.isSeagullUnlock = so.isSeagullUnlock;
+            existingSO.isSharkUnlock = so.isSharkUnlock;
+            existingSO.isDuckUnlock = so.isDuckUnlock;
+
+
+            //FTA Unlock Animal
+            existingSO.isLeopardUnlock = so.isLeopardUnlock;
+            existingSO.isPigeonUnlock = so.isPigeonUnlock;
+            existingSO.isPiranhaUnlock = so.isPiranhaUnlock;
+            existingSO.isBearUnlock = so.isBearUnlock;
+            existingSO.isOwlUnlock = so.isOwlUnlock;
+
 
             so = existingSO;
         }

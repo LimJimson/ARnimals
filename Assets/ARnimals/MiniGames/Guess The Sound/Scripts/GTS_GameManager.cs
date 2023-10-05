@@ -1,6 +1,8 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
+using System.Security.Cryptography.X509Certificates;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -64,6 +66,7 @@ public class GTS_GameManager : MonoBehaviour
         confirmWrong.SetActive(false);
         optionsUI.SetActive(false);
         GameUI.SetActive(false);
+        checkCurrentStar();
 
         if ( levelSelected == 0)
         {
@@ -119,27 +122,187 @@ public class GTS_GameManager : MonoBehaviour
             }
         }
     }
+    int currentStar;
+    void checkCurrentStar()
+    {
+        switch (levelSelected)
+        {
+            case 1:
+                currentStar = existingSO.GTS_lvl1_star;
+                break;
+            case 2:
+                currentStar = existingSO.GTS_lvl2_star;
+                break;
+            case 3:
+                currentStar = existingSO.GTS_lvl3_star;
+                break;
+            case 4:
+                currentStar = existingSO.GTS_lvl4_star;
+                break;
+            case 5:
+                currentStar = existingSO.GTS_lvl5_star;
+                break;
+        }
+    }
+    public Sprite[] animalImgToUnlockSprite;
+    public Image animalImg;
+    public GameObject checkImg;
+    void showAnimalReward()
+    {
+       switch(levelSelected)
+        {
+            case 1:
+                animalImg.sprite = animalImgToUnlockSprite[0];
+                if (existingSO.isRhinoUnlock)
+                {
+                    checkImg.SetActive(true);
+                }
+                else
+                {
+                    checkImg.SetActive(false);
+                }
+                break;
+            case 2:
+                animalImg.sprite = animalImgToUnlockSprite[1];
+                if (existingSO.isCamelUnlock)
+                {
+                    checkImg.SetActive(true);
+                }
+                else
+                {
+                    checkImg.SetActive(false);
+                }
+                break;
+            case 3:
+                animalImg.sprite = animalImgToUnlockSprite[2];
+                if (existingSO.isBatUnlock)
+                {
+                    checkImg.SetActive(true);
+                }
+                else
+                {
+                    checkImg.SetActive(false);
+                }
+                break;
+            case 4:
+                animalImg.sprite = animalImgToUnlockSprite[3];
+                if (existingSO.isKoiUnlock)
+                {
+                    checkImg.SetActive(true);
+                }
+                else
+                {
+                    checkImg.SetActive(false);
+                }
+                break;
+            case 5:
+                animalImg.sprite = animalImgToUnlockSprite[4];
+                if (existingSO.isCrabUnlock)
+                {
+                    checkImg.SetActive(true);
+                }
+                else
+                {
+                    checkImg.SetActive(false);
+                }
+                break;
+        }
+    }
+    
 
     public Sprite[] starsSprites;
     public Image _starWin;
     public TMP_Text lvlCompleted;
+
+
     void checkStar()
     {
         
         winLevel.SetActive(true);
         lvlCompleted.text = "LEVEL <color=yellow><b>" + levelSelected.ToString()+ "</b></color> COMPLETED!";
+
         if(life == 3)
         {
             _starWin.sprite = starsSprites[3];
+            unlockAnimal();
+            showAnimalReward();
+            if (currentStar < life)
+            {
+                switch (levelSelected)
+                {
+                    case 1:
+                        existingSO.GTS_lvl1_star = 3;
+                        break; 
+                    case 2:
+                        existingSO.GTS_lvl2_star = 3;
+                        break;
+                    case 3:
+                        existingSO.GTS_lvl3_star = 3;
+                        break;
+                    case 4:
+                        existingSO.GTS_lvl4_star = 3;
+                        break;
+                    case 5:
+                        existingSO.GTS_lvl5_star = 3;
+                        break;
+                }
+            }
         }
         else if(life == 2)
         {
             _starWin.sprite = starsSprites[2];
+            unlockAnimal();
+            showAnimalReward();
+            if (currentStar < life)
+            {
+                switch (levelSelected)
+                {
+                    case 1:
+                        existingSO.GTS_lvl1_star = 2;
+                        break;
+                    case 2:
+                        existingSO.GTS_lvl2_star = 2;
+                        break;
+                    case 3:
+                        existingSO.GTS_lvl3_star = 2;
+                        break;
+                    case 4:
+                        existingSO.GTS_lvl4_star = 2;
+                        break;
+                    case 5:
+                        existingSO.GTS_lvl5_star = 2;
+                        break;
+                }
+            }
+
         }
         else if(life == 1)
         {
             _starWin.sprite = starsSprites[1];
+            showAnimalReward();
+            if (currentStar <= life)
+            {
+                switch (levelSelected)
+                {
+                    case 1:
+                        existingSO.GTS_lvl1_star = 1;
+                        break;
+                    case 2:
+                        existingSO.GTS_lvl2_star = 1;
+                        break;
+                    case 3:
+                        existingSO.GTS_lvl3_star = 1;
+                        break;
+                    case 4:
+                        existingSO.GTS_lvl4_star = 1;
+                        break;
+                    case 5:
+                        existingSO.GTS_lvl5_star = 1;
+                        break;
+                }
+            }
         }
+        SaveManager.Save(existingSO);
     }
     void checkQuestion()
     {
@@ -197,6 +360,29 @@ public class GTS_GameManager : MonoBehaviour
                 showNextLvlBtn();
                 checkStar();
             }
+        }
+    }
+
+    void unlockAnimal()
+    {
+        switch (levelSelected)
+        {
+            case 1:
+                existingSO.isRhinoUnlock = true;
+                break;
+            case 2:
+                existingSO.isCamelUnlock = true;
+                break;
+            case 3:
+                existingSO.isBatUnlock = true;
+                break;
+            case 4:
+                existingSO.isKoiUnlock = true;
+                break;
+            case 5:
+                existingSO.isCrabUnlock = true;
+                break;
+
         }
     }
     public GameObject nextLvlBtn;

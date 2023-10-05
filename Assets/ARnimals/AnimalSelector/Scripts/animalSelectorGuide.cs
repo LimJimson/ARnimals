@@ -21,9 +21,6 @@ public class animalSelectorGuide : MonoBehaviour
     public GameObject animalExampleNoHighlight;
     public GameObject startBtnNoHighlight;
 
-    public GameObject[] gameObjectsToHide;
-
-
     [Header("GUIDE POSITION 1")]
     public GameObject pos1_GO;
     public GameObject boyGuidePos1;
@@ -70,13 +67,6 @@ public class animalSelectorGuide : MonoBehaviour
         }
     }
 
-    void hideGameObject()
-    {
-        foreach (GameObject items in gameObjectsToHide)
-        {
-            items.SetActive(false);
-        }
-    }
     public void skipTutorial()
     {
         pageNumPos1.text = "1/7";

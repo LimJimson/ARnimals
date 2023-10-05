@@ -23,4 +23,6 @@ public class StateNameController : MonoBehaviour
     public static string animalCategoryChosen;
     public static string animalChosen;
 
+    public static int failedAnimal;
+    public static bool isGTSExploreClicked;
 }

@@ -41,31 +41,13 @@ public class ARPlacement : MonoBehaviour
     public GameObject[] GameObjectsToHide;
     bool isGameObjectHidden;
 
-    public playAnimalSound playAnimalSndScript;
-
+    public playAnimalSound playAnimalSndScript; 
+    private Vector2 originalResolution;
     private void Awake()
     {
+        Application.targetFrameRate = 30;
         modelIndex = StateNameController.animalIndexChosen;
-        
-    }
-    void hide_showGameObjects()
-    {
-        if (isGameObjectHidden)
-        {
-            isGameObjectHidden = false;
-            foreach (GameObject uiElement in GameObjectsToHide)
-            {
-                uiElement.SetActive(false);
-            }
-        }
-        else
-        {
-            isGameObjectHidden = true;
-            foreach (GameObject uiElement in GameObjectsToHide)
-            {
-                uiElement.SetActive(true);
-            }
-        }
+
     }
     void Start()
     {
@@ -85,6 +67,42 @@ public class ARPlacement : MonoBehaviour
         countdownSpawnAnimal();
         countdownSpawnAdtnlAnimal();
     }
+
+    private void OnEnable()
+    {
+        originalResolution = new Vector2(Screen.width, Screen.height);
+
+        Vector2 changeRes = new Vector2(originalResolution.x / 2f, originalResolution.y / 2f);
+
+        Screen.SetResolution((int)changeRes.x, (int)changeRes.y, true);
+    }
+
+    private void OnDisable()
+    {
+        Screen.SetResolution((int)originalResolution.x, (int)originalResolution.y, true);
+    }
+
+
+    void hide_showGameObjects()
+    {
+        if (isGameObjectHidden)
+        {
+            isGameObjectHidden = false;
+            foreach (GameObject uiElement in GameObjectsToHide)
+            {
+                uiElement.SetActive(false);
+            }
+        }
+        else
+        {
+            isGameObjectHidden = true;
+            foreach (GameObject uiElement in GameObjectsToHide)
+            {
+                uiElement.SetActive(true);
+            }
+        }
+    }
+
     private void CalculateSpawnPosition()
     {
         // Get the camera's position and rotation
@@ -129,7 +147,7 @@ public class ARPlacement : MonoBehaviour
             uiElement.SetActive(true);
         }
 
-        playAnimalSndScript.Invoke("showSpeaker", 1f);
+        playAnimalSndScript.showSpeaker();
 
         if (!didAnimalSpawn)
         {

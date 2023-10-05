@@ -25,6 +25,7 @@ public class selectGuide : MonoBehaviour
         Screen.orientation = ScreenOrientation.LandscapeLeft;
         animatorBlackPanel.SetBool("panelFadeOut", false);
     }
+    
     public void FixedUpdate()
     {
         if (selectText.color.a != 1)

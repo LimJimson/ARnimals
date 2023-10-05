@@ -12,13 +12,17 @@ public class AnimalInfoScript : MonoBehaviour
     public string[] animalNames;
     public VideoClip[] animalVids;
     public Sprite[] play_pauseSprite;
+    public AudioClip[] animalSndsClips;
 
+    public AudioSource animalSndSrc;    
     public RenderTexture vidRenderTexture;
     public GameObject MainCanvas,AnimalInfoCanvas;
     public Image play_pauseBtn;
     public VideoPlayer animalVidPlayer;
     public Image animalImg;
     public TMP_Text animalNameTxt;
+    public GameObject playAnimalSndBtn;
+
     int chosenAnimalIndex;
     bool isExploreBtnClicked;
     private void Start()
@@ -30,6 +34,27 @@ public class AnimalInfoScript : MonoBehaviour
     {
         StateNameController.isGTSExploreClicked = false;
     }
+
+    public void playAnimalSnd()
+    {
+        animalSndSrc.clip = animalSndsClips[chosenAnimalIndex];
+
+        if (animalSndSrc.isPlaying)
+        {
+            animalSndSrc.Stop();
+            animalVidPlayer.Pause();
+            animalSndSrc.Play();
+        }
+        else
+        {
+            animalVidPlayer.Pause();
+            animalSndSrc.Play();
+        }
+    }
+    private void Update()
+    {
+        checkIfVideoIsPlaying();
+    }
     void checkIfGTS_ExploreBtnClicked()
     {
         if (isExploreBtnClicked)
@@ -37,22 +62,43 @@ public class AnimalInfoScript : MonoBehaviour
             selectedAnimal(StateNameController.failedAnimal);
         }
     }
+    void hideAnimalSndBtn()
+    {
+        if (animalSndsClips == null)
+        {
+            playAnimalSndBtn.SetActive(false);
+        }
+        else
+        {
+            playAnimalSndBtn.SetActive(true);
+        }
+    }
     public void selectedAnimal(int animalIndex)
     {
         this.chosenAnimalIndex = animalIndex;
+        
         showAnimalInfo();
     }
-    public void play_pauseVid()
+    void checkIfVideoIsPlaying()
     {
-        play_pauseBtn.sprite = play_pauseSprite[0];
         if (animalVidPlayer.isPlaying)
         {
             play_pauseBtn.sprite = play_pauseSprite[0];
-            animalVidPlayer.Pause();
         }
         else
         {
             play_pauseBtn.sprite = play_pauseSprite[1];
+        }
+    }
+    public void play_pauseVid()
+    {
+        
+        if (animalVidPlayer.isPlaying)
+        {
+            animalVidPlayer.Pause();
+        }
+        else
+        {
             animalVidPlayer.Play();
         }
     }
@@ -61,6 +107,7 @@ public class AnimalInfoScript : MonoBehaviour
     {
         MainCanvas.SetActive(true);
         AnimalInfoCanvas.SetActive(false);
+        animalSndSrc.Stop();
         vidRenderTexture.Release();
     }
 
@@ -70,6 +117,7 @@ public class AnimalInfoScript : MonoBehaviour
     }
     void showAnimalInfo()
     {
+        hideAnimalSndBtn();
         MainCanvas.SetActive(false);
         play_pauseBtn.sprite = play_pauseSprite[1];
         switch(chosenAnimalIndex)

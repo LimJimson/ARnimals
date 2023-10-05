@@ -31,9 +31,13 @@ public class ScriptHandler : MonoBehaviour
 
     public GameObject changeNameBtn;
 
+    AudioManager audioManager;
+
     void Start()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
         inputLogicScript = GetComponent<InputLogic>();
         enableInputFieldScript = GetComponent<enableInputField>();
         optionsBtn.interactable = false;

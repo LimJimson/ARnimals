@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class FTA_LevelSelector : MonoBehaviour
 {
+    public GameManager GameManager;
+
     public SaveObject soScript;
     SaveObject loadedData;
     public GameObject[] locklevel; //index 0 at lvl 2
@@ -96,6 +98,7 @@ public class FTA_LevelSelector : MonoBehaviour
 
         // Additional logic based on the level number
 
+        GameManager.ResumeGame();
         SceneManager.LoadScene("FTA_Game");
     }
 

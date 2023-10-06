@@ -24,7 +24,7 @@ public class AnimalInfoScript : MonoBehaviour
     public GameObject playAnimalSndBtn;
     public GameObject thumbnailVid;
 
-    int chosenAnimalIndex;
+    public int chosenAnimalIndex;
     bool isExploreBtnClicked;
     AudioManager audioManager;
 
@@ -164,7 +164,7 @@ public class AnimalInfoScript : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
-    void showAnimalInfo()
+    public void showAnimalInfo()
     {
         hideAnimalSndBtn();
         thumbnailVid.SetActive(true);

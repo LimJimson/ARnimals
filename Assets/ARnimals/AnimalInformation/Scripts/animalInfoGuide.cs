@@ -8,6 +8,8 @@ public class animalInfoGuide : MonoBehaviour
     SaveObject loaddata;
     string guideChosen;
     public touchToNextAnimal_Info _touchToNextAnimal_Info;
+    public AnimalInfoScript _animalInfoScript;
+
     public GameObject _animalInfoGuide;
     public GameObject _realMainAnimalInfo;
     public GameObject _realAnimalInfoGO;
@@ -92,11 +94,15 @@ public class animalInfoGuide : MonoBehaviour
     }
     public void skipTutorial()
     {
-        pageNumPos1.text = "1/6";
-        pageNumPos2.text = "1/6";
+        pageNumPos1.text = "1/13";
+        pageNumPos2.text = "1/13";
+        pageNumPos3.text = "1/13";
         _touchToNextAnimal_Info.setPageCtr(1);
         disableAllGuideGameObjects();
         _animalInfoGuide.SetActive(false);
+        _realAnimalInfoGO.SetActive(false);
+        _realMainAnimalInfo.SetActive(true);
+
 
         if (!loaddata.animalInfoGuide)
         {
@@ -153,7 +159,8 @@ public class animalInfoGuide : MonoBehaviour
     public void _animalInformationGuide()
     {
         _animalInfoGuide.gameObject.SetActive(true);
-
+        _animalInfoScript.chosenAnimalIndex = 1;
+        _animalInfoScript.showAnimalInfo();
         _realMainAnimalInfo.SetActive(true);
         _realAnimalInfoGO.SetActive(false);
 

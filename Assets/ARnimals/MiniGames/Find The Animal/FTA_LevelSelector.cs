@@ -8,8 +8,6 @@ using UnityEngine.UI;
 public class FTA_LevelSelector : MonoBehaviour
 {
     public GameManager GameManager;
-
-    public SaveObject soScript;
     SaveObject loadedData;
     public GameObject[] locklevel; //index 0 at lvl 2
     public GameObject[] unlockAnimal; //index 0 at unlock1

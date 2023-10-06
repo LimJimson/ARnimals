@@ -16,8 +16,26 @@ public class GTS_LevelSelect : MonoBehaviour
     int currentStarsLvl4;
     int currentStarsLvl5;
     int unlockedLvl;
+
+    AudioManager audioManager;
     void Start()
     {
+        try
+        {
+            audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+            if (audioManager.musicSource.isPlaying)
+            {
+
+            }
+            else
+            {
+                audioManager.playBGMMusic(audioManager.mainBG);
+            }
+        }
+        catch
+        {
+            Debug.Log("No AudioManager");
+        }
         loadedData = SaveManager.Load();
         unlockedLvl = loadedData.unlockedLevelMG2;
         checkUnlockLevel();

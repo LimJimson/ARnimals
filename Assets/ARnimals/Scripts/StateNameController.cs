@@ -14,6 +14,7 @@ public class StateNameController : MonoBehaviour
     public static bool miniGamesSelectGuide;
     public static bool animalSelectGuide;
     public static bool ARExperienceGuide;
+    public static bool animalInfoGuide;
 
     public static int levelClickedMG1;
     public static int levelClickedMG2;

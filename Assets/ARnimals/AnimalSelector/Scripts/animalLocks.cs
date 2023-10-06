@@ -172,26 +172,26 @@ public class animalLocks : MonoBehaviour
         if (isDeerUnlock)
         {
 
-            animalBtns[5].interactable = true;
-            animal_Locks[5].gameObject.SetActive(false);
+            animalBtns[2].interactable = true;
+            animal_Locks[2].gameObject.SetActive(false);
         }
         if (isSeagullUnlock)
         {
 
-            animalBtns[15].interactable = true;
-            animal_Locks[15].gameObject.SetActive(false);
+            animalBtns[7].interactable = true;
+            animal_Locks[7].gameObject.SetActive(false);
         }
         if (isSharkUnlock)
         {
 
-            animalBtns[16].interactable = true;
-            animal_Locks[16].gameObject.SetActive(false);
+            animalBtns[12].interactable = true;
+            animal_Locks[12].gameObject.SetActive(false);
         }
         if (isDuckUnlock)
         {
 
-            animalBtns[6].interactable = true;
-            animal_Locks[6].gameObject.SetActive(false);
+            animalBtns[8].interactable = true;
+            animal_Locks[8].gameObject.SetActive(false);
         }
 
 
@@ -199,20 +199,20 @@ public class animalLocks : MonoBehaviour
         if (isLeopardUnlock)
         {
 
-            animalBtns[10].interactable = true;
-            animal_Locks[10].gameObject.SetActive(false);
+            animalBtns[0].interactable = true;
+            animal_Locks[0].gameObject.SetActive(false);
         }
         if (isPigeonUnlock)
         {
 
-            animalBtns[12].interactable = true;
-            animal_Locks[12].gameObject.SetActive(false);
+            animalBtns[5].interactable = true;
+            animal_Locks[5].gameObject.SetActive(false);
         }
         if (isPiranhaUnlock)
         {
 
-            animalBtns[13].interactable = true;
-            animal_Locks[13].gameObject.SetActive(false);
+            animalBtns[10].interactable = true;
+            animal_Locks[10].gameObject.SetActive(false);
         }
         if (isBearUnlock)
         {
@@ -223,8 +223,8 @@ public class animalLocks : MonoBehaviour
         if (isOwlUnlock)
         {
 
-            animalBtns[17].interactable = true;
-            animal_Locks[17].gameObject.SetActive(false);
+            animalBtns[6].interactable = true;
+            animal_Locks[6].gameObject.SetActive(false);
         }
 
     }

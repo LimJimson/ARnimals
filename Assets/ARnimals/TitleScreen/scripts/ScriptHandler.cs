@@ -59,6 +59,7 @@ public class ScriptHandler : MonoBehaviour
         StateNameController.animalSelectGuide =soScript.AnimalSelectTutorialDone;
         StateNameController.ARExperienceGuide =soScript.ARExpTutorialDone;
         StateNameController.miniGamesSelectGuide = soScript.MiniGamesTutorialDone;
+        StateNameController.animalInfoGuide = soScript.animalInfoGuide;
         StateNameController.player_name = name;
         StateNameController.guide_chosen = guideChosen;
 
@@ -203,6 +204,7 @@ public class ScriptHandler : MonoBehaviour
         playerNameLoggedIn.gameObject.SetActive(true);
         // Wait until the animation is finished
         Debug.Log("WaitForAnimationFinish coroutine called!");
+
         while (!animator.GetCurrentAnimatorStateInfo(0).IsName("idle_button"))
         {
             yield return null;

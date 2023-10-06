@@ -4,28 +4,44 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] AudioSource musicSource;
-    [SerializeField] AudioSource sfxSource;
+    [Header("Audio Source")]
+    public AudioSource musicSource;
+    public AudioSource sfxSource;
+    public AudioSource guideSource;
 
-    public AudioClip background;
+    [Header("BGM")]
+    public AudioClip mainBG;
+
+    [Header("SFX")]
     public AudioClip touchSound;
-    
+
+    [Header("GUIDE")]
+    public AudioClip[] GuideSelector;
+    public AudioClip[] MainMenu;
+    public AudioClip[] ModeSelect;
+    public AudioClip[] AnimalSelector;
+    public AudioClip[] MinigameSelect;
+
+
+
+
+    // Start is called before the first frame update
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
     }
-    // Start is called before the first frame update
     void Start()
     {
+        
     }
     // Update is called once per frame
     void Update()
     {
         checkPlayerTouch();
     }
-    public void playBgMusic()
+    public void playBGMMusic(AudioClip clip)
     {
-        musicSource.clip = background;
+        musicSource.clip = clip;
         musicSource.Play();
     }
 
@@ -48,4 +64,20 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
+
+    public void MusicVolume(float volume)
+    {
+        musicSource.volume = volume;
+    }
+
+    public void SFXVolume(float volume)
+    {
+        sfxSource.volume = volume;
+    }
+
+    public void GuideVolume(float volume)
+    {
+        guideSource.volume = volume;
+    }
+
 }

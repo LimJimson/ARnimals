@@ -47,9 +47,25 @@ public class MiniGamesGuide : MonoBehaviour
     public GameObject backHighlight;
     public GameObject guideHighlight;
 
-
+    AudioManager audioManager;
     void Start()
     {
+        try
+        {
+            audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+            if (audioManager.musicSource.isPlaying)
+            {
+                
+            }
+            else
+            {
+                audioManager.playBGMMusic(audioManager.mainBG);
+            }
+        }
+        catch
+        {
+            Debug.Log("No AudioManager");
+        }
         loaddata = SaveManager.Load();
         guideChosen = StateNameController.guide_chosen;
         if (!StateNameController.miniGamesSelectGuide)
@@ -76,6 +92,7 @@ public class MiniGamesGuide : MonoBehaviour
             SaveManager.Save(loaddata);
         }
     }
+
     public void GuideBack()
     {
         _TouchToNextMiniGameSelectScript.minusPageCtr();

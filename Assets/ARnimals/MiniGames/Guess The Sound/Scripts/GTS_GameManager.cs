@@ -57,8 +57,24 @@ public class GTS_GameManager : MonoBehaviour
     [Header("Canvas/UI")]
     public GameObject optionsUI;
 
+    AudioManager audioManager;
     private void Start()
     {
+        try
+        {
+            audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+            if (audioManager.musicSource.isPlaying)
+            {
+                audioManager.musicSource.Stop();
+                audioManager.playBGMMusic(audioManager.mainBG); // play GTS BGM
+            }
+
+        }
+        catch
+        {
+            Debug.Log("No AudioManager");
+        }
+
         existingSO = SaveManager.Load();
         levelSelected = StateNameController.levelClickedMG2;
         guide_chosen = StateNameController.guide_chosen;
@@ -90,7 +106,17 @@ public class GTS_GameManager : MonoBehaviour
         randomizeChoiceBtnsAndPlaySndBtns();
 
     }
+    private void OnDisable()
+    {
+        try
+        {
+            audioManager.musicSource.Stop();
+        }
+        catch
+        {
 
+        }
+    }
     public void showCurrentLevel()
     {
         StartCoroutine(WaitForAnimationFinish());

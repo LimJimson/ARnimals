@@ -33,8 +33,27 @@ public class ModeSelectGuide : MonoBehaviour
     public GameObject dialog_maleGuide;
     public GameObject femaleGuide;
     public GameObject dialog_femaleGuide;
+
+    AudioManager audioManager;
     void Start()
     {
+        try
+        {
+            audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+            if (audioManager.musicSource.isPlaying)
+            {
+                
+            }
+            else
+            {
+                audioManager.playBGMMusic(audioManager.mainBG);
+            }
+        }
+        catch
+        {
+            Debug.Log("No AudioManager");
+        }
+
         loaddata = SaveManager.Load();
         GuideChosen = StateNameController.guide_chosen;
         if (!StateNameController.modeSelectGuide)

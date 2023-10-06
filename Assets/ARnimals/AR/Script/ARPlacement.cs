@@ -43,6 +43,9 @@ public class ARPlacement : MonoBehaviour
 
     public playAnimalSound playAnimalSndScript; 
     private Vector2 originalResolution;
+
+    AudioManager audioManager;
+
     private void Awake()
     {
         Application.targetFrameRate = 30;
@@ -51,6 +54,23 @@ public class ARPlacement : MonoBehaviour
     }
     void Start()
     {
+        try
+        {
+            audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+            if (audioManager.musicSource.isPlaying)
+            {
+                audioManager.musicSource.Stop();
+            }
+            else
+            {
+                
+            }
+        }
+        catch
+        {
+            Debug.Log("No AudioManager");
+        }
+
         //hide GameObjects
         foreach (GameObject uiElement in GameObjectsToHide)
         {

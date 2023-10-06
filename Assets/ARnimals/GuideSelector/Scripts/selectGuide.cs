@@ -20,8 +20,27 @@ public class selectGuide : MonoBehaviour
 
     bool boy_guide = false;
     bool girl_guide = false;
+
+
+    AudioManager audioManager;
     void Start()
     {
+        try
+        {
+            audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+            if (audioManager.musicSource.isPlaying)
+            {
+
+            }
+            else
+            {
+                audioManager.playBGMMusic(audioManager.mainBG);
+            }
+        }
+        catch
+        {
+            Debug.Log("No AudioManager");
+        }
         Screen.orientation = ScreenOrientation.LandscapeLeft;
         animatorBlackPanel.SetBool("panelFadeOut", false);
     }

@@ -40,14 +40,39 @@ public class HiddenObject : MonoBehaviour
     public GameObject health;
     public GameObject panelGameOver;
 
+    [Header("Level")]
+    public Image background;
+    public Sprite[] spriteBackground;
+    public Image[] imageButtonSelectObject;
+    public Image[] extraBackground;
+    public Sprite[] spriteExtraBackground;
+    public int maxLevel;
+    static int levelCount;
+    int chosenLevel;
+    public Button buttonNext;
+
+    [System.Serializable]
+    public class SpriteLevel
+    {
+        public List<Sprite> sprites;
+    }
+    public List<SpriteLevel> spriteLevel;
+
+    public ControlPos[] savePosition;
+
     void Start()
     {
+        chosenLevel = StateNameController.levelClickedMG1;
+
+        ChangeSpriteLevel(levelCount);
+        Debug.Log(levelCount);
         settingsMenuObject.SetActive(false);
         countHealth = health.transform.childCount;
         RandomItemPos();
         RandomIndex();
         RandomItemTarget();
         DisplayTimer();
+        checkLevel();
     }
     private void Update()
     {
@@ -61,7 +86,46 @@ public class HiddenObject : MonoBehaviour
                 GameOver();
             }
         }
+
     }
+
+    public void checkLevel()
+    {
+        if (background.GetComponent<Image>().sprite == spriteBackground[1])
+        {
+            extraBackground[0].sprite = spriteExtraBackground[0];
+            extraBackground[0].transform.localPosition = new Vector3(-441.0773f, -212.7056f, 0);
+
+            extraBackground[1].sprite = spriteExtraBackground[1];
+            extraBackground[1].transform.localPosition = new Vector3(202f, -417f, 0);
+
+            extraBackground[2].sprite = spriteExtraBackground[2];
+            extraBackground[2].transform.localPosition = new Vector3(997f, -149f, 0);
+
+            extraBackground[3].sprite = spriteExtraBackground[3];
+            extraBackground[3].transform.localPosition = new Vector3(595f, -527f, 0);
+
+            extraBackground[4].sprite = spriteExtraBackground[4];
+            extraBackground[4].transform.localPosition = new Vector3(-17f, -212.7056f, 0);
+        }
+    }
+
+    public void ButtonNextLevel()
+    {
+        levelCount += 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    void ChangeSpriteLevel(int nomerLevel)
+    {
+        background.GetComponent<Image>().sprite = spriteBackground[nomerLevel];
+
+        for (int i = 0; i < imageButtonSelectObject.Length; i++)
+        {
+            imageButtonSelectObject[i].sprite = spriteLevel[nomerLevel].sprites[i];
+        }
+    }
+
     public void PauseGame()
     {
         isPaused = true;
@@ -85,6 +149,7 @@ public class HiddenObject : MonoBehaviour
     }
     public void QuitGame()
     {
+        ResumeGame();
         SceneManager.LoadScene("FTA_lvlSelect");
     }
 
@@ -148,12 +213,16 @@ public class HiddenObject : MonoBehaviour
 
     void RandomItemPos()
     {
-        int randomSave = Random.Range(0, ControlPos.Instance.saveItemPos.Count);
+        int randomSave = chosenLevel = Random.Range(0, ControlPos.Instance.saveItemPos.Count);
         Debug.Log(randomSave);
 
         for (int i = 0; i < item.transform.childCount; i++)
         {
-            item.transform.GetChild(i).gameObject.SetActive(true);
+            if (randomSave == 0)
+            {
+                item.transform.GetChild(i).transform.localPosition = savePosition[chosenLevel].saveItemPos[randomSave].itemPos[i];
+                item.transform.GetChild(i).gameObject.SetActive(true);
+            }
         }
     }
     public void ButtonItem()
@@ -172,6 +241,12 @@ public class HiddenObject : MonoBehaviour
                 if (countItemFind >= 5)
                 {
                     GameWin();
+
+                    if (levelCount >= maxLevel)
+                    {
+                        buttonNext.interactable = false;
+                        levelCount = 0;
+                    }
                 }
                 //Destroy(EventSystem.current.currentSelectedGameObject.gameObject);
                 EventSystem.current.currentSelectedGameObject.gameObject.SetActive(false);

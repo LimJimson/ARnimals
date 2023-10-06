@@ -16,6 +16,10 @@ public class CTF_AnimalMovement : MonoBehaviour
     [Header("PowerUps")]
     [SerializeField] private GameObject shield;
     [SerializeField] private GameObject points2X;
+	
+	[Header("Musics")]
+	[SerializeField] private AudioSource wrongFoodMusic;
+	[SerializeField] private AudioSource powerUpsMusic;
 
     private void Start()
     {
@@ -53,6 +57,8 @@ public class CTF_AnimalMovement : MonoBehaviour
             }
             else 
             {
+				wrongFoodMusic.Play();
+				Debug.Log("WrongFood PlayMusic");
                 animator.SetTrigger("ShowRedPanel");
                 CTF_GameManager.Instance.ReduceHealth(1);
             }
@@ -66,6 +72,8 @@ public class CTF_AnimalMovement : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("shield")) 
         {
+			powerUpsMusic.Play();
+			Debug.Log("shield PlayMusic");
             gameManager.InShieldState = true;
             shield.SetActive(false);
             gameManager.ShieldDuration = 10f;
@@ -74,6 +82,8 @@ public class CTF_AnimalMovement : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("x2Points")) 
         {
+			powerUpsMusic.Play();
+			Debug.Log("x2Points PlayMusic");
             gameManager.InX2PointsState = true;
             points2X.SetActive(false);
             gameManager.Points2XDuration = 10f;

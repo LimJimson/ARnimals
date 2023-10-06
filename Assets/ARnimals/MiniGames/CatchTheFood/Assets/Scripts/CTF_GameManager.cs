@@ -55,6 +55,15 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelCompletedTxt;
     [SerializeField] private RectTransform[] x2Orders;
     [SerializeField] private RectTransform[] shieldsOrders;
+	
+	[Header("Musics")]
+	[SerializeField] private AudioSource bgMusic;
+	[SerializeField] private AudioSource lvlCompleteMusic;
+	[SerializeField] private AudioSource gameOverMusic;
+	[SerializeField] private AudioSource wrongFoodMusic;
+	[SerializeField] private AudioSource powerUpsMusic;
+	[SerializeField] private Slider musicVolumeSlider;
+	[SerializeField] private Slider soundFXVolumeSlider;
 
     private int finalScore;
 
@@ -100,6 +109,9 @@ public class CTF_GameManager : MonoBehaviour
         selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel");
         showRandomTrivia();
         StartCoroutine(showTransitionAfterDelay());
+		checkMusicVolume();
+		checkSoundFXVolume();
+		Debug.Log("BG PlayMusic");
     }
 
     private void Update() 
@@ -109,6 +121,19 @@ public class CTF_GameManager : MonoBehaviour
         UpdatePowerUpsUI();
         checkIfTransitionIsDone();
     }
+	
+	public void checkMusicVolume() 
+	{
+		bgMusic.volume = musicVolumeSlider.value;
+		lvlCompleteMusic.volume = musicVolumeSlider.value;
+		gameOverMusic.volume = musicVolumeSlider.value;
+	}
+	
+	public void checkSoundFXVolume() 
+	{
+		wrongFoodMusic.volume = soundFXVolumeSlider.value;
+		powerUpsMusic.volume = soundFXVolumeSlider.value;
+	}
 
     private IEnumerator showTransitionAfterDelay() 
     {
@@ -159,6 +184,8 @@ public class CTF_GameManager : MonoBehaviour
     {
         if (InShieldState) 
         {
+			
+			
             shieldContainer.SetActive(true);
             shieldDuration -= Time.deltaTime;
 
@@ -196,6 +223,8 @@ public class CTF_GameManager : MonoBehaviour
     {
         if (InX2PointsState) 
         {
+			
+			
             points2XContainer.SetActive(true);
             points2XDuration -= Time.deltaTime;
 
@@ -315,6 +344,9 @@ public class CTF_GameManager : MonoBehaviour
             {
                 pauseManager.PauseGame();
                 gameOverCanvas.SetActive(true);
+				bgMusic.Pause();
+				gameOverMusic.Play();
+				Debug.Log("Gameover PlayMusic");
             }
         }
     }
@@ -396,6 +428,9 @@ public class CTF_GameManager : MonoBehaviour
             {
                 pauseManager.PauseGame();
                 finalScore = scoreManager.GetScore();
+				bgMusic.Pause();
+				lvlCompleteMusic.Play();
+				Debug.Log("Level Complete PlayMusic");
 
                 addStar(finalScore);
                 SetMaxStars();
@@ -409,6 +444,7 @@ public class CTF_GameManager : MonoBehaviour
             {
                 starsCount = 0;
                 SetMaxStars();
+				bgMusic.Pause();
                 pauseManager.PauseGame();
                 gameOverCanvas.SetActive(true);
             }
@@ -611,11 +647,13 @@ public class CTF_GameManager : MonoBehaviour
 
         if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "quitButton") 
         {
+			bgMusic.UnPause();
             pauseManager.ResumeGame();
             SceneManager.LoadScene("CTF_LevelSelector");
         }
         else if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "restartButton")
         {
+			bgMusic.UnPause();
             pauseManager.ResumeGame();
             SceneManager.LoadScene("CTF_Game");
         }
@@ -623,11 +661,13 @@ public class CTF_GameManager : MonoBehaviour
         if (transitionToIn.activeSelf && achievedImgPositionIn) 
         {
             transitionToIn.SetActive(false);
+			bgMusic.Play();
         }
     }
 
     public void helpButtonFunction() 
     {
+		bgMusic.Pause();
         pauseAndHPCanvas.SetActive(false);
         tutorialCanvas.SetActive(true);
         int pageNum = tutorialManager.PageNum = 0;

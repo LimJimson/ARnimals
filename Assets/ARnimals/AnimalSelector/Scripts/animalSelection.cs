@@ -23,10 +23,26 @@ public class animalSelection : MonoBehaviour
         "Octopus", "Pigeon", "Piranha", "Rhinoceros", "Seagull",
         "Shark", "Owl", "Tiger", "Zebra"};
 
-
+    AudioManager audioManager;
 
     void Start()
     {
+        try
+        {
+            audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+            if (audioManager.musicSource.isPlaying)
+            {
+
+            }
+            else
+            {
+                audioManager.playBGMMusic(audioManager.mainBG);
+            }
+        }
+        catch
+        {
+            Debug.Log("No AudioManager");
+        }
         backBtn.SetActive(true);
         guideBtn.SetActive(true);
         StartBtn.SetActive(false);

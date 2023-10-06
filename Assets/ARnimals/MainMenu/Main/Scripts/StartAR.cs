@@ -18,10 +18,29 @@ public class StartAR : MonoBehaviour
     string guide_chosen;
 
     public TMP_Text playerName;
-
+    AudioManager audioManager;
 
     void Start()
     {
+        try
+        {
+            audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+            if (audioManager.musicSource.isPlaying)
+            {
+
+            }
+            else
+            {
+                audioManager.playBGMMusic(audioManager.mainBG);
+            }
+        }
+        catch
+        {
+            Debug.Log("No AudioManager");
+        }
+
+
+        
         loaddata = SaveManager.Load();
         guide_chosen = StateNameController.guide_chosen;
         if (string.IsNullOrEmpty(guide_chosen))

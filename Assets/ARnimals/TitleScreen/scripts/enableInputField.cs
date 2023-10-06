@@ -32,6 +32,7 @@ public class enableInputField : MonoBehaviour
     {
         // Wait until the animation is finished
         Debug.Log("WaitForAnimationFinish coroutine called!");
+
         while (!animator.GetCurrentAnimatorStateInfo(0).IsName("idle_input_field"))
         {
             yield return null;

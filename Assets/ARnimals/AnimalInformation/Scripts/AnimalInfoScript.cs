@@ -16,50 +16,89 @@ public class AnimalInfoScript : MonoBehaviour
 
     public AudioSource animalSndSrc;    
     public RenderTexture vidRenderTexture;
-    public GameObject MainCanvas,AnimalInfoCanvas;
+    public GameObject MainCanvas,AnimalInfoCanvas, SettingsCanvas;
     public Image play_pauseBtn;
     public VideoPlayer animalVidPlayer;
     public Image animalImg;
     public TMP_Text animalNameTxt;
     public GameObject playAnimalSndBtn;
+    public GameObject thumbnailVid;
 
     int chosenAnimalIndex;
     bool isExploreBtnClicked;
+    AudioManager audioManager;
+
+
     private void Start()
     {
+        try
+        {
+            audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+            if (audioManager.musicSource.isPlaying)
+            {
+                
+            }
+            else
+            {
+                audioManager.playBGMMusic(audioManager.mainBG);
+            }
+        }
+        catch
+        {
+            Debug.Log("No AudioManager");
+        }
+
         isExploreBtnClicked = StateNameController.isGTSExploreClicked;
+        
         checkIfGTS_ExploreBtnClicked();
     }
     private void OnDisable()
     {
         StateNameController.isGTSExploreClicked = false;
+        vidRenderTexture.Release();
     }
 
+    bool isAnimalSndClicked;
     public void playAnimalSnd()
     {
-        animalSndSrc.clip = animalSndsClips[chosenAnimalIndex];
+        animalSndSrc.PlayOneShot(animalSndsClips[chosenAnimalIndex]);
+        animalVidPlayer.Pause();
+    }
 
-        if (animalSndSrc.isPlaying)
+    void checkIfPlayerIsPlaying()
+    {
+        try
         {
-            animalSndSrc.Stop();
-            animalVidPlayer.Pause();
-            animalSndSrc.Play();
+            if (animalSndSrc.isPlaying || animalVidPlayer.isPlaying)
+            {
+                audioManager.musicSource.Pause();
+            }
+            else
+            {
+                audioManager.musicSource.UnPause();
+            }
         }
-        else
+        catch
         {
-            animalVidPlayer.Pause();
-            animalSndSrc.Play();
+
         }
     }
     private void Update()
     {
         checkIfVideoIsPlaying();
+        checkIfPlayerIsPlaying();
     }
     void checkIfGTS_ExploreBtnClicked()
     {
         if (isExploreBtnClicked)
         {
             selectedAnimal(StateNameController.failedAnimal);
+        }
+        else
+        {
+            MainCanvas.SetActive(true);
+            AnimalInfoCanvas.SetActive(false);
+            SettingsCanvas.SetActive(false);
         }
     }
     void hideAnimalSndBtn()
@@ -96,9 +135,11 @@ public class AnimalInfoScript : MonoBehaviour
         if (animalVidPlayer.isPlaying)
         {
             animalVidPlayer.Pause();
+
         }
         else
         {
+            thumbnailVid.SetActive(false);
             animalVidPlayer.Play();
         }
     }
@@ -109,6 +150,14 @@ public class AnimalInfoScript : MonoBehaviour
         AnimalInfoCanvas.SetActive(false);
         animalSndSrc.Stop();
         vidRenderTexture.Release();
+        try
+        {
+            audioManager.musicSource.UnPause();
+        }
+        catch
+        {
+
+        }
     }
 
     public void goToMainMenu()
@@ -118,6 +167,7 @@ public class AnimalInfoScript : MonoBehaviour
     void showAnimalInfo()
     {
         hideAnimalSndBtn();
+        thumbnailVid.SetActive(true);
         MainCanvas.SetActive(false);
         play_pauseBtn.sprite = play_pauseSprite[1];
         switch(chosenAnimalIndex)

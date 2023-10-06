@@ -4,7 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/ARnimals/Scenes/FindTheAnimal/FTA_Game.unity
+    guid: a75fd9d2521ef46468f8fe3ef6210b3c
   m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 58f40b12bbc864f3c96c6505a9a1e1e3,
+      type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 4971fc10c2059c945b174049514e156e,
       type: 2}

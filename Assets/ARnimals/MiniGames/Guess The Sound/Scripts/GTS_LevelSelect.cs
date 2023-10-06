@@ -19,7 +19,7 @@ public class GTS_LevelSelect : MonoBehaviour
     void Start()
     {
         loadedData = SaveManager.Load();
-        unlockedLvl = loadedData.unlockedLevelMG2 + 1;
+        unlockedLvl = loadedData.unlockedLevelMG2;
         checkUnlockLevel();
         
         

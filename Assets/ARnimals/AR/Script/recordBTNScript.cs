@@ -150,11 +150,14 @@ public class recordBTNScript : MonoBehaviour
         }
         
     }
+
+    
     private void OnVideoLoopPointReached(VideoPlayer source)
     {
         // Change the sprite to "Play"
         play_pause_vid.image.sprite = play_btn[1];
     }
+
     public void PlayNextVideo()
     {
         currentVideoIndex+=1;

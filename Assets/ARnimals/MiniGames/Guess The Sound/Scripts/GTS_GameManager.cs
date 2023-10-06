@@ -636,6 +636,34 @@ public class GTS_GameManager : MonoBehaviour
             girl_guide_gameOver.SetActive(true);
         }
     }
+
+    public GameObject exploreConfirm;
+    public GameObject boy_guide_explore;
+    public GameObject girl_guide_explore;
+    public void showConfirmExplore()
+    {
+        exploreConfirm.SetActive(true);
+        if (guide_chosen == "boy_guide")
+        {
+            boy_guide_explore.SetActive(true);
+            girl_guide_explore.SetActive(false);
+
+        }
+        else if (guide_chosen == "girl_guide")
+        {
+            boy_guide_explore.SetActive(false);
+            girl_guide_explore.SetActive(true);
+        }
+
+    }
+
+    public void goToAnimalInfo()
+    {
+        StateNameController.failedAnimal = animalIndex;
+        StateNameController.isGTSExploreClicked = true;
+        SceneManager.LoadScene("Animal_Information");
+    }
+
     private List<int> usedAnimalIndices = new List<int>();
 
     public void randomizedAnimal()
@@ -660,30 +688,7 @@ public class GTS_GameManager : MonoBehaviour
 
         animalIndex = randomIndex;
     }
-    public void goToAnimalInfo()
-    {
-        SceneManager.LoadScene("Animal_Information");
-    }
 
-    public GameObject exploreConfirm;
-    public GameObject boy_guide_explore;
-    public GameObject girl_guide_explore;
-    public void showConfirmExplore()
-    {
-        exploreConfirm.SetActive(true);
-        if (guide_chosen == "boy_guide")
-        {
-            boy_guide_explore.SetActive(true);
-            girl_guide_explore.SetActive(false);
-
-        }
-        else if (guide_chosen == "girl_guide")
-        {
-            boy_guide_explore.SetActive(false);
-            girl_guide_explore.SetActive(true);
-        }
-
-    }
     public void hideConfirmExplore()
     {
         exploreConfirm.SetActive(false);

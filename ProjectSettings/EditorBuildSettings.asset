@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/ARnimals/Scenes/FindTheAnimal/FTA_Game.unity
     guid: a75fd9d2521ef46468f8fe3ef6210b3c
+  - enabled: 1
+    path: Assets/ARnimals/Scenes/FindTheAnimal/FTA_lvlSelect.unity
+    guid: b5a233d26e90b3447af1c75c9d365ddd
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 58f40b12bbc864f3c96c6505a9a1e1e3,
       type: 2}

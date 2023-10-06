@@ -40,6 +40,7 @@ public class HiddenObject : MonoBehaviour
     public GameObject health;
     public GameObject panelGameOver;
 
+<<<<<<< Updated upstream
     [Header("Level System")]
     public GameObject background;
     public Sprite[] spriteBackground;
@@ -56,6 +57,9 @@ public class HiddenObject : MonoBehaviour
     public List<SpriteLevel> spriteLevel;
 
     public ControlPos[] savePosition;
+=======
+
+>>>>>>> Stashed changes
 
     void Start()
     {

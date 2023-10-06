@@ -11,6 +11,8 @@ public class CTF_GameManager : MonoBehaviour
 
     [Header("Scripts Needed")]
 
+    SaveObject existingSo;
+
     [SerializeField] private CTF_ScoreManager scoreManager;
     [SerializeField] private CTF_HealthManager healthManager;
     [SerializeField] private CTF_PauseManager pauseManager;
@@ -32,7 +34,7 @@ public class CTF_GameManager : MonoBehaviour
     [Header("UIs Needed")]
 
     [SerializeField] private TextMeshProUGUI finalScoreText;
-    [SerializeField] private int minimumScoreToWin;
+    private int minimumScoreToWin = 10;
 
     [Header("PowerUps")]
     [SerializeField] private GameObject shield;
@@ -55,6 +57,8 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private RectTransform[] shieldsOrders;
 
     private int finalScore;
+
+    private int starsCount;
     
     private bool isGameOver = false;
 
@@ -65,6 +69,10 @@ public class CTF_GameManager : MonoBehaviour
 
     private float shieldDuration = 10f;
     private float points2XDuration = 10f;
+
+    [SerializeField] private Image animalImg;
+    [SerializeField] private Sprite[] animalSprites;
+    [SerializeField] private GameObject checkGameObject;
 
     [SerializeField] private TextMeshProUGUI triviaTxt;
 	[SerializeField] private GameObject transitionToOut;
@@ -87,6 +95,8 @@ public class CTF_GameManager : MonoBehaviour
 
     private void Start() 
     {
+		existingSo = SaveManager.Load();
+		
         selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel");
         showRandomTrivia();
         StartCoroutine(showTransitionAfterDelay());
@@ -386,7 +396,9 @@ public class CTF_GameManager : MonoBehaviour
             {
                 pauseManager.PauseGame();
                 finalScore = scoreManager.GetScore();
+
                 addStar(finalScore);
+                SetMaxStars();
                 UnlockedNextLevel();
                 finalScoreText.text = finalScore.ToString();
                 highScoreManager.SaveHighScore(scoreManager.GetScore());
@@ -395,34 +407,93 @@ public class CTF_GameManager : MonoBehaviour
             }
             else
             {
+                starsCount = 0;
+                SetMaxStars();
                 pauseManager.PauseGame();
                 gameOverCanvas.SetActive(true);
             }
         }
     }
 
+    private void SetMaxStars() 
+    {
+        int currentMaxStarsCount = PlayerPrefs.GetInt("CTF_Lvl" + selectedLevel + "StarsCount", 0);
+        int newStarsCount = starsCount;
+
+        checkGameObject.SetActive(false);
+
+        if (newStarsCount > currentMaxStarsCount) 
+        {
+            PlayerPrefs.SetInt("CTF_Lvl" + selectedLevel + "StarsCount", newStarsCount);
+        }
+
+        if (PlayerPrefs.GetInt("CTF_Lvl" + selectedLevel + "StarsCount") >= 2) 
+        {
+            checkGameObject.SetActive(true);
+
+            switch(selectedLevel) 
+            {
+                case "1":
+                    existingSo.isOctopusUnlock = true;
+                    break;
+                case "2":
+                    existingSo.isDeerUnlock = true;
+                    break;
+                case "3":
+                    existingSo.isSeagullUnlock = true;
+                    break;
+                case "4":
+                    existingSo.isSharkUnlock = true;
+                    break;
+                case "5":
+                    existingSo.isDuckUnlock = true;
+                    break;
+            }
+
+            SaveManager.Save(existingSo);
+        }
+
+        animalImg.sprite = animalSprites[int.Parse(selectedLevel)];
+    }
+
     public void addStar(int score) 
     {
-        if (score >= 20 && score < 40) 
+        if (score >= 10 && score < 20) 
         {
             starHolder.sprite = stars[0];
+            starsCount = 1;
         }
-        else if (score >= 40 && score < 60) 
+        else if (score >= 20 && score < 30) 
         {
             starHolder.sprite = stars[1];
+            starsCount = 2;
         }
-        else if (score >= 60) 
+        else if (score >= 30) 
         {
             starHolder.sprite = stars[2];
+            starsCount = 3;
         }
     }
 
     //Button's functions
+	
+	private string confirmQuitCode;
 
     public void QuitButtonFunction()
     {
+		if (optionsUICanvas.activeSelf) 
+		{
+			optionsUICanvas.SetActive(false);
+			confirmQuitCode = "OptionsUI";
+		}
+		
+		if (gameOverCanvas.activeSelf) 
+		{
+			gameOverCanvas.SetActive(false);
+			confirmQuitCode = "GameOverUI";
+		}
+		
         confirmationQuitCanvas.SetActive(true);
-        optionsUICanvas.SetActive(false);
     }
 
     public void RestartButtonFunction()
@@ -452,8 +523,16 @@ public class CTF_GameManager : MonoBehaviour
 
     public void confirmQuitNoButtonFunction()
     {
+		switch(confirmQuitCode)
+		{
+			case "OptionsUI":
+                optionsUICanvas.SetActive(true);
+                break;
+            case "GameOverUI":
+                gameOverCanvas.SetActive(true);
+                break;
+		}	
         confirmationQuitCanvas.SetActive(false);
-        optionsUICanvas.SetActive(true);
     }
 
     public void confirmRetryNoButtonFunction()
@@ -509,6 +588,7 @@ public class CTF_GameManager : MonoBehaviour
         buttonCode = "restartButton";
         confirmationRetryCanvas.SetActive(false);
         confirmationPlayAgainCanvas.SetActive(false);
+		gameOverCanvas.SetActive(false);
         transitionToOut.SetActive(true);
     }
 
@@ -518,6 +598,7 @@ public class CTF_GameManager : MonoBehaviour
         confirmationQuitCanvas.SetActive(false);
         confirmationPlayAgainCanvas.SetActive(false);
         levelCompleteCanvas.SetActive(false);
+		gameOverCanvas.SetActive(false);
 		transitionToOut.SetActive(true);
         
     }
@@ -525,8 +606,8 @@ public class CTF_GameManager : MonoBehaviour
     private void checkIfTransitionIsDone() 
     {
 
-        bool achievedImgPositionOut = transitionToOutImg.rectTransform.anchoredPosition.x <= -1070.5f && transitionToOutImg.rectTransform.anchoredPosition.x >= -1071.5f;
-        bool achievedImgPositionIn = transitionToInImg.rectTransform.anchoredPosition.x <= -2790.5f && transitionToInImg.rectTransform.anchoredPosition.x >= -2791.5f;
+        bool achievedImgPositionOut = transitionToOutImg.color.a >= 0.9999 && transitionToOutImg.color.a <= 1.0001;
+        bool achievedImgPositionIn = transitionToInImg.color.a >= -0.0001 && transitionToInImg.color.a <= 0.0001;
 
         if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "quitButton") 
         {

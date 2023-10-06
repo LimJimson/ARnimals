@@ -11,6 +11,7 @@ TagManager:
   - heart
   - shield
   - x2Points
+  - Audio
   layers:
   - Default
   - TransparentFX

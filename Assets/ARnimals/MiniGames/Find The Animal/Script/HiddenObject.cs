@@ -40,33 +40,10 @@ public class HiddenObject : MonoBehaviour
     public GameObject health;
     public GameObject panelGameOver;
 
-<<<<<<< Updated upstream
-    [Header("Level System")]
-    public GameObject background;
-    public Sprite[] spriteBackground;
-    public Image[] imageButtonSelectObject;
-    public int maxLevel;
-    static int levelCount;
-    public Button buttonNext;
-
-    [System.Serializable]
-    public class SpriteLevel
-    {
-        public List<Sprite> sprites;
-    }
-    public List<SpriteLevel> spriteLevel;
-
-    public ControlPos[] savePosition;
-=======
-
->>>>>>> Stashed changes
-
     void Start()
     {
         settingsMenuObject.SetActive(false);
         countHealth = health.transform.childCount;
-        ChangeSpriteLevel(levelCount);
-        Debug.Log(levelCount);
         RandomItemPos();
         RandomIndex();
         RandomItemTarget();
@@ -83,23 +60,6 @@ public class HiddenObject : MonoBehaviour
             {
                 GameOver();
             }
-        }
-    }
-
-    public void ButtonNextLevel()
-    {
-        levelCount += 1;
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    void ChangeSpriteLevel(int nomerLevel)
-    {
-        background.GetComponent<Image>().sprite = spriteBackground[nomerLevel];
-
-        for (int i = 0; i < imageButtonSelectObject.Length; i++)
-        {
-            imageButtonSelectObject[i].sprite = spriteLevel[nomerLevel].sprites[i];
         }
     }
     public void PauseGame()
@@ -193,7 +153,6 @@ public class HiddenObject : MonoBehaviour
 
         for (int i = 0; i < item.transform.childCount; i++)
         {
-            item.transform.GetChild(i).transform.localPosition = savePosition[levelCount].saveItemPos[randomSave].itemPos[i];
             item.transform.GetChild(i).gameObject.SetActive(true);
         }
     }
@@ -213,12 +172,6 @@ public class HiddenObject : MonoBehaviour
                 if (countItemFind >= 5)
                 {
                     GameWin();
-                    if (levelCount >= maxLevel)
-                    {
-                        buttonNext.interactable = false;
-
-                        levelCount = 0;
-                    }
                 }
                 //Destroy(EventSystem.current.currentSelectedGameObject.gameObject);
                 EventSystem.current.currentSelectedGameObject.gameObject.SetActive(false);

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CTF_LevelManager : MonoBehaviour
 {
+
     [SerializeField] private Button level1Button;
     [SerializeField] private Button level2Button;
     [SerializeField] private Button level3Button;
@@ -21,16 +22,30 @@ public class CTF_LevelManager : MonoBehaviour
     [SerializeField] private GameObject transitionToIn;
     [SerializeField] private Image transitionToInImg;
 
+    [Header("Confirm Play")]
+
+    [SerializeField] private Image starsImg;
+    [SerializeField] private Sprite [] starsSprites;
+    [SerializeField] private Image levelImg;
+    [SerializeField] private Sprite[] levelSprites;
+    [SerializeField] private Image animalImg;
+    [SerializeField] private Sprite[] animalSprites;
+    [SerializeField] private GameObject checkGameObject;
+    [SerializeField] private GameObject playConfirmGameObject;
+
     private string selectedAnimal;
     private string selectedLevel;
 
     private string buttonCode;
 
     private void Start()
-    {
+    {		
+		selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel", "1");
+		
+		checkStar();
+		
         // Assign button click events
         level1Button.onClick.AddListener(OnLevel1ButtonClick);
-
 
         if (PlayerPrefs.GetInt("CTF_Lvl1", 0) == 1) 
         {
@@ -64,6 +79,7 @@ public class CTF_LevelManager : MonoBehaviour
         backBtn.onClick.AddListener(GoBackToMiniGamesSelection);
 
         transitionToIn.SetActive(true);
+		
     }
 
     private void Update() 
@@ -74,8 +90,8 @@ public class CTF_LevelManager : MonoBehaviour
     private void checkIfTransitionIsDone() 
     {
 
-        bool achievedImgPositionOut = transitionToOutImg.rectTransform.anchoredPosition.x <= -1070.5f && transitionToOutImg.rectTransform.anchoredPosition.x >= -1071.5f;
-        bool achievedImgPositionIn = transitionToInImg.rectTransform.anchoredPosition.x <= -2790.5f && transitionToInImg.rectTransform.anchoredPosition.x >= -2791.5f;
+        bool achievedImgPositionOut = transitionToOutImg.color.a >= 0.9999 && transitionToOutImg.color.a <= 1.0001;
+        bool achievedImgPositionIn = transitionToInImg.color.a >= -0.0001 && transitionToInImg.color.a <= 0.0001;
 
         if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "levelButton") 
         {
@@ -93,39 +109,76 @@ public class CTF_LevelManager : MonoBehaviour
         }
     }
 
+    public void checkStar() 
+    { 
+
+        animalImg.sprite = animalSprites[int.Parse(selectedLevel)];
+
+        levelImg.sprite = levelSprites[int.Parse(selectedLevel)];
+
+        int currentStar = PlayerPrefs.GetInt("CTF_Lvl" + selectedLevel + "StarsCount", 0);
+
+        checkGameObject.SetActive(false);
+		
+		Debug.Log("Level: " + selectedLevel + "\n" + "currentStar: " + currentStar);
+		
+		switch(currentStar) 
+		{
+			case 0:
+				starsImg.sprite = starsSprites[0];
+				break;
+			case 1:
+				starsImg.sprite = starsSprites[1];
+				break;
+			case 2:
+				starsImg.sprite = starsSprites[2];
+				checkGameObject.SetActive(true);
+				break;
+			case 3:
+				starsImg.sprite = starsSprites[3];
+				checkGameObject.SetActive(true);
+				break;
+		}
+    }
+
     public void OnLevel1ButtonClick()
     {
         selectedAnimal = "Elephant";
         selectedLevel = "1";
-        LoadNextScene();
+        checkStar();
+        playConfirmGameObject.SetActive(true);
     }
 
     public void OnLevel2ButtonClick()
     {
         selectedAnimal = "Pigeon";
         selectedLevel = "2";
-        LoadNextScene();
+        checkStar();
+        playConfirmGameObject.SetActive(true);
     }
 
     public void OnLevel3ButtonClick()
     {
         selectedAnimal = "Koi";
         selectedLevel = "3";
-        LoadNextScene();
+        checkStar();
+        playConfirmGameObject.SetActive(true);
     }
 
     public void OnLevel4ButtonClick()
     {
         selectedAnimal = "Camel";
         selectedLevel = "4";
-        LoadNextScene();
+        checkStar();
+        playConfirmGameObject.SetActive(true);
     }
 
     public void OnLevel5ButtonClick()
     {
         selectedAnimal = "Crab";
         selectedLevel = "5";
-        LoadNextScene();
+        checkStar();
+        playConfirmGameObject.SetActive(true);
     }
 
     public void GoBackToMiniGamesSelection() 
@@ -134,13 +187,19 @@ public class CTF_LevelManager : MonoBehaviour
         transitionToOut.SetActive(true);
     }
 
-    private void LoadNextScene()
+    public void closeButtonFunction() 
+    {
+        playConfirmGameObject.SetActive(false);
+    }
+
+    public void LoadLevel()
     {
         // Pass the selected animal name to the next scene
         PlayerPrefs.SetString("CTF_SelectedAnimal", selectedAnimal);
         PlayerPrefs.SetString("CTF_SelectedLevel", selectedLevel);
         
         buttonCode = "levelButton";
+		playConfirmGameObject.SetActive(false);
         transitionToOut.SetActive(true);
     }
 }

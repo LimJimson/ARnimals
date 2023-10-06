@@ -67,6 +67,23 @@ public class animalLocks : MonoBehaviour
         isKoiUnlock = loaddata.isKoiUnlock;
         isCrabUnlock = loaddata.isCrabUnlock;
 
+
+        //CTF
+
+        isOctopusUnlock = loaddata.isOctopusUnlock;
+        isDeerUnlock = loaddata.isDeerUnlock;
+        isSeagullUnlock = loaddata.isSeagullUnlock;
+        isSharkUnlock = loaddata.isSharkUnlock;
+        isDuckUnlock = loaddata.isDuckUnlock;
+
+
+        //FTA
+
+        isLeopardUnlock = loaddata.isLeopardUnlock;
+        isPigeonUnlock = loaddata.isPigeonUnlock;
+        isPiranhaUnlock = loaddata.isPiranhaUnlock;
+        isBearUnlock = loaddata.isBearUnlock;
+        isOwlUnlock = loaddata.isOwlUnlock;
     }
 
     void lockAnimals()

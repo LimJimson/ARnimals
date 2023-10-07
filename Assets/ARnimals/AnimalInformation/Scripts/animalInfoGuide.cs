@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class animalInfoGuide : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class animalInfoGuide : MonoBehaviour
 
     public GameObject clickAnywherePos1;
     public GameObject clickAnywherePos2;
+
+    public GameObject videoPlayerGO;
 
     [Header("GUIDE POSITION 1")]
     public GameObject pos1_GO;
@@ -100,6 +103,9 @@ public class animalInfoGuide : MonoBehaviour
         _touchToNextAnimal_Info.setPageCtr(1);
         disableAllGuideGameObjects();
         _animalInfoGuide.SetActive(false);
+
+
+        videoPlayerGO.gameObject.SetActive(false);
         _realAnimalInfoGO.SetActive(false);
         _realMainAnimalInfo.SetActive(true);
 
@@ -164,6 +170,7 @@ public class animalInfoGuide : MonoBehaviour
         _realMainAnimalInfo.SetActive(true);
         _realAnimalInfoGO.SetActive(false);
 
+        videoPlayerGO.gameObject.SetActive(false);
         pos1_GO.SetActive(true);
         pos2_GO.SetActive(false);
         pos3_GO.SetActive(false);
@@ -324,6 +331,7 @@ public class animalInfoGuide : MonoBehaviour
             pos2_GO.SetActive(true);
             pos3_GO.SetActive(false);
 
+            videoPlayerGO.gameObject.SetActive(false);
             welcomeTxt.gameObject.SetActive(false);
             categorizeTxt.gameObject.SetActive(false);
             categorizeHighlight.SetActive(false);
@@ -372,7 +380,7 @@ public class animalInfoGuide : MonoBehaviour
             pos3_GO.SetActive(false);
 
             welcomeTxt.gameObject.SetActive(false);
-
+            videoPlayerGO.gameObject.SetActive(true);
             categorizeTxt.gameObject.SetActive(false);
             categorizeHighlight.SetActive(false);
 
@@ -671,6 +679,7 @@ public class animalInfoGuide : MonoBehaviour
             pos2_GO.SetActive(false);
             pos3_GO.SetActive(true);
 
+            videoPlayerGO.gameObject.SetActive(true);
             welcomeTxt.gameObject.SetActive(false);
             categorizeTxt.gameObject.SetActive(false);
             categorizeHighlight.SetActive(false);
@@ -721,7 +730,7 @@ public class animalInfoGuide : MonoBehaviour
             welcomeTxt.gameObject.SetActive(false);
             categorizeTxt.gameObject.SetActive(false);
             categorizeHighlight.SetActive(false);
-
+            videoPlayerGO.gameObject.SetActive(false);
             chooseAnimalTxt.gameObject.SetActive(false);
             chooseAnimalHighlight.SetActive(false);
 

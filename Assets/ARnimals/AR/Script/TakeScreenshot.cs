@@ -14,6 +14,7 @@ public class TakeScreenshot : MonoBehaviour {
 	{
         try
         {
+            StopAllCoroutines();
             StartCoroutine(TakeScreenshotAndSave());
         }
         catch

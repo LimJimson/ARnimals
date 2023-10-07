@@ -31,7 +31,7 @@ public class ARPlacement : MonoBehaviour
     int modelIndex;
 
     public Camera arCamera;
-    bool didAnimalSpawn = false;
+    public bool didAnimalSpawn = false;
 
     public GameObject limitAnimalTXT;
     public Animator limitAnimalTXTAnim;
@@ -86,6 +86,7 @@ public class ARPlacement : MonoBehaviour
     {
         countdownSpawnAnimal();
         countdownSpawnAdtnlAnimal();
+
     }
 
     private void OnEnable()
@@ -129,31 +130,31 @@ public class ARPlacement : MonoBehaviour
         Vector3 cameraPosition = Camera.main.transform.position;
         Quaternion cameraRotation = Camera.main.transform.rotation;
 
-        // Set the height below the camera where you want to spawn the object
         float spawnHeight = 0.5f;
-
-        // Set the distance in front of the camera where you want to spawn the object
         float spawnDistance = 3f;
 
-        // Calculate the center of the screen in viewport coordinates (0.5, 0.5)
         Vector3 screenCenter = new Vector3(0.5f, 0.5f, Camera.main.nearClipPlane);
 
-        // Calculate the spawn position based on the screen center
         spawnPosition = Camera.main.ViewportToWorldPoint(screenCenter);
 
-        // Adjust the spawn position by moving it downward by the specified height
         spawnPosition -= Vector3.up * spawnHeight;
 
-        // Move the spawn position forward by the specified distance
         spawnPosition += cameraRotation * Vector3.forward * spawnDistance;
     }
 
     float desiredRotationDegrees = 180.0f;
 
-    void destroyObject()
+    public void destroyObject()
     {
         Destroy(spawnedObject);
         didAnimalSpawn = false;
+
+        foreach (GameObject uiElement in GameObjectsToHide)
+        {
+            uiElement.SetActive(false);
+        }
+
+
     }
 
     public void spawnAnimal()

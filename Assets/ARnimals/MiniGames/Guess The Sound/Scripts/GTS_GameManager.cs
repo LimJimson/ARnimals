@@ -66,7 +66,7 @@ public class GTS_GameManager : MonoBehaviour
             if (audioManager.musicSource.isPlaying)
             {
                 audioManager.musicSource.Stop();
-                audioManager.playBGMMusic(audioManager.mainBG); // play GTS BGM
+                audioManager.playBGMMusic(audioManager.GTS_BGM); // play GTS BGM
             }
 
         }

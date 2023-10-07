@@ -9,8 +9,6 @@ namespace BrainCheck {
 		static AndroidJavaClass _class;
 		static AndroidJavaObject instance { get { return _class.GetStatic<AndroidJavaObject>("instance"); } }
 
-		
-
 		private static void SetupPlugin () {
 			if (_class == null) {
 				_class = new AndroidJavaClass ("mayankgupta.com.audioPlugin.ScreenRecorderPlugin");

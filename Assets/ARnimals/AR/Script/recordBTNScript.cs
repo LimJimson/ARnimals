@@ -10,11 +10,12 @@ using UnityEngine.Video;
 
 public class recordBTNScript : MonoBehaviour
 {
+    public ARPlacement _ARPlacementScript;
     public int startingFileIndex = 1;
     public GameObject VidPlayerImage;
     public GameObject RawImg;
     public VideoPlayer VidPlayer;
-    public Button play_pause_vid;
+    public Button play_pause_vid, nextBtn, prevBtn;
     private string[] videoFiles;
     public TMP_Text videoCount;
     public Sprite[] play_btn; 
@@ -28,6 +29,11 @@ public class recordBTNScript : MonoBehaviour
     public Button deleteBtn;
 
     public TMP_Text vidFileName;
+    public TMP_Text vidCurrDuration,vidTotDuration;
+
+
+    public GameObject stopRecordBtn;
+    public GameObject[] objectsToHide;
 
     void Start()
     {
@@ -40,38 +46,106 @@ public class recordBTNScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        #if UNITY_ANDROID && !UNITY_EDITOR
-            if (ScreenRecorderBridge.CheckIfRecordingInProgress() == true)
-            {
-                isRecording = true;
-                _txt.text = "Recording...";
-            }
-            else if (ScreenRecorderBridge.CheckIfRecordingInProgress() == false)
-            {
-                isRecording = false;
-            }
-        #endif
+        checkIfRecordingIsActive();
+        
     }
 
-    public void RecordButtonOnClick()
+    void checkIfRecordingIsActive()
+    {
+        if (ScreenRecorderBridge.CheckIfRecordingInProgress() == true)
+        {
+            isRecording = true;
+            _txt.gameObject.SetActive(true);
+
+            stopRecordBtn.SetActive(true);
+            StartCountdown();
+
+
+        }
+        else if (ScreenRecorderBridge.CheckIfRecordingInProgress() == false)
+        {
+            isRecording = false;
+            
+            stopRecordBtn.SetActive(false);
+
+        }
+
+        enable_disableGameObjects();
+    }
+
+    void enable_disableGameObjects()
+    {
+        if(!isRecording && _ARPlacementScript.didAnimalSpawn)
+        {
+            foreach (GameObject uiElement in objectsToHide)
+            {
+                uiElement.SetActive(true);
+            }
+        }
+        else if (isRecording && _ARPlacementScript.didAnimalSpawn)
+        {
+            foreach (GameObject uiElement in objectsToHide)
+            {
+                uiElement.SetActive(false);
+            }
+        }
+
+    }
+    public TMP_Text countdownTextRecord;
+    private float countdownTime;
+    private bool isCountingDown = false;
+
+    public void StartCountdown()
     {
         
-        if (!isRecording)
-        {
-            // Start the recording
-           
-            ScreenRecorderBridge.StartScreenRecording();
-        }
-        else
-        {
-            // Stop the recording
-            ScreenRecorderBridge.StopScreenRecording();
-            isRecording = false;
-            StartCoroutine(txtDelay());
-
-        }
+        isCountingDown = true;
     }
 
+    private void UpdateCountdownText()
+    {
+        // Calculate minutes and seconds
+        int minutes = Mathf.FloorToInt(countdownTime / 60);
+        int seconds = Mathf.FloorToInt(countdownTime % 60);
+
+        // Display the countdown time in the "00:00" format
+        countdownTextRecord.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    private void Update()
+    {
+
+        if (VidPlayer.isPlaying)
+        {
+            SetCurrentTimeUI();
+            
+        }
+        if (VidPlayer.isPrepared)
+        {
+            SetTotalTimeUI();
+        }
+        if (isCountingDown)
+        {
+            countdownTime -= Time.deltaTime;
+
+            countdownTime = Mathf.Max(countdownTime, 0.0f);
+
+            UpdateCountdownText();
+
+            if (countdownTime == 0.0f)
+            {
+                isCountingDown = false;
+                stopRecord();
+            }
+        }
+    }
+    public void RecordButtonOnClick()
+    {
+        countdownTime = 15.0f;
+        StopAllCoroutines();
+        ScreenRecorderBridge.StartScreenRecording();
+    }
+
+    
     public void stopRecord(){
         if(isRecording){
         ScreenRecorderBridge.StopScreenRecording();
@@ -80,8 +154,10 @@ public class recordBTNScript : MonoBehaviour
         }
     }
     string videoFileName;
+
     public void getVideoPath()
     {
+        _ARPlacementScript.destroyObject();
         DirPath = "/storage/emulated/0/Movies/";
         if (Directory.Exists(DirPath + "ARnimals"))
         {
@@ -98,6 +174,7 @@ public class recordBTNScript : MonoBehaviour
             
 
             GetVideos();
+
         }
         catch
         {
@@ -106,6 +183,9 @@ public class recordBTNScript : MonoBehaviour
         }
 
     }
+
+    public GameObject vidDuration;
+    public TMP_Text slashTxt;
 
     public void GetVideos()
     {
@@ -116,21 +196,60 @@ public class recordBTNScript : MonoBehaviour
             {
                 VidPlayer.Stop();
             }
+
+            play_pause_vid.gameObject.SetActive(true);
+            nextBtn.gameObject.SetActive(true);
+            prevBtn.gameObject.SetActive(true);
             videoCount.gameObject.SetActive(true);
+            slashTxt.text = "/";
             VidPlayer.gameObject.SetActive(true);
-            vidFileName.text = videoFileName;
+            vidDuration.SetActive(true);
+            vidFileName.gameObject.SetActive(true);
             RawImg.SetActive(true);
+
+            vidFileName.text = videoFileName;
             VidPlayer.url = videoFiles[currentVideoIndex];
             videoCount.text = currentVideoIndex + 1 + "/" + videoFiles.Length.ToString();
+            VidPlayer.Prepare();
+
+            SetCurrentTimeUI();
             VidPlayer.Play();
             VidPlayer.Pause();
         }
         else
         {
+            play_pause_vid.gameObject.SetActive(false);
+            nextBtn.gameObject.SetActive(false);
+            prevBtn.gameObject.SetActive(false);
+            vidDuration.SetActive(false);
+            vidFileName.gameObject.SetActive(false);
             videoCount.gameObject.SetActive(false);
             VidPlayer.gameObject.SetActive(false);
             RawImg.SetActive(false);
         }
+    }
+
+    void SetCurrentTimeUI()
+    {
+        string curMinutes = Mathf.Floor((int)VidPlayer.time / 60).ToString("00");
+        string curSeconds = ((int)VidPlayer.time % 60).ToString("00");
+
+
+        vidCurrDuration.text = curMinutes + ":"+ curSeconds;
+    }
+
+
+    void SetTotalTimeUI()
+    {
+        double durationInSeconds = VidPlayer.frameCount / VidPlayer.frameRate;
+        System.TimeSpan VideoUrlLength = System.TimeSpan.FromSeconds(durationInSeconds);
+        int minutes = Mathf.FloorToInt((float)durationInSeconds / 60);
+        int seconds = Mathf.FloorToInt((float)durationInSeconds % 60);
+
+        string formattedTime = minutes.ToString("00") + ":" + seconds.ToString("00");
+
+        vidTotDuration.text = formattedTime;
+
     }
 
     public void playVideo()
@@ -141,6 +260,7 @@ public class recordBTNScript : MonoBehaviour
             {
                 play_pause_vid.image.sprite = play_btn[0];
                 VidPlayer.Play();
+
             }
             else
             {
@@ -168,7 +288,6 @@ public class recordBTNScript : MonoBehaviour
         play_pause_vid.image.sprite = play_btn[1];
         GetVideos();
 
-        
 
     }
     public void PlayPreviousVideo()
@@ -190,10 +309,14 @@ public class recordBTNScript : MonoBehaviour
         _txt.text = "Saved to Gallery!";
         yield return new WaitForSeconds(2f);
         _txt.text = "";
+        _txt.gameObject.SetActive(false);
 
     }
 
-
+    public void setVidIndex()
+    {
+        currentVideoIndex = 1;
+    }
     //delete video script
 
     //public void DeleteVideo()

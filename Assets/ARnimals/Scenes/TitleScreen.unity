@@ -582,7 +582,8 @@ MonoBehaviour:
   sfxSource: {fileID: 1987842474}
   guideSource: {fileID: 1857730204}
   mainBG: {fileID: 8300000, guid: f332ca9804e324a4b9123c020a306c15, type: 3}
-  touchSound: {fileID: 8300000, guid: d03bc7c43a22613478242dd275353567, type: 3}
+  GTS_BGM: {fileID: 8300000, guid: c248d58a45c6a784e93ffd93a103b704, type: 3}
+  touchSound: {fileID: 8300000, guid: 5f92a3d4ca52e9e4e8dd2003d049ce58, type: 3}
   GuideSelector: []
   MainMenu: []
   ModeSelect: []
@@ -2023,6 +2024,7 @@ MonoBehaviour:
     AnimalInfoTutorialDone: 0
     AnimalSelectTutorialDone: 0
     ARExpTutorialDone: 0
+    animalInfoGuide: 0
     GTS_lvl1_star: 0
     GTS_lvl2_star: 0
     GTS_lvl3_star: 0
@@ -4971,7 +4973,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 25
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -6508,6 +6510,7 @@ MonoBehaviour:
     AnimalInfoTutorialDone: 0
     AnimalSelectTutorialDone: 0
     ARExpTutorialDone: 0
+    animalInfoGuide: 0
     GTS_lvl1_star: 0
     GTS_lvl2_star: 0
     GTS_lvl3_star: 0
@@ -6581,6 +6584,7 @@ MonoBehaviour:
     AnimalInfoTutorialDone: 0
     AnimalSelectTutorialDone: 0
     ARExpTutorialDone: 0
+    animalInfoGuide: 0
     GTS_lvl1_star: 0
     GTS_lvl2_star: 0
     GTS_lvl3_star: 0
@@ -6797,7 +6801,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c1c7e7be4882d694eb0114d893dd3191, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0

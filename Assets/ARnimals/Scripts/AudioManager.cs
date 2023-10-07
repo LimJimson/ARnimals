@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("BGM")]
     public AudioClip mainBG;
+    public AudioClip GTS_BGM;
 
     [Header("SFX")]
     public AudioClip touchSound;
@@ -53,16 +54,38 @@ public class AudioManager : MonoBehaviour
 
     void checkPlayerTouch()
     {
+
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
-
-            if (touch.phase == TouchPhase.Began)
+            // Loop through all active touches
+            for (int i = 0; i < Input.touchCount; i++)
             {
-                sfxSource.Stop();
-                PlaySFX(touchSound);
+                Touch touch = Input.GetTouch(i);
+
+                // Check if the touch phase is "began" (when the touch starts)
+                if (touch.phase == TouchPhase.Began)
+                {
+                    // Play the touch sound effect if the audio source is not currently playing
+                    if (sfxSource != null && !sfxSource.isPlaying)
+                    {
+                        PlaySFX(touchSound);
+                    }
+                    // If audio source is already playing, delay the next touch event
+                    else if (sfxSource != null && sfxSource.isPlaying)
+                    {
+                        StartCoroutine(DelayTouch());
+                    }
+                }
             }
         }
+    }
+
+    private System.Collections.IEnumerator DelayTouch()
+    {
+        // Wait for the duration of the sound effect
+        yield return new WaitForSeconds(sfxSource.clip.length);
+
+        // Allow the next touch event to trigger the sound effect
     }
 
     public void MusicVolume(float volume)

@@ -9,6 +9,7 @@ public class CTF_GameStartManager : MonoBehaviour
     [SerializeField] private GameObject[] foodSpawners;
     [SerializeField] private GameObject timerManager;
     [SerializeField] private GameObject clickToStart; 
+	[SerializeField] private AudioSource bgMusic;
 
     [SerializeField] private bool gameStarted = false;
 
@@ -79,6 +80,7 @@ public class CTF_GameStartManager : MonoBehaviour
 
             gameStarted = true; // Toggle the gameStarted flag
             EnableFoodSpawnersAndScoreHealthCanvas();
+			bgMusic.Play();
         }
     }
 }

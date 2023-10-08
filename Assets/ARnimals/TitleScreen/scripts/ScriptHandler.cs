@@ -65,7 +65,9 @@ public class ScriptHandler : MonoBehaviour
 
         if (!string.IsNullOrEmpty(name))
         {
+
             StartCoroutine(WaitForAnimationFinish());
+
             ResetGameBtn.gameObject.SetActive(true);
             changeNameBtn.gameObject.SetActive(true);
             // If the name is not null or empty, hide the name text field and show the player name text

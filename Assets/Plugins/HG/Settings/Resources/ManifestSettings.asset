@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: ManifestSettings
   m_EditorClassIdentifier: 
   setttings:
-    _keys: []
-    _values: []
+    _keys:
+    - TestingEnabled
+    _values:
+    - False

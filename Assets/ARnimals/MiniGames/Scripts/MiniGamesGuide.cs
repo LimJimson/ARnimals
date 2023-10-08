@@ -102,7 +102,6 @@ public class MiniGamesGuide : MonoBehaviour
     void disableAllGuideGameObjects()
     {
 
-
         welcomeTxt.gameObject.SetActive(false);
 
         MG1Txt.gameObject.SetActive(false);

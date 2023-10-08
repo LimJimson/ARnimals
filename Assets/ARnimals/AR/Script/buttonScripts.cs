@@ -94,9 +94,12 @@ public class buttonScripts : MonoBehaviour
         GalleryImgUI.SetActive(false);
         GalleryUI.SetActive(true);
     }
+
+    public RenderTexture renderTextureVid;
     public void showVidGallery()
     {
         GalleryUI.SetActive(false);
+        renderTextureVid.Release();
         GalleryVidUI.SetActive(true);
     }
 

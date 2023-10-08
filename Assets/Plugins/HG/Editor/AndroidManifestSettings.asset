@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0898300d8e6741f5b0ee98b0605623c9, type: 3}
   m_Name: AndroidManifestSettings
   m_EditorClassIdentifier: 
-  _manifests: []
+  _manifests:
+  - Path: Assets/Plugins/Android/AndroidManifest.xml

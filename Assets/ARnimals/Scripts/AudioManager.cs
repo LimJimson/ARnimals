@@ -29,7 +29,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] MinigameSelect;
 
 
-
+    private bool canPlayTouchSound = true;
 
     // Start is called before the first frame update
     private void Awake()
@@ -63,7 +63,6 @@ public class AudioManager : MonoBehaviour
 
     void checkPlayerTouch()
     {
-
         if (Input.touchCount > 0)
         {
             // Loop through all active touches
@@ -74,27 +73,27 @@ public class AudioManager : MonoBehaviour
                 // Check if the touch phase is "began" (when the touch starts)
                 if (touch.phase == TouchPhase.Began)
                 {
-                    // Play the touch sound effect if the audio source is not currently playing
-                    if (tapSource != null && !tapSource.isPlaying)
+                    // Play the touch sound effect if allowed
+                    if (tapSource != null && !tapSource.isPlaying && canPlayTouchSound)
                     {
                         PlayTap(touchSound);
-                    }
-                    // If audio source is already playing, delay the next touch event
-                    else if (tapSource != null && tapSource.isPlaying)
-                    {
-                        StartCoroutine(DelayTouch());
+
+                        // Prevent the next touch from playing the sound effect immediately
+                        canPlayTouchSound = false;
+                        StartCoroutine(EnableTouchSound());
                     }
                 }
             }
         }
     }
 
-    private System.Collections.IEnumerator DelayTouch()
+    private System.Collections.IEnumerator EnableTouchSound()
     {
-        // Wait for the duration of the sound effect
-        yield return new WaitForSeconds(tapSource.clip.length);
+        // Wait for a short duration before allowing the touch sound again
+        yield return new WaitForSeconds(0.5f);
 
         // Allow the next touch event to trigger the sound effect
+        canPlayTouchSound = true;
     }
 
     public void MusicVolume(float volume)

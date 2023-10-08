@@ -68,6 +68,10 @@ public class GTS_GameManager : MonoBehaviour
                 audioManager.musicSource.Stop();
                 audioManager.playBGMMusic(audioManager.GTS_BGM); // play GTS BGM
             }
+            else
+            {
+                audioManager.playBGMMusic(audioManager.GTS_BGM);
+            }
 
         }
         catch
@@ -105,17 +109,6 @@ public class GTS_GameManager : MonoBehaviour
         checkAnimal();
         randomizeChoiceBtnsAndPlaySndBtns();
 
-    }
-    private void OnDisable()
-    {
-        try
-        {
-            audioManager.musicSource.Stop();
-        }
-        catch
-        {
-
-        }
     }
     public void showCurrentLevel()
     {
@@ -243,7 +236,8 @@ public class GTS_GameManager : MonoBehaviour
 
     void checkStar()
     {
-        
+        audioManager.PlaySFX(audioManager.winLevel);
+        audioManager.musicSource.Stop();
         winLevel.SetActive(true);
         lvlCompleted.text = "LEVEL <color=yellow><b>" + levelSelected.ToString()+ "</b></color> COMPLETED!";
 
@@ -586,6 +580,7 @@ public class GTS_GameManager : MonoBehaviour
     public void correctAnswer()
     {
         hideConfirmCorrect();
+        audioManager.PlaySFX(audioManager.correctAnswer);
         stopSound();
         audioSrc.PlayOneShot(AnimalSounds[animalIndex]);
         StartCoroutine(_showFacts());
@@ -613,6 +608,9 @@ public class GTS_GameManager : MonoBehaviour
         hideConfirmWrong();
         life -=1;
         lifeChecker();
+
+
+        audioManager.PlaySFX(audioManager.wrongAnswer);
 
     }
     
@@ -650,6 +648,9 @@ public class GTS_GameManager : MonoBehaviour
     void gameOverUI()
     {
         gameOver.SetActive(true);
+        audioManager.PlaySFX(audioManager.loseLevel);
+        audioManager.musicSource.Stop();
+
         if (guide_chosen == "boy_guide")
         {
             boy_guide_gameOver.SetActive(true);
@@ -685,6 +686,7 @@ public class GTS_GameManager : MonoBehaviour
 
     public void goToAnimalInfo()
     {
+        audioManager.musicSource.Stop();
         StateNameController.failedAnimal = animalIndex;
         StateNameController.isGTSExploreClicked = true;
         SceneManager.LoadScene("Animal_Information");
@@ -726,6 +728,7 @@ public class GTS_GameManager : MonoBehaviour
 
     public void quitLevel()
     {
+        audioManager.musicSource.Stop();
         SceneManager.LoadScene("GTAFS_lvlSelect");
     }
 

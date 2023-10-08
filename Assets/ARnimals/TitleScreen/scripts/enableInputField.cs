@@ -22,10 +22,13 @@ public class enableInputField : MonoBehaviour
     {
         Debug.Log("StartAnimationAndEnableButton method called!");
         // Set the animation trigger to start the animation
-        animator.SetTrigger("AnimationStart");
+        animator.SetTrigger("AnimationStart"); 
+        
 
         // Start a coroutine to wait for the animation to finish
+
         StartCoroutine(WaitForAnimationFinish());
+
     }
 
     IEnumerator WaitForAnimationFinish()
@@ -37,6 +40,7 @@ public class enableInputField : MonoBehaviour
         {
             yield return null;
         }
+
 
         Debug.Log("Animation has finished!");
         // Enable the button after the animation is finished

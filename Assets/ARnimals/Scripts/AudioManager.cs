@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     [Header("Audio Source")]
     public AudioSource musicSource;
     public AudioSource sfxSource;
+    public AudioSource tapSource;
     public AudioSource guideSource;
 
     [Header("BGM")]
@@ -15,6 +16,10 @@ public class AudioManager : MonoBehaviour
 
     [Header("SFX")]
     public AudioClip touchSound;
+    public AudioClip correctAnswer;
+    public AudioClip wrongAnswer;
+    public AudioClip winLevel;
+    public AudioClip loseLevel;
 
     [Header("GUIDE")]
     public AudioClip[] GuideSelector;
@@ -51,6 +56,10 @@ public class AudioManager : MonoBehaviour
         sfxSource.PlayOneShot(clip); 
     }
 
+    public void PlayTap(AudioClip clip)
+    {
+        tapSource.PlayOneShot(clip);
+    }
 
     void checkPlayerTouch()
     {
@@ -66,12 +75,12 @@ public class AudioManager : MonoBehaviour
                 if (touch.phase == TouchPhase.Began)
                 {
                     // Play the touch sound effect if the audio source is not currently playing
-                    if (sfxSource != null && !sfxSource.isPlaying)
+                    if (tapSource != null && !tapSource.isPlaying)
                     {
-                        PlaySFX(touchSound);
+                        PlayTap(touchSound);
                     }
                     // If audio source is already playing, delay the next touch event
-                    else if (sfxSource != null && sfxSource.isPlaying)
+                    else if (tapSource != null && tapSource.isPlaying)
                     {
                         StartCoroutine(DelayTouch());
                     }
@@ -83,7 +92,7 @@ public class AudioManager : MonoBehaviour
     private System.Collections.IEnumerator DelayTouch()
     {
         // Wait for the duration of the sound effect
-        yield return new WaitForSeconds(sfxSource.clip.length);
+        yield return new WaitForSeconds(tapSource.clip.length);
 
         // Allow the next touch event to trigger the sound effect
     }

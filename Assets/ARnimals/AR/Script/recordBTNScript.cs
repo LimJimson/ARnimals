@@ -55,17 +55,15 @@ public class recordBTNScript : MonoBehaviour
         if (ScreenRecorderBridge.CheckIfRecordingInProgress() == true)
         {
             isRecording = true;
-            _txt.gameObject.SetActive(true);
-
+            
+            
             stopRecordBtn.SetActive(true);
             StartCountdown();
-
-
         }
         else if (ScreenRecorderBridge.CheckIfRecordingInProgress() == false)
         {
-            isRecording = false;
             
+            isRecording = false;
             stopRecordBtn.SetActive(false);
 
         }
@@ -141,6 +139,7 @@ public class recordBTNScript : MonoBehaviour
     public void RecordButtonOnClick()
     {
         countdownTime = 15.0f;
+        _txt.gameObject.SetActive(false);
         StopAllCoroutines();
         ScreenRecorderBridge.StartScreenRecording();
     }
@@ -149,6 +148,7 @@ public class recordBTNScript : MonoBehaviour
     public void stopRecord(){
         if(isRecording){
         ScreenRecorderBridge.StopScreenRecording();
+        _txt.gameObject.SetActive(true);
         isRecording = false;
         StartCoroutine(txtDelay());
         }
@@ -174,7 +174,7 @@ public class recordBTNScript : MonoBehaviour
             
 
             GetVideos();
-
+            
         }
         catch
         {
@@ -203,7 +203,6 @@ public class recordBTNScript : MonoBehaviour
             videoCount.gameObject.SetActive(true);
             slashTxt.text = "/";
             VidPlayer.gameObject.SetActive(true);
-            vidDuration.SetActive(true);
             vidFileName.gameObject.SetActive(true);
             RawImg.SetActive(true);
 
@@ -212,8 +211,10 @@ public class recordBTNScript : MonoBehaviour
             videoCount.text = currentVideoIndex + 1 + "/" + videoFiles.Length.ToString();
             VidPlayer.Prepare();
 
-            SetCurrentTimeUI();
+            
             VidPlayer.Play();
+            Invoke("SetTotalTimeUI", 0.5f);
+            Invoke("SetCurrentTimeUI",0.5f);
             VidPlayer.Pause();
         }
         else
@@ -260,7 +261,7 @@ public class recordBTNScript : MonoBehaviour
             {
                 play_pause_vid.image.sprite = play_btn[0];
                 VidPlayer.Play();
-
+                vidDuration.SetActive(true);
             }
             else
             {
@@ -285,10 +286,9 @@ public class recordBTNScript : MonoBehaviour
         {
             currentVideoIndex = 0; // Loop back to the first video
         }
+        vidDuration.SetActive(false);
         play_pause_vid.image.sprite = play_btn[1];
         GetVideos();
-
-
     }
     public void PlayPreviousVideo()
     {
@@ -300,7 +300,7 @@ public class recordBTNScript : MonoBehaviour
 
             currentVideoIndex = videoFiles.Length - 1; // Wrap around to the last video
         }
-        
+        vidDuration.SetActive(false);
         play_pause_vid.image.sprite = play_btn[1];
         GetVideos();
     }
@@ -315,7 +315,8 @@ public class recordBTNScript : MonoBehaviour
 
     public void setVidIndex()
     {
-        currentVideoIndex = 1;
+        currentVideoIndex = 0;
+        GetVideos();
     }
     //delete video script
 
@@ -349,7 +350,6 @@ public class recordBTNScript : MonoBehaviour
     //        StartCoroutine(showTextNoVid());
     //    }
     //    GetVideos();
-
     //}
 
     //IEnumerator showTextNoVid()

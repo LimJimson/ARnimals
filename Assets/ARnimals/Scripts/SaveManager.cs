@@ -38,6 +38,9 @@ public static class SaveManager
             existingSO.AnimalSelectTutorialDone = so.AnimalSelectTutorialDone;
             existingSO.ARExpTutorialDone = so.ARExpTutorialDone;
             existingSO.animalInfoGuide = so.animalInfoGuide;
+            existingSO.mainMenuSettingsGuide = so.mainMenuSettingsGuide;
+
+            //GTS Star
             existingSO.GTS_lvl1_star = so.GTS_lvl1_star;
             existingSO.GTS_lvl2_star = so.GTS_lvl2_star;
             existingSO.GTS_lvl3_star = so.GTS_lvl3_star;

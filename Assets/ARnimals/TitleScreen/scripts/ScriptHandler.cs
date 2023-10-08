@@ -59,9 +59,11 @@ public class ScriptHandler : MonoBehaviour
         StateNameController.animalSelectGuide =soScript.AnimalSelectTutorialDone;
         StateNameController.ARExperienceGuide =soScript.ARExpTutorialDone;
         StateNameController.miniGamesSelectGuide = soScript.MiniGamesTutorialDone;
+        StateNameController.mainMenuSettingsGuide = soScript.mainMenuSettingsGuide;
         StateNameController.animalInfoGuide = soScript.animalInfoGuide;
         StateNameController.player_name = name;
         StateNameController.guide_chosen = guideChosen;
+        
 
         if (!string.IsNullOrEmpty(name))
         {

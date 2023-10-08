@@ -111,7 +111,6 @@ public class CTF_GameManager : MonoBehaviour
         StartCoroutine(showTransitionAfterDelay());
 		checkMusicVolume();
 		checkSoundFXVolume();
-		Debug.Log("BG PlayMusic");
     }
 
     private void Update() 
@@ -661,7 +660,6 @@ public class CTF_GameManager : MonoBehaviour
         if (transitionToIn.activeSelf && achievedImgPositionIn) 
         {
             transitionToIn.SetActive(false);
-			bgMusic.Play();
         }
     }
 

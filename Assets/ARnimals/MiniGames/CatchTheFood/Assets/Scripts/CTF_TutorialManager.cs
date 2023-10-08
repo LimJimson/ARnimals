@@ -125,11 +125,11 @@ public class CTF_TutorialManager : MonoBehaviour
 
         if (guideChosen == "boy_guide") 
         {
-            showGuide(0, 0, "Lorem", boyGuideForMenus);
+            showGuide(0, 0, "Patrick", boyGuideForMenus);
         }
         else if (guideChosen == "girl_guide") 
         {
-            showGuide(1, 1, "Ipsum", girlGuideForMenus);
+            showGuide(1, 1, "Gigi", girlGuideForMenus);
         }
     }
 

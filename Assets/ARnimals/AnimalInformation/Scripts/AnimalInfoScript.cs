@@ -8,6 +8,10 @@ using UnityEngine.Video;
 
 public class AnimalInfoScript : MonoBehaviour
 {
+	public VideoPlayerController videoPlayerController;
+	public GameObject toggleHideButton;
+	public GameObject[] videoPlayerButtons;
+	
     public Sprite[] animalImgsSprite;
     public string[] animalNames;
     public VideoClip[] animalVids;
@@ -87,6 +91,7 @@ public class AnimalInfoScript : MonoBehaviour
     {
         checkIfVideoIsPlaying();
         checkIfPlayerIsPlaying();
+		DisableToggleHideButtonIfNotFullScreen();
     }
     void checkIfGTS_ExploreBtnClicked()
     {
@@ -276,4 +281,101 @@ public class AnimalInfoScript : MonoBehaviour
         }
         AnimalInfoCanvas.SetActive(true);
     }
+	
+	private bool buttonHidden = false;
+	private float hideDelay = 5f;
+	private bool isDelayTimerRunning = false;
+	private Coroutine hideCoroutine;
+
+	public void ToggleHideButtonsIfFullScreen(int code)
+	{
+		if (code == 1)
+		{
+			buttonHidden = true;
+			toggleHideButton.SetActive(true);
+		}
+		
+		if (videoPlayerController.IsFullScreen)
+		{
+			if (!buttonHidden)
+			{
+				HideVideoPlayerButtons();
+				StopHideCoroutine();
+			}
+			else if (buttonHidden)
+			{
+				ShowVideoPlayerButtons();
+				if (!isDelayTimerRunning)
+				{
+					StartHideCoroutine();
+				}
+			}
+		}
+		else
+		{
+			ShowVideoPlayerButtons();
+		}
+		Debug.Log("Delay Running: " + isDelayTimerRunning);
+		Debug.Log(buttonHidden);
+	}
+
+	private void HideVideoPlayerButtons()
+	{
+		foreach (var button in videoPlayerButtons)
+		{
+			button.SetActive(false);
+		}
+		buttonHidden = true;
+	}
+
+	private void ShowVideoPlayerButtons()
+	{
+		foreach (var button in videoPlayerButtons)
+		{
+			button.SetActive(true);
+		}
+		buttonHidden = false;
+	}
+
+	private void DisableToggleHideButtonIfNotFullScreen()
+	{
+		if (!videoPlayerController.IsFullScreen)
+		{
+			toggleHideButton.SetActive(false);
+		}
+	}
+
+	private void StartHideCoroutine()
+	{
+		if (hideCoroutine != null)
+		{
+			StopCoroutine(hideCoroutine);
+		}
+		hideCoroutine = StartCoroutine(HideButtonsAfterDelay());
+	}
+
+	private void StopHideCoroutine()
+	{
+		if (hideCoroutine != null)
+		{
+			StopCoroutine(hideCoroutine);
+		}
+		isDelayTimerRunning = false;
+	}
+
+	private IEnumerator HideButtonsAfterDelay()
+	{
+		isDelayTimerRunning = true;
+		yield return new WaitForSeconds(hideDelay);
+
+		if (videoPlayerController.IsFullScreen)
+		{
+			HideVideoPlayerButtons();
+		}
+		else
+		{
+			ShowVideoPlayerButtons();
+		}
+		isDelayTimerRunning = false;
+	}
 }

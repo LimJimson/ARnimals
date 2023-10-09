@@ -12,6 +12,11 @@ public class VideoPlayerController : MonoBehaviour
     private bool isFullscreen = false;
     public float fullscreenScale = 0.8f;
     public GameObject referenceCanvas; 
+	
+	public bool IsFullScreen 
+	{
+		get {return isFullscreen; } set { isFullscreen = value; }
+	}
 
     private void Start()
     {
@@ -37,6 +42,8 @@ public class VideoPlayerController : MonoBehaviour
         }
 
         isFullscreen = !isFullscreen;
+		
+		Debug.Log("In Full Screen: " + isFullscreen);
     }
 }
 

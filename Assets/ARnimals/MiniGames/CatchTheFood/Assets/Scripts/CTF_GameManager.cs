@@ -646,13 +646,11 @@ public class CTF_GameManager : MonoBehaviour
 
         if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "quitButton") 
         {
-			bgMusic.UnPause();
             pauseManager.ResumeGame();
             SceneManager.LoadScene("CTF_LevelSelector");
         }
         else if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "restartButton")
         {
-			bgMusic.UnPause();
             pauseManager.ResumeGame();
             SceneManager.LoadScene("CTF_Game");
         }

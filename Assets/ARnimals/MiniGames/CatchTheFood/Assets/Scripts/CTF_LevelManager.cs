@@ -33,6 +33,8 @@ public class CTF_LevelManager : MonoBehaviour
     [SerializeField] private GameObject checkGameObject;
     [SerializeField] private GameObject playConfirmGameObject;
 
+    AudioManager audioManager;
+
     private string selectedAnimal;
     private string selectedLevel;
 
@@ -41,13 +43,42 @@ public class CTF_LevelManager : MonoBehaviour
     private void Start()
     {		
 		selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel", "1");
-		
+		checkIfLevelIsUnlocked();
 		checkStar();
+        transitionToIn.SetActive(true);
 		
-        // Assign button click events
-        level1Button.onClick.AddListener(OnLevel1ButtonClick);
+		try
+		{
+			audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+			if (audioManager.musicSource.isPlaying)
+			{
 
-        if (PlayerPrefs.GetInt("CTF_Lvl1", 0) == 1) 
+			}
+			else
+			{
+				audioManager.playBGMMusic(audioManager.mainBG);
+			}
+		}
+		catch
+		{
+			Debug.Log("No AudioManager");
+		}
+		
+    }
+
+    private void Update() 
+    {
+        checkIfTransitionIsDone();
+    }
+	
+	private void checkIfLevelIsUnlocked() 
+	{
+		
+		 // Assign button click events
+        level1Button.onClick.AddListener(OnLevel1ButtonClick);
+        backBtn.onClick.AddListener(GoBackToMiniGamesSelection);
+		
+		if (PlayerPrefs.GetInt("CTF_Lvl1", 0) == 1) 
         {
             locks[0].SetActive(false);
             level2Button.onClick.AddListener(OnLevel2ButtonClick);
@@ -75,17 +106,7 @@ public class CTF_LevelManager : MonoBehaviour
         {
 
         }
-
-        backBtn.onClick.AddListener(GoBackToMiniGamesSelection);
-
-        transitionToIn.SetActive(true);
-		
-    }
-
-    private void Update() 
-    {
-        checkIfTransitionIsDone();
-    }
+	}
 
     private void checkIfTransitionIsDone() 
     {
@@ -194,6 +215,15 @@ public class CTF_LevelManager : MonoBehaviour
 
     public void LoadLevel()
     {
+		
+		try 
+		{
+			audioManager.musicSource.Stop();
+		} 
+		catch 
+		{
+			
+		}
         // Pass the selected animal name to the next scene
         PlayerPrefs.SetString("CTF_SelectedAnimal", selectedAnimal);
         PlayerPrefs.SetString("CTF_SelectedLevel", selectedLevel);

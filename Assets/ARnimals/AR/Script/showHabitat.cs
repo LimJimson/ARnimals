@@ -18,7 +18,7 @@ public class showHabitat : MonoBehaviour
     public ARCameraBackground ARCameraBGScript;
 
     public GameObject skyBox;
-
+    AudioManager AudioManager;
     List<int> forestAnimals = new List<int>{0,1,5,6,8, 12, 15, 17,18};
     List<int> underWaterAnimals = new List<int>{3,11,9,13,16};
     List<int> SavannahAnimals = new List<int>{7,2,4,10,14,19};
@@ -27,10 +27,58 @@ public class showHabitat : MonoBehaviour
         modelIndex = StateNameController.animalIndexChosen;
         
      }
+    private void Start()
+    {
+        try
+        {
+            AudioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+            playEnvironmentBGM();
+        }        
+        catch
+        {
+            Debug.Log("No AudioManager");
+        }
+
+
+    }
+    public void playEnvironmentBGM()
+    {
+        if (AudioManager.musicSource.isPlaying)
+        {
+            AudioManager.musicSource.Stop();
+            if (forestAnimals.Contains(modelIndex))
+            {
+                AudioManager.playBGMMusic(AudioManager.ForestHabitat_BGM);
+            }
+            else if (underWaterAnimals.Contains(modelIndex))
+            {
+                AudioManager.playBGMMusic(AudioManager.UnderwaterHabitat_BGM);
+            }
+            else if (SavannahAnimals.Contains(modelIndex))
+            {
+                AudioManager.playBGMMusic(AudioManager.SavannahHabitat_BGM);
+            }
+        }
+    }
     private void Update()
     {
         countdownHabitat();
         
+    }
+
+    public void PlayMainBGM()
+    {
+        AudioManager.musicSource.Stop();
+        AudioManager.playBGMMusic(AudioManager.mainBG);
+    }
+
+    public void pauseMainBGM()
+    {
+        AudioManager.musicSource.Pause();
+    }
+    public void unPauseMainBGM()
+    {
+        AudioManager.musicSource.UnPause();
     }
 
     public TMP_Text timerHabitat;
@@ -93,7 +141,6 @@ public class showHabitat : MonoBehaviour
             //ARCameraBGScript.enabled = false;
             if (forestAnimals.Contains(modelIndex))
             {
-
                 sceneLighting.SetActive(true);
                 Forest.SetActive(true);
                 Underwater.SetActive(false);

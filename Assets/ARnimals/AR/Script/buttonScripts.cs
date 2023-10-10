@@ -9,7 +9,8 @@ public class buttonScripts : MonoBehaviour
 {
 
     bool showUI = true;
-
+    public ARPlacement ARPlacementScript;
+    public showHabitat _showHabitatScript;
     public GameObject MainUI;
     public GameObject OptionsUI;
     public GameObject GalleryImgUI;
@@ -107,6 +108,7 @@ public class buttonScripts : MonoBehaviour
     {
         GalleryVidUI.SetActive(false);
         GalleryUI.SetActive(true);
+        _showHabitatScript.unPauseMainBGM();
     }
 
     public void showGallerySelectionUI()
@@ -114,10 +116,12 @@ public class buttonScripts : MonoBehaviour
         GalleryVidUI.SetActive(false);
         GalleryImgUI.SetActive(false);
         GalleryUI.SetActive(true);
+        ARPlacementScript.resetTimerSpawnAnimal();
     }
     public void hideGallerySelectionUI()
     {
         GalleryUI.SetActive(false);
+        _showHabitatScript.playEnvironmentBGM();
     }
     public void show_hide_UI()
     {

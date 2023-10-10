@@ -31,7 +31,7 @@ public class AnimalInfoScript : MonoBehaviour
     public int chosenAnimalIndex;
     bool isExploreBtnClicked;
     AudioManager audioManager;
-
+    public GameObject backAndGuideBtns;
 
     private void Start()
     {
@@ -153,6 +153,7 @@ public class AnimalInfoScript : MonoBehaviour
     {
         MainCanvas.SetActive(true);
         AnimalInfoCanvas.SetActive(false);
+        backAndGuideBtns.SetActive(true);
         animalSndSrc.Stop();
         vidRenderTexture.Release();
         try
@@ -171,6 +172,7 @@ public class AnimalInfoScript : MonoBehaviour
     }
     public void showAnimalInfo()
     {
+        backAndGuideBtns.SetActive(false);
         hideAnimalSndBtn();
         thumbnailVid.SetActive(true);
         MainCanvas.SetActive(false);

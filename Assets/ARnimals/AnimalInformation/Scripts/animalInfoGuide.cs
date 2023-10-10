@@ -268,6 +268,9 @@ public class animalInfoGuide : MonoBehaviour
 
             guideTxt.gameObject.SetActive(false);
             guideHighlight.SetActive(false);
+            pos1_GO.SetActive(true);
+            pos2_GO.SetActive(false);
+            pos3_GO.SetActive(false);
 
 
         }

@@ -44,7 +44,8 @@ public class ARPlacement : MonoBehaviour
     public playAnimalSound playAnimalSndScript; 
     private Vector2 originalResolution;
 
-    AudioManager audioManager;
+    public GameObject Arrow;
+    public TMP_Text distanceTxt;
 
     private void Awake()
     {
@@ -54,23 +55,7 @@ public class ARPlacement : MonoBehaviour
     }
     void Start()
     {
-        try
-        {
-            audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-            if (audioManager.musicSource.isPlaying)
-            {
-                audioManager.musicSource.Stop();
-            }
-            else
-            {
-                
-            }
-        }
-        catch
-        {
-            Debug.Log("No AudioManager");
-        }
-
+        
         //hide GameObjects
         foreach (GameObject uiElement in GameObjectsToHide)
         {
@@ -80,6 +65,8 @@ public class ARPlacement : MonoBehaviour
         //UI and Canvas
         AR_UI.gameObject.SetActive(true);
         spawnAnimalContainer.SetActive(true);
+        Arrow.gameObject.SetActive(false);
+        distanceTxt.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -147,6 +134,8 @@ public class ARPlacement : MonoBehaviour
     public void destroyObject()
     {
         Destroy(spawnedObject);
+        Arrow.gameObject.SetActive(false);
+        distanceTxt.gameObject.SetActive(false);
         didAnimalSpawn = false;
 
         foreach (GameObject uiElement in GameObjectsToHide)
@@ -162,7 +151,6 @@ public class ARPlacement : MonoBehaviour
         destroyObject();
         CalculateSpawnPosition();
 
-        //show GameObjects
         foreach (GameObject uiElement in GameObjectsToHide)
         {
             uiElement.SetActive(true);
@@ -173,6 +161,8 @@ public class ARPlacement : MonoBehaviour
         if (!didAnimalSpawn)
         {
             Destroy(spawnedObject);
+            Arrow.gameObject.SetActive(true);
+            distanceTxt.gameObject.SetActive(true);
             spawnedObject = Instantiate(arModels[modelIndex], spawnPosition, Camera.main.transform.rotation);
             spawnedObject.transform.rotation = Quaternion.Euler(0.0f, desiredRotationDegrees, 0.0f);
 
@@ -208,8 +198,6 @@ public class ARPlacement : MonoBehaviour
             return;
         }
 
-        // Calculate the position for the spawned animal based on the initial position.
-        //Vector3 spawnPositionCopy = spawnPosition + (spawnedAnimalCtr == 0 ? Vector3.left : Vector3.right) * 1.5f;
         Vector3 spawnPositionCopy = spawnedObject.transform.position + (spawnedAnimalCtr == 0 ? Vector3.left : Vector3.right) * 1.5f;
 
 
@@ -280,6 +268,16 @@ public class ARPlacement : MonoBehaviour
         }
     }
 
+
+    public void resetTimerSpawnAnimal()
+    {
+        countdownTime = 5.0f;
+        isSpawnAnimalTimerCounting = false;
+        timerSpawnAnimalTxt.gameObject.SetActive(false);
+        spawnAnimalBtn.interactable = true;
+
+        UpdateTimerText();
+    }
     public void StartCountdownSpawnAnimal()
     {
         isSpawnAnimalTimerCounting = true;

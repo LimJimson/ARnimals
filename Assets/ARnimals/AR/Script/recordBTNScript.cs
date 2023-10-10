@@ -11,6 +11,7 @@ using UnityEngine.Video;
 public class recordBTNScript : MonoBehaviour
 {
     public ARPlacement _ARPlacementScript;
+    public showHabitat _showHabitatScript;
     public int startingFileIndex = 1;
     public GameObject VidPlayerImage;
     public GameObject RawImg;
@@ -55,7 +56,8 @@ public class recordBTNScript : MonoBehaviour
         if (ScreenRecorderBridge.CheckIfRecordingInProgress() == true)
         {
             isRecording = true;
-            
+            _ARPlacementScript.Arrow.SetActive(false);
+            _ARPlacementScript.distanceTxt.gameObject.SetActive(false);
             
             stopRecordBtn.SetActive(true);
             StartCountdown();
@@ -64,6 +66,7 @@ public class recordBTNScript : MonoBehaviour
         {
             
             isRecording = false;
+
             stopRecordBtn.SetActive(false);
 
         }
@@ -115,8 +118,13 @@ public class recordBTNScript : MonoBehaviour
         if (VidPlayer.isPlaying)
         {
             SetCurrentTimeUI();
-            
+            _showHabitatScript.pauseMainBGM();
         }
+        else
+        {
+            _showHabitatScript.unPauseMainBGM();
+        }
+
         if (VidPlayer.isPrepared)
         {
             SetTotalTimeUI();
@@ -148,6 +156,8 @@ public class recordBTNScript : MonoBehaviour
     public void stopRecord(){
         if(isRecording){
         ScreenRecorderBridge.StopScreenRecording();
+        _ARPlacementScript.Arrow.SetActive(true);
+        _ARPlacementScript.distanceTxt.gameObject.SetActive(true);
         _txt.gameObject.SetActive(true);
         isRecording = false;
         StartCoroutine(txtDelay());

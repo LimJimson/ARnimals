@@ -13,6 +13,9 @@ public class AudioManager : MonoBehaviour
     [Header("BGM")]
     public AudioClip mainBG;
     public AudioClip GTS_BGM;
+    public AudioClip ForestHabitat_BGM;
+    public AudioClip UnderwaterHabitat_BGM;
+    public AudioClip SavannahHabitat_BGM;
 
     [Header("SFX")]
     public AudioClip touchSound;
@@ -90,7 +93,7 @@ public class AudioManager : MonoBehaviour
     private System.Collections.IEnumerator EnableTouchSound()
     {
         // Wait for a short duration before allowing the touch sound again
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(touchSound.length);
 
         // Allow the next touch event to trigger the sound effect
         canPlayTouchSound = true;

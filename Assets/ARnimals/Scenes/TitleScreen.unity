@@ -1967,6 +1967,7 @@ MonoBehaviour:
     AnimalSelectTutorialDone: 0
     ARExpTutorialDone: 0
     animalInfoGuide: 0
+    mainMenuSettingsGuide: 0
     GTS_lvl1_star: 0
     GTS_lvl2_star: 0
     GTS_lvl3_star: 0
@@ -6325,6 +6326,7 @@ MonoBehaviour:
     AnimalSelectTutorialDone: 0
     ARExpTutorialDone: 0
     animalInfoGuide: 0
+    mainMenuSettingsGuide: 0
     GTS_lvl1_star: 0
     GTS_lvl2_star: 0
     GTS_lvl3_star: 0
@@ -6399,6 +6401,7 @@ MonoBehaviour:
     AnimalSelectTutorialDone: 0
     ARExpTutorialDone: 0
     animalInfoGuide: 0
+    mainMenuSettingsGuide: 0
     GTS_lvl1_star: 0
     GTS_lvl2_star: 0
     GTS_lvl3_star: 0
@@ -8266,5 +8269,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6252438274105919866, guid: 1abfb5b6363b8f84e900fa6a75cbdc7b,
+        type: 3}
+      propertyPath: ForestHabitat_BGM
+      value: 
+      objectReference: {fileID: 8300000, guid: 5c63c863a606b8c40b2fef1294a089e0, type: 3}
+    - target: {fileID: 6252438274105919866, guid: 1abfb5b6363b8f84e900fa6a75cbdc7b,
+        type: 3}
+      propertyPath: SavannahHabitat_BGM
+      value: 
+      objectReference: {fileID: 8300000, guid: d9f76bd9c10822b478e66732154fdd4a, type: 3}
+    - target: {fileID: 6252438274105919866, guid: 1abfb5b6363b8f84e900fa6a75cbdc7b,
+        type: 3}
+      propertyPath: UnderwaterHabitat_BGM
+      value: 
+      objectReference: {fileID: 8300000, guid: 37c3a8ef6310acb4d8a9009540ade048, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1abfb5b6363b8f84e900fa6a75cbdc7b, type: 3}

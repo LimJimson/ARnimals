@@ -160,7 +160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.63900006, y: 0.17514814}
   m_AnchorMax: {x: 0.70500004, y: 0.3027778}
-  m_AnchoredPosition: {x: 6.245056, y: -41.807922}
+  m_AnchoredPosition: {x: 6.245056, y: -41.80786}
   m_SizeDelta: {x: 1.2299194, y: 1.1139221}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &29482461
@@ -1394,7 +1394,7 @@ VideoPlayer:
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 2
-  m_AspectRatio: 2
+  m_AspectRatio: 5
   m_DataSource: 0
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
@@ -6368,7 +6368,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.63900006, y: 0.17514814}
   m_AnchorMax: {x: 0.70500004, y: 0.3027778}
-  m_AnchoredPosition: {x: 6.245056, y: -41.807922}
+  m_AnchoredPosition: {x: 6.245056, y: -41.80786}
   m_SizeDelta: {x: 1.2299194, y: 1.1139221}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &667651744
@@ -12828,7 +12828,7 @@ MonoBehaviour:
   - {fileID: 32900000, guid: 9108ae2333192d4479b49fd86965642a, type: 3}
   - {fileID: 32900000, guid: ba7045a251262664c9674578abd5b3eb, type: 3}
   - {fileID: 32900000, guid: 24f7b4ed15181ac4c842ccececd79dea, type: 3}
-  - {fileID: 32900000, guid: f62ff1b30b9ee8945bb772af86569731, type: 3}
+  - {fileID: 32900000, guid: 914816661620560478eb88101df0e408, type: 3}
   - {fileID: 32900000, guid: 7b954274b3b6bd44bb047894c5bbd12a, type: 3}
   - {fileID: 32900000, guid: a2c7b462a818a7548b0f7758e305b410, type: 3}
   - {fileID: 32900000, guid: 3072938577963484994adfcdc06b0e78, type: 3}
@@ -12868,7 +12868,7 @@ MonoBehaviour:
   - {fileID: 0}
   animalSndSrc: {fileID: 897916640}
   vidRenderTexture: {fileID: 8400000, guid: b1e492aa5ed87c34bbe14fdaabf3ec0a, type: 2}
-  MainCanvas: {fileID: 0}
+  MainCanvas: {fileID: 1219201338}
   AnimalInfoCanvas: {fileID: 1784253950}
   SettingsCanvas: {fileID: 1896025161}
   play_pauseBtn: {fileID: 1681864284}
@@ -12878,6 +12878,7 @@ MonoBehaviour:
   playAnimalSndBtn: {fileID: 897916635}
   thumbnailVid: {fileID: 1123684209}
   chosenAnimalIndex: 0
+  backAndGuideBtns: {fileID: 442991695}
 --- !u!114 &1200929093
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -95,12 +95,15 @@ public class animalInfoGuide : MonoBehaviour
     {
         showDialogs();
     }
+    public GameObject backAndGuideBtns;
     public void skipTutorial()
     {
         pageNumPos1.text = "1/13";
         pageNumPos2.text = "1/13";
         pageNumPos3.text = "1/13";
         _touchToNextAnimal_Info.setPageCtr(1);
+
+        backAndGuideBtns.SetActive(true);
         disableAllGuideGameObjects();
         _animalInfoGuide.SetActive(false);
 
@@ -169,7 +172,7 @@ public class animalInfoGuide : MonoBehaviour
         _animalInfoScript.showAnimalInfo();
         _realMainAnimalInfo.SetActive(true);
         _realAnimalInfoGO.SetActive(false);
-
+        backAndGuideBtns.SetActive(true);
         videoPlayerGO.gameObject.SetActive(false);
         pos1_GO.SetActive(true);
         pos2_GO.SetActive(false);
@@ -356,7 +359,7 @@ public class animalInfoGuide : MonoBehaviour
 
             settingsTxt.gameObject.SetActive(false);
             settingsHighlight.SetActive(false);
-
+            backAndGuideBtns.SetActive(true);
             backAnimalInfoSelectTxt.gameObject.SetActive(false);
             backAnimalInfoSelectHighlight.SetActive(false);
 
@@ -371,7 +374,7 @@ public class animalInfoGuide : MonoBehaviour
             
             animalTxt.gameObject.SetActive(true);
             animalHighlight.SetActive(true);
-
+            backAndGuideBtns.SetActive(false);
             _realAnimalInfoGO.SetActive(true);
             _realMainAnimalInfo.SetActive(false);
 
@@ -710,7 +713,7 @@ public class animalInfoGuide : MonoBehaviour
 
             backMainMenuTxt.gameObject.SetActive(false);
             backMainMenuHighlight.SetActive(false);
-
+            backAndGuideBtns.SetActive(false);
             guideTxt.gameObject.SetActive(false);
             guideHighlight.SetActive(false);
         }
@@ -719,7 +722,7 @@ public class animalInfoGuide : MonoBehaviour
             
             backMainMenuTxt.gameObject.SetActive(true);
             backMainMenuHighlight.SetActive(true);
-
+            backAndGuideBtns.SetActive(true);
             _realMainAnimalInfo.SetActive(true);
             _realAnimalInfoGO.SetActive(false);
 

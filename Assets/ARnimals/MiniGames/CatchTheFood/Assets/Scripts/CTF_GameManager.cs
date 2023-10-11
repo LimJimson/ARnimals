@@ -3,7 +3,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using System.Linq;
 using Unity.VisualScripting;
+using System.Collections.Generic;
 
 public class CTF_GameManager : MonoBehaviour
 {
@@ -30,10 +32,12 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverCanvas;
     [SerializeField] private GameObject levelCompleteCanvas;
     [SerializeField] private GameObject confirmationPlayAgainCanvas;
+	[SerializeField] private GameObject highScoreCanvas;
 
     [Header("UIs Needed")]
 
     [SerializeField] private TextMeshProUGUI finalScoreText;
+    [SerializeField] private TextMeshProUGUI highScoreListTxt;
     private int minimumScoreToWin = 10;
 
     [Header("PowerUps")]
@@ -105,12 +109,12 @@ public class CTF_GameManager : MonoBehaviour
     private void Start() 
     {
 		existingSo = SaveManager.Load();
-		
         selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel");
         showRandomTrivia();
         StartCoroutine(showTransitionAfterDelay());
 		checkMusicVolume();
 		checkSoundFXVolume();
+		updateHighScoreList();
     }
 
     private void Update() 
@@ -436,6 +440,8 @@ public class CTF_GameManager : MonoBehaviour
                 UnlockedNextLevel();
                 finalScoreText.text = finalScore.ToString();
                 highScoreManager.SaveHighScore(scoreManager.GetScore());
+                addHighScores(finalScore);
+				SaveManager.Save(existingSo);
                 levelCompletedTxt.text = "LEVEL <color=yellow><b>"+ selectedLevel +"</b></color> COMPLETED!";
                 levelCompleteCanvas.SetActive(true);
             }
@@ -448,6 +454,128 @@ public class CTF_GameManager : MonoBehaviour
                 gameOverCanvas.SetActive(true);
             }
         }
+    }
+
+    public void addHighScores(int score) 
+    {
+
+        switch(selectedLevel) 
+        {
+            case "1":
+                existingSo.ctf_HighScoresLvl1.Add(new SaveObject.CTF_HighScore { score = score, dateAchieved = System.DateTime.Now.ToString("MM/dd/yy") });
+                existingSo.ctf_HighScoresLvl1.Sort((a, b) => b.score.CompareTo(a.score)); // Sort by descending score
+                existingSo.ctf_HighScoresLvl1 = existingSo.ctf_HighScoresLvl1.Take(10).ToList(); // Keep only the top 10 scores
+                break;
+            case "2":
+                existingSo.ctf_HighScoresLvl2.Add(new SaveObject.CTF_HighScore { score = score, dateAchieved = System.DateTime.Now.ToString("MM/dd/yy") });
+                existingSo.ctf_HighScoresLvl2.Sort((a, b) => b.score.CompareTo(a.score)); // Sort by descending score
+                existingSo.ctf_HighScoresLvl2 = existingSo.ctf_HighScoresLvl2.Take(10).ToList(); // Keep only the top 10 scores
+                break;
+            case "3":
+                existingSo.ctf_HighScoresLvl3.Add(new SaveObject.CTF_HighScore { score = score, dateAchieved = System.DateTime.Now.ToString("MM/dd/yy") });
+                existingSo.ctf_HighScoresLvl3.Sort((a, b) => b.score.CompareTo(a.score)); // Sort by descending score
+                existingSo.ctf_HighScoresLvl3 = existingSo.ctf_HighScoresLvl3.Take(10).ToList(); // Keep only the top 10 scores
+                break;
+            case "4":
+                existingSo.ctf_HighScoresLvl4.Add(new SaveObject.CTF_HighScore { score = score, dateAchieved = System.DateTime.Now.ToString("MM/dd/yy") });
+                existingSo.ctf_HighScoresLvl4.Sort((a, b) => b.score.CompareTo(a.score)); // Sort by descending score
+                existingSo.ctf_HighScoresLvl4 = existingSo.ctf_HighScoresLvl4.Take(10).ToList(); // Keep only the top 10 scores
+                break;
+            case "5":
+                existingSo.ctf_HighScoresLvl5.Add(new SaveObject.CTF_HighScore { score = score, dateAchieved = System.DateTime.Now.ToString("MM/dd/yy") });
+                existingSo.ctf_HighScoresLvl5.Sort((a, b) => b.score.CompareTo(a.score)); // Sort by descending score
+                existingSo.ctf_HighScoresLvl5 = existingSo.ctf_HighScoresLvl5.Take(10).ToList(); // Keep only the top 10 scores
+                break;
+        }
+		SaveManager.Save(existingSo);
+        updateHighScoreList();
+    }
+
+    public void updateHighScoreList() 
+    { 
+        string formattedScores = "";
+
+        switch(selectedLevel) 
+        {
+            case "1":
+                // Format the high scores for display
+
+                for (int i = 0; i < existingSo.ctf_HighScoresLvl1.Count; i++)
+                {	
+					if (i == 9) 
+					{
+						formattedScores += "10" + ".    " + existingSo.ctf_HighScoresLvl1[9].score + "     -     " + existingSo.ctf_HighScoresLvl1[i].dateAchieved + "\n";
+					}
+					else 
+					{
+						formattedScores += (i + 1) + ".     " + existingSo.ctf_HighScoresLvl1[i].score + "     -     " + existingSo.ctf_HighScoresLvl1[i].dateAchieved + "\n";
+					}
+                }
+                break;
+            case "2":
+                // Format the high scores for display
+
+                for (int i = 0; i < existingSo.ctf_HighScoresLvl2.Count; i++)
+                {
+					if (i == 9) 
+					{
+						formattedScores += "10" + ".    " + existingSo.ctf_HighScoresLvl2[9].score + "     -     " + existingSo.ctf_HighScoresLvl2[i].dateAchieved + "\n";
+					}
+					else 
+					{
+						formattedScores += (i + 1) + ".     " + existingSo.ctf_HighScoresLvl2[i].score + "     -     " + existingSo.ctf_HighScoresLvl2[i].dateAchieved + "\n";
+					}
+                }
+                break;
+            case "3":
+                // Format the high scores for display
+
+                for (int i = 0; i < existingSo.ctf_HighScoresLvl3.Count; i++)
+                {
+                    if (i == 9) 
+					{
+						formattedScores += "10" + ".    " + existingSo.ctf_HighScoresLvl3[9].score + "     -     " + existingSo.ctf_HighScoresLvl3[i].dateAchieved + "\n";
+					}
+					else 
+					{
+						formattedScores += (i + 1) + ".     " + existingSo.ctf_HighScoresLvl3[i].score + "     -     " + existingSo.ctf_HighScoresLvl3[i].dateAchieved + "\n";
+					}
+                }
+                break;
+            case "4":
+                // Format the high scores for display
+
+                for (int i = 0; i < existingSo.ctf_HighScoresLvl4.Count; i++)
+                {
+                    if (i == 9) 
+					{
+						formattedScores += "10" + ".    " + existingSo.ctf_HighScoresLvl4[9].score + "     -     " + existingSo.ctf_HighScoresLvl4[i].dateAchieved + "\n";
+					}
+					else 
+					{
+						formattedScores += (i + 1) + ".     " + existingSo.ctf_HighScoresLvl4[i].score + "     -     " + existingSo.ctf_HighScoresLvl4[i].dateAchieved + "\n";
+					}
+                }
+                break;
+            case "5":
+                // Format the high scores for display
+
+                for (int i = 0; i < existingSo.ctf_HighScoresLvl5.Count; i++)
+                {
+					if (i == 9) 
+					{
+						formattedScores += "10" + ".    " + existingSo.ctf_HighScoresLvl5[9].score + "     -     " + existingSo.ctf_HighScoresLvl5[i].dateAchieved + "\n";
+					}
+					else 
+					{
+						formattedScores += (i + 1) + ".     " + existingSo.ctf_HighScoresLvl5[i].score + "     -     " + existingSo.ctf_HighScoresLvl5[i].dateAchieved + "\n";
+					}
+                }
+                break;
+        }
+        // Set the formatted scores in the UI Text element
+        highScoreListTxt.text = formattedScores;
+		Debug.Log("High Score List: " + formattedScores);
     }
 
     private void SetMaxStars() 
@@ -484,8 +612,6 @@ public class CTF_GameManager : MonoBehaviour
                     existingSo.isDuckUnlock = true;
                     break;
             }
-
-            SaveManager.Save(existingSo);
         }
 
         animalImg.sprite = animalSprites[int.Parse(selectedLevel)];
@@ -672,4 +798,16 @@ public class CTF_GameManager : MonoBehaviour
         tutorialManager.disableAllGameObjects();
         pauseManager.PauseGame();
     }
+	
+	public void highScoreButtonFunction() 
+	{
+		highScoreCanvas.SetActive(true);
+		pauseManager.PauseGame();
+	}
+	
+	public void highScoreXButtonFunction() 
+	{
+		highScoreCanvas.SetActive(false);
+		gameResumeTimerManager.SetActive(true);
+	}
 }

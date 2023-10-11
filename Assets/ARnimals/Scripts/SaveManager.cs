@@ -69,6 +69,13 @@ public static class SaveManager
             existingSO.isBearUnlock = so.isBearUnlock;
             existingSO.isOwlUnlock = so.isOwlUnlock;
 
+            //CTF_HighScores
+            existingSO.ctf_HighScoresLvl1 = so.ctf_HighScoresLvl1;
+            existingSO.ctf_HighScoresLvl2 = so.ctf_HighScoresLvl2;
+            existingSO.ctf_HighScoresLvl3 = so.ctf_HighScoresLvl3;
+            existingSO.ctf_HighScoresLvl4 = so.ctf_HighScoresLvl4;
+            existingSO.ctf_HighScoresLvl5 = so.ctf_HighScoresLvl5;
+
 
             so = existingSO;
         }

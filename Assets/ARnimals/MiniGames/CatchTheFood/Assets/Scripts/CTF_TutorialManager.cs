@@ -407,7 +407,7 @@ public class CTF_TutorialManager : MonoBehaviour
         else if (pageNum == 8) 
         {
             dialogText.fontSize = 36.5f;
-            dialogText.text = "Introducing the <color=yellow>game's timer</color>! You have 60 seconds to catch the falling foods. To earn a reward, aim to score 20 or more without losing all your hearts before time runs out. Good luck!";
+            dialogText.text = "Introducing the <color=yellow>game's timer</color>! You have 60 seconds to catch the falling foods. To earn a reward, aim to score 10 or more without losing all your hearts before time runs out. Good luck!";
 
             tutorial.transform.localPosition = (new Vector3(371f, -110f, 0f));
 

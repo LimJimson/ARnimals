@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using TMPro;
 
 public class CTF_HighScoreManager : MonoBehaviour
 {

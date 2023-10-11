@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -6,10 +7,10 @@ public class SaveObject
 {
     [SerializeField]
     public string name;
+    public int unlockedLevelMG3 = 1; 
     public string guideChosen;
     public int unlockedLevelMG1 = 1;
     public int unlockedLevelMG2 = 1;
-    public int unlockedLevelMG3 = 1; 
     public bool MainMenuTutorialDone = false;
     public bool ModeSelectTutorialDone = false;
     public bool MiniGamesTutorialDone = false;
@@ -48,9 +49,24 @@ public class SaveObject
     public bool isBearUnlock = false;
     public bool isOwlUnlock = false;
 
+    //CTF_HighScoreLists
+	[System.Serializable]
+	public class CTF_HighScore 
+    {
+        public int score;
+        public string dateAchieved;
+    }
 
-
-
+    //High Score List for Level 1
+    public List<CTF_HighScore> ctf_HighScoresLvl1 = new List<CTF_HighScore>(); 
+    //High Score List for Level 2
+    public List<CTF_HighScore> ctf_HighScoresLvl2 = new List<CTF_HighScore>();
+    //High Score List for Level 3
+    public List<CTF_HighScore> ctf_HighScoresLvl3 = new List<CTF_HighScore>();
+    //High Score List for Level 4
+    public List<CTF_HighScore> ctf_HighScoresLvl4 = new List<CTF_HighScore>();
+    //High Score List for Level 5
+    public List<CTF_HighScore> ctf_HighScoresLvl5 = new List<CTF_HighScore>();
 
     public void setName(string playerName)
     {

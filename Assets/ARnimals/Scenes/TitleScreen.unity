@@ -1956,10 +1956,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soScript:
     name: 
+    unlockedLevelMG3: 0
     guideChosen: 
     unlockedLevelMG1: 0
     unlockedLevelMG2: 0
-    unlockedLevelMG3: 0
     MainMenuTutorialDone: 0
     ModeSelectTutorialDone: 0
     MiniGamesTutorialDone: 0
@@ -1988,6 +1988,11 @@ MonoBehaviour:
     isPiranhaUnlock: 0
     isBearUnlock: 0
     isOwlUnlock: 0
+    ctf_HighScoresLvl1: []
+    ctf_HighScoresLvl2: []
+    ctf_HighScoresLvl3: []
+    ctf_HighScoresLvl4: []
+    ctf_HighScoresLvl5: []
   input: {fileID: 0}
   maxCharCount: 10
   minCharCount: 3
@@ -6315,10 +6320,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soScript:
     name: 
+    unlockedLevelMG3: 0
     guideChosen: 
     unlockedLevelMG1: 0
     unlockedLevelMG2: 0
-    unlockedLevelMG3: 0
     MainMenuTutorialDone: 0
     ModeSelectTutorialDone: 0
     MiniGamesTutorialDone: 0
@@ -6347,6 +6352,11 @@ MonoBehaviour:
     isPiranhaUnlock: 0
     isBearUnlock: 0
     isOwlUnlock: 0
+    ctf_HighScoresLvl1: []
+    ctf_HighScoresLvl2: []
+    ctf_HighScoresLvl3: []
+    ctf_HighScoresLvl4: []
+    ctf_HighScoresLvl5: []
   continueBtn: {fileID: 1814196439}
   optionsBtn: {fileID: 1481498556}
   ResetGameBtn: {fileID: 1899475625}
@@ -6390,10 +6400,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soScript:
     name: 
+    unlockedLevelMG3: 0
     guideChosen: 
     unlockedLevelMG1: 0
     unlockedLevelMG2: 0
-    unlockedLevelMG3: 0
     MainMenuTutorialDone: 0
     ModeSelectTutorialDone: 0
     MiniGamesTutorialDone: 0
@@ -6422,6 +6432,11 @@ MonoBehaviour:
     isPiranhaUnlock: 0
     isBearUnlock: 0
     isOwlUnlock: 0
+    ctf_HighScoresLvl1: []
+    ctf_HighScoresLvl2: []
+    ctf_HighScoresLvl3: []
+    ctf_HighScoresLvl4: []
+    ctf_HighScoresLvl5: []
   input: {fileID: 45921460}
   maxCharCount: 10
   minCharCount: 1
@@ -8269,6 +8284,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6252438274105919866, guid: 1abfb5b6363b8f84e900fa6a75cbdc7b,
+        type: 3}
+      propertyPath: FTA_BGM
+      value: 
+      objectReference: {fileID: 8300000, guid: 8c3c063689aad2e4baee4894def2b323, type: 3}
     - target: {fileID: 6252438274105919866, guid: 1abfb5b6363b8f84e900fa6a75cbdc7b,
         type: 3}
       propertyPath: ForestHabitat_BGM

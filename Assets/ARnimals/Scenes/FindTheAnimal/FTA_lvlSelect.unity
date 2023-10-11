@@ -160,7 +160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -290, y: -287}
+  m_AnchoredPosition: {x: -429, y: -290}
   m_SizeDelta: {x: 270.1254, y: 212.7082}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &26056072
@@ -207,13 +207,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1669821973}
-        m_TargetAssemblyTypeName: FTA_LevelSelector, Assembly-CSharp
-        m_MethodName: StartGame
-        m_Mode: 2
+      - m_Target: {fileID: 1630385231}
+        m_TargetAssemblyTypeName: FTA_LevelManager, Assembly-CSharp
+        m_MethodName: Level5isCLicked
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -370,7 +370,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -151, y: 18}
+  m_AnchoredPosition: {x: -112, y: 0}
   m_SizeDelta: {x: 270.1254, y: 212.7082}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &239351202
@@ -417,13 +417,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1669821973}
-        m_TargetAssemblyTypeName: FTA_LevelSelector, Assembly-CSharp
-        m_MethodName: StartGame
-        m_Mode: 2
+      - m_Target: {fileID: 1630385231}
+        m_TargetAssemblyTypeName: FTA_LevelManager, Assembly-CSharp
+        m_MethodName: Level4isCLicked
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 239351202}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -612,7 +612,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &594733389
 RectTransform:
   m_ObjectHideFlags: 0
@@ -707,7 +707,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -34.9886, y: 343.42}
+  m_AnchoredPosition: {x: -52, y: 384}
   m_SizeDelta: {x: 270.1254, y: 212.7082}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &633444647
@@ -754,13 +754,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1669821973}
-        m_TargetAssemblyTypeName: FTA_LevelSelector, Assembly-CSharp
-        m_MethodName: StartGame
-        m_Mode: 2
+      - m_Target: {fileID: 1630385231}
+        m_TargetAssemblyTypeName: FTA_LevelManager, Assembly-CSharp
+        m_MethodName: Level1isCLicked
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 633444647}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -942,7 +942,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 676, y: 296}
+  m_AnchoredPosition: {x: 691, y: 301.87}
   m_SizeDelta: {x: 270.1254, y: 212.7082}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1217201177
@@ -989,13 +989,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1669821973}
-        m_TargetAssemblyTypeName: FTA_LevelSelector, Assembly-CSharp
-        m_MethodName: StartGame
-        m_Mode: 2
+      - m_Target: {fileID: 1630385231}
+        m_TargetAssemblyTypeName: FTA_LevelManager, Assembly-CSharp
+        m_MethodName: Level2isCLicked
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1217201177}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1056,7 +1056,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1337089382
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1256,10 +1256,10 @@ RectTransform:
   m_Father: {fileID: 844561396}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0022583, y: -0.00093079}
-  m_SizeDelta: {x: 1920, y: 951.29}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1553315846
 MonoBehaviour:
@@ -1316,7 +1316,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1561017855
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1384,7 +1384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1630385230}
-  - component: {fileID: 1630385229}
+  - component: {fileID: 1630385231}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1392,7 +1392,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1630385229
+--- !u!4 &1630385230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630385228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1493388240}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1630385231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1401,24 +1416,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1630385228}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad55574ca3812a94f9d5732cb242d01b, type: 3}
+  m_Script: {fileID: 11500000, guid: 117a78f618307ac4aa92b01845f3f791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1630385230
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630385228}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1493388240}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1669821970
 GameObject:
   m_ObjectHideFlags: 0
@@ -1476,39 +1476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be19d16489885604e93936f54224752d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameManager: {fileID: 1630385229}
-  soScript:
-    name: 
-    guideChosen: 
-    unlockedLevelMG1: 0
-    unlockedLevelMG2: 0
-    unlockedLevelMG3: 0
-    MainMenuTutorialDone: 0
-    ModeSelectTutorialDone: 0
-    MiniGamesTutorialDone: 0
-    AnimalInfoTutorialDone: 0
-    AnimalSelectTutorialDone: 0
-    ARExpTutorialDone: 0
-    GTS_lvl1_star: 0
-    GTS_lvl2_star: 0
-    GTS_lvl3_star: 0
-    GTS_lvl4_star: 0
-    GTS_lvl5_star: 0
-    isRhinoUnlock: 0
-    isCamelUnlock: 0
-    isBatUnlock: 0
-    isKoiUnlock: 0
-    isCrabUnlock: 0
-    isOctopusUnlock: 0
-    isDeerUnlock: 0
-    isSeagullUnlock: 0
-    isSharkUnlock: 0
-    isDuckUnlock: 0
-    isLeopardUnlock: 0
-    isPigeonUnlock: 0
-    isPiranhaUnlock: 0
-    isBearUnlock: 0
-    isOwlUnlock: 0
+  GameManager: {fileID: 0}
   locklevel:
   - {fileID: 1337089381}
   - {fileID: 594733388}
@@ -1562,7 +1530,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 320, y: 83.292}
+  m_AnchoredPosition: {x: 399, y: 89.162}
   m_SizeDelta: {x: 270.1254, y: 212.7082}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1806150770
@@ -1609,13 +1577,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1669821973}
-        m_TargetAssemblyTypeName: FTA_LevelSelector, Assembly-CSharp
-        m_MethodName: StartGame
-        m_Mode: 2
+      - m_Target: {fileID: 1630385231}
+        m_TargetAssemblyTypeName: FTA_LevelManager, Assembly-CSharp
+        m_MethodName: Level3isCLicked
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1806150770}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1760,7 +1728,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2001902079
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1921,10 +1889,10 @@ RectTransform:
   m_Father: {fileID: 1470031947}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 6.9}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -830, y: 397}
-  m_SizeDelta: {x: 179.9768, y: 105.5545}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: -768, y: 411}
+  m_SizeDelta: {x: 179.9768, y: 105.554504}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2110591401
 MonoBehaviour:

@@ -16,6 +16,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip ForestHabitat_BGM;
     public AudioClip UnderwaterHabitat_BGM;
     public AudioClip SavannahHabitat_BGM;
+    public AudioClip FTA_BGM;
 
     [Header("SFX")]
     public AudioClip touchSound;

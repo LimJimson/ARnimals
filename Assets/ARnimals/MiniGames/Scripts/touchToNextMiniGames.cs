@@ -8,6 +8,8 @@ using UnityEngine.EventSystems;
 public class touchToNextMiniGames : MonoBehaviour, IPointerDownHandler
 {
     SaveObject existingSO;
+    
+
     public TMP_Text pageNum;
     public TMP_Text pageNum2;
     public int pageCounter = 1;

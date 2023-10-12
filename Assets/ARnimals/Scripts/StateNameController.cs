@@ -16,6 +16,7 @@ public class StateNameController : MonoBehaviour
     public static bool ARExperienceGuide;
     public static bool animalInfoGuide;
     public static bool mainMenuSettingsGuide;
+    public static bool GTS_GAME_GUIDE;
 
     public static int levelClickedMG1;
     public static int levelClickedMG2;

@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
@@ -8,6 +9,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class GTS_GameManager : MonoBehaviour
 {
@@ -25,12 +27,12 @@ public class GTS_GameManager : MonoBehaviour
 
     public GameObject confirmCorrect;
     public GameObject confirmWrong;
-
+    public GameObject confirmGoToARExp;
     public GameObject playAgainConfirm;
     public GameObject restartLevelConfirm;
     public GameObject winLevel;
     public GTS_Trivia GTS_TriviaScript;
-
+    int HintsLeft;
     [Header("Animal")]
     public int animalIndex;
     public Image[] AnimalsContainer;
@@ -60,6 +62,7 @@ public class GTS_GameManager : MonoBehaviour
     AudioManager audioManager;
     private void Start()
     {
+        HintsLeft = 2;
         try
         {
             audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
@@ -110,11 +113,147 @@ public class GTS_GameManager : MonoBehaviour
         randomizeChoiceBtnsAndPlaySndBtns();
 
     }
+    private void Update()
+    {
+        countdownHints();
+        pause_unpauseBGM();
+    }
+
+    void pause_unpauseBGM()
+    {
+        //pauseBGM if speaker is clicked
+
+        if (audioSrc.isPlaying)
+        {
+            try
+            {
+                audioManager.musicSource.Pause();
+            }
+            catch
+            {
+
+            }
+        }
+        else
+        {
+            try
+            {
+                audioManager.musicSource.UnPause();
+            }
+            catch
+            {
+
+            }
+        }
+    }
+    public TMP_Text hintsTxt;
+    public GameObject hintsGO;
+    public Animator hintsAnim;
+
+    public GameObject hintGuideBoy;
+    public GameObject hintGuideGirl;
+    public void hintBtn()
+    {
+        if (guide_chosen == "boy_guide")
+        {
+            hintGuideBoy.SetActive(true);
+            hintGuideGirl.SetActive(false);
+            hintTxt();
+        }
+        else if (guide_chosen == "girl_guide")
+        {
+            hintGuideBoy.SetActive(false);
+            hintGuideGirl.SetActive(true);
+            hintTxt();
+        }
+
+
+
+    }
+
+    void hintTxt()
+    {
+        if (audioSrc.isPlaying)
+        {
+            hintsTxt.text = "<color=#FFFF00>Wait</color> for the <color=#00FFFF>sound</color> to <color=#00FFFF>finish</color> before using <color=#00FFFF>hint</color>!";
+            StartCoroutine(_showHintLeft());
+        }
+        else
+        {
+            if (HintsLeft != 0)
+            {
+                playSoundCorrectAnswer();
+                HintsLeft -= 1;
+
+                hintsTxt.text = "<color=#FFFF00>" + HintsLeft + " </color>hint left";
+                StartCoroutine(_showHintLeft());
+            }
+            else if (HintsLeft == 0)
+            {
+
+                hintsTxt.text = "No more hints left";
+                StartCoroutine(_showHintLeft());
+                audioManager.PlaySFX(audioManager.wrongAnswer);
+            }
+        }
+    }
+    IEnumerator _showHintLeft()
+    {
+        hintsGO.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        hintsAnim.SetTrigger("HintsOut");
+        yield return new WaitForSeconds(1f);
+        hintsGO.SetActive(false);
+    }
+
+    public TMP_Text timerHints;
+    bool isHintsTimerCounting = false;
+    float countdownTimeHints = 3.0f;
+    public Button HintsButton;
+
+    void countdownHints()
+    {
+        if (isHintsTimerCounting)
+        {
+            countdownTimeHints -= Time.deltaTime;
+
+            if (countdownTimeHints <= 0)
+            {
+                countdownTimeHints = 3.0f;
+                isHintsTimerCounting = false;
+                timerHints.gameObject.SetActive(false);
+                HintsButton.interactable = true;
+
+            }
+
+            UpdateTimerText();
+        }
+    }
+
+    public void StartCountdownHints()
+    {
+        if(!audioSrc.isPlaying)
+        {
+            isHintsTimerCounting = true;
+            countdownHints();
+            timerHints.gameObject.SetActive(true);
+            HintsButton.interactable = false;
+        }
+
+    }
+
+
+    private void UpdateTimerText()
+    {
+        timerHints.text = Convert.ToInt16(countdownTimeHints).ToString();
+    }
+
     public void showCurrentLevel()
     {
         StartCoroutine(WaitForAnimationFinish());
 
     }
+    public GTS_Guide gts_guideScript;
     IEnumerator WaitForAnimationFinish()
     {
         // Wait until the animation is finished
@@ -126,6 +265,7 @@ public class GTS_GameManager : MonoBehaviour
         Debug.Log("Animation has finished!");
         curr_lvl.gameObject.SetActive(false);
         GameUI.SetActive(true);
+        gts_guideScript.Invoke("checkIfGuideIsDone",1f);
     }
     void checkAnimal()
     {
@@ -166,12 +306,14 @@ public class GTS_GameManager : MonoBehaviour
     public Sprite[] animalImgToUnlockSprite;
     public Image animalImg;
     public GameObject checkImg;
+    public TMP_Text animalName;
     void showAnimalReward()
     {
        switch(levelSelected)
         {
             case 1:
                 animalImg.sprite = animalImgToUnlockSprite[0];
+                animalName.text = "Rhinoceros";
                 if (existingSO.isRhinoUnlock)
                 {
                     checkImg.SetActive(true);
@@ -183,6 +325,7 @@ public class GTS_GameManager : MonoBehaviour
                 break;
             case 2:
                 animalImg.sprite = animalImgToUnlockSprite[1];
+                animalName.text = "Camel";
                 if (existingSO.isCamelUnlock)
                 {
                     checkImg.SetActive(true);
@@ -194,6 +337,7 @@ public class GTS_GameManager : MonoBehaviour
                 break;
             case 3:
                 animalImg.sprite = animalImgToUnlockSprite[2];
+                animalName.text = "Bat";
                 if (existingSO.isBatUnlock)
                 {
                     checkImg.SetActive(true);
@@ -205,6 +349,7 @@ public class GTS_GameManager : MonoBehaviour
                 break;
             case 4:
                 animalImg.sprite = animalImgToUnlockSprite[3];
+                animalName.text = "Koi";
                 if (existingSO.isKoiUnlock)
                 {
                     checkImg.SetActive(true);
@@ -216,6 +361,7 @@ public class GTS_GameManager : MonoBehaviour
                 break;
             case 5:
                 animalImg.sprite = animalImgToUnlockSprite[4];
+                animalName.text = "Crab";
                 if (existingSO.isCrabUnlock)
                 {
                     checkImg.SetActive(true);
@@ -232,12 +378,19 @@ public class GTS_GameManager : MonoBehaviour
     public Sprite[] starsSprites;
     public Image _starWin;
     public TMP_Text lvlCompleted;
-
+    public GameObject tryARBtn;
 
     void checkStar()
     {
-        audioManager.PlaySFX(audioManager.winLevel);
-        audioManager.musicSource.Stop();
+        try
+        {
+            audioManager.PlaySFX(audioManager.winLevel);
+            audioManager.musicSource.Stop();
+        }
+        catch
+        {
+
+        }
         winLevel.SetActive(true);
         lvlCompleted.text = "LEVEL <color=yellow><b>" + levelSelected.ToString()+ "</b></color> COMPLETED!";
 
@@ -245,6 +398,7 @@ public class GTS_GameManager : MonoBehaviour
         {
             _starWin.sprite = starsSprites[3];
             unlockAnimal();
+            tryARBtn.SetActive(true);
             showAnimalReward();
             if (currentStar < life)
             {
@@ -272,6 +426,7 @@ public class GTS_GameManager : MonoBehaviour
         {
             _starWin.sprite = starsSprites[2];
             unlockAnimal();
+            tryARBtn.SetActive(true);
             showAnimalReward();
             if (currentStar < life)
             {
@@ -300,6 +455,7 @@ public class GTS_GameManager : MonoBehaviour
         {
             _starWin.sprite = starsSprites[1];
             showAnimalReward();
+            tryARBtn.SetActive(false);
             if (currentStar <= life)
             {
                 switch (levelSelected)
@@ -454,7 +610,7 @@ public class GTS_GameManager : MonoBehaviour
         // Check if the correct answer is in the choices
         if (!soundArray.Contains(animalIndex))
         {
-            int randomNum = Random.Range(0, soundBtns.Length);
+            int randomNum = UnityEngine.Random.Range(0, soundBtns.Length);
             // Remove listeners from the randomly selected button
             soundBtns[randomNum].onClick.RemoveAllListeners();
             playSoundBtns[randomNum].onClick.RemoveAllListeners();
@@ -492,7 +648,7 @@ public class GTS_GameManager : MonoBehaviour
         for (int i = 0; i < inputList.Count - 1; i++)
         {
             T temp = inputList[i];
-            int rand = Random.Range(i, inputList.Count);
+            int rand = UnityEngine.Random.Range(i, inputList.Count);
             inputList[i] = inputList[rand];
             inputList[rand] = temp;
 
@@ -507,8 +663,6 @@ public class GTS_GameManager : MonoBehaviour
             {
                 audioSrc.PlayOneShot(AnimalSounds[animalIndex]);
             }
-            
-
         }
         else
         {
@@ -538,6 +692,10 @@ public class GTS_GameManager : MonoBehaviour
     public GameObject boy_guide_waitForSnd;
     public GameObject girl_guide_waitForSnd;
     string guide_chosen;
+
+    public Animator waitForSndBoy;
+    public Animator waitForSndGirl;
+    public Animator waitForSndTxt;
     IEnumerator waitForSountTxtDelay()
     {
 
@@ -546,7 +704,13 @@ public class GTS_GameManager : MonoBehaviour
                 waitForSoundTxt.SetActive(true);
                 boy_guide_waitForSnd.SetActive(true);
                 waitSndPlaying = true;
-                yield return (new WaitForSeconds(1f));
+                yield return (new WaitForSeconds(0.5f));
+                waitForSndBoy.SetTrigger("closeGuideBoy");
+                waitForSndTxt.SetTrigger("closeGuideTxt");
+                while (!waitForSndBoy.GetCurrentAnimatorStateInfo(0).IsName("fadeInAndOut_waitForSoundFinish") && !waitForSndTxt.GetCurrentAnimatorStateInfo(0).IsName("fadeInAndOut_waitForSoundFinish"))
+                {
+                    yield return null;
+                }
                 waitForSoundTxt.SetActive(false);
                 boy_guide_waitForSnd.SetActive(false);
                 waitSndPlaying = false;
@@ -556,11 +720,18 @@ public class GTS_GameManager : MonoBehaviour
                 waitForSoundTxt.SetActive(true);
                 girl_guide_waitForSnd.SetActive(true);
                 waitSndPlaying = true;
-                yield return (new WaitForSeconds(1f));
+                yield return (new WaitForSeconds(0.5f));
+                waitForSndGirl.SetTrigger("closeGuideGirl");
+                waitForSndTxt.SetTrigger("closeGuideTxt");
+                while (!waitForSndBoy.GetCurrentAnimatorStateInfo(0).IsName("fade_Out_waitForSNDFemale") && !waitForSndTxt.GetCurrentAnimatorStateInfo(0).IsName("fadeInAndOut_waitForSoundFinish"))
+                    {
+                        yield return null;
+                    }
                 waitForSoundTxt.SetActive(false);
                 girl_guide_waitForSnd.SetActive(false);
                 waitSndPlaying = false;
             }
+
 
     }
 
@@ -570,17 +741,27 @@ public class GTS_GameManager : MonoBehaviour
 
     IEnumerator _showFacts()
     {
+        HintsButton.interactable = false;
         GTS_TriviaScript.generateTrivia();
         factsGuideGO.SetActive(true);
         yield return new WaitForSeconds(2f);
         factsGuideAnim.SetTrigger("TriviaOut");
         yield return new WaitForSeconds(1f);
         factsGuideGO.SetActive(false);
+        HintsButton.interactable = true;
     }
     public void correctAnswer()
     {
+        StopAllCoroutines();
         hideConfirmCorrect();
-        audioManager.PlaySFX(audioManager.correctAnswer);
+        try
+        {
+            audioManager.PlaySFX(audioManager.correctAnswer);
+        }
+        catch
+        {
+
+        }
         stopSound();
         audioSrc.PlayOneShot(AnimalSounds[animalIndex]);
         StartCoroutine(_showFacts());
@@ -600,6 +781,7 @@ public class GTS_GameManager : MonoBehaviour
         Invoke("randomizeChoiceBtnsAndPlaySndBtns", 2.8f);
 
     }
+
     public Animator dmgEffect;
     public GameObject damagePanel;
     public void wrongAnswer()
@@ -708,7 +890,7 @@ public class GTS_GameManager : MonoBehaviour
         int randomIndex;
         do
         {
-            randomIndex = Random.Range(0, totalAnimals);
+            randomIndex = UnityEngine.Random.Range(0, totalAnimals);
         } while (usedAnimalIndices.Contains(randomIndex));
 
         // Add the randomIndex to the usedAnimalIndices list
@@ -730,6 +912,36 @@ public class GTS_GameManager : MonoBehaviour
     {
         audioManager.musicSource.Stop();
         SceneManager.LoadScene("GTAFS_lvlSelect");
+    }
+
+    public GameObject boy_guide_goToAR;
+    public GameObject girl_guide_goToAR;
+    public void showConfirmGoToAR()
+    {
+        confirmGoToARExp.SetActive(true);
+        if (guide_chosen == "boy_guide")
+        {
+            boy_guide_goToAR.SetActive(true);
+            girl_guide_goToAR.SetActive(false);
+
+        }
+        else if (guide_chosen == "girl_guide")
+        {
+            boy_guide_goToAR.SetActive(false);
+            girl_guide_goToAR.SetActive(true);
+        }
+    }
+
+    public void hideConfirmGoToAR()
+    {
+        confirmGoToARExp.SetActive(false);
+    }
+
+
+    public void goToAR()
+    {
+        audioManager.musicSource.Stop();
+        SceneManager.LoadScene("Animal Selector AR");
     }
 
     public void showOptions()
@@ -763,6 +975,7 @@ public class GTS_GameManager : MonoBehaviour
     {
         confirmCorrect.SetActive(false);
     }
+
     public GameObject boy_guide_playAgain;
     public GameObject girl_guide_playAgain;
     public void showPlayAgainConfirm()

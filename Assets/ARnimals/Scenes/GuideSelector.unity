@@ -904,16 +904,19 @@ MonoBehaviour:
   girlBtn: {fileID: 1334376241}
   soScript:
     name: 
+    unlockedLevelMG3: 1
     guideChosen: 
     unlockedLevelMG1: 1
     unlockedLevelMG2: 1
-    unlockedLevelMG3: 1
     MainMenuTutorialDone: 0
     ModeSelectTutorialDone: 0
     MiniGamesTutorialDone: 0
     AnimalInfoTutorialDone: 0
     AnimalSelectTutorialDone: 0
     ARExpTutorialDone: 0
+    animalInfoGuide: 0
+    mainMenuSettingsGuide: 0
+    GTS_GAME_GUIDE: 0
     GTS_lvl1_star: 0
     GTS_lvl2_star: 0
     GTS_lvl3_star: 0
@@ -934,6 +937,11 @@ MonoBehaviour:
     isPiranhaUnlock: 0
     isBearUnlock: 0
     isOwlUnlock: 0
+    ctf_HighScoresLvl1: []
+    ctf_HighScoresLvl2: []
+    ctf_HighScoresLvl3: []
+    ctf_HighScoresLvl4: []
+    ctf_HighScoresLvl5: []
   animatorBlackPanel: {fileID: 410021559}
   boyBtnHighlight: {fileID: 114842092}
   girlBtnHighlight: {fileID: 867180231}
@@ -1100,8 +1108,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.522}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5, y: 19}
-  m_SizeDelta: {x: 223.5176, y: 157.5522}
+  m_AnchoredPosition: {x: 0.9033, y: 19}
+  m_SizeDelta: {x: 261.9944, y: 157.5522}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &411921176
 MonoBehaviour:
@@ -1123,7 +1131,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hi, playername! I'm Gigi. Let's explore the wildlife of the animals!
+  m_text: Hi, playername! I'm Sandy. Let's explore the wildlife of the animals!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,
@@ -1236,8 +1244,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.522}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5, y: 19}
-  m_SizeDelta: {x: 223.5176, y: 157.5522}
+  m_AnchoredPosition: {x: 0.9033, y: 19}
+  m_SizeDelta: {x: 261.9944, y: 157.5522}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &514942881
 MonoBehaviour:
@@ -1259,7 +1267,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hi, playername! I'm Gigi. Let's explore the wildlife of the animals!
+  m_text: Hi, playername! I'm Sandy. Let's explore the wildlife of the animals!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,

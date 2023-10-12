@@ -503,10 +503,10 @@ RectTransform:
   m_Father: {fileID: 700376877}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -23.159, y: -192.7}
-  m_SizeDelta: {x: 2148.2402, y: 799.45}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -6.36145, y: -192.69998}
+  m_SizeDelta: {x: 146.3154, y: -166.55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &44760688
 MonoBehaviour:
@@ -5333,8 +5333,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clicking the <color=#FFF933>START</color> button, will take you to the
-    <color=#00FFFF>MODE SELECTION MENU</color>.
+  m_text: Clicking the <color=#FFF933>START</color> button will take you to the <color=#00FFFF>MODE
+    SELECTION MENU</color>.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: c677042c8c8c80f459434edb5a55a51e, type: 2}
@@ -8557,8 +8557,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -463, y: 729.8105}
-  m_SizeDelta: {x: 605.2374, y: 226.0413}
+  m_AnchoredPosition: {x: -460.59, y: 692.4158}
+  m_SizeDelta: {x: 577.67, y: 300.8308}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &939151328
 MonoBehaviour:
@@ -8580,8 +8580,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome to <color=#E4FF00>ARnimals</color> my name is <color=#FB00FF>Gigi</color>,
-    and I would be your guide for today.
+  m_text: Welcome to <color=#E4FF00>ARnimals</color>. My name is <color=#FB00FF>Sandy</color>,
+    and I will be your guide for today.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: c677042c8c8c80f459434edb5a55a51e, type: 2}
@@ -8608,7 +8608,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 53.7
+  m_fontSize: 54.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8647,7 +8647,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 10.3745575}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &939151329
@@ -13882,10 +13882,10 @@ RectTransform:
   m_Father: {fileID: 700376877}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.01091, y: 72.4438}
-  m_SizeDelta: {x: 2101.9, y: 1078.9446}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1394663993
 MonoBehaviour:
@@ -16053,7 +16053,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Clicking the <color=#FFF933>ANIMALS</color> button, will take you to the
-    <color=#00FFFF>ANIMAL INFORMATION MENU</color>, In where you can learn more about
+    <color=#00FFFF>ANIMAL INFORMATION MENU</color>, where you can learn more about
     \nthe animals."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
@@ -17799,8 +17799,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -470, y: 684.97}
-  m_SizeDelta: {x: 564.1, y: 326.4417}
+  m_AnchoredPosition: {x: -463, y: 684.97}
+  m_SizeDelta: {x: 550.1, y: 326.4417}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1730848083
 MonoBehaviour:
@@ -17823,8 +17823,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Clicking the <color=#FFF933>SETTINGS</color> button, will take you to the
-    <color=#00FFFF>SETTINGS MENU</color>, you can configure the sounds and other
-    features.
+    <color=#00FFFF>SETTINGS MENU</color>, where you can configure the sounds and
+    other features.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: c677042c8c8c80f459434edb5a55a51e, type: 2}
@@ -17851,7 +17851,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
+  m_fontSize: 41.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -19100,8 +19100,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -463, y: 729.81055}
-  m_SizeDelta: {x: 605.2374, y: 226.0413}
+  m_AnchoredPosition: {x: -463, y: 692.4158}
+  m_SizeDelta: {x: 605.2374, y: 300.8308}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1868990019
 MonoBehaviour:
@@ -19123,8 +19123,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome to <color=#E4FF00>ARnimals</color> my name is <color=#FF2050>Patrick</color>,
-    and I would be your guide for today.
+  m_text: Welcome to <color=#E4FF00>ARnimals</color>. My name is <color=#FF2050>Patrick</color>,
+    and I will be your guide for today.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: c677042c8c8c80f459434edb5a55a51e, type: 2}
@@ -19151,7 +19151,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 53.7
+  m_fontSize: 56.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

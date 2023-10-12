@@ -158,8 +158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -459.88995, y: 1945}
-  m_SizeDelta: {x: 557.1219, y: 309.5}
+  m_AnchoredPosition: {x: -454, y: 1953.2}
+  m_SizeDelta: {x: 562.1, y: 309.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6268912
 MonoBehaviour:
@@ -181,8 +181,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clicking the <color=#FFF933>AR Experience</color> button, will take you
-    to the <color=#00FFFF>Augmented Reality feature</color>.
+  m_text: Clicking the <color=#FFF933>AR Experience</color> button will take you
+    to the <color=#00FFFF>Augmented Reality Feature</color>.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,
@@ -210,10 +210,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46.35
-  m_fontSizeBase: 36
+  m_fontSize: 48.14
+  m_fontSizeBase: 48.14
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 30.8
   m_fontSizeMax: 101.7
   m_fontStyle: 0
@@ -406,7 +406,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -454, y: 1932.4}
+  m_AnchoredPosition: {x: -456.53, y: 1932.4}
   m_SizeDelta: {x: 514.61, y: 313.34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &175583503
@@ -429,8 +429,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can also click the  <color=#FFF933>GUIDE</color> button, at the <color=#00FFFF>upper
-    right of the screen</color>, if you need me.
+  m_text: You can also click the  <color=#FFF933>GUIDE</color> button at the <color=#00FFFF>upper
+    right of the screen</color> if you need me.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,
@@ -458,7 +458,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 47.5
+  m_fontSize: 48.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1262,7 +1262,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Clicking the <color=#FFF933>BACK</color> button, will take you back to
+  m_text: 'Clicking the <color=#FFF933>BACK</color> button will take you back to
     the <color=#00FFFF>Main Menu</color>. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
@@ -1740,8 +1740,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -454, y: 1945}
-  m_SizeDelta: {x: 533.1, y: 276.9734}
+  m_AnchoredPosition: {x: -454, y: 1936.9}
+  m_SizeDelta: {x: 555.3, y: 322.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &865272243
 MonoBehaviour:
@@ -1792,7 +1792,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45.7
+  m_fontSize: 48.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2655,7 +2655,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1033546134
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3841,8 +3841,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -454, y: 1919.5}
-  m_SizeDelta: {x: 577.4955, y: 327.8826}
+  m_AnchoredPosition: {x: -447.18, y: 1927.7}
+  m_SizeDelta: {x: 575.74, y: 327.8826}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1759608168
 MonoBehaviour:
@@ -3864,8 +3864,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clicking the <color=#FFF933>Mini-Games</color> button, will take you to
-    the <color=#00FFFF>Educational Mini-Games</color> Menu.
+  m_text: Clicking the <color=#FFF933>Mini-Games</color> button will take you to
+    the <color=#00FFFF>educational mini-games</color> menu.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,
@@ -3893,10 +3893,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 49.6
-  m_fontSizeBase: 36
+  m_fontSize: 48.7
+  m_fontSizeBase: 48.7
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 12.5
   m_fontSizeMax: 95.7
   m_fontStyle: 0

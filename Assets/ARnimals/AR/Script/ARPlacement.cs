@@ -246,7 +246,7 @@ public class ARPlacement : MonoBehaviour
     //Spawn Animal Timer
     public TMP_Text timerSpawnAnimalTxt;
     bool isSpawnAnimalTimerCounting = false;
-    float countdownTime = 5.0f;
+    float countdownTime = 3.0f;
     public Button spawnAnimalBtn;
 
     void countdownSpawnAnimal()
@@ -257,7 +257,7 @@ public class ARPlacement : MonoBehaviour
 
             if (countdownTime <= 0)
             {
-                countdownTime = 5.0f;
+                countdownTime = 3.0f;
                 isSpawnAnimalTimerCounting = false;
                 timerSpawnAnimalTxt.gameObject.SetActive(false);
                 spawnAnimalBtn.interactable = true;
@@ -271,7 +271,7 @@ public class ARPlacement : MonoBehaviour
 
     public void resetTimerSpawnAnimal()
     {
-        countdownTime = 5.0f;
+        countdownTime = 3.0f;
         isSpawnAnimalTimerCounting = false;
         timerSpawnAnimalTxt.gameObject.SetActive(false);
         spawnAnimalBtn.interactable = true;

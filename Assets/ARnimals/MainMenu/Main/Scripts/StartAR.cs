@@ -143,6 +143,14 @@ public class StartAR : MonoBehaviour
     }
     public void ResetGameClickedYes()
     {
+        try
+        {
+            audioManager.musicSource.Stop();
+        }
+        catch
+        {
+
+        }
         CTF_Reset.CTF_ResetProgress();
         SaveManager.DeleteFile();
     }
@@ -175,6 +183,14 @@ public class StartAR : MonoBehaviour
     }
     public void changeNameClickedYes ()
     {
+        try
+        {
+            audioManager.musicSource.Stop();
+        }
+        catch
+        {
+
+        }
         loaddata.name = "";
         StateNameController.player_name = "";
         SaveManager.Save(loaddata);

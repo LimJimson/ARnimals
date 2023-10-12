@@ -39,6 +39,7 @@ public static class SaveManager
             existingSO.ARExpTutorialDone = so.ARExpTutorialDone;
             existingSO.animalInfoGuide = so.animalInfoGuide;
             existingSO.mainMenuSettingsGuide = so.mainMenuSettingsGuide;
+            existingSO.GTS_GAME_GUIDE = so.GTS_GAME_GUIDE;
 
             //GTS Star
             existingSO.GTS_lvl1_star = so.GTS_lvl1_star;

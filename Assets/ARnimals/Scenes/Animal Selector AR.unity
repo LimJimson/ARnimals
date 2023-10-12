@@ -17329,8 +17329,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 483.99997, y: 135.4}
-  m_SizeDelta: {x: 555.27, y: 270.81}
+  m_AnchoredPosition: {x: 477.24, y: 135.4}
+  m_SizeDelta: {x: 601.37, y: 293.2946}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1828166699
 MonoBehaviour:
@@ -17353,7 +17353,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: <color=#FFF933>Animals </color>that are <color=#00FFFF>locked</color> can
-    be <color=#00FFFF>unlocked</color>, by playing the <color=#00FFFF>Mini-Games</color>!
+    be <color=#00FFFF>unlocked</color> by playing the <color=#00FFFF>Mini-Games</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,
@@ -17381,8 +17381,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 53.5
-  m_fontSizeBase: 53.5
+  m_fontSize: 55.5
+  m_fontSizeBase: 55.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 37.47

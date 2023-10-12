@@ -14,7 +14,6 @@ public class animalBookScript : MonoBehaviour
     void Start()
     {
         animalIndex = _arPlacementScript.getAnimalIndex();
-        showAnimalInfo();
     }
 
     public Image animalImg;
@@ -42,7 +41,7 @@ public class animalBookScript : MonoBehaviour
     List<int> Fish = new List<int> { 9,14,17, };
     List<int> Mollusk = new List<int> { 11 };
 
-    void showAnimalInfo()
+    void _showAnimalInfo()
     {
         animalHabitat1Img.gameObject.SetActive(true);
         animalHabitat1Txt.gameObject.SetActive(true);

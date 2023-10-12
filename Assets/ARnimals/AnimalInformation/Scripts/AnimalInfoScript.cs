@@ -108,7 +108,7 @@ public class AnimalInfoScript : MonoBehaviour
     }
     void hideAnimalSndBtn()
     {
-        if (animalSndsClips == null)
+        if (animalSndsClips[chosenAnimalIndex] == null)
         {
             playAnimalSndBtn.SetActive(false);
         }
@@ -128,6 +128,7 @@ public class AnimalInfoScript : MonoBehaviour
         if (animalVidPlayer.isPlaying)
         {
             play_pauseBtn.sprite = play_pauseSprite[0];
+            SetCurrentTimeUI();
         }
         else
         {
@@ -140,13 +141,34 @@ public class AnimalInfoScript : MonoBehaviour
         if (animalVidPlayer.isPlaying)
         {
             animalVidPlayer.Pause();
+            
 
         }
         else
         {
             thumbnailVid.SetActive(false);
+            vidDurationGO.SetActive(true);
             animalVidPlayer.Play();
+            SetTotalTime();
         }
+    }
+
+    public TMP_Text currentTime;
+    public TMP_Text totalTime;
+    public GameObject vidDurationGO;
+    void SetCurrentTimeUI()
+    {
+        string Minutes = Mathf.Floor((int) animalVidPlayer.time / 60).ToString("00");
+        string Seconds = ((int)animalVidPlayer.time % 60).ToString("00");
+
+        currentTime.text = Minutes + ":" + Seconds;
+    }
+    void SetTotalTime()
+    {
+        string Minutes = Mathf.Floor((int)animalVidPlayer.clip.length/ 60).ToString("00");
+        string Seconds = ((int)animalVidPlayer.clip.length % 60).ToString("00");
+
+        totalTime.text = Minutes + ":" + Seconds;
     }
 
     public void goToAnimalInfoSelect()
@@ -155,6 +177,7 @@ public class AnimalInfoScript : MonoBehaviour
         AnimalInfoCanvas.SetActive(false);
         backAndGuideBtns.SetActive(true);
         animalSndSrc.Stop();
+        vidDurationGO.SetActive(false);
         vidRenderTexture.Release();
         try
         {
@@ -174,6 +197,7 @@ public class AnimalInfoScript : MonoBehaviour
     {
         backAndGuideBtns.SetActive(false);
         hideAnimalSndBtn();
+        vidDurationGO.SetActive(false);
         thumbnailVid.SetActive(true);
         MainCanvas.SetActive(false);
         play_pauseBtn.sprite = play_pauseSprite[1];
@@ -281,6 +305,7 @@ public class AnimalInfoScript : MonoBehaviour
                 animalVidPlayer.clip = animalVids[19];
                 break;
         }
+        animalVidPlayer.Prepare();
         AnimalInfoCanvas.SetActive(true);
     }
 	

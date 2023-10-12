@@ -30,4 +30,8 @@ public class MiniGameButtonScripts : MonoBehaviour
         SceneManager.LoadScene("ModeSelect");
     }
 
+    public void goToAr()
+    {
+        SceneManager.LoadScene("Animal Selector AR");
+    }
 }

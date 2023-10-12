@@ -19,6 +19,7 @@ public class SaveObject
     public bool ARExpTutorialDone = false;
     public bool animalInfoGuide = false;
     public bool mainMenuSettingsGuide = false;
+    public bool GTS_GAME_GUIDE = false;
 
     //GTS Stars
     public int GTS_lvl1_star = 0;

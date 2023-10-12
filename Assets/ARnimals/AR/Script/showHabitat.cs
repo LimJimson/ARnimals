@@ -83,7 +83,7 @@ public class showHabitat : MonoBehaviour
 
     public TMP_Text timerHabitat;
     bool isHabitatTimerCounting = false;
-    float countdownTime = 5.0f;
+    float countdownTime = 3.0f;
     public Button habitatButton;
 
     void countdownHabitat()
@@ -94,7 +94,7 @@ public class showHabitat : MonoBehaviour
 
             if (countdownTime <= 0)
             {
-                countdownTime = 5.0f;
+                countdownTime = 3.0f;
                 isHabitatTimerCounting = false;
                 timerHabitat.gameObject.SetActive(false);
                 habitatButton.interactable = true; 

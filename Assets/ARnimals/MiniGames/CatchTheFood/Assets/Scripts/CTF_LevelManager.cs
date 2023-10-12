@@ -2,6 +2,7 @@ using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class CTF_LevelManager : MonoBehaviour
 {
@@ -34,7 +35,13 @@ public class CTF_LevelManager : MonoBehaviour
     [SerializeField] private GameObject playConfirmGameObject;
 
     AudioManager audioManager;
-
+	
+	[Header("Try Animal")]
+	
+	[SerializeField] private TextMeshProUGUI animalToUnlockName;
+	[SerializeField] private GameObject confirmationToARCanvas;
+	[SerializeField] private GameObject tryAnimalBtn;
+	
     private string selectedAnimal;
     private string selectedLevel;
 
@@ -123,6 +130,11 @@ public class CTF_LevelManager : MonoBehaviour
             Debug.Log("Back animation");
             SceneManager.LoadScene("MiniGamesSelect");
         }
+		else if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "tryAnimalButton")
+        {
+            Debug.Log("Back animation");
+            SceneManager.LoadScene("Animal Selector AR");
+        }
 
         if (transitionToIn.activeSelf && achievedImgPositionIn) 
         {
@@ -140,6 +152,7 @@ public class CTF_LevelManager : MonoBehaviour
         int currentStar = PlayerPrefs.GetInt("CTF_Lvl" + selectedLevel + "StarsCount", 0);
 
         checkGameObject.SetActive(false);
+		tryAnimalBtn.SetActive(false);
 		
 		Debug.Log("Level: " + selectedLevel + "\n" + "currentStar: " + currentStar);
 		
@@ -154,10 +167,12 @@ public class CTF_LevelManager : MonoBehaviour
 			case 2:
 				starsImg.sprite = starsSprites[2];
 				checkGameObject.SetActive(true);
+				tryAnimalBtn.SetActive(true);
 				break;
 			case 3:
 				starsImg.sprite = starsSprites[3];
 				checkGameObject.SetActive(true);
+				tryAnimalBtn.SetActive(true);
 				break;
 		}
     }
@@ -167,6 +182,7 @@ public class CTF_LevelManager : MonoBehaviour
         selectedAnimal = "Elephant";
         selectedLevel = "1";
         checkStar();
+        animalToUnlockName.text = "Octopus";
         playConfirmGameObject.SetActive(true);
     }
 
@@ -175,6 +191,7 @@ public class CTF_LevelManager : MonoBehaviour
         selectedAnimal = "Pigeon";
         selectedLevel = "2";
         checkStar();
+        animalToUnlockName.text = "Deer";
         playConfirmGameObject.SetActive(true);
     }
 
@@ -182,7 +199,9 @@ public class CTF_LevelManager : MonoBehaviour
     {
         selectedAnimal = "Koi";
         selectedLevel = "3";
+        animalToUnlockName.text = "Seagull";
         checkStar();
+
         playConfirmGameObject.SetActive(true);
     }
 
@@ -191,6 +210,7 @@ public class CTF_LevelManager : MonoBehaviour
         selectedAnimal = "Camel";
         selectedLevel = "4";
         checkStar();
+        animalToUnlockName.text = "Shark";
         playConfirmGameObject.SetActive(true);
     }
 
@@ -199,6 +219,7 @@ public class CTF_LevelManager : MonoBehaviour
         selectedAnimal = "Crab";
         selectedLevel = "5";
         checkStar();
+        animalToUnlockName.text = "Duck";
         playConfirmGameObject.SetActive(true);
     }
 
@@ -232,4 +253,18 @@ public class CTF_LevelManager : MonoBehaviour
 		playConfirmGameObject.SetActive(false);
         transitionToOut.SetActive(true);
     }
+	
+	public void TryAnimalBtnFunction() 
+	{
+		confirmationToARCanvas.SetActive(true);
+	}
+	public void ConfirmationToARYes() 
+	{
+		buttonCode = "tryAnimalButton";
+		transitionToOut.SetActive(true);
+	}
+	public void ConfirmationToARNo() 
+	{
+		confirmationToARCanvas.SetActive(false);
+	}
 }

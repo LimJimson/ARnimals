@@ -442,6 +442,7 @@ MonoBehaviour:
   UnderwaterHabitat_BGM: {fileID: 8300000, guid: 37c3a8ef6310acb4d8a9009540ade048,
     type: 3}
   SavannahHabitat_BGM: {fileID: 8300000, guid: d9f76bd9c10822b478e66732154fdd4a, type: 3}
+  FTA_BGM: {fileID: 8300000, guid: 8c3c063689aad2e4baee4894def2b323, type: 3}
   touchSound: {fileID: 8300000, guid: 5f92a3d4ca52e9e4e8dd2003d049ce58, type: 3}
   correctAnswer: {fileID: 8300000, guid: 92a5c8a26f7b3814282e7560ddfc758e, type: 3}
   wrongAnswer: {fileID: 8300000, guid: da29a5530ce3f014284d72e1bb0b9cf6, type: 3}

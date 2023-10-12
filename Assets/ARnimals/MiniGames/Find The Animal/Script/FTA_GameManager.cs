@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using TMPro;
+using System;
 
 public class FTA_GameManager : MonoBehaviour
 {
@@ -31,6 +32,8 @@ public class FTA_GameManager : MonoBehaviour
     public int countHealth;
     public GameObject health;
 
+    SaveObject SaveFTAGame;
+
     AudioManager audioManager;
 
     private Vector3[] positions;
@@ -53,6 +56,9 @@ public class FTA_GameManager : MonoBehaviour
         {
             Debug.Log("No AudioManager");
         }
+        SaveFTAGame = SaveManager.Load();
+        guide_chosen = SaveFTAGame.guideChosen;
+        HintsLeft = 1;
         SelectedLevel = PlayerPrefs.GetString("FTA_SelectedLevel");
         SelectedArraySprites();
         initializePositionsofItems();
@@ -69,7 +75,6 @@ public class FTA_GameManager : MonoBehaviour
         {
             NextLevelBtn.interactable = false;
         }
-        checkIfAllFound();
         if (!isGameOver && !isPaused && countItemFind < 3)
         {
             timer += Time.deltaTime;
@@ -81,6 +86,7 @@ public class FTA_GameManager : MonoBehaviour
                 GameOver();
             }
         }
+        countdownHints();
     }
 
         private void initializePositionsofItems()
@@ -114,7 +120,7 @@ public class FTA_GameManager : MonoBehaviour
         int n = array.Length;
         for (int i = 0; i < n - 1; i++)
         {
-            int j = Random.Range(i, n);
+            int j = UnityEngine.Random.Range(i, n);
             Vector3 temp = array[i];
             array[i] = array[j];
             array[j] = temp;
@@ -139,7 +145,7 @@ public class FTA_GameManager : MonoBehaviour
     {
         for (int i = array.Length - 1; i > 0; i--)
         {
-            int j = Random.Range(0, i + 1);
+            int j = UnityEngine.Random.Range(0, i + 1);
             Sprite temp = array[i];
             array[i] = array[j];
             array[j] = temp;
@@ -257,6 +263,7 @@ public class FTA_GameManager : MonoBehaviour
                 }
             }
         }
+        checkIfAllFound();
     }
     private void checkIfAllFound()
     {
@@ -264,15 +271,7 @@ public class FTA_GameManager : MonoBehaviour
         if (shadowImgs[0].color == enableCorrectAnswer && shadowImgs[1].color == enableCorrectAnswer && shadowImgs[2].color == enableCorrectAnswer)
         {
             GameWin();
-            try
-            {
-                audioManager.PlaySFX(audioManager.winLevel);
-                audioManager.musicSource.Stop();
-            }
-            catch
-            {
-
-            }
+            PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel, 1);
         }
     }
 
@@ -291,6 +290,15 @@ public class FTA_GameManager : MonoBehaviour
     }
     private void GameWin()
     {
+        try
+        {
+            audioManager.PlaySFX(audioManager.winLevel);
+            audioManager.musicSource.Stop();
+        }
+        catch
+        {
+
+        }
         isGameOver = true;
         timer = Mathf.Min(timer, timeLimit);
         panelFinish.SetActive(true);
@@ -309,18 +317,154 @@ public class FTA_GameManager : MonoBehaviour
     }
     public void RestartGame()
     {
-        if (isPaused)
+        if (guide_chosen == "boy_guide")
         {
-            ResumeGame();
+            guide_boy_restart.SetActive(true);
+            guide_girl_restart.SetActive(false);
         }
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        else if (guide_chosen == "girl_guide")
+        {
+            guide_boy_restart.SetActive(false);
+            guide_girl_restart.SetActive(true);
+        }
+        RestartGuideConfirm.SetActive(true);
+        settingsMenuObject.SetActive(false);
     }
     public void QuitGame()
     {
         ResumeGame();
         SceneManager.LoadScene("FTA_lvlSelect");
+        try
+        {
+            audioManager.musicSource.Stop();
+        }
+        catch
+        {
+
+        }
     }
+
+    [Header("Guides")]
+    public GameObject QuitGuideConfirm;
+    public GameObject guide_boy_quit;
+    public GameObject guide_girl_quit;
+    public void ConfirmationQuit()
+    {
+        ResumeGame();
+        SceneManager.LoadScene("FTA_lvlSelect");
+    }
+    public void CloseConfirmationQuit()
+    {
+        QuitGuideConfirm.SetActive(false);
+        settingsMenuObject.SetActive(true);
+    }
+
+    public GameObject RestartGuideConfirm;
+    public GameObject guide_boy_restart;
+    public GameObject guide_girl_restart;
+    public void ConfirmRestart()
+    {
+        ResumeGame();
+        SceneManager.LoadScene("FTA_Game");
+    }
+    public void CloseConfirmRestart()
+    {
+        RestartGuideConfirm.SetActive(false);
+        settingsMenuObject.SetActive(true);
+    }
+
+    private string confirmQuitCode;
+
+    public void QuitButtonFunction()
+    {
+        if (guide_chosen == "boy_guide")
+        {
+            guide_boy_quit.SetActive(true);
+            guide_girl_quit.SetActive(false);
+        }
+        else if (guide_chosen == "girl_guide")
+        {
+            guide_boy_quit.SetActive(false);
+            guide_girl_quit.SetActive(true);
+        }
+
+        if (settingsMenuObject.activeSelf)
+        {
+            settingsMenuObject.SetActive(false);
+            confirmQuitCode = "OptionsUI";
+        }
+
+        if (panelGameOver.activeSelf)
+        {
+            panelGameOver.SetActive(false);
+            confirmQuitCode = "GameOverUI";
+        }
+
+        QuitGuideConfirm.SetActive(true);
+    }
+
+    public void confirmQuitNoButtonFunction()
+    {
+        switch (confirmQuitCode)
+        {
+            case "OptionsUI":
+                settingsMenuObject.SetActive(true);
+                break;
+            case "GameOverUI":
+                panelGameOver.SetActive(true);
+                break;
+        }
+        QuitGuideConfirm.SetActive(false);
+    }
+
+    public void GameOverPlayAgain()
+    {
+        ResumeGame();
+        SceneManager.LoadScene("FTA_Game");
+    }
+    public void GameOverQuit()
+    {
+        QuitGuideConfirm.SetActive(true);
+        panelGameOver.SetActive(false);
+    }
+    public void CloseGameOverQuit()
+    {
+        QuitGuideConfirm.SetActive(false);
+        panelGameOver.SetActive(true);
+    }
+
+
+    public GameObject ExploreGuidePanel;
+    public GameObject guide_boy_explore;
+    public GameObject guide_girl_explore;
+    public void ExploreBtnGuide()
+    {
+        ResumeGame();
+        ExploreGuidePanel.SetActive(true);
+        panelGameOver.SetActive(false);
+        if (guide_chosen == "boy_guide")
+        {
+            guide_boy_explore.SetActive(true);
+            guide_girl_explore.SetActive(false);
+        }
+        else if (guide_chosen == "girl_guide")
+        {
+            guide_boy_explore.SetActive(false);
+            guide_girl_explore.SetActive(true);
+        }
+    }
+    public void ExploreBtn()
+    {
+        ResumeGame();
+        SceneManager.LoadScene("Animal_Information");
+    }
+    public void CloseExploreBtn()
+    {
+        panelGameOver.SetActive(true);
+        ExploreGuidePanel.SetActive(false);
+    }
+
+    //Panel Effects
     private void DisplayWrongAnswerEffect()
     {
         StartCoroutine(ShowWrongAnswerPanel());
@@ -536,11 +680,6 @@ public class FTA_GameManager : MonoBehaviour
                 break;
         }
     }
-    public void ExploreBtn()
-    {
-        ResumeGame();
-        SceneManager.LoadScene("Animal_Information");
-    }
 
     public Button ButtonHint;
     public void HintBtn()
@@ -630,12 +769,116 @@ public class FTA_GameManager : MonoBehaviour
     public IEnumerator ShowHint(Image shawdowImage)
     {
         Vector3 originalSize = shawdowImage.transform.localScale;
-        Vector3 doubleSize = shawdowImage.transform.localScale = shawdowImage.transform.localScale * 1.5f;
+        Vector3 doubleSize = shawdowImage.transform.localScale = shawdowImage.transform.localScale * 2.0f;
 
         shawdowImage.transform.localScale = doubleSize;
-        ButtonHint.interactable = false;
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(3.0f);
         shawdowImage.transform.localScale = originalSize;
-        ButtonHint.interactable = true;
     }
+
+    public TMP_Text hintsTxt;
+    public GameObject hintsGO;
+    public Animator hintsAnim;
+
+    public GameObject hintGuideBoy;
+    public GameObject hintGuideGirl;
+
+    string guide_chosen;
+    int HintsLeft;
+    public void hintBtn()
+    {
+        if (guide_chosen == "boy_guide")
+        {
+            hintGuideBoy.SetActive(true);
+            hintGuideGirl.SetActive(false);
+            hintTxt();
+        }
+        else if (guide_chosen == "girl_guide")
+        {
+            hintGuideBoy.SetActive(false);
+            hintGuideGirl.SetActive(true);
+            hintTxt();
+        }
+        else if (string.IsNullOrEmpty(guide_chosen))
+        {
+            hintGuideBoy.SetActive(true);
+            hintGuideGirl.SetActive(false);
+            hintTxt();
+        }
+    }
+
+    void hintTxt()
+    {
+        if (HintsLeft != 0)
+            {
+                Debug.Log("noooh");
+                HintsLeft -= 1;
+                HintBtn();
+                //hintsTxt.text = "<color=#FFFF00>" + HintsLeft + " </color>hint left";
+                hintsTxt.text = "No more hints left";
+                StartCoroutine(_showHintLeft());
+            }
+        else if (HintsLeft == 0)
+            {
+                try
+                {
+                    audioManager.PlaySFX(audioManager.wrongAnswer);
+                }
+                catch
+                {
+
+                }
+            hintsTxt.text = "No more hints left";
+            StartCoroutine(_showHintLeft());
+            }
+        }
+    IEnumerator _showHintLeft()
+    {
+        hintsGO.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        hintsAnim.SetTrigger("HintsOut");
+        yield return new WaitForSeconds(1f);
+        hintsGO.SetActive(false);
+    }
+
+    public TMP_Text timerHints;
+    bool isHintsTimerCounting = false;
+    float countdownTimeHints = 10.0f;
+    public Button HintsButton;
+
+    void countdownHints()
+    {
+        if (isHintsTimerCounting)
+        {
+            countdownTimeHints -= Time.deltaTime;
+
+            if (countdownTimeHints <= 0)
+            {
+                countdownTimeHints = 10.0f;
+                isHintsTimerCounting = false;
+                timerHints.gameObject.SetActive(false);
+                HintsButton.interactable = true;
+
+            }
+
+            UpdateTimerText();
+        }
+    }
+
+    public void StartCountdownHints()
+    {
+        if (HintsLeft != 0)
+        {
+            isHintsTimerCounting = true;
+            countdownHints();
+            timerHints.gameObject.SetActive(true);
+            HintsButton.interactable = false;
+        }
+
+    }
+    private void UpdateTimerText()
+    {
+        timerHints.text = Convert.ToInt16(countdownTimeHints).ToString();
+    }
+
 }

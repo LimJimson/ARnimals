@@ -82,11 +82,7 @@ public class CTF_GameManager : MonoBehaviour
 
     private float shieldDuration = 10f;
     private float points2XDuration = 10f;
-	
-	[Header("Try Animal")]
-	[SerializeField] private TextMeshProUGUI animalToUnlockName;
-	[SerializeField] private GameObject tryAnimalBtn;
-	[SerializeField] private GameObject confirmationToAR;
+
     [SerializeField] private Image animalImg;
     [SerializeField] private Sprite[] animalSprites;
     [SerializeField] private GameObject checkGameObject;
@@ -454,7 +450,6 @@ public class CTF_GameManager : MonoBehaviour
                 starsCount = 0;
                 SetMaxStars();
 				bgMusic.Pause();
-				gameOverMusic.Play();
                 pauseManager.PauseGame();
                 gameOverCanvas.SetActive(true);
             }
@@ -589,7 +584,6 @@ public class CTF_GameManager : MonoBehaviour
         int newStarsCount = starsCount;
 
         checkGameObject.SetActive(false);
-		tryAnimalBtn.SetActive(false);
 
         if (newStarsCount > currentMaxStarsCount) 
         {
@@ -599,29 +593,23 @@ public class CTF_GameManager : MonoBehaviour
         if (PlayerPrefs.GetInt("CTF_Lvl" + selectedLevel + "StarsCount") >= 2) 
         {
             checkGameObject.SetActive(true);
-			tryAnimalBtn.SetActive(true);
 
             switch(selectedLevel) 
             {
                 case "1":
                     existingSo.isOctopusUnlock = true;
-					animalToUnlockName.text = "Octopus";
                     break;
                 case "2":
                     existingSo.isDeerUnlock = true;
-					animalToUnlockName.text = "Deer";
                     break;
                 case "3":
                     existingSo.isSeagullUnlock = true;
-					animalToUnlockName.text = "Seagull";
                     break;
                 case "4":
                     existingSo.isSharkUnlock = true;
-					animalToUnlockName.text = "Shark";
                     break;
                 case "5":
                     existingSo.isDuckUnlock = true;
-					animalToUnlockName.text = "Duck";
                     break;
             }
         }
@@ -666,12 +654,6 @@ public class CTF_GameManager : MonoBehaviour
 			confirmQuitCode = "GameOverUI";
 		}
 		
-		if (levelCompleteCanvas.activeSelf) 
-		{
-			levelCompleteCanvas.SetActive(false);
-			confirmQuitCode = "LevelCompleteUI";
-		}
-		
         confirmationQuitCanvas.SetActive(true);
     }
 
@@ -710,9 +692,6 @@ public class CTF_GameManager : MonoBehaviour
             case "GameOverUI":
                 gameOverCanvas.SetActive(true);
                 break;
-			case "LevelCompleteUI":
-				levelCompleteCanvas.SetActive(true);
-				break;
 		}	
         confirmationQuitCanvas.SetActive(false);
     }
@@ -784,12 +763,6 @@ public class CTF_GameManager : MonoBehaviour
 		transitionToOut.SetActive(true);
         
     }
-	
-	public void ConfirmationPlayAgainNo() 
-	{
-		confirmationPlayAgainCanvas.SetActive(false);
-		levelCompleteCanvas.SetActive(true);
-	}
 
     private void checkIfTransitionIsDone() 
     {
@@ -806,11 +779,6 @@ public class CTF_GameManager : MonoBehaviour
         {
             pauseManager.ResumeGame();
             SceneManager.LoadScene("CTF_Game");
-        }
-		else if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "tryAnimalButton")
-        {
-            pauseManager.ResumeGame();
-            SceneManager.LoadScene("Animal Selector AR");
         }
 
         if (transitionToIn.activeSelf && achievedImgPositionIn) 
@@ -841,21 +809,5 @@ public class CTF_GameManager : MonoBehaviour
 	{
 		highScoreCanvas.SetActive(false);
 		gameResumeTimerManager.SetActive(true);
-	}
-	
-	public void TryAnimalBtnFunction() 
-	{
-		confirmationToAR.SetActive(true);
-	}
-	
-	public void ConfirmationToARYes() 
-	{
-		buttonCode = "tryAnimalButton";
-		transitionToOut.SetActive(true);
-	}
-	
-	public void ConfirmationToARNo() 
-	{
-		confirmationToAR.SetActive(false);
 	}
 }

@@ -129,7 +129,7 @@ public class CTF_TutorialManager : MonoBehaviour
         }
         else if (guideChosen == "girl_guide") 
         {
-            showGuide(1, 1, "Gigi", girlGuideForMenus);
+            showGuide(1, 1, "Sandy", girlGuideForMenus);
         }
     }
 

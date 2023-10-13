@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    SaveObject loaddata;
     [Header("Audio Source")]
     public AudioSource musicSource;
     public AudioSource sfxSource;
@@ -52,7 +54,11 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] GTS_Patrick;
     public AudioClip[] GTS_Sandy;
 
-
+    public float musicVol;
+    public float sfxVol;
+    public float guideVol;
+    public float animalSndVol;
+    public float vidVol;
 
     private bool canPlayTouchSound = true;
 
@@ -65,32 +71,46 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
         }
         else
         {
             Destroy(gameObject);
         }
+
     }
     void Start()
     {
-
+        loaddata = SaveManager.Load();
+        loadVolumeSettings();
+        
     }
+
     // Update is called once per frame
     void Update()
     {
         checkPlayerTouch();
-        playGuideSound();
+        checkIfGuideIsPlaying();
     }
 
-    void playGuideSound()
+    void checkIfGuideIsPlaying()
     {
+
         if (guideSource.isPlaying)
         {
-            musicSource.volume = 0.3f;
+            if (musicSource.volume == 0)
+            {
+                musicSource.volume = 0;
+            }
+            else
+            {
+                musicSource.volume = 0.1f;
+            }
+            
         }
         else
         {
-            musicSource.volume = 0.5f;
+            musicSource.volume = musicVol;
         }
     }
     public void playBGMMusic(AudioClip clip)
@@ -105,9 +125,13 @@ public class AudioManager : MonoBehaviour
     }
     public void PlayGuide(AudioClip clip)
     {
+        
         guideSource.Stop();
         guideSource.PlayOneShot(clip);
     }
+
+
+
     public void PlayTap(AudioClip clip)
     {
         tapSource.PlayOneShot(clip);
@@ -151,16 +175,38 @@ public class AudioManager : MonoBehaviour
     public void MusicVolume(float volume)
     {
         musicSource.volume = volume;
+        musicVol = volume;
     }
 
+    public void AnimalVolume(float volume)
+    {
+        animalSndVol = volume;
+    }
+    public void VidVolume(float volume)
+    {
+        vidVol = volume;
+    }
     public void SFXVolume(float volume)
     {
         sfxSource.volume = volume;
+        tapSource.volume = volume;
+        sfxVol = volume;
     }
 
     public void GuideVolume(float volume)
     {
         guideSource.volume = volume;
+        guideVol = volume;
+    }
+
+
+    public void loadVolumeSettings()
+    {
+        musicVol = loaddata.MusicVolume;
+        sfxVol = loaddata.SFXVolume;
+        guideVol = loaddata.GuideVolume;
+        animalSndVol = loaddata.AnimalSndVolume;
+        vidVol =loaddata.VideoSndVolume;
     }
 
 }

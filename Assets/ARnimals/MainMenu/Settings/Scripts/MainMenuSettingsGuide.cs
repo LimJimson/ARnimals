@@ -52,13 +52,19 @@ public class MainMenuSettingsGuide : MonoBehaviour
     public GameObject backHighlight;
     public GameObject guideHighlight;
 
+    AudioManager audioManager;
+
     void Start()
     {
         loaddata = SaveManager.Load();
-        guideChosen = StateNameController.guide_chosen;
+        guideChosen = loaddata.guideChosen;
+        isSettingsClicked = false;
+        try { audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); } catch { }
+        
         if (!StateNameController.mainMenuSettingsGuide)
         {
             _MainMenuSettingsGuide();
+            
             StateNameController.mainMenuSettingsGuide = true;
         }
     }
@@ -69,11 +75,149 @@ public class MainMenuSettingsGuide : MonoBehaviour
         showDialogs();
 
     }
+    public void returnBGMVol()
+    {
+        try { audioManager.musicSource.volume = loaddata.MusicVolume; } catch { }
+
+    }
+    public void _isSettingsClicked(bool isSettings)
+    {
+        this.isSettingsClicked = isSettings;
+    }
+    public void guideVoiceOver()
+    {
+
+            try
+            {
+                if (_touchToNextMainMenuSettings.pageCounter == 1)
+                {
+                    if (guideChosen == "boy_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsPatrick[0]);
+                    }
+                    else if (guideChosen == "girl_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsSandy[0]);
+                    }
+
+                }
+                else if (_touchToNextMainMenuSettings.pageCounter == 2)
+                {
+                    if (guideChosen == "boy_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsPatrick[1]);
+                    }
+                    else if (guideChosen == "girl_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsSandy[1]);
+                    }
+                }
+                else if (_touchToNextMainMenuSettings.pageCounter == 3)
+                {
+                    if (guideChosen == "boy_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsPatrick[2]);
+                    }
+                    else if (guideChosen == "girl_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsSandy[2]);
+                    }
+                }
+                else if (_touchToNextMainMenuSettings.pageCounter == 4)
+                {
+                    if (guideChosen == "boy_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsPatrick[3]);
+                    }
+                    else if (guideChosen == "girl_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsSandy[3]);
+                    }
+                }
+                else if (_touchToNextMainMenuSettings.pageCounter == 5)
+                {
+                    if (guideChosen == "boy_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsPatrick[4]);
+                    }
+                    else if (guideChosen == "girl_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsSandy[4]);
+                    }
+                }
+                else if (_touchToNextMainMenuSettings.pageCounter == 6)
+                {
+                    if (guideChosen == "boy_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsPatrick[5]);
+                    }
+                    else if (guideChosen == "girl_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsSandy[5]);
+                    }
+                }
+                else if (_touchToNextMainMenuSettings.pageCounter == 7)
+                {
+                    if (guideChosen == "boy_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsPatrick[6]);
+                    }
+                    else if (guideChosen == "girl_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsSandy[6]);
+                    }
+                }
+                else if (_touchToNextMainMenuSettings.pageCounter == 8)
+                {
+                    if (guideChosen == "boy_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsPatrick[7]);
+                    }
+                    else if (guideChosen == "girl_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsSandy[7]);
+                    }
+                }
+                else if (_touchToNextMainMenuSettings.pageCounter == 9)
+                {
+                    if (guideChosen == "boy_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsPatrick[8]);
+                    }
+                    else if (guideChosen == "girl_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsSandy[8]);
+                    }
+                }
+                else if (_touchToNextMainMenuSettings.pageCounter == 10)
+                {
+                    if (guideChosen == "boy_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsPatrick[9]);
+                    }
+                    else if (guideChosen == "girl_guide")
+                    {
+                        audioManager.PlayGuide(audioManager.MainMenuSettingsSandy[9]);
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+       
+
+    }
+    public void stopGuideVoice()
+    {
+        try { audioManager.guideSource.Stop(); } catch { }
+    }
     public void skipTutorial()
     {
         pageNumPos1.text = "1/10";
         pageNumPos2.text = "1/10";
         _touchToNextMainMenuSettings.setPageCtr(1);
+        stopGuideVoice();
         disableAllGuideGameObjects();
         Settings_GO.SetActive(false);
 
@@ -87,6 +231,7 @@ public class MainMenuSettingsGuide : MonoBehaviour
     public void GuideBack()
     {
         _touchToNextMainMenuSettings.minusPageCtr();
+        guideVoiceOver();
         disableAllGuideGameObjects();
     }
     void disableAllGuideGameObjects()
@@ -122,7 +267,7 @@ public class MainMenuSettingsGuide : MonoBehaviour
         guideHighlight.gameObject.SetActive(false);
 
     }
-
+    public bool isSettingsClicked;
     public void _MainMenuSettingsGuide()
     {
         Settings_GO.SetActive(true);
@@ -131,7 +276,8 @@ public class MainMenuSettingsGuide : MonoBehaviour
         pos2_GO.SetActive(false);
 
         pageNumPos1.text = "1/10";
-
+        guideVoiceOver();
+        
         if (guideChosen == "boy_guide")
         {
             _maleGuide();

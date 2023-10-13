@@ -44,12 +44,14 @@ public class runtimePerms : MonoBehaviour
 
     private bool IsAndroidVersionAtLeast(int minVersion)
     {
-        // Check if the Android SDK version is equal to or greater than minVersion
-        using (AndroidJavaClass version = new AndroidJavaClass("android.os.Build$VERSION"))
-        {
-            int sdkInt = version.GetStatic<int>("SDK_INT");
-            return sdkInt >= minVersion;
-        }
+
+            // Check if the Android SDK version is equal to or greater than minVersion
+            using (AndroidJavaClass version = new AndroidJavaClass("android.os.Build$VERSION"))
+            {
+                int sdkInt = version.GetStatic<int>("SDK_INT");
+                return sdkInt >= minVersion;
+            }
+
     }
     public void requestPerms()
     {

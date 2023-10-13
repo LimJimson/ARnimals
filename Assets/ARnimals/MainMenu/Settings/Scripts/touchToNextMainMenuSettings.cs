@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class touchToNextMainMenuSettings : MonoBehaviour, IPointerDownHandler
 {
     SaveObject existingSO;
+    public MainMenuSettingsGuide _MainMenuSettingsGuideScript;
     public TMP_Text pageNum;
     public TMP_Text pageNum2;
     public int pageCounter = 1;
@@ -14,6 +15,7 @@ public class touchToNextMainMenuSettings : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         pageCounter++;
+        _MainMenuSettingsGuideScript.guideVoiceOver();
     }
 
     void Start()
@@ -110,8 +112,8 @@ public class touchToNextMainMenuSettings : MonoBehaviour, IPointerDownHandler
             pageNum.text = "1/10";
 
             MainMenuSettingsGuideGO.SetActive(false);
-
-
+            _MainMenuSettingsGuideScript.returnBGMVol();
+            _MainMenuSettingsGuideScript.stopGuideVoice();
             if (!existingSO.mainMenuSettingsGuide)
             {
                 existingSO.mainMenuSettingsGuide = true;

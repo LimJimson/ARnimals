@@ -2795,6 +2795,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 822122309}
+        m_TargetAssemblyTypeName: MainMenuSettingsGuide, Assembly-CSharp
+        m_MethodName: _isSettingsClicked
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 822122310}
+        m_TargetAssemblyTypeName: MainMenuSettings, Assembly-CSharp
+        m_MethodName: LoadSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &363471499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3107,8 +3131,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 700629721}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4262,9 +4286,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>Sound Effects</color> icon, You can use the
-    slider to make things like <color=#00FFFF>  boings, splashes, and whooshes louder
-    or quiter</color>!
+  m_text: This is the <color=#FFF933>Sound Effects</color> icon, you can use the
+    <color=#00FFFF>slider</color> to make things like <color=#00FFFF>  boings, splashes,
+    and whooshes louder or quiter</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,
@@ -4359,7 +4383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &547389458
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4762,8 +4786,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 738491012}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6724,9 +6748,33 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 822122309}
+        m_TargetAssemblyTypeName: MainMenuSettingsGuide, Assembly-CSharp
+        m_MethodName: _isSettingsClicked
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 822122306}
         m_TargetAssemblyTypeName: StartAR, Assembly-CSharp
         m_MethodName: goToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 822122310}
+        m_TargetAssemblyTypeName: MainMenuSettings, Assembly-CSharp
+        m_MethodName: saveSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7376,8 +7424,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1420886422}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7394,6 +7442,7 @@ GameObject:
   - component: {fileID: 822122306}
   - component: {fileID: 822122308}
   - component: {fileID: 822122309}
+  - component: {fileID: 822122310}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -7417,6 +7466,8 @@ MonoBehaviour:
   Settings: {fileID: 847886930}
   MainMenuGuide: {fileID: 277279377}
   playerName: {fileID: 223205801}
+  _touchToNextMainMenuSettingsScript: {fileID: 1104084946}
+  _MainMenuSettingsGuideScript: {fileID: 822122309}
   changeGuideMale: {fileID: 1455080550}
   changeGuideFemale: {fileID: 1393492258}
   ConfirmGuideChange: {fileID: 227020707}
@@ -7523,6 +7574,35 @@ MonoBehaviour:
   resetGameHighlight: {fileID: 1289814429}
   backHighlight: {fileID: 63423999}
   guideHighlight: {fileID: 1059968819}
+  isSettingsClicked: 0
+--- !u!114 &822122310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822122305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0520cd17ce414a41bb0d5ca2441a5a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSlider: {fileID: 1306103659}
+  sfxSlider: {fileID: 611203892}
+  AnimalVolSlider: {fileID: 412682587}
+  guideSlider: {fileID: 833330616}
+  musicPercent: {fileID: 1540317569}
+  sfxPercent: {fileID: 38110929}
+  AnimalSndPercent: {fileID: 1897964836}
+  guidePercent: {fileID: 335683153}
+  musicSliderGuide: {fileID: 818843233}
+  sfxSliderGuide: {fileID: 1726882707}
+  AnimalVolSliderGuide: {fileID: 1923278617}
+  guideSliderGuide: {fileID: 1706014741}
+  musicPercentGuide: {fileID: 1137987799}
+  sfxPercentGuide: {fileID: 1737256782}
+  AnimalSndPercentGuide: {fileID: 1061262537}
+  guidePercentGuide: {fileID: 180219166}
 --- !u!1 &833330614
 GameObject:
   m_ObjectHideFlags: 0
@@ -7608,8 +7688,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2044910406}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8905,6 +8985,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977550695}
   m_CullTransparentMesh: 1
+--- !u!1001 &987656662
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 453011601254209602, guid: e35709dbdc0dfa347bb960006cf87ce5,
+        type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 453011601254209603, guid: e35709dbdc0dfa347bb960006cf87ce5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 453011601254209603, guid: e35709dbdc0dfa347bb960006cf87ce5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.47142
+      objectReference: {fileID: 0}
+    - target: {fileID: 453011601254209603, guid: e35709dbdc0dfa347bb960006cf87ce5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.982169
+      objectReference: {fileID: 0}
+    - target: {fileID: 453011601254209603, guid: e35709dbdc0dfa347bb960006cf87ce5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15.942812
+      objectReference: {fileID: 0}
+    - target: {fileID: 453011601254209603, guid: e35709dbdc0dfa347bb960006cf87ce5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 453011601254209603, guid: e35709dbdc0dfa347bb960006cf87ce5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 453011601254209603, guid: e35709dbdc0dfa347bb960006cf87ce5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 453011601254209603, guid: e35709dbdc0dfa347bb960006cf87ce5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 453011601254209603, guid: e35709dbdc0dfa347bb960006cf87ce5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 453011601254209603, guid: e35709dbdc0dfa347bb960006cf87ce5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 453011601254209603, guid: e35709dbdc0dfa347bb960006cf87ce5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e35709dbdc0dfa347bb960006cf87ce5, type: 3}
 --- !u!1 &988740122
 GameObject:
   m_ObjectHideFlags: 0
@@ -11012,6 +11161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6380526a449b15b47ae5265a54e1f893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _MainMenuSettingsGuideScript: {fileID: 822122309}
   pageNum: {fileID: 694211394}
   pageNum2: {fileID: 1304922406}
   pageCounter: 1
@@ -12641,8 +12791,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 237860512}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -14707,7 +14857,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>Guide Volume</color> icon, You can use the slider
+  m_text: This is the <color=#FFF933>Guide Volume</color> icon, you can use the slider
     to make the<color=#00FFFF> guide sound louder or quiter</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
@@ -17266,8 +17416,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 407074954}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -17529,8 +17679,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1447474903}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -19446,8 +19596,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1506617656}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -21369,6 +21519,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 822122310}
+        m_TargetAssemblyTypeName: MainMenuSettings, Assembly-CSharp
+        m_MethodName: saveSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 822122309}
         m_TargetAssemblyTypeName: MainMenuSettingsGuide, Assembly-CSharp
         m_MethodName: _MainMenuSettingsGuide

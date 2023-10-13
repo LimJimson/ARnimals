@@ -41,6 +41,13 @@ public static class SaveManager
             existingSO.mainMenuSettingsGuide = so.mainMenuSettingsGuide;
             existingSO.GTS_GAME_GUIDE = so.GTS_GAME_GUIDE;
 
+            //Settings
+            existingSO.MusicVolume = so.MusicVolume;
+            existingSO.SFXVolume = so.SFXVolume;
+            existingSO.GuideVolume = so.GuideVolume;
+            existingSO.AnimalSndVolume = so.AnimalSndVolume;
+            existingSO.VideoSndVolume = so.VideoSndVolume;
+
             //GTS Star
             existingSO.GTS_lvl1_star = so.GTS_lvl1_star;
             existingSO.GTS_lvl2_star = so.GTS_lvl2_star;

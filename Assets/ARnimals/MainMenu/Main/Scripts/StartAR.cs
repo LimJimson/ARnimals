@@ -22,6 +22,9 @@ public class StartAR : MonoBehaviour
 
     void Start()
     {
+        _touchToNextMainMenuSettingsScript.enabled = false;
+        _MainMenuSettingsGuideScript.enabled = false;
+
         try
         {
             audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
@@ -70,8 +73,13 @@ public class StartAR : MonoBehaviour
         SceneManager.LoadScene("Animal_Information");
     }
 
+    public touchToNextMainMenuSettings _touchToNextMainMenuSettingsScript;
+    public MainMenuSettingsGuide _MainMenuSettingsGuideScript;
+
     public void goToSettingsMenu()
     {
+        _touchToNextMainMenuSettingsScript.enabled = true;
+        _MainMenuSettingsGuideScript.enabled = true;
         Settings.gameObject.SetActive(true);
         MainMenu.gameObject.SetActive(false);
 
@@ -80,6 +88,7 @@ public class StartAR : MonoBehaviour
 
     public void goToMainMenu()
     {
+
         Settings.gameObject.SetActive(false);
         MainMenu.gameObject.SetActive(true);
     }

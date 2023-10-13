@@ -53,6 +53,7 @@ public class ScriptHandler : MonoBehaviour
         name = soScript.getName();
         guideChosen = soScript.getGuide();
 
+        
 
         StateNameController.mainMenuGuide =soScript.MainMenuTutorialDone;
         StateNameController.modeSelectGuide =soScript.ModeSelectTutorialDone;
@@ -111,7 +112,10 @@ public class ScriptHandler : MonoBehaviour
             nameTxtField.SetActive(true);
             playerNameLoggedIn.gameObject.SetActive(false);
         }
+
     }
+
+    
 
     // ----- CHANGE NAME -----
     public void changeName()

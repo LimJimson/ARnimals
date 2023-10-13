@@ -21,6 +21,14 @@ public class SaveObject
     public bool mainMenuSettingsGuide = false;
     public bool GTS_GAME_GUIDE = false;
 
+
+    //Settings
+    public float MusicVolume = 0.5f;
+    public float SFXVolume = 0.5f;
+    public float GuideVolume = 0.5f;
+    public float AnimalSndVolume = 0.5f;
+    public float VideoSndVolume = 0.5f;
+
     //GTS Stars
     public int GTS_lvl1_star = 0;
     public int GTS_lvl2_star = 0;

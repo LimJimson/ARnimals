@@ -1286,7 +1286,7 @@ RectTransform:
   m_GameObject: {fileID: 36697897}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1570399744}
@@ -1650,10 +1650,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Crabs are versatile eaters that enjoy both plants and meat. They have preferences
-    for certain foods like seaweed, shrimp, and oysters found in the sea. However,
-    they avoid processed foods such as hotdogs as they can be harmful, and they also
-    stay away from foods like milk and potatoes  because their bellies can't handle
-    them.
+    for certain foods like <color=green>seaweed, shrimp, and oysters</color> found
+    in the sea. However, they avoid <color=red>processed foods such as hotdogs</color>
+    as they can be harmful, and they also stay away from foods like <color=red>milk
+    and potatoes</color> because their bellies can't handle them.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,
@@ -2581,44 +2581,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 98520228}
   m_CullTransparentMesh: 1
---- !u!1 &99400063
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 99400064}
-  m_Layer: 5
-  m_Name: Buttons
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &99400064
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 99400063}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 764732456}
-  - {fileID: 639845037}
-  m_Father: {fileID: 1768319581}
-  m_RootOrder: 16
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &105859835
 GameObject:
   m_ObjectHideFlags: 0
@@ -5477,18 +5439,18 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 206669387}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -2.0000303}
+  m_LocalScale: {x: 1.1999999, y: 1.1999999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 227858850}
   m_Father: {fileID: 1792579249}
-  m_RootOrder: 22
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 646, y: 85}
-  m_SizeDelta: {x: 133.97498, y: 101.504}
+  m_AnchorMin: {x: 0.37583336, y: 0.07040741}
+  m_AnchorMax: {x: 0.37816668, y: 0.077703685}
+  m_AnchoredPosition: {x: -0.47802734, y: 0}
+  m_SizeDelta: {x: 132.4258, y: 93.7153}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &206669389
 MonoBehaviour:
@@ -9694,17 +9656,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346589915}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1068655803}
+  m_Father: {fileID: 2068730917}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 662.3384, y: 487.157}
+  m_AnchoredPosition: {x: -99.853455, y: 2.7149048}
   m_SizeDelta: {x: 86.383, y: 79.686}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &346589917
@@ -10889,6 +10851,44 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &405386974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 405386975}
+  m_Layer: 5
+  m_Name: Buttons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &405386975
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405386974}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 764732456}
+  - {fileID: 639845037}
+  m_Father: {fileID: 1768319581}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.915125, y: 0.6351113}
+  m_AnchorMax: {x: 0.9271877, y: 0.66011125}
+  m_AnchoredPosition: {x: -5.6501465, y: 3.5390015}
+  m_SizeDelta: {x: 157.80103, y: 350.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &408824260
 GameObject:
@@ -12720,7 +12720,7 @@ RectTransform:
   m_GameObject: {fileID: 470954388}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1570399744}
@@ -12728,7 +12728,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -248.31, y: 235}
+  m_AnchoredPosition: {x: -248.31, y: 234.99998}
   m_SizeDelta: {x: 533.37, y: 216.16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &470954390
@@ -15735,7 +15735,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2128654719}
-  - {fileID: 1068655803}
+  - {fileID: 2068730917}
   m_Father: {fileID: 322364194}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17011,18 +17011,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 639845036}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 99400064}
+  m_Father: {fileID: 405386975}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.91600007, y: 0.558}
-  m_AnchorMax: {x: 0.9194792, y: 0.5665557}
-  m_AnchoredPosition: {x: -0.36010742, y: -0.77700806}
-  m_SizeDelta: {x: 142.04999, y: 122.45}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.595314, y: -96.5733}
+  m_SizeDelta: {x: 148.09741, y: 131.45934}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &639845038
 MonoBehaviour:
@@ -17100,7 +17100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4712aeda01e691f479b9f82c35e39f5b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8bdeec005433b5541a6f2bb7d5de5522, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18236,10 +18236,10 @@ RectTransform:
   m_Father: {fileID: 1792579249}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -662, y: 76}
-  m_SizeDelta: {x: 133.97498, y: 101.5}
+  m_AnchorMin: {x: 0.6382501, y: 0.067629635}
+  m_AnchorMax: {x: 0.64074993, y: 0.074}
+  m_AnchoredPosition: {x: -0.000091552734, y: -0.49987793}
+  m_SizeDelta: {x: 131.97496, y: 94.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &681432345
 MonoBehaviour:
@@ -20026,13 +20026,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 99400064}
+  m_Father: {fileID: 405386975}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.9175209, y: 0.74300003}
-  m_AnchorMax: {x: 0.9194792, y: 0.74600005}
-  m_AnchoredPosition: {x: -0.94311523, y: 0.37298584}
-  m_SizeDelta: {x: 145.213, y: 146.007}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.14352417, y: 101.565994}
+  m_SizeDelta: {x: 148.61687, y: 149.11412}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &764732457
 MonoBehaviour:
@@ -22607,7 +22607,7 @@ RectTransform:
   m_GameObject: {fileID: 828089511}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1570399744}
@@ -22615,7 +22615,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 38, y: 88}
+  m_AnchoredPosition: {x: 37.999985, y: 88}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &828089513
@@ -23247,10 +23247,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Elephants have food favorites like sweet treats such as bananas, pumpkins,
-    and watermelons. However, they don't like sour lemons and spicy chilies. They
-    prefer being vegetarian and enjoy plants, skipping meat. Just like you have your
-    own favorite foods!
+  m_text: Elephants have food favorites like sweet treats such as <color=green>bananas,
+    pumpkins, and watermelons.</color> However, they don't like <color=red>sour lemons
+    and spicy chilies</color>. They prefer being vegetarian and enjoy plants, skipping
+    <color=red>meat</color>. Just like you have your own favorite foods!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,
@@ -24402,17 +24402,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889730563}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1068655803}
+  m_Father: {fileID: 2068730917}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 765, y: 486}
+  m_AnchoredPosition: {x: 2.8081665, y: 1.5578308}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &889730565
@@ -27797,48 +27797,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &1068655802
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1068655803}
-  m_Layer: 5
-  m_Name: HP
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1068655803
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1068655802}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 346589916}
-  - {fileID: 1625555179}
-  - {fileID: 1697575769}
-  - {fileID: 1896781880}
-  - {fileID: 889730564}
-  - {fileID: 1872270634}
-  m_Father: {fileID: 591895723}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -910, y: -519}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 1, y: 1}
 --- !u!1 &1070413813
 GameObject:
   m_ObjectHideFlags: 0
@@ -29209,10 +29167,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Dive into the world of koi fish! They love garlic for flavor and strength.
-    They also enjoy pellets and wheat germ for energy. Avoid bread, corn, and peas
-    as they are hard to digest. Treat them to a feast of garlic, pellets, or wheat
-    germ when visiting a koi pond!
+  m_text: Dive into the world of koi fish! They love <color=green>garlic</color>
+    for flavor and strength. They also enjoy <color=green>pellets and wheat germ</color>
+    for energy. Avoid <color=red>bread, corn, and peas</color> as they are hard to
+    digest. Treat them to a feast of garlic, pellets, or wheat germ when visiting
+    a koi pond!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,
@@ -33717,7 +33676,7 @@ RectTransform:
   m_GameObject: {fileID: 1279183649}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.4, z: 1}
+  m_LocalScale: {x: 0.99999994, y: 1.3999999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1570399744}
@@ -33725,7 +33684,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -238.421, y: 199}
+  m_AnchoredPosition: {x: -238.421, y: 199.00003}
   m_SizeDelta: {x: 620.999, y: 367.566}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1279183651
@@ -35819,10 +35778,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pigeons are adventurous and love to peck at grains, seeds, and worms. However,
-    they are picky eaters and avoid foods like chocolate, coffee beans, and onions
-    because they are difficult to digest and make them feel unwell. To make pigeons
-    happy, let's give them their favorite snacks when they visit the park.
+  m_text: Pigeons are adventurous and love to peck at <color=green>grains, seeds,
+    and worms</color>. However, they are picky eaters and avoid foods like <color=red>chocolate,
+    coffee beans, and onions</color> because they are difficult to digest and make
+    them feel unwell. To make pigeons happy, let's give them their favorite snacks
+    when they visit the park.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,
@@ -39240,7 +39200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 47688667}
-  maxTime: 20
+  maxTime: 60
 --- !u!1 &1505412144
 GameObject:
   m_ObjectHideFlags: 0
@@ -40731,6 +40691,7 @@ RectTransform:
   - {fileID: 36697898}
   - {fileID: 470954389}
   - {fileID: 828089512}
+  - {fileID: 1677969491}
   m_Father: {fileID: 1792579249}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -41046,11 +41007,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Camels are animals that eat plants as their main food. They really like
-    to eat things like barley, dates, and cactus. They stay away from meat, like
-    pork, and they are smart enough to not eat rhubarb leaves because they can be
-    harmful. Unlike some people, camels don't like garlic because it has a very strong
-    smell and taste.
+  m_text: Camels are animals that eat <color=green>plants</color> as their main food.
+    They really like to eat things like <color=green>barley, dates, and cactus</color>.
+    They stay away from <color=red>meat, like pork</color>, and they are smart enough
+    to not eat </color=red>rhubarb leaves</color> because they can be harmful. Unlike
+    some people, camels don't like <color=red>garlic</color> because it has a very
+    strong smell and taste.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,
@@ -41766,17 +41728,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1625555178}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1068655803}
+  m_Father: {fileID: 2068730917}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 764, y: 486}
+  m_AnchoredPosition: {x: 1.8080444, y: 1.5578308}
   m_SizeDelta: {x: 86.383, y: 79.686}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1625555180
@@ -42934,15 +42896,15 @@ RectTransform:
   m_GameObject: {fileID: 1677969490}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.83333313, y: 0.83333313, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1792579249}
-  m_RootOrder: 20
+  m_Father: {fileID: 1570399744}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16.393957, y: 0.05404663}
+  m_AnchoredPosition: {x: -28.421661, y: 133.84625}
   m_SizeDelta: {x: 2598.604, y: 1168.263}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1677969492
@@ -43565,17 +43527,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1697575768}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1068655803}
+  m_Father: {fileID: 2068730917}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 866, y: 487}
+  m_AnchoredPosition: {x: 103.808044, y: 2.5578918}
   m_SizeDelta: {x: 86.383, y: 79.686}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1697575770
@@ -45166,7 +45128,7 @@ RectTransform:
   - {fileID: 319752992}
   - {fileID: 350449057}
   - {fileID: 12714592}
-  - {fileID: 99400064}
+  - {fileID: 405386975}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45632,9 +45594,8 @@ RectTransform:
   - {fileID: 582820525}
   - {fileID: 1619006172}
   - {fileID: 1570399744}
-  - {fileID: 1677969491}
-  - {fileID: 681432344}
   - {fileID: 206669388}
+  - {fileID: 681432344}
   m_Father: {fileID: 322364194}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -47292,17 +47253,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872270633}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1068655803}
+  m_Father: {fileID: 2068730917}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 866, y: 486}
+  m_AnchoredPosition: {x: 103.808044, y: 1.5578308}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1872270635
@@ -47707,17 +47668,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896781879}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1068655803}
+  m_Father: {fileID: 2068730917}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 663, y: 486}
+  m_AnchoredPosition: {x: -99.191895, y: 1.5578308}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1896781881
@@ -50841,6 +50802,48 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 4
   m_TargetDisplay: 0
+--- !u!1 &2068730916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2068730917}
+  m_Layer: 0
+  m_Name: HP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2068730917
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068730916}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 346589916}
+  - {fileID: 1625555179}
+  - {fileID: 1697575769}
+  - {fileID: 1896781880}
+  - {fileID: 889730564}
+  - {fileID: 1872270634}
+  m_Father: {fileID: 591895723}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.8882916, y: 0.90400004}
+  m_AnchorMax: {x: 0.9058334, y: 0.93144464}
+  m_AnchoredPosition: {x: -0.30786133, y: 4.4421387}
+  m_SizeDelta: {x: 293.781, y: 81.72}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2070097094
 GameObject:
   m_ObjectHideFlags: 0

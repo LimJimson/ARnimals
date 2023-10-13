@@ -6,7 +6,7 @@ using TMPro;
 public class CTF_HighScoreManager : MonoBehaviour
 {
     [SerializeField] private GameObject highScoreText;
-    private const string HighScoreKey = "CTF_HighScore";
+	private string selectedLevel;
 
     [SerializeField] private int highScore;
 
@@ -17,6 +17,7 @@ public class CTF_HighScoreManager : MonoBehaviour
 
     private void Start()
     {
+		selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel");
         // Load the high score from PlayerPrefs when the game starts.
         LoadHighScore();
     }
@@ -32,7 +33,7 @@ public class CTF_HighScoreManager : MonoBehaviour
         if (score > highScore)
         {
             highScore = score;
-            PlayerPrefs.SetInt(HighScoreKey, highScore);
+            PlayerPrefs.SetInt("CTF_HighScoreLvl" + selectedLevel, highScore);
 
             highScoreText.SetActive(true);
         }
@@ -45,6 +46,6 @@ public class CTF_HighScoreManager : MonoBehaviour
     private void LoadHighScore()
     {
         // Load the high score from PlayerPrefs.
-        highScore = PlayerPrefs.GetInt(HighScoreKey, 0);
+        highScore = PlayerPrefs.GetInt("CTF_HighScoreLvl" + selectedLevel, 0);
     }
 }

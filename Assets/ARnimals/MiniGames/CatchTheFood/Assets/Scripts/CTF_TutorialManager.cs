@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class CTF_TutorialManager : MonoBehaviour
 {
@@ -55,6 +56,12 @@ public class CTF_TutorialManager : MonoBehaviour
     [SerializeField] private GameObject[] boyGuideForMenus;
     [SerializeField] private GameObject[] girlGuideForMenus;
 
+    [Header("Guide Voice Overs")]
+    [SerializeField] private AudioSource[] boyVoiceOver;
+    [SerializeField] private AudioSource[] girlVoiceOver;
+	[SerializeField] private Slider guideVolumeSlider;
+	[SerializeField] private TextMeshProUGUI guideVolumePercentageTxt;
+
     [SerializeField] private int pageNum = 0;
 
     private string guide_name;
@@ -76,6 +83,7 @@ public class CTF_TutorialManager : MonoBehaviour
         checkGuide();
         pagesContents();
         disableAllGameObjects();
+		checkGuideVolume();
         backButton.SetActive(false);
         tutorialCanvas.SetActive(true);
         startGamePanel.SetActive(false);
@@ -91,7 +99,7 @@ public class CTF_TutorialManager : MonoBehaviour
 
     private void Update() 
     {
-        pagesContents();
+        //pagesContents();
     }
 
     private void showGuide(int guideSprite, int dialogBoxSprite, string name, GameObject[] guideForMenus)
@@ -132,6 +140,49 @@ public class CTF_TutorialManager : MonoBehaviour
             showGuide(1, 1, "Sandy", girlGuideForMenus);
         }
     }
+	
+	private void stopAllVoiceOvers() 
+	{
+		for (int i = 0; i < boyVoiceOver.Length; i++) 
+        {
+            boyVoiceOver[i].Stop();
+        }
+
+        for (int i = 0; i < girlVoiceOver.Length; i++) 
+        {
+            girlVoiceOver[i].Stop();
+        }
+	}
+
+    private void playGuideVoiceOver(int currentPage) 
+    {
+		stopAllVoiceOvers();
+
+        if (guideChosen == "boy_guide") 
+        {
+            boyVoiceOver[currentPage].Play();
+        }
+        else if (guideChosen == "girl_guide") 
+        {
+            girlVoiceOver[currentPage].Play();
+        }
+		else if(string.IsNullOrEmpty(guideChosen)) 
+		{
+			boyVoiceOver[currentPage].Play();
+		}
+    }
+	
+	public void checkGuideVolume() 
+	{
+		for (int i = 0; i < boyVoiceOver.Length; i++) 
+		{
+			boyVoiceOver[i].volume = guideVolumeSlider.value;
+			girlVoiceOver[i].volume = guideVolumeSlider.value;
+		}
+		
+		int percentage = Mathf.RoundToInt(guideVolumeSlider.value * 100);
+		guideVolumePercentageTxt.text = percentage.ToString() + "%";
+	}
 
     public void backBtnFunction() 
     {
@@ -141,10 +192,6 @@ public class CTF_TutorialManager : MonoBehaviour
         {
             pageNum--;
             pagesContents();
-        }
-        if (pageNum == 1) 
-        {
-            backButton.SetActive(false);
         }
 
         pageNumTxt.text = pageNum.ToString() + "/10";
@@ -169,6 +216,7 @@ public class CTF_TutorialManager : MonoBehaviour
         }
 
         PlayerPrefs.SetInt("CTF_IsTutorialDone", 1);
+		stopAllVoiceOvers();
     }
 
     public void clickToNext()
@@ -199,6 +247,7 @@ public class CTF_TutorialManager : MonoBehaviour
             }
 
             PlayerPrefs.SetInt("CTF_IsTutorialDone", 1);
+			stopAllVoiceOvers();
         }
 
         if (pageNum > 1) 
@@ -212,8 +261,8 @@ public class CTF_TutorialManager : MonoBehaviour
     {
             hideAllComponents();
             pageNumTxt.text = "";
-            dialogText.fontSize = 41.8f;
-            dialogText.text = "Hello there! I'm <color=yellow>" + guide_name + "</color>, your trusty guide who will help you learn and navigate this game. Get ready for an exciting learning experience!";            
+            dialogText.fontSize = 45f;
+            dialogText.text = "Welcome to <color=yellow>Catch the Food</color>, a fun game where you need to catch the right food for the animals!";            
             tutorial.transform.localPosition = (new Vector3(50.49997f, -160.5615f, 0f));
 
             showClickToNextTxt(click2NextTxtRightGameObject, click2NextTxtRight, 1);
@@ -222,6 +271,7 @@ public class CTF_TutorialManager : MonoBehaviour
             dialogBox.transform.localScale = new Vector3(1f, 1.4f, 1f);
 
             dialogText.transform.localPosition = new Vector3(-248.31f, 235f, 0f);
+            playGuideVoiceOver(0);
     }
 
     public void pagesContents() 
@@ -238,6 +288,7 @@ public class CTF_TutorialManager : MonoBehaviour
                 click2NxtPanelForTrivia.SetActive(true);
                 panelForTrivia.SetActive(true);            
                 hideAllComponents();
+				stopAllVoiceOvers();
                 showClickToNextTxt(click2NextTxtBottomGameObject,click2NextTxtBottm, 1);
 
                 // Retrieve the selected level from PlayerPrefs
@@ -299,6 +350,7 @@ public class CTF_TutorialManager : MonoBehaviour
             dialogText.transform.localPosition = new Vector3(-248.31f, 240f, 0f);
 
             showComponent(tutorialGameObjectsCanvas[0], tutorialGameObjects[0]);
+            playGuideVoiceOver(1);
 
         }
         else if (pageNum == 2) 
@@ -316,6 +368,7 @@ public class CTF_TutorialManager : MonoBehaviour
             dialogText.transform.localPosition = new Vector3(-248.31f, 228f, 0f);
 
             showComponent(tutorialGameObjectsCanvas[1], tutorialGameObjects[1]);
+            playGuideVoiceOver(2);
         }
         else if (pageNum == 3) 
         {
@@ -334,6 +387,7 @@ public class CTF_TutorialManager : MonoBehaviour
             tutorialGameObjects[2].SetActive(false);
 
             showComponent(tutorialGameObjectsCanvas[1], tutorialGameObjects[1]);
+            playGuideVoiceOver(3);
         }
         else if (pageNum == 4) 
         {
@@ -351,6 +405,7 @@ public class CTF_TutorialManager : MonoBehaviour
             tutorialGameObjects[1].SetActive(false);
 
             showComponent(tutorialGameObjectsCanvas[2], tutorialGameObjects[2]);
+            playGuideVoiceOver(4);
         }
         else if (pageNum == 5) 
         {
@@ -368,6 +423,7 @@ public class CTF_TutorialManager : MonoBehaviour
             tutorialGameObjects[2].SetActive(true);
 
             showComponent(tutorialGameObjectsCanvas[3], tutorialGameObjects[3]);
+            playGuideVoiceOver(5);
         }
         else if (pageNum == 6) 
         {
@@ -387,11 +443,12 @@ public class CTF_TutorialManager : MonoBehaviour
             tutorialGameObjects[3].SetActive(false); //PowerUpSigns
 
             showComponent(tutorialGameObjectsCanvas[4], tutorialGameObjects[4]);
+            playGuideVoiceOver(6);
         }
         else if (pageNum == 7) 
         {
             dialogText.fontSize = 37f;
-            dialogText.text = "Watch out for your <color=yellow>animal's health</color>! If you catch the wrong food, you'll lose a heart. Remember, your animal only has three hearts, so be careful!";
+            dialogText.text = "Watch out for your <color=yellow>animal’s health</color>! If you eat the wrong food, you’ll lose a heart. Remember, your animal only has three hearts, so be careful! ";
 
             tutorial.transform.localPosition = (new Vector3(502f, -72f, 0f));
 
@@ -403,11 +460,12 @@ public class CTF_TutorialManager : MonoBehaviour
             dialogText.transform.localPosition = new Vector3(-248.31f, 239f, 0f);
 
             showComponent(tutorialGameObjectsCanvas[5], tutorialGameObjects[5]);
+            playGuideVoiceOver(7);
         }
         else if (pageNum == 8) 
         {
             dialogText.fontSize = 36.5f;
-            dialogText.text = "Introducing the <color=yellow>game's timer</color>! You have 60 seconds to catch the falling foods. To earn a reward, aim to score 10 or more without losing all your hearts before time runs out. Good luck!";
+            dialogText.text = "Introducing the <color=yellow>game’s timer</color>! You have 60 seconds to catch the falling foods. To earn a reward, aim to score 10 or more without losing all your hearts before time runs out. Good luck!";
 
             tutorial.transform.localPosition = (new Vector3(371f, -110f, 0f));
 
@@ -419,11 +477,12 @@ public class CTF_TutorialManager : MonoBehaviour
             dialogText.transform.localPosition = new Vector3(-248.31f, 241f, 0f);
 
             showComponent(tutorialGameObjectsCanvas[6], tutorialGameObjects[6]);
+            playGuideVoiceOver(8);
         }
         else if (pageNum == 9) 
         {
             dialogText.fontSize = 37f;
-            dialogText.text = "Introducing the <color=yellow>settings button</color>! If you want to adjust the volume, restart, or quit the game, simply click on this button. It gives you control over the game settings. Have fun!";
+            dialogText.text = "Introducing the <color=yellow>settings button</color>. If you want to adjust the volume, restart, or quit the game, simply click on this button. It gives you control over the game settings. Have fun!";
 
             tutorial.transform.localPosition = (new Vector3(52f, -84f, 0f));
 
@@ -435,6 +494,7 @@ public class CTF_TutorialManager : MonoBehaviour
             dialogText.transform.localPosition = new Vector3(-248.31f, 260f, 0f);
 
             showComponent(tutorialGameObjectsCanvas[7], tutorialGameObjects[7]);
+            playGuideVoiceOver(9);
         }
         else if (pageNum == 10) 
         {
@@ -446,6 +506,7 @@ public class CTF_TutorialManager : MonoBehaviour
             showClickToNextTxt(click2NextTxtLeftGameObject, click2NextTxtLeft, 2);
 
             showComponent(tutorialGameObjectsCanvas[8], tutorialGameObjects[8]);
+            playGuideVoiceOver(10);
         }
     }
     private void showClickToNextTxt(GameObject gameObject, TextMeshProUGUI tmpText, int choice) 

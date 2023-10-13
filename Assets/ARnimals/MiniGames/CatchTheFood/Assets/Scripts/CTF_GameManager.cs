@@ -68,6 +68,8 @@ public class CTF_GameManager : MonoBehaviour
 	[SerializeField] private AudioSource powerUpsMusic;
 	[SerializeField] private Slider musicVolumeSlider;
 	[SerializeField] private Slider soundFXVolumeSlider;
+	[SerializeField] private TextMeshProUGUI musicVolumePercentageTxt;
+	[SerializeField] private TextMeshProUGUI soundFXVolumePercentageTxt;
 
     private int finalScore;
 
@@ -134,12 +136,18 @@ public class CTF_GameManager : MonoBehaviour
 		bgMusic.volume = musicVolumeSlider.value;
 		lvlCompleteMusic.volume = musicVolumeSlider.value;
 		gameOverMusic.volume = musicVolumeSlider.value;
+		
+		int percentage = Mathf.RoundToInt(musicVolumeSlider.value * 100);
+		musicVolumePercentageTxt.text = percentage.ToString() + "%";
 	}
 	
 	public void checkSoundFXVolume() 
 	{
 		wrongFoodMusic.volume = soundFXVolumeSlider.value;
 		powerUpsMusic.volume = soundFXVolumeSlider.value;
+		
+		int percentage = Mathf.RoundToInt(soundFXVolumeSlider.value * 100);
+		soundFXVolumePercentageTxt.text = percentage.ToString() + "%";
 	}
 
     private IEnumerator showTransitionAfterDelay() 

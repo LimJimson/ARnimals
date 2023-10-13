@@ -92,6 +92,7 @@ public class AnimalInfoScript : MonoBehaviour
         checkIfVideoIsPlaying();
         checkIfPlayerIsPlaying();
 		DisableToggleHideButtonIfNotFullScreen();
+		delayTimerForHidingButtons();
     }
     void checkIfGTS_ExploreBtnClicked()
     {
@@ -312,40 +313,58 @@ public class AnimalInfoScript : MonoBehaviour
 	private bool buttonHidden = false;
 	private float hideDelay = 5f;
 	private bool isDelayTimerRunning = false;
-	private Coroutine hideCoroutine;
-
-	public void ToggleHideButtonsIfFullScreen(int code)
+	
+	private void delayTimerForHidingButtons() 
 	{
-		if (code == 1)
+		if (isDelayTimerRunning)
 		{
-			buttonHidden = true;
-			toggleHideButton.SetActive(true);
-		}
-		
-		if (videoPlayerController.IsFullScreen)
-		{
-			if (!buttonHidden)
-			{
-				HideVideoPlayerButtons();
-				StopHideCoroutine();
-			}
-			else if (buttonHidden)
-			{
-				ShowVideoPlayerButtons();
-				if (!isDelayTimerRunning)
-				{
-					StartHideCoroutine();
-				}
-			}
-		}
-		else
-		{
-			ShowVideoPlayerButtons();
-		}
-		Debug.Log("Delay Running: " + isDelayTimerRunning);
-		Debug.Log(buttonHidden);
-	}
+			hideDelay -= Time.deltaTime;
 
+			if (hideDelay <= 0.0f)
+			{
+				// Timer has reached 0 or less
+				isDelayTimerRunning = false;
+				hideDelay = 5f;
+				HideVideoPlayerButtons();
+			}
+		}
+	}
+	
+	private void startTimer() 
+	{
+		hideDelay = 5f;
+		isDelayTimerRunning = true;
+	}
+	
+	public void ToggleHideButtonsIfFullScreen(string buttonName)
+	{
+		switch (buttonName)
+		{
+			case "FullScreenButton":
+				buttonHidden = true;
+				toggleHideButton.SetActive(true);
+				startTimer();;
+				break;
+			case "Play/PauseButton" when videoPlayerController.IsFullScreen:
+				ShowVideoPlayerButtons();
+				startTimer();
+				break;
+			case "ToggleButton" when videoPlayerController.IsFullScreen:
+				if (!buttonHidden)
+				{
+					HideVideoPlayerButtons();
+					isDelayTimerRunning = false;
+					hideDelay = 5f;
+				}
+				else
+				{
+					ShowVideoPlayerButtons();
+					startTimer();
+				}
+				break;
+		}
+	}
+	
 	private void HideVideoPlayerButtons()
 	{
 		foreach (var button in videoPlayerButtons)
@@ -369,40 +388,9 @@ public class AnimalInfoScript : MonoBehaviour
 		if (!videoPlayerController.IsFullScreen)
 		{
 			toggleHideButton.SetActive(false);
-		}
-	}
-
-	private void StartHideCoroutine()
-	{
-		if (hideCoroutine != null)
-		{
-			StopCoroutine(hideCoroutine);
-		}
-		hideCoroutine = StartCoroutine(HideButtonsAfterDelay());
-	}
-
-	private void StopHideCoroutine()
-	{
-		if (hideCoroutine != null)
-		{
-			StopCoroutine(hideCoroutine);
-		}
-		isDelayTimerRunning = false;
-	}
-
-	private IEnumerator HideButtonsAfterDelay()
-	{
-		isDelayTimerRunning = true;
-		yield return new WaitForSeconds(hideDelay);
-
-		if (videoPlayerController.IsFullScreen)
-		{
-			HideVideoPlayerButtons();
-		}
-		else
-		{
 			ShowVideoPlayerButtons();
+			isDelayTimerRunning = false;
+			hideDelay = 5f;
 		}
-		isDelayTimerRunning = false;
 	}
 }

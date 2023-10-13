@@ -17,7 +17,11 @@ public static class CTF_Reset
         PlayerPrefs.SetInt("CTF_IsTutorialDone", 0);
 
         //Reset High Score
-        PlayerPrefs.SetInt("CTF_HighScore", 0);
+        PlayerPrefs.SetInt("CTF_HighScoreLvl1", 0);
+		PlayerPrefs.SetInt("CTF_HighScoreLvl2", 0);
+		PlayerPrefs.SetInt("CTF_HighScoreLvl3", 0);
+		PlayerPrefs.SetInt("CTF_HighScoreLvl4", 0);
+		PlayerPrefs.SetInt("CTF_HighScoreLvl5", 0);
 		
 		//Reset Stars
 		PlayerPrefs.SetInt("CTF_Lvl1StarsCount", 0);

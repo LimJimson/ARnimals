@@ -7598,6 +7598,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1142736042}
+        m_TargetAssemblyTypeName: GTS_Settings, Assembly-CSharp
+        m_MethodName: LoadSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &584902866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8933,8 +8945,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1519351317}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9101,8 +9113,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 967226304}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -14524,8 +14536,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1455025992}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -16412,6 +16424,7 @@ GameObject:
   - component: {fileID: 1142736039}
   - component: {fileID: 1142736040}
   - component: {fileID: 1142736041}
+  - component: {fileID: 1142736042}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -16634,6 +16647,27 @@ MonoBehaviour:
   placeHolderImages:
   - {fileID: 1406841471}
   - {fileID: 402885802}
+--- !u!114 &1142736042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142736037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63c8562cde9682c47a3d6fd969e2094b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animalSnd: {fileID: 314712635}
+  musicSlider: {fileID: 1588735233}
+  sfxSlider: {fileID: 669945103}
+  AnimalVolSlider: {fileID: 1018368227}
+  guideSlider: {fileID: 650770692}
+  musicPercent: {fileID: 38922356}
+  sfxPercent: {fileID: 1848347635}
+  AnimalSndPercent: {fileID: 910647435}
+  guidePercent: {fileID: 670057595}
 --- !u!1 &1147657393
 GameObject:
   m_ObjectHideFlags: 0
@@ -23198,8 +23232,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 182536846}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -26627,9 +26661,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GTS_Settings, Assembly-CSharp
-        m_MethodName: SaveToVolumeButton
+      - m_Target: {fileID: 1142736039}
+        m_TargetAssemblyTypeName: GTS_GameManager, Assembly-CSharp
+        m_MethodName: hideOptions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -26639,9 +26673,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1142736039}
-        m_TargetAssemblyTypeName: GTS_GameManager, Assembly-CSharp
-        m_MethodName: hideOptions
+      - m_Target: {fileID: 1142736042}
+        m_TargetAssemblyTypeName: GTS_Settings, Assembly-CSharp
+        m_MethodName: saveSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -15,9 +15,13 @@ public class touchToNextMiniGames : MonoBehaviour, IPointerDownHandler
     public int pageCounter = 1;
     public GameObject miniGameSelectGuide;
     public GameObject realGuideBtn;
+
+    public MiniGamesGuide _miniGameGuideScript;
     public void OnPointerDown(PointerEventData eventData)
     {
         pageCounter++;
+        _miniGameGuideScript.guideVoiceOver();
+
     }
 
     void Start()
@@ -87,7 +91,7 @@ public class touchToNextMiniGames : MonoBehaviour, IPointerDownHandler
             realGuideBtn.SetActive(true);
 
             miniGameSelectGuide.SetActive(false);
-            
+            _miniGameGuideScript.stopGuideVoice();
 
             if (!existingSO.MiniGamesTutorialDone)
             {

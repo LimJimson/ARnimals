@@ -10,9 +10,12 @@ public class TouchToNextModeSelect : MonoBehaviour,IPointerDownHandler
     public TMP_Text pageNum;
     public int pageCounter = 1;
     public GameObject mode_select_guide;
+
+    public ModeSelectGuide modeSelectGuideScript;
     public void OnPointerDown(PointerEventData eventData)
     {
         pageCounter++;
+        modeSelectGuideScript.guideVoiceOver();
     }
 
     // Start is called before the first frame update
@@ -56,6 +59,7 @@ public class TouchToNextModeSelect : MonoBehaviour,IPointerDownHandler
         {
             pageCounter = 1;
             mode_select_guide.SetActive(false);
+            modeSelectGuideScript.stopGuideVoice();
             if (!existingSO.ModeSelectTutorialDone)
             {
                 existingSO.ModeSelectTutorialDone = true;

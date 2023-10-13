@@ -67,7 +67,7 @@ public class MiniGamesGuide : MonoBehaviour
             Debug.Log("No AudioManager");
         }
         loaddata = SaveManager.Load();
-        guideChosen = StateNameController.guide_chosen;
+        guideChosen = loaddata.guideChosen;
         if (!StateNameController.miniGamesSelectGuide)
         {
             _MiniGameSelectGuide();
@@ -76,15 +76,101 @@ public class MiniGamesGuide : MonoBehaviour
         }
         
     }
+    public void guideVoiceOver()
+    {
+        try
+        {
+            if (_TouchToNextMiniGameSelectScript.pageCounter == 1)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    
+                    audioManager.PlayGuide(audioManager.MinigameSelectPatrick[0]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.MinigameSelectSandy[0]);
+                }
+
+            }
+            else if (_TouchToNextMiniGameSelectScript.pageCounter == 2)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.MinigameSelectPatrick[1]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.MinigameSelectSandy[1]);
+                }
+            }
+            else if (_TouchToNextMiniGameSelectScript.pageCounter == 3)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.MinigameSelectPatrick[2]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.MinigameSelectSandy[2]);
+                }
+            }
+            else if (_TouchToNextMiniGameSelectScript.pageCounter == 4)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.MinigameSelectPatrick[3]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.MinigameSelectSandy[3]);
+                }
+            }
+            else if (_TouchToNextMiniGameSelectScript.pageCounter == 5)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.MinigameSelectPatrick[4]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.MinigameSelectSandy[4]);
+                }
+            }
+            else if (_TouchToNextMiniGameSelectScript.pageCounter == 6)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.MinigameSelectPatrick[5]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.MinigameSelectSandy[5]);
+                }
+            }
+        }
+        catch
+        {
+
+        }
+
+    }
+    public void stopGuideVoice()
+    {
+        try { audioManager.guideSource.Stop(); } catch { }
+    }
 
     public void skipTutorial()
     {
+
         pageNumPos1.text = "1/6";
         pageNumPos2.text = "1/6";
         _TouchToNextMiniGameSelectScript.setPageCtr(1);
+        stopGuideVoice();
         disableAllGuideGameObjects();
         MiniGameSelectGuide.SetActive(false);
         realGuideBtn.SetActive(true);
+        realBackBtn.SetActive(true);
 
         if (!loaddata.MiniGamesTutorialDone)
         {
@@ -96,6 +182,7 @@ public class MiniGamesGuide : MonoBehaviour
     public void GuideBack()
     {
         _TouchToNextMiniGameSelectScript.minusPageCtr();
+        guideVoiceOver();
         disableAllGuideGameObjects();
     }
 
@@ -133,6 +220,7 @@ public class MiniGamesGuide : MonoBehaviour
         pos2_GO.SetActive(false);
 
         pageNumPos1.text = "1/6";
+        guideVoiceOver();
 
         if (guideChosen == "boy_guide")
         {
@@ -265,6 +353,8 @@ public class MiniGamesGuide : MonoBehaviour
 
             guideTxt.gameObject.SetActive(false);
             guideHighlight.gameObject.SetActive(false);
+
+            realBackBtn.SetActive(true);
 
             pos1_GO.SetActive(false);
             pos2_GO.SetActive(true);

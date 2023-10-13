@@ -33,6 +33,7 @@ public class showHabitat : MonoBehaviour
         {
             AudioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
             playEnvironmentBGM();
+            
         }        
         catch
         {
@@ -68,17 +69,23 @@ public class showHabitat : MonoBehaviour
 
     public void PlayMainBGM()
     {
-        AudioManager.musicSource.Stop();
-        AudioManager.playBGMMusic(AudioManager.mainBG);
+        try
+        {
+            AudioManager.musicSource.Stop();
+            AudioManager.playBGMMusic(AudioManager.mainBG);
+        } catch { }
+
     }
 
     public void pauseMainBGM()
     {
-        AudioManager.musicSource.Pause();
+        try { AudioManager.musicSource.Pause(); } catch { }
+        
     }
     public void unPauseMainBGM()
     {
-        AudioManager.musicSource.UnPause();
+        try { AudioManager.musicSource.UnPause(); } catch { }
+        
     }
 
     public TMP_Text timerHabitat;

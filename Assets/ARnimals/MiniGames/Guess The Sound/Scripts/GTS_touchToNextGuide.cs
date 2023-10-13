@@ -18,6 +18,7 @@ public class GTS_touchToNextGuide : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         pageCounter++;
+        gts_guideScript.guideVoiceOver();
     }
 
     void Start()
@@ -44,6 +45,7 @@ public class GTS_touchToNextGuide : MonoBehaviour, IPointerDownHandler
             pageNum2.gameObject.SetActive(false);
             pageNum.text = "1/10";
             pageNum2.text = "1/10";
+
         }
         else if (pageCounter == 2)
         {
@@ -114,7 +116,7 @@ public class GTS_touchToNextGuide : MonoBehaviour, IPointerDownHandler
             pageNum.text = "1/10";
             gts_guideScript.showObjects();
             gts_guideScript.hidePlaceHolderImg();
-
+            gts_guideScript.stopGuideVoice();
             GTS_GameGO.SetActive(false);
 
 

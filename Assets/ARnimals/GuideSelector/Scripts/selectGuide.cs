@@ -8,15 +8,7 @@ using UnityEngine.UI;
 
 public class selectGuide : MonoBehaviour
 {
-    public GameObject blackPanel;
-    public TMP_Text selectText;
-    public Button boyBtn;
-    public Button girlBtn;
-    public SaveObject soScript;
-    public Animator animatorBlackPanel;
-
-    public Button boyBtnHighlight;
-    public Button girlBtnHighlight;
+    SaveObject soScript;
 
     bool boy_guide = false;
     bool girl_guide = false;
@@ -36,45 +28,14 @@ public class selectGuide : MonoBehaviour
             {
                 audioManager.playBGMMusic(audioManager.mainBG);
             }
+
         }
         catch
         {
             Debug.Log("No AudioManager");
         }
         Screen.orientation = ScreenOrientation.LandscapeLeft;
-        animatorBlackPanel.SetBool("panelFadeOut", false);
-    }
-    
-    public void FixedUpdate()
-    {
-        if (selectText.color.a != 1)
-        {
-            boyBtnHighlight.gameObject.SetActive(true);
-            girlBtnHighlight.gameObject.SetActive(true);
-            boyBtn.interactable = false;
-            girlBtn.interactable = false;
-            blackPanel.SetActive(true);
-            animatorBlackPanel.SetBool("panelFadeOut", false);
-        }
-        else if (selectText.color.a == 1)
-        {
-            StartCoroutine(delay(animatorBlackPanel.GetCurrentAnimatorStateInfo(0).length));
-            animatorBlackPanel.SetBool("panelFadeOut", true);
-            boyBtnHighlight.gameObject.SetActive(false);
-            girlBtnHighlight.gameObject.SetActive(false);
-            boyBtn.interactable = true;
-            girlBtn.interactable = true;
-            
-        }
-
-    }
-    IEnumerator delay(float delayFadeOut = 0)
-    {
-        yield return new WaitForSeconds(delayFadeOut);
-        blackPanel.SetActive(false);
-    }
-    public void tempBTN(){
-        SceneManager.LoadScene("MainMenu");
+       
     }
 
     public void selectBoy()

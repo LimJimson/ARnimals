@@ -11,12 +11,13 @@ public class touchToNextAnimal_Info : MonoBehaviour, IPointerDownHandler
     public TMP_Text pageNum2;
     public TMP_Text pageNum3;
     public int pageCounter = 1;
-
+    public animalInfoGuide _animalInfoGuideScript;
     public GameObject animalInfoGuide;
 
     public void OnPointerDown(PointerEventData eventData)
     {
         pageCounter++;
+        _animalInfoGuideScript.guideVoiceOver();
     }
 
     void Start()
@@ -171,6 +172,7 @@ public class touchToNextAnimal_Info : MonoBehaviour, IPointerDownHandler
         {
             pageCounter = 1;
             pageNum.text = "1/13";
+            _animalInfoGuideScript.stopGuideVoice();
             animalInfoGuide.SetActive(false);
 
             if (!existingSO.animalInfoGuide)

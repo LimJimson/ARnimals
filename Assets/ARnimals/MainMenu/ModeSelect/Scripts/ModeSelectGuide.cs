@@ -55,7 +55,7 @@ public class ModeSelectGuide : MonoBehaviour
         }
 
         loaddata = SaveManager.Load();
-        GuideChosen = StateNameController.guide_chosen;
+        GuideChosen = loaddata.guideChosen;
         if (!StateNameController.modeSelectGuide)
         {
             _modeSelectGuide();
@@ -68,6 +68,77 @@ public class ModeSelectGuide : MonoBehaviour
     void Update()
     {
         showDialogs();
+    }
+    public void guideVoiceOver()
+    {
+        try
+        {
+            if (_TouchToNextModeSelectScript.pageCounter == 1)
+            {
+                if (GuideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.ModeSelectPatrick[0]);
+                }
+                else if (GuideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.ModeSelectSandy[0]);
+                }
+
+            }
+            else if (_TouchToNextModeSelectScript.pageCounter == 2)
+            {
+                if (GuideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.ModeSelectPatrick[1]);
+                }
+                else if (GuideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.ModeSelectSandy[1]);
+                }
+            }
+            else if (_TouchToNextModeSelectScript.pageCounter == 3)
+            {
+                if (GuideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.ModeSelectPatrick[2]);
+                }
+                else if (GuideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.ModeSelectSandy[2]);
+                }
+            }
+            else if (_TouchToNextModeSelectScript.pageCounter == 4)
+            {
+                if (GuideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.ModeSelectPatrick[3]);
+                }
+                else if (GuideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.ModeSelectSandy[3]);
+                }
+            }
+            else if (_TouchToNextModeSelectScript.pageCounter == 5)
+            {
+                if (GuideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.ModeSelectPatrick[4]);
+                }
+                else if (GuideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.ModeSelectSandy[4]);
+                }
+            }
+        }
+        catch
+        {
+
+        }
+
+    }
+    public void stopGuideVoice()
+    {
+        try { audioManager.guideSource.Stop(); } catch { }
     }
 
     public void goToMainMenu()
@@ -89,6 +160,7 @@ public class ModeSelectGuide : MonoBehaviour
         pageNum.text = "1/5";
         modeSelect_guide.gameObject.SetActive(true);
         pageNum.gameObject.SetActive(true);
+        guideVoiceOver();
         if (GuideChosen == "boy_guide")
         {
             _maleGuide();
@@ -118,6 +190,7 @@ public class ModeSelectGuide : MonoBehaviour
         pageNum.text = "1/5";
         _TouchToNextModeSelectScript.setPageCtr(1);
         disableAllGuideGameObjects();
+        stopGuideVoice();
         modeSelect_guide.SetActive(false);
         if (!loaddata.ModeSelectTutorialDone)
         {
@@ -128,6 +201,7 @@ public class ModeSelectGuide : MonoBehaviour
     public void GuideBack()
     {
         _TouchToNextModeSelectScript.minusPageCtr();
+        guideVoiceOver();
         disableAllGuideGameObjects();
     }
 

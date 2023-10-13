@@ -111,6 +111,7 @@ public class ARPlacement : MonoBehaviour
         }
     }
 
+
     private void CalculateSpawnPosition()
     {
         // Get the camera's position and rotation
@@ -118,7 +119,7 @@ public class ARPlacement : MonoBehaviour
         Quaternion cameraRotation = Camera.main.transform.rotation;
 
         float spawnHeight = 0.5f;
-        float spawnDistance = 3f;
+        float spawnDistance = 5f;
 
         Vector3 screenCenter = new Vector3(0.5f, 0.5f, Camera.main.nearClipPlane);
 

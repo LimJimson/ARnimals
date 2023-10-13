@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 public class TouchToNextASGuide : MonoBehaviour, IPointerDownHandler
 {
     SaveObject existingSO;
+    public animalSelectorGuide _animalSelectorGuideScript;
+
     public TMP_Text pageNum;
     public TMP_Text pageNum2;
     public int pageCounter = 1;
@@ -20,6 +22,7 @@ public class TouchToNextASGuide : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         pageCounter++;
+        _animalSelectorGuideScript.guideVoiceOver();
     }
 
     void Start()
@@ -93,6 +96,7 @@ public class TouchToNextASGuide : MonoBehaviour, IPointerDownHandler
         {
             pageCounter = 1;
             pageNum.text = "1/7";
+            _animalSelectorGuideScript.stopGuideVoice();
             animalSelectGuide.SetActive(false);
             animalName_txt.gameObject.SetActive(true);
             selectAnimal_txt.gameObject.SetActive(true);

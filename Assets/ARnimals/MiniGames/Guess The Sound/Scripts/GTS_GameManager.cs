@@ -113,6 +113,7 @@ public class GTS_GameManager : MonoBehaviour
         randomizeChoiceBtnsAndPlaySndBtns();
 
     }
+
     private void Update()
     {
         countdownHints();
@@ -167,34 +168,32 @@ public class GTS_GameManager : MonoBehaviour
             hintTxt();
         }
 
-
-
     }
 
     void hintTxt()
     {
-        if (audioSrc.isPlaying)
+
+        if (HintsLeft != 0)
         {
-            hintsTxt.text = "<color=#FFFF00>Wait</color> for the <color=#00FFFF>sound</color> to <color=#00FFFF>finish</color> before using <color=#00FFFF>hint</color>!";
+            playSoundCorrectAnswer();
+            HintsLeft -= 1;
+                if(HintsLeft == 0) 
+                {
+                    hintsTxt.text = "No more hints left";
+                }
+                else
+                {
+                    hintsTxt.text = "<color=#FFFF00>" + HintsLeft + " </color>hint left";
+                }
             StartCoroutine(_showHintLeft());
         }
-        else
+        else if (HintsLeft == 0)
         {
-            if (HintsLeft != 0)
-            {
-                playSoundCorrectAnswer();
-                HintsLeft -= 1;
 
-                hintsTxt.text = "<color=#FFFF00>" + HintsLeft + " </color>hint left";
-                StartCoroutine(_showHintLeft());
-            }
-            else if (HintsLeft == 0)
-            {
-
-                hintsTxt.text = "No more hints left";
-                StartCoroutine(_showHintLeft());
-                audioManager.PlaySFX(audioManager.wrongAnswer);
-            }
+            hintsTxt.text = "No more hints left";
+            StartCoroutine(_showHintLeft());
+            try { audioManager.PlaySFX(audioManager.wrongAnswer); }catch { }
+            
         }
     }
     IEnumerator _showHintLeft()
@@ -232,12 +231,22 @@ public class GTS_GameManager : MonoBehaviour
 
     public void StartCountdownHints()
     {
-        if(!audioSrc.isPlaying)
+        if (!audioSrc.isPlaying && HintsLeft != 0)
         {
             isHintsTimerCounting = true;
             countdownHints();
             timerHints.gameObject.SetActive(true);
             HintsButton.interactable = false;
+        }
+        else
+        {
+            hintsTxt.text = "<color=#FFFF00>Wait</color> for the <color=#00FFFF>sound</color> to <color=#00FFFF>finish</color> before using <color=#00FFFF>hint</color>!";
+            StartCoroutine(_showHintLeft());
+        }
+
+        if (HintsLeft == 0)
+        {
+            countdownHints();
         }
 
     }
@@ -791,8 +800,9 @@ public class GTS_GameManager : MonoBehaviour
         life -=1;
         lifeChecker();
 
-
-        audioManager.PlaySFX(audioManager.wrongAnswer);
+        try { audioManager.PlaySFX(audioManager.wrongAnswer); }
+        catch { }
+       
 
     }
     
@@ -910,7 +920,9 @@ public class GTS_GameManager : MonoBehaviour
 
     public void quitLevel()
     {
-        audioManager.musicSource.Stop();
+        try { audioManager.musicSource.Stop(); }
+        catch { }
+        
         SceneManager.LoadScene("GTAFS_lvlSelect");
     }
 

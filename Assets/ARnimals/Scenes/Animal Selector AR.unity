@@ -5423,6 +5423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9bd6133eedaf01489e8c59ffcfcfe4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animalSelectorGuideScript: {fileID: 16181650}
   pageNum: {fileID: 365444985}
   pageNum2: {fileID: 954906724}
   pageCounter: 1

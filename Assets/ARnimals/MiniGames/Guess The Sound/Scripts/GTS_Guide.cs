@@ -74,10 +74,9 @@ public class GTS_Guide : MonoBehaviour
             Debug.Log("No AudioManager");
         }
         loaddata = SaveManager.Load();
-        guideChosen = StateNameController.guide_chosen;
+        guideChosen = loaddata.guideChosen;
 
     }
-
     public void checkIfGuideIsDone()
     {
         if (!StateNameController.GTS_GAME_GUIDE)
@@ -92,6 +91,133 @@ public class GTS_Guide : MonoBehaviour
     {
         showDialogs();
     }
+    public void guideVoiceOver()
+    {
+        try
+        {
+            if (gts_touchToNextScript.pageCounter == 1)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Patrick[0]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Sandy[0]);
+                }
+
+            }
+            else if (gts_touchToNextScript.pageCounter == 2)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Patrick[1]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Sandy[1]);
+                }
+            }
+            else if (gts_touchToNextScript.pageCounter == 3)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Patrick[2]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Sandy[2]);
+                }
+            }
+            else if (gts_touchToNextScript.pageCounter == 4)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Patrick[3]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Sandy[3]);
+                }
+            }
+            else if (gts_touchToNextScript.pageCounter == 5)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Patrick[4]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Sandy[4]);
+                }
+            }
+            else if (gts_touchToNextScript.pageCounter == 6)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Patrick[5]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Sandy[5]);
+                }
+            }
+            else if (gts_touchToNextScript.pageCounter == 7)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Patrick[6]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Sandy[6]);
+                }
+            }
+            else if (gts_touchToNextScript.pageCounter == 8)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Patrick[7]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Sandy[7]);
+                }
+            }
+            else if (gts_touchToNextScript.pageCounter == 9)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Patrick[8]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Sandy[8]);
+                }
+            }
+            else if (gts_touchToNextScript.pageCounter == 10)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Patrick[9]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.GTS_Sandy[9]);
+                }
+            }
+        }
+        catch
+        {
+
+        }
+
+    }
+    public void stopGuideVoice()
+    {
+        try { audioManager.guideSource.Stop(); } catch { }
+    }
+
     public void hideObjects()
     {
         foreach(GameObject go in objectsToHide)
@@ -164,6 +290,7 @@ public class GTS_Guide : MonoBehaviour
         pos2_GO.SetActive(false);
 
         pageNumPos1.text = "1/10";
+        guideVoiceOver();
 
         if (guideChosen == "boy_guide")
         {
@@ -180,6 +307,7 @@ public class GTS_Guide : MonoBehaviour
         pageNumPos1.text = "1/10";
         pageNumPos2.text = "1/10";
         gts_touchToNextScript.setPageCtr(1);
+        stopGuideVoice();
         disableAllGuideGameObjects();
         GTS_GameGuideGO.SetActive(false);
         hidePlaceHolderImg();
@@ -195,7 +323,10 @@ public class GTS_Guide : MonoBehaviour
     public void GuideBack()
     {
         gts_touchToNextScript.minusPageCtr();
+        guideVoiceOver();
         disableAllGuideGameObjects();
+        
+
     }
 
     void _maleGuide()
@@ -225,11 +356,11 @@ public class GTS_Guide : MonoBehaviour
         boyDialogPos2.SetActive(false);
     }
 
-    void showDialogs()
+    public void showDialogs()
     {
-
         if (pageNumPos1.text == "1/10")
         {
+
             welcome_txt.gameObject.SetActive(true);
             backBtnPos1.SetActive(false);
 
@@ -237,7 +368,7 @@ public class GTS_Guide : MonoBehaviour
             animalHighlight.gameObject.SetActive(false);
 
             choices_speakerBtns_txt.gameObject.SetActive(false);
-            
+
             speaker_txt.gameObject.SetActive(false);
             speakerHighlight.gameObject.SetActive(false);
 
@@ -261,6 +392,7 @@ public class GTS_Guide : MonoBehaviour
         }
         else if (pageNumPos1.text == "2/10")
         {
+
             welcome_txt.gameObject.SetActive(false);
             backBtnPos1.SetActive(true);
 
@@ -268,7 +400,7 @@ public class GTS_Guide : MonoBehaviour
             animalHighlight.gameObject.SetActive(true);
 
             choices_speakerBtns_txt.gameObject.SetActive(false);
-            
+
             speaker_txt.gameObject.SetActive(false);
             speakerHighlight.gameObject.SetActive(false);
 

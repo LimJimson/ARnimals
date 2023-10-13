@@ -11,6 +11,7 @@ public class TouchToNextMainMenu : MonoBehaviour, IPointerDownHandler
     public GameObject main_menu_guide;
     public GameObject firstStartTxt;
 
+    public MainMenuGuide main_guideScript;
     public GameObject origHelpBtn;
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -18,10 +19,12 @@ public class TouchToNextMainMenu : MonoBehaviour, IPointerDownHandler
         {
             firstStartTxt.SetActive(false);
             pageCounter++;
+            main_guideScript.guideVoiceOver();
         }
         else
         {
             pageCounter++;
+            main_guideScript.guideVoiceOver();
         }
     }
     public void setPageCtr(int newCtr)
@@ -72,9 +75,10 @@ public class TouchToNextMainMenu : MonoBehaviour, IPointerDownHandler
             origHelpBtn.SetActive(false);
             pageNum.text = "6/6";
         }
-        else
+        else if(pageCounter == 7)
         {
             pageCounter = 1;
+            main_guideScript.stopGuideVoice();
             origHelpBtn.SetActive(true);
             main_menu_guide.SetActive(false);
         }

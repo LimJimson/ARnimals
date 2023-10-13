@@ -78,10 +78,14 @@ public class animalInfoGuide : MonoBehaviour
     public GameObject backMainMenuHighlight;
     public GameObject guideHighlight;
 
+    AudioManager audioManager;
+
     void Start()
     {
         loaddata = SaveManager.Load();
-        guideChosen = StateNameController.guide_chosen;
+        guideChosen = loaddata.guideChosen;
+        try { audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); } catch { }
+
         if (!StateNameController.animalInfoGuide)
         {
             _animalInformationGuide();
@@ -95,6 +99,167 @@ public class animalInfoGuide : MonoBehaviour
     {
         showDialogs();
     }
+
+    public void guideVoiceOver()
+    {
+        try
+        {
+            if (_touchToNextAnimal_Info.pageCounter == 1)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoPatrick[0]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoSandy[0]);
+                }
+
+            }
+            else if (_touchToNextAnimal_Info.pageCounter == 2)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoPatrick[1]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoSandy[1]);
+                }
+            }
+            else if (_touchToNextAnimal_Info.pageCounter == 3)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoPatrick[2]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoSandy[2]);
+                }
+            }
+            else if (_touchToNextAnimal_Info.pageCounter == 4)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoPatrick[3]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoSandy[3]);
+                }
+            }
+            else if (_touchToNextAnimal_Info.pageCounter == 5)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoPatrick[4]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoSandy[4]);
+                }
+            }
+            else if (_touchToNextAnimal_Info.pageCounter == 6)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoPatrick[5]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoSandy[5]);
+                }
+            }
+            else if (_touchToNextAnimal_Info.pageCounter == 7)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoPatrick[6]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoSandy[6]);
+                }
+            }
+            else if (_touchToNextAnimal_Info.pageCounter == 8)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoPatrick[7]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoSandy[7]);
+                }
+            }
+            else if (_touchToNextAnimal_Info.pageCounter == 9)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoPatrick[8]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoSandy[8]);
+                }
+            }
+            else if (_touchToNextAnimal_Info.pageCounter == 10)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoPatrick[9]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoSandy[9]);
+                }
+            }
+            else if (_touchToNextAnimal_Info.pageCounter == 11)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoPatrick[10]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoSandy[10]);
+                }
+            }
+            else if (_touchToNextAnimal_Info.pageCounter == 12)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoPatrick[11]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoSandy[11]);
+                }
+            }
+            else if (_touchToNextAnimal_Info.pageCounter == 13)
+            {
+                if (guideChosen == "boy_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoPatrick[12]);
+                }
+                else if (guideChosen == "girl_guide")
+                {
+                    audioManager.PlayGuide(audioManager.AnimalInfoSandy[12]);
+                }
+            }
+        }
+        catch
+        {
+
+        }
+
+    }
+    public void stopGuideVoice()
+    {
+        try { audioManager.guideSource.Stop(); } catch { }
+    }
+
     public GameObject backAndGuideBtns;
     public void skipTutorial()
     {
@@ -102,7 +267,7 @@ public class animalInfoGuide : MonoBehaviour
         pageNumPos2.text = "1/13";
         pageNumPos3.text = "1/13";
         _touchToNextAnimal_Info.setPageCtr(1);
-
+        stopGuideVoice();
         backAndGuideBtns.SetActive(true);
         disableAllGuideGameObjects();
         _animalInfoGuide.SetActive(false);
@@ -163,10 +328,12 @@ public class animalInfoGuide : MonoBehaviour
     public void GuideBack()
     {
         _touchToNextAnimal_Info.minusPageCtr();
+        guideVoiceOver();
         disableAllGuideGameObjects();
     }
     public void _animalInformationGuide()
     {
+        guideVoiceOver();
         _animalInfoGuide.gameObject.SetActive(true);
         _animalInfoScript.chosenAnimalIndex = 1;
         _animalInfoScript.showAnimalInfo();
@@ -176,7 +343,6 @@ public class animalInfoGuide : MonoBehaviour
         videoPlayerGO.gameObject.SetActive(false);
         pos1_GO.SetActive(true);
         pos2_GO.SetActive(false);
-        pos3_GO.SetActive(false);
 
         pageNumPos1.text = "1/13";
 
@@ -229,7 +395,9 @@ public class animalInfoGuide : MonoBehaviour
 
         if (pageNumPos1.text == "1/13")
         {
-            
+            clickAnywherePos1.SetActive(true);
+            clickAnywherePos2.SetActive(false);
+
             welcomeTxt.gameObject.SetActive(true);
             backBtnPos1.SetActive(false);
 
@@ -326,7 +494,9 @@ public class animalInfoGuide : MonoBehaviour
         }
         else if (pageNumPos1.text == "3/13")
         {
-            
+            clickAnywherePos1.SetActive(true);
+            clickAnywherePos2.SetActive(false);
+
             chooseAnimalHighlight.SetActive(true);
             chooseAnimalTxt.gameObject.SetActive(true);
 
@@ -374,7 +544,9 @@ public class animalInfoGuide : MonoBehaviour
         }
         else if (pageNumPos1.text == "4/13")
         {
-            
+            clickAnywherePos1.SetActive(false);
+            clickAnywherePos2.SetActive(true);
+
             animalTxt.gameObject.SetActive(true);
             animalHighlight.SetActive(true);
             backAndGuideBtns.SetActive(false);
@@ -719,10 +891,15 @@ public class animalInfoGuide : MonoBehaviour
             backAndGuideBtns.SetActive(false);
             guideTxt.gameObject.SetActive(false);
             guideHighlight.SetActive(false);
+
+            clickAnywherePos1.SetActive(false);
+            clickAnywherePos2.SetActive(true);
         }
         else if (pageNumPos1.text == "12/13")
         {
-            
+            clickAnywherePos1.SetActive(true);
+            clickAnywherePos2.SetActive(false);
+
             backMainMenuTxt.gameObject.SetActive(true);
             backMainMenuHighlight.SetActive(true);
             backAndGuideBtns.SetActive(true);

@@ -27,27 +27,71 @@ public class AudioManager : MonoBehaviour
 
     [Header("GUIDE")]
     public AudioClip[] GuideSelector;
-    public AudioClip[] MainMenu;
-    public AudioClip[] ModeSelect;
-    public AudioClip[] AnimalSelector;
-    public AudioClip[] MinigameSelect;
+
+    public AudioClip[] MainMenuPatrick;
+    public AudioClip[] MainMenuSandy;
+
+    public AudioClip[] MainMenuSettingsPatrick;
+    public AudioClip[] MainMenuSettingsSandy;
+
+    public AudioClip[] AnimalInfoPatrick;
+    public AudioClip[] AnimalInfoSandy;
+
+    public AudioClip[] ModeSelectPatrick;
+    public AudioClip[] ModeSelectSandy;
+
+    public AudioClip[] AnimalSelectorPatrick;
+    public AudioClip[] AnimalSelectorSandy;
+
+    public AudioClip[] ARExpPatrick;
+    public AudioClip[] ARExpSandy;
+
+    public AudioClip[] MinigameSelectPatrick;
+    public AudioClip[] MinigameSelectSandy;
+
+    public AudioClip[] GTS_Patrick;
+    public AudioClip[] GTS_Sandy;
+
 
 
     private bool canPlayTouchSound = true;
 
+    public static AudioManager instance;
+
     // Start is called before the first frame update
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     void Start()
     {
-        
+
     }
     // Update is called once per frame
     void Update()
     {
         checkPlayerTouch();
+        playGuideSound();
+    }
+
+    void playGuideSound()
+    {
+        if (guideSource.isPlaying)
+        {
+            musicSource.volume = 0.3f;
+        }
+        else
+        {
+            musicSource.volume = 0.5f;
+        }
     }
     public void playBGMMusic(AudioClip clip)
     {
@@ -59,7 +103,11 @@ public class AudioManager : MonoBehaviour
     {
         sfxSource.PlayOneShot(clip); 
     }
-
+    public void PlayGuide(AudioClip clip)
+    {
+        guideSource.Stop();
+        guideSource.PlayOneShot(clip);
+    }
     public void PlayTap(AudioClip clip)
     {
         tapSource.PlayOneShot(clip);

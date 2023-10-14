@@ -8,6 +8,7 @@ public class CTF_AnimalMovement : MonoBehaviour
 
     private Vector2 screenOffset;
     [SerializeField] private CTF_PauseManager pauseManager;
+    [SerializeField] private CTF_AudioManager audioManager;
     [SerializeField] private GameObject gameResumeTimerCanvas;
     [SerializeField] private Animator animator; 
     [SerializeField] private CTF_HealthManager healthManager;
@@ -45,7 +46,7 @@ public class CTF_AnimalMovement : MonoBehaviour
             {
                 CTF_GameManager.Instance.IncreaseScore(1);
             }
-
+            audioManager.playCorrectFoodSFX();
             Destroy(collision.gameObject);
         }
         else if (collision.gameObject.CompareTag("Incorrect"))
@@ -57,7 +58,7 @@ public class CTF_AnimalMovement : MonoBehaviour
             }
             else 
             {
-				wrongFoodMusic.Play();
+                audioManager.playWrongFoodSFX();
 				Debug.Log("WrongFood PlayMusic");
                 animator.SetTrigger("ShowRedPanel");
                 CTF_GameManager.Instance.ReduceHealth(1);
@@ -72,7 +73,7 @@ public class CTF_AnimalMovement : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("shield")) 
         {
-			powerUpsMusic.Play();
+            audioManager.playPowerUpSFX();
 			Debug.Log("shield PlayMusic");
             gameManager.InShieldState = true;
             shield.SetActive(false);
@@ -82,7 +83,7 @@ public class CTF_AnimalMovement : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("x2Points")) 
         {
-			powerUpsMusic.Play();
+            audioManager.playPowerUpSFX();
 			Debug.Log("x2Points PlayMusic");
             gameManager.InX2PointsState = true;
             points2X.SetActive(false);
@@ -148,35 +149,35 @@ public class CTF_AnimalMovement : MonoBehaviour
     }
 
     private Vector3 ClampToScreen(Vector3 position, float edgeOffset)
-{
-    // Create a new vector to store the clamped position, initially set to the input position.
-    Vector3 clampedPosition = position;
+    {
+        // Create a new vector to store the clamped position, initially set to the input position.
+        Vector3 clampedPosition = position;
 
-    // Convert the world-space position to viewport coordinates (values between 0 and 1).
-    Vector3 viewportPosition = mainCamera.WorldToViewportPoint(position);
+        // Convert the world-space position to viewport coordinates (values between 0 and 1).
+        Vector3 viewportPosition = mainCamera.WorldToViewportPoint(position);
 
-    // Clamp the x and y coordinates of the viewportPosition, considering the edge offset.
-    viewportPosition.x = Mathf.Clamp01(viewportPosition.x);
-    viewportPosition.y = Mathf.Clamp01(viewportPosition.y);
+        // Clamp the x and y coordinates of the viewportPosition, considering the edge offset.
+        viewportPosition.x = Mathf.Clamp01(viewportPosition.x);
+        viewportPosition.y = Mathf.Clamp01(viewportPosition.y);
 
-    // Calculate the screen edges considering the edge offset.
-    float minX = edgeOffset / mainCamera.pixelWidth;
-    float minY = edgeOffset / mainCamera.pixelHeight;
-    float maxX = 1 - minX;
-    float maxY = 1 - minY;
+        // Calculate the screen edges considering the edge offset.
+        float minX = edgeOffset / mainCamera.pixelWidth;
+        float minY = edgeOffset / mainCamera.pixelHeight;
+        float maxX = 1 - minX;
+        float maxY = 1 - minY;
 
-    // Clamp the viewportPosition considering the edge offset.
-    viewportPosition.x = Mathf.Clamp(viewportPosition.x, minX, maxX);
-    viewportPosition.y = Mathf.Clamp(viewportPosition.y, minY, maxY);
+        // Clamp the viewportPosition considering the edge offset.
+        viewportPosition.x = Mathf.Clamp(viewportPosition.x, minX, maxX);
+        viewportPosition.y = Mathf.Clamp(viewportPosition.y, minY, maxY);
 
-    // Convert the clamped viewport position back to world-space coordinates.
-    clampedPosition = mainCamera.ViewportToWorldPoint(viewportPosition);
+        // Convert the clamped viewport position back to world-space coordinates.
+        clampedPosition = mainCamera.ViewportToWorldPoint(viewportPosition);
 
-    // Set the y-coordinate of the clamped position to the initial Y position.
-    clampedPosition.y = initialYPosition;
+        // Set the y-coordinate of the clamped position to the initial Y position.
+        clampedPosition.y = initialYPosition;
 
-    // Return the clamped position.
-    return clampedPosition;
-}
+        // Return the clamped position.
+        return clampedPosition;
+    }
 
 }

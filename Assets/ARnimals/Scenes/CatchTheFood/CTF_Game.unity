@@ -11897,6 +11897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseManager: {fileID: 1432307885}
+  audioManager: {fileID: 1723323712}
   gameResumeTimerCanvas: {fileID: 956183864}
   animator: {fileID: 12714595}
   healthManager: {fileID: 1329176700}
@@ -16803,6 +16804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPanel: {fileID: 1446195119}
   pauseManager: {fileID: 1432307885}
+  audioManager: {fileID: 1723323712}
   foodSpawners:
   - {fileID: 848972946}
   - {fileID: 603564418}
@@ -16810,6 +16812,7 @@ MonoBehaviour:
   timerManager: {fileID: 1504089506}
   clickToStart: {fileID: 1744297341}
   bgMusic: {fileID: 975873612}
+  settings: {fileID: 684811574}
   gameStarted: 0
 --- !u!1 &627969981
 GameObject:
@@ -18335,6 +18338,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681432343}
   m_CullTransparentMesh: 1
+--- !u!1 &684811572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 684811573}
+  - component: {fileID: 684811574}
+  m_Layer: 0
+  m_Name: Settings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &684811573
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684811572}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1261628130}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &684811574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684811572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5855d1a17fb5341429f308de185a0104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSlider: {fileID: 1479906985}
+  sfxSlider: {fileID: 781661509}
+  guideSlider: {fileID: 293090052}
+  musicPercent: {fileID: 1184928636}
+  sfxPercent: {fileID: 627969983}
+  guidePercent: {fileID: 1279395795}
 --- !u!1 &686422441
 GameObject:
   m_ObjectHideFlags: 0
@@ -19957,6 +20010,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 684811574}
+        m_TargetAssemblyTypeName: CTF_Settings, Assembly-CSharp
+        m_MethodName: saveSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &760961971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20349,6 +20414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseManager: {fileID: 1432307885}
+  audioManager: {fileID: 1723323712}
   gameResumeTimerCanvas: {fileID: 956183864}
   animator: {fileID: 12714595}
   healthManager: {fileID: 1329176700}
@@ -20522,6 +20588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseManager: {fileID: 1432307885}
+  audioManager: {fileID: 1723323712}
   gameResumeTimerCanvas: {fileID: 956183864}
   animator: {fileID: 12714595}
   healthManager: {fileID: 1329176700}
@@ -20708,19 +20775,7 @@ MonoBehaviour:
   m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1286526055}
-        m_TargetAssemblyTypeName: CTF_GameManager, Assembly-CSharp
-        m_MethodName: checkSoundFXVolume
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &787962506
 GameObject:
   m_ObjectHideFlags: 0
@@ -25701,6 +25756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df3a98b75c3c054cb88fc5be22f6a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 1723323712}
   resumeTimerCanvas: {fileID: 1956231594}
   gameResumeTimerManager: {fileID: 956183864}
   startGameCanvas: {fileID: 1446195119}
@@ -32705,6 +32761,8 @@ Transform:
   - {fileID: 1477850009}
   - {fileID: 956183866}
   - {fileID: 2070097095}
+  - {fileID: 1723323711}
+  - {fileID: 684811573}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -33986,6 +34044,7 @@ MonoBehaviour:
   pauseManager: {fileID: 1432307885}
   tutorialManager: {fileID: 1477850010}
   highScoreManager: {fileID: 2070097096}
+  audioManager: {fileID: 1723323712}
   gameResumeTimerManager: {fileID: 956183864}
   pauseAndHPCanvas: {fileID: 591895722}
   tutorialCanvas: {fileID: 1792579248}
@@ -38364,6 +38423,7 @@ MonoBehaviour:
   startGamePanel: {fileID: 1446195119}
   pauseAndHpCanvas: {fileID: 591895722}
   gameStartManager: {fileID: 625389457}
+  audioManager: {fileID: 1723323712}
   gameResumeTimerManager: {fileID: 956183864}
   tutorialGameObjects:
   - {fileID: 195632663}
@@ -38615,19 +38675,7 @@ MonoBehaviour:
   m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1286526055}
-        m_TargetAssemblyTypeName: CTF_GameManager, Assembly-CSharp
-        m_MethodName: checkMusicVolume
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1480645523
 GameObject:
   m_ObjectHideFlags: 0
@@ -43973,6 +44021,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1721988215}
   m_CullTransparentMesh: 1
+--- !u!1 &1723323710
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1723323711}
+  - component: {fileID: 1723323712}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1723323711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723323710}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1261628130}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1723323712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723323710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d0892a037485974c9725d27e8d78e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1723843001
 GameObject:
   m_ObjectHideFlags: 0
@@ -48369,6 +48461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseManager: {fileID: 1432307885}
+  audioManager: {fileID: 1723323712}
   gameResumeTimerCanvas: {fileID: 956183864}
   animator: {fileID: 12714595}
   healthManager: {fileID: 1329176700}
@@ -49338,6 +49431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseManager: {fileID: 1432307885}
+  audioManager: {fileID: 1723323712}
   gameResumeTimerCanvas: {fileID: 956183864}
   animator: {fileID: 12714595}
   healthManager: {fileID: 1329176700}
@@ -51895,7 +51989,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.1001453, y: 0.92300004}
   m_AnchorMax: {x: 0.104, y: 0.93144464}
-  m_AnchoredPosition: {x: -0.71313477, y: 0.4963379}
+  m_AnchoredPosition: {x: -0.7133789, y: 0.4963379}
   m_SizeDelta: {x: 64.11401, y: 52.498993}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2128654720

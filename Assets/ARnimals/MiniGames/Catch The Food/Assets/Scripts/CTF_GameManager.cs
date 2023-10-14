@@ -20,6 +20,7 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private CTF_PauseManager pauseManager;
     [SerializeField] private CTF_TutorialManager tutorialManager;
     [SerializeField] private CTF_HighScoreManager highScoreManager;
+    [SerializeField] private CTF_AudioManager audioManager;
 
     [Header("Game Objects Needed")]
 
@@ -101,7 +102,7 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private GameObject plainBlackPanel;
 
     private string buttonCode;
-
+	
     private void Awake()
     {
         if (Instance == null)
@@ -130,7 +131,7 @@ public class CTF_GameManager : MonoBehaviour
         UpdatePowerUpsUI();
         checkIfTransitionIsDone();
     }
-	
+
 	public void checkMusicVolume() 
 	{
 		bgMusic.volume = musicVolumeSlider.value;
@@ -359,8 +360,8 @@ public class CTF_GameManager : MonoBehaviour
             {
                 pauseManager.PauseGame();
                 gameOverCanvas.SetActive(true);
-				bgMusic.Pause();
-				gameOverMusic.Play();
+				audioManager.pauseBGMusic();
+				audioManager.playGameOverSFX();
 				Debug.Log("Gameover PlayMusic");
             }
         }
@@ -443,8 +444,8 @@ public class CTF_GameManager : MonoBehaviour
             {
                 pauseManager.PauseGame();
                 finalScore = scoreManager.GetScore();
-				bgMusic.Pause();
-				lvlCompleteMusic.Play();
+				audioManager.stopBGMusic();
+				audioManager.playLvlCompletedSFX();
 				Debug.Log("Level Complete PlayMusic");
 
                 addStar(finalScore);
@@ -461,8 +462,8 @@ public class CTF_GameManager : MonoBehaviour
             {
                 starsCount = 0;
                 SetMaxStars();
-				bgMusic.Pause();
-				gameOverMusic.Play();
+				audioManager.stopBGMusic();
+				audioManager.playGameOverSFX();
                 pauseManager.PauseGame();
                 gameOverCanvas.SetActive(true);
             }
@@ -807,18 +808,15 @@ public class CTF_GameManager : MonoBehaviour
 
         if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "quitButton") 
         {
-            pauseManager.ResumeGame();
-            SceneManager.LoadScene("CTF_LevelSelector");
+            quitTo("CTF_LevelSelector");
         }
         else if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "restartButton")
         {
-            pauseManager.ResumeGame();
-            SceneManager.LoadScene("CTF_Game");
+            quitTo("CTF_Game");
         }
 		else if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "tryAnimalButton")
         {
-            pauseManager.ResumeGame();
-            SceneManager.LoadScene("Animal Selector AR");
+            quitTo("Animal Selector AR");
         }
 
         if (transitionToIn.activeSelf && achievedImgPositionIn) 
@@ -826,10 +824,16 @@ public class CTF_GameManager : MonoBehaviour
             transitionToIn.SetActive(false);
         }
     }
+    private void quitTo(string sceneName) 
+    {
+        audioManager.stopBGMusic();
+        pauseManager.ResumeGame();
+        SceneManager.LoadScene(sceneName);
+    }
 
     public void helpButtonFunction() 
     {
-		bgMusic.Pause();
+		audioManager.pauseBGMusic();
         pauseAndHPCanvas.SetActive(false);
         tutorialCanvas.SetActive(true);
         int pageNum = tutorialManager.PageNum = 0;

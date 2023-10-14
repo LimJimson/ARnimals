@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip UnderwaterHabitat_BGM;
     public AudioClip SavannahHabitat_BGM;
     public AudioClip FTA_BGM;
+	public AudioClip CTF_BGM;
 
     [Header("SFX")]
     public AudioClip touchSound;
@@ -26,6 +27,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip wrongAnswer;
     public AudioClip winLevel;
     public AudioClip loseLevel;
+	public AudioClip CTF_PowerUps;
 
     [Header("GUIDE")]
     public AudioClip[] GuideSelector;
@@ -53,6 +55,9 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip[] GTS_Patrick;
     public AudioClip[] GTS_Sandy;
+	
+	public AudioClip[] CTF_Patrick;
+	public AudioClip[] CTF_Sandy;
 
     public float musicVol;
     public float sfxVol;

@@ -89,7 +89,7 @@ public class FTA_GameManager : MonoBehaviour
         countdownHints();
     }
 
-        private void initializePositionsofItems()
+    private void initializePositionsofItems()
     {
         positions = new Vector3[]{
         items[0].transform.localPosition, items[1].transform.localPosition, items[2].transform.localPosition, items[3].transform.localPosition, items[4].transform.localPosition};
@@ -194,6 +194,7 @@ public class FTA_GameManager : MonoBehaviour
             Debug.Log("Correct");
             shadowImgs[0].color = enableCorrectAnswer;
             clickedAnimal.SetActive(false);
+            checkStar();
             try
             {
                 audioManager.PlaySFX(audioManager.correctAnswer);
@@ -208,6 +209,7 @@ public class FTA_GameManager : MonoBehaviour
             Debug.Log("Correct");
             shadowImgs[1].color = enableCorrectAnswer;
             clickedAnimal.SetActive(false);
+            checkStar();
             try
             {
                 audioManager.PlaySFX(audioManager.correctAnswer);
@@ -222,6 +224,7 @@ public class FTA_GameManager : MonoBehaviour
             Debug.Log("Correct");
             shadowImgs[2].color = enableCorrectAnswer;
             clickedAnimal.SetActive(false);
+            checkStar();
             try
             {
                 audioManager.PlaySFX(audioManager.correctAnswer);
@@ -270,6 +273,7 @@ public class FTA_GameManager : MonoBehaviour
         Color enableCorrectAnswer = new Color(1.0f, 1.0f, 1.0f);
         if (shadowImgs[0].color == enableCorrectAnswer && shadowImgs[1].color == enableCorrectAnswer && shadowImgs[2].color == enableCorrectAnswer)
         {
+            checkStar();
             GameWin();
             PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel, 1);
         }
@@ -302,6 +306,7 @@ public class FTA_GameManager : MonoBehaviour
         isGameOver = true;
         timer = Mathf.Min(timer, timeLimit);
         panelFinish.SetActive(true);
+        checkStar();
     }
     public void PauseGame()
     {
@@ -810,28 +815,28 @@ public class FTA_GameManager : MonoBehaviour
     void hintTxt()
     {
         if (HintsLeft != 0)
-            {
-                Debug.Log("noooh");
-                HintsLeft -= 1;
-                HintBtn();
-                //hintsTxt.text = "<color=#FFFF00>" + HintsLeft + " </color>hint left";
-                hintsTxt.text = "No more hints left";
-                StartCoroutine(_showHintLeft());
-            }
-        else if (HintsLeft == 0)
-            {
-                try
-                {
-                    audioManager.PlaySFX(audioManager.wrongAnswer);
-                }
-                catch
-                {
-
-                }
+        {
+            Debug.Log("noooh");
+            HintsLeft -= 1;
+            HintBtn();
+            //hintsTxt.text = "<color=#FFFF00>" + HintsLeft + " </color>hint left";
             hintsTxt.text = "No more hints left";
             StartCoroutine(_showHintLeft());
-            }
         }
+        else if (HintsLeft == 0)
+        {
+            try
+            {
+                audioManager.PlaySFX(audioManager.wrongAnswer);
+            }
+            catch
+            {
+
+            }
+            hintsTxt.text = "No more hints left";
+            StartCoroutine(_showHintLeft());
+        }
+    }
     IEnumerator _showHintLeft()
     {
         hintsGO.SetActive(true);
@@ -881,4 +886,103 @@ public class FTA_GameManager : MonoBehaviour
         timerHints.text = Convert.ToInt16(countdownTimeHints).ToString();
     }
 
+
+
+    [Header("Stars")]
+    [SerializeField] private Image starHolder;
+    [SerializeField] private Sprite[] stars;
+    int currentStar;
+    void checkStar()
+    {
+        if (countHealth == 3)
+        {
+            if (currentStar < countHealth)
+            {
+                switch (SelectedLevel)
+                {
+                    case "1":
+                        starHolder.sprite = stars[2];
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
+                        break;
+                    case "2":
+                        starHolder.sprite = stars[2];
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
+                        break;
+                    case "3":
+                        starHolder.sprite = stars[2];
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
+                        break;
+                    case "4":
+                        starHolder.sprite = stars[2];
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
+                        break;
+                    case "5":
+                        starHolder.sprite = stars[2];
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
+                        break;
+                }
+            }
+        }
+        else if (countHealth == 2)
+        {
+            if (currentStar < countHealth)
+            {
+                switch (SelectedLevel)
+                {
+                    case "1":
+                        starHolder.sprite = stars[1];
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
+                        break;
+                    case "2":
+                        starHolder.sprite = stars[1];
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
+                        break;
+                    case "3":
+                        starHolder.sprite = stars[1];
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
+                        break;
+                    case "4":
+                        starHolder.sprite = stars[1];
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
+                        break;
+                    case "5":
+                        starHolder.sprite = stars[1];
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
+                        break;
+                }
+            }
+
+        }
+        else if (countHealth == 1)
+        {
+            
+            if (currentStar <= countHealth)
+            {
+                switch (SelectedLevel)
+                {
+                    case "1":
+                        starHolder.sprite = stars[0];
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
+                        break;
+                    case "2":
+                        starHolder.sprite = stars[0];
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
+                        break;
+                    case "3":
+                        starHolder.sprite = stars[0];
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
+                        break;
+                    case "4":
+                        starHolder.sprite = stars[0];
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
+                        break;
+                    case "5":
+                        starHolder.sprite = stars[0];
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
+                        break;
+                }
+            }
+        }
+        SaveManager.Save(SaveFTAGame);
+    }
 }

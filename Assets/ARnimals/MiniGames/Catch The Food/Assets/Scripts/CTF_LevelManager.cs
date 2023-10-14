@@ -243,7 +243,7 @@ public class CTF_LevelManager : MonoBehaviour
 		} 
 		catch 
 		{
-			
+			Debug.Log("No AudioManager");
 		}
         // Pass the selected animal name to the next scene
         PlayerPrefs.SetString("CTF_SelectedAnimal", selectedAnimal);

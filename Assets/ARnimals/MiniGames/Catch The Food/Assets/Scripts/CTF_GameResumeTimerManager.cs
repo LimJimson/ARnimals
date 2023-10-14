@@ -5,6 +5,7 @@ using TMPro;
 
 public class CTF_GameResumeTimerManager : MonoBehaviour
 {
+    [SerializeField] private CTF_AudioManager audioManager;
     [SerializeField] private GameObject resumeTimerCanvas;
     [SerializeField] private GameObject gameResumeTimerManager;
     [SerializeField] private GameObject startGameCanvas;
@@ -30,7 +31,7 @@ public class CTF_GameResumeTimerManager : MonoBehaviour
             resumeTime = 3f;
             resumeTimerCanvas.SetActive(false);
             gameResumeTimerManager.SetActive(false);
-			bgMusic.UnPause();
+			audioManager.unPauseBGMusic();
             pauseManager.ResumeGame();
         }    
     }

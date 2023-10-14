@@ -13,7 +13,7 @@ public class animalBookScript : MonoBehaviour
     
     void Start()
     {
-        animalIndex = _arPlacementScript.getAnimalIndex();
+        
     }
 
     public Image animalImg;
@@ -34,15 +34,16 @@ public class animalBookScript : MonoBehaviour
     public Sprite[] animalHabitat;
 
 
-    List<int> Mammals = new List<int> {0,1,2,5,7,8,10,15,18,19};
+    List<int> Mammals = new List<int> {0,1,2,5,7,8,10,14,18,19};
     List<int> Crustacean = new List<int> {3};
     List<int> Reptile = new List<int> { 4 };
-    List<int> Bird = new List<int> { 6,12,13,16};
-    List<int> Fish = new List<int> { 9,14,17, };
-    List<int> Mollusk = new List<int> { 11 };
+    List<int> Bird = new List<int> {6, 12, 15, 17};
+    List<int> Fish = new List<int> {9, 13, 16};
+    List<int> Mollusk = new List<int> {11};
 
-    void _showAnimalInfo()
+    public void _showAnimalInfo()
     {
+        animalIndex = _arPlacementScript.getAnimalIndex();
         animalHabitat1Img.gameObject.SetActive(true);
         animalHabitat1Txt.gameObject.SetActive(true);
         animalHabitat2Img.gameObject.SetActive(true);
@@ -253,16 +254,6 @@ public class animalBookScript : MonoBehaviour
                 animalHabitat3Txt.gameObject.SetActive(true);
                 animalHabitat3Img.sprite = animalHabitat[0];
                 animalHabitat3Txt.text = animalHabitatTxt[0];
-                break;
-            case 20:
-                animalHabitat1Img.gameObject.SetActive(false);
-                animalHabitat1Txt.gameObject.SetActive(false);
-                animalHabitat2Img.gameObject.SetActive(false);
-                animalHabitat2Txt.gameObject.SetActive(false);
-                animalHabitat3Img.gameObject.SetActive(true);
-                animalHabitat3Txt.gameObject.SetActive(true);
-                animalHabitat3Img.sprite = animalHabitat[3];
-                animalHabitat3Txt.text = animalHabitatTxt[3];
                 break;
         }
     }

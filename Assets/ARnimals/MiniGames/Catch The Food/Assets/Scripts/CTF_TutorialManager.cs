@@ -8,12 +8,13 @@ using System;
 public class CTF_TutorialManager : MonoBehaviour
 {
 
+    AudioManager audioManager;
+
     [SerializeField] private GameObject tutorialCanvas;
     [SerializeField] private GameObject startGamePanel;
     [SerializeField] private GameObject pauseAndHpCanvas;
 
     [SerializeField] private CTF_GameStartManager gameStartManager;
-    [SerializeField] private CTF_AudioManager audioManager;
     [SerializeField] private GameObject gameResumeTimerManager;
 
     [Header("Game Objects")]
@@ -75,6 +76,17 @@ public class CTF_TutorialManager : MonoBehaviour
 
     private void Start() 
     {
+
+        try
+        {
+            audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+			Debug.Log("AudioManager Available");
+        }
+        catch
+        {
+            Debug.Log("No AudioManager");
+        }
+
         checkGuide();
         pagesContents();
         disableAllGameObjects();
@@ -137,20 +149,16 @@ public class CTF_TutorialManager : MonoBehaviour
 
     private void playGuideVoiceOver(int currentPage) 
     {
-        audioManager.stopGuideVoiceOvers();
+        try{audioManager.guideSource.Stop();} catch{ }
 
         if (guideChosen == "boy_guide") 
         {
-            audioManager.playBoyGuideVoiceOver(currentPage);
+            try{audioManager.PlayGuide(audioManager.CTF_Patrick[currentPage]);} catch{}
         }
         else if (guideChosen == "girl_guide") 
         {
-            audioManager.playGirlGuideVoiceOver(currentPage);
+            try{audioManager.PlayGuide(audioManager.CTF_Sandy[currentPage]);} catch{}
         }
-		else if(string.IsNullOrEmpty(guideChosen)) 
-		{
-			audioManager.playBoyGuideVoiceOver(currentPage);
-		}
     }
 	
     public void backBtnFunction() 
@@ -185,7 +193,7 @@ public class CTF_TutorialManager : MonoBehaviour
         }
 
         PlayerPrefs.SetInt("CTF_IsTutorialDone", 1);
-        audioManager.stopGuideVoiceOvers();
+        try{audioManager.guideSource.Stop();} catch{}
     }
 
     public void clickToNext()
@@ -216,7 +224,7 @@ public class CTF_TutorialManager : MonoBehaviour
             }
 
             PlayerPrefs.SetInt("CTF_IsTutorialDone", 1);
-            audioManager.stopGuideVoiceOvers();
+            try{audioManager.guideSource.Stop();} catch{}
         }
 
         if (pageNum > 1) 
@@ -257,7 +265,7 @@ public class CTF_TutorialManager : MonoBehaviour
                 click2NxtPanelForTrivia.SetActive(true);
                 panelForTrivia.SetActive(true);            
                 hideAllComponents();
-				audioManager.stopGuideVoiceOvers();
+				try{audioManager.guideSource.Stop();} catch{}
                 showClickToNextTxt(click2NextTxtBottomGameObject,click2NextTxtBottm, 1);
 
                 // Retrieve the selected level from PlayerPrefs

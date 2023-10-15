@@ -61,17 +61,6 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private RectTransform[] x2Orders;
     [SerializeField] private RectTransform[] shieldsOrders;
 	
-	[Header("Musics")]
-	[SerializeField] private AudioSource bgMusic;
-	[SerializeField] private AudioSource lvlCompleteMusic;
-	[SerializeField] private AudioSource gameOverMusic;
-	[SerializeField] private AudioSource wrongFoodMusic;
-	[SerializeField] private AudioSource powerUpsMusic;
-	[SerializeField] private Slider musicVolumeSlider;
-	[SerializeField] private Slider soundFXVolumeSlider;
-	[SerializeField] private TextMeshProUGUI musicVolumePercentageTxt;
-	[SerializeField] private TextMeshProUGUI soundFXVolumePercentageTxt;
-
     private int finalScore;
 
     private int starsCount;
@@ -119,8 +108,6 @@ public class CTF_GameManager : MonoBehaviour
         selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel");
         showRandomTrivia();
         StartCoroutine(showTransitionAfterDelay());
-		checkMusicVolume();
-		checkSoundFXVolume();
 		updateHighScoreList();
     }
 
@@ -131,25 +118,6 @@ public class CTF_GameManager : MonoBehaviour
         UpdatePowerUpsUI();
         checkIfTransitionIsDone();
     }
-
-	public void checkMusicVolume() 
-	{
-		bgMusic.volume = musicVolumeSlider.value;
-		lvlCompleteMusic.volume = musicVolumeSlider.value;
-		gameOverMusic.volume = musicVolumeSlider.value;
-		
-		int percentage = Mathf.RoundToInt(musicVolumeSlider.value * 100);
-		musicVolumePercentageTxt.text = percentage.ToString() + "%";
-	}
-	
-	public void checkSoundFXVolume() 
-	{
-		wrongFoodMusic.volume = soundFXVolumeSlider.value;
-		powerUpsMusic.volume = soundFXVolumeSlider.value;
-		
-		int percentage = Mathf.RoundToInt(soundFXVolumeSlider.value * 100);
-		soundFXVolumePercentageTxt.text = percentage.ToString() + "%";
-	}
 
     private IEnumerator showTransitionAfterDelay() 
     {

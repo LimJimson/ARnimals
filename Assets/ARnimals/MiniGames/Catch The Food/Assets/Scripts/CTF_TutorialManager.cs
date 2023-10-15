@@ -57,12 +57,6 @@ public class CTF_TutorialManager : MonoBehaviour
     [SerializeField] private GameObject[] boyGuideForMenus;
     [SerializeField] private GameObject[] girlGuideForMenus;
 
-    [Header("Guide Voice Overs")]
-    [SerializeField] private AudioSource[] boyVoiceOver;
-    [SerializeField] private AudioSource[] girlVoiceOver;
-	[SerializeField] private Slider guideVolumeSlider;
-	[SerializeField] private TextMeshProUGUI guideVolumePercentageTxt;
-
     [SerializeField] private int pageNum = 0;
 
     private string guide_name;
@@ -84,7 +78,6 @@ public class CTF_TutorialManager : MonoBehaviour
         checkGuide();
         pagesContents();
         disableAllGameObjects();
-		checkGuideVolume();
         backButton.SetActive(false);
         tutorialCanvas.SetActive(true);
         startGamePanel.SetActive(false);
@@ -141,19 +134,6 @@ public class CTF_TutorialManager : MonoBehaviour
             showGuide(1, 1, "Sandy", girlGuideForMenus);
         }
     }
-	
-	private void stopAllVoiceOvers() 
-	{
-		for (int i = 0; i < boyVoiceOver.Length; i++) 
-        {
-            boyVoiceOver[i].Stop();
-        }
-
-        for (int i = 0; i < girlVoiceOver.Length; i++) 
-        {
-            girlVoiceOver[i].Stop();
-        }
-	}
 
     private void playGuideVoiceOver(int currentPage) 
     {
@@ -173,18 +153,6 @@ public class CTF_TutorialManager : MonoBehaviour
 		}
     }
 	
-	public void checkGuideVolume() 
-	{
-		for (int i = 0; i < boyVoiceOver.Length; i++) 
-		{
-			boyVoiceOver[i].volume = guideVolumeSlider.value;
-			girlVoiceOver[i].volume = guideVolumeSlider.value;
-		}
-		
-		int percentage = Mathf.RoundToInt(guideVolumeSlider.value * 100);
-		guideVolumePercentageTxt.text = percentage.ToString() + "%";
-	}
-
     public void backBtnFunction() 
     {
         hideAllComponents();

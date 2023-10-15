@@ -5,13 +5,13 @@ using TMPro;
 
 public class CTF_GameResumeTimerManager : MonoBehaviour
 {
+
     [SerializeField] private CTF_AudioManager audioManager;
     [SerializeField] private GameObject resumeTimerCanvas;
     [SerializeField] private GameObject gameResumeTimerManager;
     [SerializeField] private GameObject startGameCanvas;
     [SerializeField] private CTF_PauseManager pauseManager;
     [SerializeField] private TextMeshProUGUI countdownText;
-	[SerializeField] private AudioSource bgMusic;
 
     private float resumeTime = 3f;
 

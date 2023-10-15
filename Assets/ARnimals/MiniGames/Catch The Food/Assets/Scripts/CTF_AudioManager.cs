@@ -8,20 +8,98 @@ public class CTF_AudioManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    AudioManager audioManager;
+    AudioManager mainAudioManager;
+
+	SaveObject loaddata;
+
+	[SerializeField] private Slider musicSlider;
+	[SerializeField] private Slider sfxSlider;
+	[SerializeField] private Slider guideSlider;
+
+	[SerializeField] private TextMeshProUGUI musicPercentTxt;
+	[SerializeField] private TextMeshProUGUI sfxPercentTxt;
+	[SerializeField] private TextMeshProUGUI guidePercentText;
 
     void Start()
     {
         try
         {
-            audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-
+            mainAudioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+			Debug.Log("AudioManager Available");
         }
         catch
         {
             Debug.Log("No AudioManager");
         }
+
+		loaddata = SaveManager.Load();
+
+		loadSavedVolume();
     }
+
+	private void Update() 
+	{
+		
+	}
+
+	private void loadSavedVolume() 
+	{
+		mainAudioManager.musicSource.volume = loaddata.MusicVolume;
+		mainAudioManager.sfxSource.volume = loaddata.SFXVolume;
+		mainAudioManager.guideSource.volume = loaddata.GuideVolume;
+
+		musicSlider.value = mainAudioManager.musicSource.volume;
+		sfxSlider.value = mainAudioManager.sfxSource.volume;
+		guideSlider.value = mainAudioManager.guideSource.volume;
+
+		int percentageForMusicSlider = Mathf.RoundToInt(musicSlider.value * 100);
+		musicPercentTxt.text = percentageForMusicSlider.ToString() + "%";
+		int percentageForSFXSlider = Mathf.RoundToInt(sfxSlider.value * 100);
+		sfxPercentTxt.text = percentageForSFXSlider.ToString() + "%";
+		int percentageForGuideSlider = Mathf.RoundToInt(guideSlider.value * 100);
+		guidePercentText.text = percentageForGuideSlider.ToString() + "%";
+	}
+
+	public void changeMusicVolume() 
+	{	
+		mainAudioManager.musicVol = musicSlider.value;
+
+		int percentage = Mathf.RoundToInt(musicSlider.value * 100);
+		musicPercentTxt.text = percentage.ToString() + "%";
+
+		Debug.Log("Music Source Volume: " + mainAudioManager.musicSource.volume);
+	}
+
+	public void changeSfxVolume() 
+	{	
+		mainAudioManager.sfxSource.volume = sfxSlider.value;
+
+		int percentage = Mathf.RoundToInt(sfxSlider.value * 100);
+		sfxPercentTxt.text = percentage.ToString() + "%";
+	}
+
+	public void changeGuideVolume() 
+	{	
+		mainAudioManager.guideSource.volume = guideSlider.value;
+
+		int percentage = Mathf.RoundToInt(guideSlider.value * 100);
+		guidePercentText.text = percentage.ToString() + "%";
+	}
+
+	public void saveVolume() 
+	{
+		changeMusicVolume();
+		changeSfxVolume();
+		changeGuideVolume();
+
+		loaddata.MusicVolume = mainAudioManager.musicSource.volume;
+		loaddata.SFXVolume = mainAudioManager.sfxSource.volume;
+		loaddata.GuideVolume = mainAudioManager.guideSource.volume;
+
+		SaveManager.Save(loaddata);
+
+		loadSavedVolume();
+	} 
 
 	//Audio Methods to use for different CTF Scripts
 
@@ -29,7 +107,7 @@ public class CTF_AudioManager : MonoBehaviour
     {
         try
 		{
-			audioManager.musicSource.Pause();
+			mainAudioManager.musicSource.Pause();
 		}
 		catch
 		{
@@ -40,7 +118,7 @@ public class CTF_AudioManager : MonoBehaviour
 	{
 		try
 		{
-			audioManager.musicSource.Stop();
+			mainAudioManager.musicSource.Stop();
 		}
 		catch
 		{
@@ -51,7 +129,7 @@ public class CTF_AudioManager : MonoBehaviour
 	{
 		try
 		{
-			audioManager.PlaySFX(audioManager.winLevel);
+			mainAudioManager.PlaySFX(mainAudioManager.winLevel);
 		}
 		catch
 		{
@@ -62,7 +140,7 @@ public class CTF_AudioManager : MonoBehaviour
 	{
 		try
 		{
-			audioManager.PlaySFX(audioManager.loseLevel);
+			mainAudioManager.PlaySFX(mainAudioManager.loseLevel);
 		}
 		catch
 		{
@@ -73,7 +151,7 @@ public class CTF_AudioManager : MonoBehaviour
     {
         try
 		{
-			audioManager.musicSource.UnPause();
+			mainAudioManager.musicSource.UnPause();
 		}
 		catch
 		{
@@ -84,7 +162,7 @@ public class CTF_AudioManager : MonoBehaviour
     {
         try
 		{
-			audioManager.playBGMMusic(audioManager.CTF_BGM);
+			mainAudioManager.playBGMMusic(mainAudioManager.CTF_BGM);
 		}
 		catch
 		{
@@ -95,7 +173,7 @@ public class CTF_AudioManager : MonoBehaviour
     {
         try
 		{
-			audioManager.PlaySFX(audioManager.CTF_PowerUps);
+			mainAudioManager.PlaySFX(mainAudioManager.CTF_PowerUps);
 		}
 		catch
 		{
@@ -106,7 +184,7 @@ public class CTF_AudioManager : MonoBehaviour
     {
         try
 		{
-			audioManager.PlaySFX(audioManager.correctAnswer);
+			mainAudioManager.PlaySFX(mainAudioManager.correctAnswer);
 		}
 		catch
 		{
@@ -117,7 +195,7 @@ public class CTF_AudioManager : MonoBehaviour
     {
         try
 		{
-			audioManager.PlaySFX(audioManager.wrongAnswer);
+			mainAudioManager.PlaySFX(mainAudioManager.wrongAnswer);
 		}
 		catch
 		{
@@ -128,7 +206,7 @@ public class CTF_AudioManager : MonoBehaviour
     {
         try
 		{
-			audioManager.PlayGuide(audioManager.CTF_Patrick[index]);
+			mainAudioManager.PlayGuide(mainAudioManager.CTF_Patrick[index]);
 		}
 		catch
 		{
@@ -139,7 +217,7 @@ public class CTF_AudioManager : MonoBehaviour
     {
         try
 		{
-			audioManager.PlayGuide(audioManager.CTF_Sandy[index]);
+			mainAudioManager.PlayGuide(mainAudioManager.CTF_Sandy[index]);
 		}
 		catch
 		{
@@ -150,7 +228,7 @@ public class CTF_AudioManager : MonoBehaviour
 	{
 		try
 		{
-			audioManager.guideSource.Stop();
+			mainAudioManager.guideSource.Stop();
 		}
 		catch
 		{

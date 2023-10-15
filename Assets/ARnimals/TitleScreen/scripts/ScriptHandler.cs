@@ -195,6 +195,7 @@ public class ScriptHandler : MonoBehaviour
     public void resetGame()
     {
         SaveManager.DeleteFile();
+        CTF_Reset.CTF_ResetProgress();
     }
 
     //Button Scripts

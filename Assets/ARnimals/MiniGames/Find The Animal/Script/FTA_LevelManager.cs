@@ -124,6 +124,10 @@ public class FTA_LevelManager : MonoBehaviour
     [SerializeField] private Sprite[] animalSprites;
     [SerializeField] private GameObject playConfirmGameObject;
 
+    [SerializeField] private GameObject checkGameObject;
+    [SerializeField] private GameObject tryAnimalBtn;
+    [SerializeField] private GameObject confirmationToARCanvas;
+
     public void checkStar()
     {
 
@@ -132,6 +136,9 @@ public class FTA_LevelManager : MonoBehaviour
         levelImg.sprite = levelSprites[int.Parse(SelectedLevel)];
 
         int currentStar = PlayerPrefs.GetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 0);
+
+        checkGameObject.SetActive(false);
+        tryAnimalBtn.SetActive(false);
 
         Debug.Log("Level: " + SelectedLevel + "\n" + "currentStar: " + currentStar);
 
@@ -145,14 +152,34 @@ public class FTA_LevelManager : MonoBehaviour
                 break;
             case 2:
                 starsImg.sprite = starsSprites[2];
+                checkGameObject.SetActive(true);
+                tryAnimalBtn.SetActive(true);
                 break;
             case 3:
                 starsImg.sprite = starsSprites[3];
+                checkGameObject.SetActive(true);
+                tryAnimalBtn.SetActive(true);
                 break;
         }
     }
     public void closeButtonFunction()
     {
         playConfirmGameObject.SetActive(false);
+    }
+    public void backButtonFTA()
+    {
+        SceneManager.LoadScene("MiniGamesSelect");
+    }
+    public void TryAnimalARButton()
+    {
+        confirmationToARCanvas.SetActive(true);
+    }
+    public void ConfirmYesTryAnimalARButton()
+    {
+        SceneManager.LoadScene("Animal Selector AR");
+    }
+    public void ConfirmNoTryAnimalARButton()
+    {
+        confirmationToARCanvas.SetActive(false);
     }
 }

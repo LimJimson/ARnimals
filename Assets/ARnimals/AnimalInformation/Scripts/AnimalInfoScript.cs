@@ -319,7 +319,6 @@ public class AnimalInfoScript : MonoBehaviour
 		if (isDelayTimerRunning)
 		{
 			hideDelay -= Time.deltaTime;
-
 			if (hideDelay <= 0.0f)
 			{
 				// Timer has reached 0 or less
@@ -341,11 +340,15 @@ public class AnimalInfoScript : MonoBehaviour
 		switch (buttonName)
 		{
 			case "FullScreenButton":
-				buttonHidden = true;
-				toggleHideButton.SetActive(true);
-				startTimer();;
+                toggleHideButton.SetActive(true);
+				ShowVideoPlayerButtons();
+				startTimer();
 				break;
 			case "Play/PauseButton" when videoPlayerController.IsFullScreen:
+				ShowVideoPlayerButtons();
+				startTimer();
+				break;
+            case "InfoButton" when videoPlayerController.IsFullScreen:
 				ShowVideoPlayerButtons();
 				startTimer();
 				break;

@@ -9,6 +9,8 @@ public class FTA_HelpButtonGuide : MonoBehaviour
 {
     SaveObject GuideLoadData;
 
+    AudioManager AudioManager;
+
     public FTA_GameManager gameManager;
 
     public GameObject Health;
@@ -40,6 +42,7 @@ public class FTA_HelpButtonGuide : MonoBehaviour
     {
         GuideLoadData = SaveManager.Load();
         GuideChosen = GuideLoadData.guideChosen;
+        AudioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         CheckPageNumber();
         GuideBoyorGirl();
     }
@@ -57,42 +60,50 @@ public class FTA_HelpButtonGuide : MonoBehaviour
                 welcomeguidetxt.SetActive(true);
                 PageNumbertxt.text = "1/8";
                 BackBtn.SetActive(false);
+                NarratorGuide();
                 break;
             case 2:
                 boardshadowtxt.SetActive(true);
                 ShadowHint.SetActive(true);
                 PageNumbertxt.text = "2/8";
                 BackBtn.SetActive(true);
+                NarratorGuide();
                 break;
             case 3:
                 hearttxt.SetActive(true);
                 Health.SetActive(true);
                 PageNumbertxt.text = "3/8";
+                NarratorGuide();
                 break;
             case 4:
                 hinttxt.SetActive(true);
                 HintBorder.SetActive(true);
                 PageNumbertxt.text = "4/8";
+                NarratorGuide();
                 break;
             case 5:
                 timertxt.SetActive(true);
                 Timer.SetActive(true);
                 PageNumbertxt.text = "5/8";
+                NarratorGuide();
                 break;
             case 6:
                 hidinganimaltxt.SetActive(true);
                 HiddenBg.SetActive(true);
                 PageNumbertxt.text = "6/8";
+                NarratorGuide();
                 break;
             case 7:
                 settingstxt.SetActive(true);
                 Settings.SetActive(true);
                 PageNumbertxt.text = "7/8";
+                NarratorGuide();
                 break;
             case 8:
                 guidedtxt.SetActive(true);
                 HelpGuide.SetActive(true);
                 PageNumbertxt.text = "8/8";
+                NarratorGuide();
                 break;
         }
     }
@@ -139,6 +150,8 @@ public class FTA_HelpButtonGuide : MonoBehaviour
             CheckPageNumber();
             GuideLoadData.FTA_GAME_GUIDE = true;
             SaveManager.Save(GuideLoadData);
+            AudioManager.guideSource.Stop();
+            gameManager.isGuideClicked = false;
         }
     }
     public void BackButton()
@@ -154,6 +167,8 @@ public class FTA_HelpButtonGuide : MonoBehaviour
         CheckPageNumber();
         GuideLoadData.FTA_GAME_GUIDE = true;
         SaveManager.Save(GuideLoadData);
+        AudioManager.guideSource.Stop();
+        gameManager.isGuideClicked = false;
     }
 
     public GameObject BoyGuide;
@@ -171,6 +186,20 @@ public class FTA_HelpButtonGuide : MonoBehaviour
         {
             BoyGuide.SetActive(false);
             GirlGuide.SetActive(true);
+        }
+    }
+    public void NarratorGuide()
+    {
+        if (gameManager.isGuideClicked)
+        {
+            if (GuideChosen == "boy_guide")
+            {
+                AudioManager.PlayGuide(AudioManager.FTA_Patrick[pageNumber - 1]);
+            }
+            else if (GuideChosen == "girl_guide")
+            {
+                AudioManager.PlayGuide(AudioManager.FTA_Sandy[pageNumber - 1]);
+            }
         }
     }
 }

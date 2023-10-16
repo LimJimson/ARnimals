@@ -18153,6 +18153,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ae38a092ef27db84193a9b555477ca1a, type: 3}
   - {fileID: 21300000, guid: a7d2a4677e3a19b4ab23441f0a192f00, type: 3}
   - {fileID: 21300000, guid: 53d38bb464c2dcb4ab0e3c84b137e2e2, type: 3}
+  isGuideClicked: 0
+  guideScript: {fileID: 1750624384}
   confirmationToARCanvas: {fileID: 1774892045}
   animalToUnlockName: {fileID: 431509556}
   animalImg: {fileID: 1609922780}

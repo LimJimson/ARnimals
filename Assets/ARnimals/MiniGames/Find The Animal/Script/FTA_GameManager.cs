@@ -1092,6 +1092,8 @@ public class FTA_GameManager : MonoBehaviour
     {
         ClickAnytoStart.SetActive(true);
     }
+    public bool isGuideClicked;
+    public FTA_HelpButtonGuide guideScript;
     public void ToStartGame()
     {
         if (!guideTutorialisDone)
@@ -1158,9 +1160,11 @@ public class FTA_GameManager : MonoBehaviour
     public GameObject Guide;
     public void FTAHelpButton()
     {
+        isGuideClicked = true;
         isPaused = true;
         Time.timeScale = 0f;
         Guide.SetActive(true);
+        guideScript.CheckPageNumber();
     }
     public TMP_Text timerStart;
     bool isStartTimerCounting = false;

@@ -194,7 +194,6 @@ public class FTA_GameManager : MonoBehaviour
             Debug.Log("Correct");
             shadowImgs[0].color = enableCorrectAnswer;
             clickedAnimal.SetActive(false);
-            checkStar();
             try
             {
                 audioManager.PlaySFX(audioManager.correctAnswer);
@@ -209,7 +208,6 @@ public class FTA_GameManager : MonoBehaviour
             Debug.Log("Correct");
             shadowImgs[1].color = enableCorrectAnswer;
             clickedAnimal.SetActive(false);
-            checkStar();
             try
             {
                 audioManager.PlaySFX(audioManager.correctAnswer);
@@ -224,7 +222,6 @@ public class FTA_GameManager : MonoBehaviour
             Debug.Log("Correct");
             shadowImgs[2].color = enableCorrectAnswer;
             clickedAnimal.SetActive(false);
-            checkStar();
             try
             {
                 audioManager.PlaySFX(audioManager.correctAnswer);
@@ -306,7 +303,6 @@ public class FTA_GameManager : MonoBehaviour
         isGameOver = true;
         timer = Mathf.Min(timer, timeLimit);
         panelFinish.SetActive(true);
-        checkStar();
     }
     public void PauseGame()
     {
@@ -339,14 +335,7 @@ public class FTA_GameManager : MonoBehaviour
     {
         ResumeGame();
         SceneManager.LoadScene("FTA_lvlSelect");
-        try
-        {
-            audioManager.musicSource.Stop();
-        }
-        catch
-        {
-
-        }
+        audioManager.musicSource.Stop();
     }
 
     [Header("Guides")]
@@ -357,6 +346,7 @@ public class FTA_GameManager : MonoBehaviour
     {
         ResumeGame();
         SceneManager.LoadScene("FTA_lvlSelect");
+        audioManager.musicSource.Stop();
     }
     public void CloseConfirmationQuit()
     {
@@ -462,6 +452,7 @@ public class FTA_GameManager : MonoBehaviour
     {
         ResumeGame();
         SceneManager.LoadScene("Animal_Information");
+        audioManager.musicSource.Stop();
     }
     public void CloseExploreBtn()
     {

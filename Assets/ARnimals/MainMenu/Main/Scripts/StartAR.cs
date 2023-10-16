@@ -161,6 +161,7 @@ public class StartAR : MonoBehaviour
 
         }
         CTF_Reset.CTF_ResetProgress();
+        FTA_ResetBtn.FTA_ResetProgress();
         SaveManager.DeleteFile();
     }
 

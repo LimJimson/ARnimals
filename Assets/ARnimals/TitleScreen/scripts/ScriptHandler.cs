@@ -196,6 +196,7 @@ public class ScriptHandler : MonoBehaviour
     {
         SaveManager.DeleteFile();
         CTF_Reset.CTF_ResetProgress();
+        FTA_ResetBtn.FTA_ResetProgress();
     }
 
     //Button Scripts

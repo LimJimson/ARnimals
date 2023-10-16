@@ -40,6 +40,7 @@ public static class SaveManager
             existingSO.animalInfoGuide = so.animalInfoGuide;
             existingSO.mainMenuSettingsGuide = so.mainMenuSettingsGuide;
             existingSO.GTS_GAME_GUIDE = so.GTS_GAME_GUIDE;
+            existingSO.FTA_GAME_GUIDE = so.FTA_GAME_GUIDE;
 
             //Settings
             existingSO.MusicVolume = so.MusicVolume;

@@ -14676,7 +14676,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!1 &596771914
 GameObject:
@@ -29615,7 +29615,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 20.038685, y: -12.546135}
+  m_AnchoredPosition: {x: 20.038696, y: -12.546143}
   m_SizeDelta: {x: 295.57422, y: 88.36694}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1230636635
@@ -35079,7 +35079,6 @@ MonoBehaviour:
   startGamePanel: {fileID: 1446195119}
   pauseAndHpCanvas: {fileID: 591895722}
   gameStartManager: {fileID: 625389457}
-  audioManager: {fileID: 1723323712}
   gameResumeTimerManager: {fileID: 956183864}
   tutorialGameObjects:
   - {fileID: 195632663}
@@ -42147,7 +42146,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!1 &1793524417
 GameObject:

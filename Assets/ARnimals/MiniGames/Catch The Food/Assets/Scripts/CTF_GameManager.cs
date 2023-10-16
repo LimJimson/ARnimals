@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using System.Linq;
+using static SaveObject.CTF_HighScore;
 using Unity.VisualScripting;
 using System.Collections.Generic;
 
@@ -108,7 +109,7 @@ public class CTF_GameManager : MonoBehaviour
         selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel");
         showRandomTrivia();
         StartCoroutine(showTransitionAfterDelay());
-		updateHighScoreList();
+		UpdateHighScoreList();
     }
 
     private void Update() 
@@ -470,95 +471,55 @@ public class CTF_GameManager : MonoBehaviour
                 break;
         }
 		SaveManager.Save(existingSo);
-        updateHighScoreList();
+        UpdateHighScoreList();
     }
 
-    public void updateHighScoreList() 
-    { 
-        string formattedScores = "";
+    public void UpdateHighScoreList()
+{
+    string formattedScores = "";
 
-        switch(selectedLevel) 
+    List<SaveObject.CTF_HighScore> highScores = null;
+    switch (selectedLevel)
+    {
+        case "1":
+            highScores = existingSo.ctf_HighScoresLvl1;
+            break;
+        case "2":
+            highScores = existingSo.ctf_HighScoresLvl2;
+            break;
+        case "3":
+            highScores = existingSo.ctf_HighScoresLvl3;
+            break;
+        case "4":
+            highScores = existingSo.ctf_HighScoresLvl4;
+            break;
+        case "5":
+            highScores = existingSo.ctf_HighScoresLvl5;
+            break;
+    }
+
+    if (highScores != null)
+    {
+        for (int i = 0; i < highScores.Count; i++)
         {
-            case "1":
-                // Format the high scores for display
+            string rank = (i == 9) ? "10" : (i + 1).ToString();
 
-                for (int i = 0; i < existingSo.ctf_HighScoresLvl1.Count; i++)
-                {	
-					if (i == 9) 
-					{
-						formattedScores += "10" + ".    " + existingSo.ctf_HighScoresLvl1[9].score + "     -     " + existingSo.ctf_HighScoresLvl1[i].dateAchieved + "\n";
-					}
-					else 
-					{
-						formattedScores += (i + 1) + ".     " + existingSo.ctf_HighScoresLvl1[i].score + "     -     " + existingSo.ctf_HighScoresLvl1[i].dateAchieved + "\n";
-					}
-                }
-                break;
-            case "2":
-                // Format the high scores for display
-
-                for (int i = 0; i < existingSo.ctf_HighScoresLvl2.Count; i++)
-                {
-					if (i == 9) 
-					{
-						formattedScores += "10" + ".    " + existingSo.ctf_HighScoresLvl2[9].score + "     -     " + existingSo.ctf_HighScoresLvl2[i].dateAchieved + "\n";
-					}
-					else 
-					{
-						formattedScores += (i + 1) + ".     " + existingSo.ctf_HighScoresLvl2[i].score + "     -     " + existingSo.ctf_HighScoresLvl2[i].dateAchieved + "\n";
-					}
-                }
-                break;
-            case "3":
-                // Format the high scores for display
-
-                for (int i = 0; i < existingSo.ctf_HighScoresLvl3.Count; i++)
-                {
-                    if (i == 9) 
-					{
-						formattedScores += "10" + ".    " + existingSo.ctf_HighScoresLvl3[9].score + "     -     " + existingSo.ctf_HighScoresLvl3[i].dateAchieved + "\n";
-					}
-					else 
-					{
-						formattedScores += (i + 1) + ".     " + existingSo.ctf_HighScoresLvl3[i].score + "     -     " + existingSo.ctf_HighScoresLvl3[i].dateAchieved + "\n";
-					}
-                }
-                break;
-            case "4":
-                // Format the high scores for display
-
-                for (int i = 0; i < existingSo.ctf_HighScoresLvl4.Count; i++)
-                {
-                    if (i == 9) 
-					{
-						formattedScores += "10" + ".    " + existingSo.ctf_HighScoresLvl4[9].score + "     -     " + existingSo.ctf_HighScoresLvl4[i].dateAchieved + "\n";
-					}
-					else 
-					{
-						formattedScores += (i + 1) + ".     " + existingSo.ctf_HighScoresLvl4[i].score + "     -     " + existingSo.ctf_HighScoresLvl4[i].dateAchieved + "\n";
-					}
-                }
-                break;
-            case "5":
-                // Format the high scores for display
-
-                for (int i = 0; i < existingSo.ctf_HighScoresLvl5.Count; i++)
-                {
-					if (i == 9) 
-					{
-						formattedScores += "10" + ".    " + existingSo.ctf_HighScoresLvl5[9].score + "     -     " + existingSo.ctf_HighScoresLvl5[i].dateAchieved + "\n";
-					}
-					else 
-					{
-						formattedScores += (i + 1) + ".     " + existingSo.ctf_HighScoresLvl5[i].score + "     -     " + existingSo.ctf_HighScoresLvl5[i].dateAchieved + "\n";
-					}
-                }
-                break;
+            if (rank == "10") 
+            {
+                formattedScores += $"{rank}.    {highScores[i].score}     -     {highScores[i].dateAchieved}\n";
+            }
+            else 
+            {
+                formattedScores += $"{rank}.     {highScores[i].score}     -     {highScores[i].dateAchieved}\n";
+            }
         }
-        // Set the formatted scores in the UI Text element
-        highScoreListTxt.text = formattedScores;
-		Debug.Log("High Score List: " + formattedScores);
     }
+
+    // Set the formatted scores in the UI Text element
+    highScoreListTxt.text = formattedScores;
+    Debug.Log("High Score List: " + formattedScores);
+}
+
 
     private void SetMaxStars() 
     {

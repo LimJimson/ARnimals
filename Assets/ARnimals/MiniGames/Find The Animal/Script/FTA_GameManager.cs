@@ -24,6 +24,9 @@ public class FTA_GameManager : MonoBehaviour
     public Sprite[] CoverBackgroundSpritesLvl4;
     public Sprite[] CoverBackgroundSpritesLvl5;
 
+    public Image[] GuideshadowImgs;
+    public Image[] GuideCoverBackground;
+
     [Header("Items and Positions")]
     public GameObject[] items;
     int countItemFind;
@@ -32,14 +35,23 @@ public class FTA_GameManager : MonoBehaviour
     public int countHealth;
     public GameObject health;
 
+    [Header("Start Game Panel")]
+    public GameObject InstructionGamePanel;
+    public GameObject ClickAnytoStart;
+    public bool startGame;
+
     SaveObject SaveFTAGame;
 
     AudioManager audioManager;
+
+    bool guideTutorialisDone;
 
     private Vector3[] positions;
 
     private void Start()
     {
+        SaveFTAGame = SaveManager.Load();
+        guideTutorialisDone = SaveFTAGame.FTA_GAME_GUIDE;
         try
         {
             audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
@@ -56,26 +68,28 @@ public class FTA_GameManager : MonoBehaviour
         {
             Debug.Log("No AudioManager");
         }
-        SaveFTAGame = SaveManager.Load();
+        
         guide_chosen = SaveFTAGame.guideChosen;
         HintsLeft = 1;
         SelectedLevel = PlayerPrefs.GetString("FTA_SelectedLevel");
         SelectedArraySprites();
+        CheckLevel();
         initializePositionsofItems();
         RandomlyAssignSprites();
         RandomlyAssignPositionToItems();
         countHealth = health.transform.childCount;
-        DisplayTimer();
         settingsMenuObject.SetActive(false);
-        CheckLevel();
+        InstructionGamePanel.SetActive(true);
+        Invoke("StartCountdownStarts", 0.8f);
     }
     private void Update()
     {
+        countdownStarts();
         if (SelectedLevel == "5")
         {
             NextLevelBtn.interactable = false;
         }
-        if (!isGameOver && !isPaused && countItemFind < 3)
+        if (startGame == true && !isGameOver && !isPaused && countItemFind < 3)
         {
             timer += Time.deltaTime;
             DisplayTimer();
@@ -87,6 +101,10 @@ public class FTA_GameManager : MonoBehaviour
             }
         }
         countdownHints();
+        if (InstructionGamePanel.activeSelf == true)
+        {
+            Invoke("ClickToStart", 3f);
+        }
     }
 
     private void initializePositionsofItems()
@@ -137,6 +155,7 @@ public class FTA_GameManager : MonoBehaviour
         for (int i = 0; i < numberOfshadowImgs; i++)
         {
             shadowImgs[i].sprite = SelectedArraySprites()[i];
+            GuideshadowImgs[i].sprite = SelectedArraySprites()[i];
         }
     }
 
@@ -291,6 +310,7 @@ public class FTA_GameManager : MonoBehaviour
     }
     private void GameWin()
     {
+        AnimaltoUnlock();
         try
         {
             audioManager.PlaySFX(audioManager.winLevel);
@@ -346,7 +366,14 @@ public class FTA_GameManager : MonoBehaviour
     {
         ResumeGame();
         SceneManager.LoadScene("FTA_lvlSelect");
-        audioManager.musicSource.Stop();
+        try 
+        {
+            audioManager.musicSource.Stop();
+        }
+        catch
+        {
+
+        }
     }
     public void CloseConfirmationQuit()
     {
@@ -552,6 +579,18 @@ public class FTA_GameManager : MonoBehaviour
                 CoverBackground[3].transform.localPosition = CoverBgPositionForLevel1[3];
                 CoverBackground[4].sprite = CoverBackgroundSpritesLvl1[4];
                 CoverBackground[4].transform.localPosition = CoverBgPositionForLevel1[4];
+
+                GuideCoverBackground[0].sprite = CoverBackgroundSpritesLvl1[0];
+                GuideCoverBackground[0].transform.localPosition = CoverBgPositionForLevel1[0];
+                GuideCoverBackground[1].sprite = CoverBackgroundSpritesLvl1[1];
+                GuideCoverBackground[1].transform.localPosition = CoverBgPositionForLevel1[1];
+                GuideCoverBackground[2].sprite = CoverBackgroundSpritesLvl1[2];
+                GuideCoverBackground[2].transform.localPosition = CoverBgPositionForLevel1[2];
+                GuideCoverBackground[3].sprite = CoverBackgroundSpritesLvl1[3];
+                GuideCoverBackground[3].transform.localPosition = CoverBgPositionForLevel1[3];
+                GuideCoverBackground[4].sprite = CoverBackgroundSpritesLvl1[4];
+                GuideCoverBackground[4].transform.localPosition = CoverBgPositionForLevel1[4];
+
                 break;
             case "2":
                 Background.sprite = BackgroundImgs[1];
@@ -576,6 +615,18 @@ public class FTA_GameManager : MonoBehaviour
                 CoverBackground[3].transform.localPosition = CoverBgPositionForLevel2[3];
                 CoverBackground[4].sprite = CoverBackgroundSpritesLvl2[4];
                 CoverBackground[4].transform.localPosition = CoverBgPositionForLevel2[4];
+
+                GuideCoverBackground[0].sprite = CoverBackgroundSpritesLvl2[0];
+                GuideCoverBackground[0].transform.localPosition = CoverBgPositionForLevel2[0];
+                GuideCoverBackground[1].sprite = CoverBackgroundSpritesLvl2[1];
+                GuideCoverBackground[1].transform.localPosition = CoverBgPositionForLevel2[1];
+                GuideCoverBackground[2].sprite = CoverBackgroundSpritesLvl2[2];
+                GuideCoverBackground[2].transform.localPosition = CoverBgPositionForLevel2[2];
+                GuideCoverBackground[3].sprite = CoverBackgroundSpritesLvl2[3];
+                GuideCoverBackground[3].transform.localPosition = CoverBgPositionForLevel2[3];
+                GuideCoverBackground[4].sprite = CoverBackgroundSpritesLvl2[4];
+                GuideCoverBackground[4].transform.localPosition = CoverBgPositionForLevel2[4];
+
                 break;
             case "3":
                 Background.sprite = BackgroundImgs[2];
@@ -600,6 +651,18 @@ public class FTA_GameManager : MonoBehaviour
                 CoverBackground[3].transform.localPosition = CoverBgPositionForLevel3[3];
                 CoverBackground[4].sprite = CoverBackgroundSpritesLvl3[4];
                 CoverBackground[4].transform.localPosition = CoverBgPositionForLevel3[4];
+
+                GuideCoverBackground[0].sprite = CoverBackgroundSpritesLvl3[0];
+                GuideCoverBackground[0].transform.localPosition = CoverBgPositionForLevel3[0];
+                GuideCoverBackground[1].sprite = CoverBackgroundSpritesLvl3[1];
+                GuideCoverBackground[1].transform.localPosition = CoverBgPositionForLevel3[1];
+                GuideCoverBackground[2].sprite = CoverBackgroundSpritesLvl3[2];
+                GuideCoverBackground[2].transform.localPosition = CoverBgPositionForLevel3[2];
+                GuideCoverBackground[3].sprite = CoverBackgroundSpritesLvl3[3];
+                GuideCoverBackground[3].transform.localPosition = CoverBgPositionForLevel3[3];
+                GuideCoverBackground[4].sprite = CoverBackgroundSpritesLvl3[4];
+                GuideCoverBackground[4].transform.localPosition = CoverBgPositionForLevel3[4];
+
                 break;
             case "4":
                 Background.sprite = BackgroundImgs[3];
@@ -624,6 +687,18 @@ public class FTA_GameManager : MonoBehaviour
                 CoverBackground[3].transform.localPosition = CoverBgPositionForLevel4[3];
                 CoverBackground[4].sprite = CoverBackgroundSpritesLvl4[4];
                 CoverBackground[4].transform.localPosition = CoverBgPositionForLevel4[4];
+
+                GuideCoverBackground[0].sprite = CoverBackgroundSpritesLvl4[0];
+                GuideCoverBackground[0].transform.localPosition = CoverBgPositionForLevel4[0];
+                GuideCoverBackground[1].sprite = CoverBackgroundSpritesLvl4[1];
+                GuideCoverBackground[1].transform.localPosition = CoverBgPositionForLevel4[1];
+                GuideCoverBackground[2].sprite = CoverBackgroundSpritesLvl4[2];
+                GuideCoverBackground[2].transform.localPosition = CoverBgPositionForLevel4[2];
+                GuideCoverBackground[3].sprite = CoverBackgroundSpritesLvl4[3];
+                GuideCoverBackground[3].transform.localPosition = CoverBgPositionForLevel4[3];
+                GuideCoverBackground[4].sprite = CoverBackgroundSpritesLvl4[4];
+                GuideCoverBackground[4].transform.localPosition = CoverBgPositionForLevel4[4];
+
                 break;
             case "5":
                 Background.sprite = BackgroundImgs[4];
@@ -648,6 +723,18 @@ public class FTA_GameManager : MonoBehaviour
                 CoverBackground[3].transform.localPosition = CoverBgPositionForLevel5[3];
                 CoverBackground[4].sprite = CoverBackgroundSpritesLvl5[4];
                 CoverBackground[4].transform.localPosition = CoverBgPositionForLevel5[4];
+
+                GuideCoverBackground[0].sprite = CoverBackgroundSpritesLvl5[0];
+                GuideCoverBackground[0].transform.localPosition = CoverBgPositionForLevel5[0];
+                GuideCoverBackground[1].sprite = CoverBackgroundSpritesLvl5[1];
+                GuideCoverBackground[1].transform.localPosition = CoverBgPositionForLevel5[1];
+                GuideCoverBackground[2].sprite = CoverBackgroundSpritesLvl5[2];
+                GuideCoverBackground[2].transform.localPosition = CoverBgPositionForLevel5[2];
+                GuideCoverBackground[3].sprite = CoverBackgroundSpritesLvl5[3];
+                GuideCoverBackground[3].transform.localPosition = CoverBgPositionForLevel5[3];
+                GuideCoverBackground[4].sprite = CoverBackgroundSpritesLvl5[4];
+                GuideCoverBackground[4].transform.localPosition = CoverBgPositionForLevel5[4];
+
                 break;
         }
     }
@@ -765,7 +852,7 @@ public class FTA_GameManager : MonoBehaviour
     public IEnumerator ShowHint(Image shawdowImage)
     {
         Vector3 originalSize = shawdowImage.transform.localScale;
-        Vector3 doubleSize = shawdowImage.transform.localScale = shawdowImage.transform.localScale * 2.0f;
+        Vector3 doubleSize = shawdowImage.transform.localScale = shawdowImage.transform.localScale * 1.5f;
 
         shawdowImage.transform.localScale = doubleSize;
         yield return new WaitForSeconds(3.0f);
@@ -779,7 +866,7 @@ public class FTA_GameManager : MonoBehaviour
     public GameObject hintGuideBoy;
     public GameObject hintGuideGirl;
 
-    string guide_chosen;
+    public string guide_chosen;
     int HintsLeft;
     public void hintBtn()
     {
@@ -894,22 +981,32 @@ public class FTA_GameManager : MonoBehaviour
                     case "1":
                         starHolder.sprite = stars[2];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
+                        SaveFTAGame.isLeopardUnlock = true;
+                        checkGameObject.SetActive(true);
                         break;
                     case "2":
                         starHolder.sprite = stars[2];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
+                        SaveFTAGame.isPigeonUnlock = true;
+                        checkGameObject.SetActive(true);
                         break;
                     case "3":
                         starHolder.sprite = stars[2];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
+                        SaveFTAGame.isPiranhaUnlock = true;
+                        checkGameObject.SetActive(true);
                         break;
                     case "4":
                         starHolder.sprite = stars[2];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
+                        SaveFTAGame.isBearUnlock = true;
+                        checkGameObject.SetActive(true);
                         break;
                     case "5":
                         starHolder.sprite = stars[2];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
+                        SaveFTAGame.isOwlUnlock = true;
+                        checkGameObject.SetActive(true);
                         break;
                 }
             }
@@ -923,22 +1020,32 @@ public class FTA_GameManager : MonoBehaviour
                     case "1":
                         starHolder.sprite = stars[1];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
+                        SaveFTAGame.isLeopardUnlock = true;
+                        checkGameObject.SetActive(true);
                         break;
                     case "2":
                         starHolder.sprite = stars[1];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
+                        SaveFTAGame.isPigeonUnlock = true;
+                        checkGameObject.SetActive(true);
                         break;
                     case "3":
                         starHolder.sprite = stars[1];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
+                        SaveFTAGame.isPiranhaUnlock = true;
+                        checkGameObject.SetActive(true);
                         break;
                     case "4":
                         starHolder.sprite = stars[1];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
+                        SaveFTAGame.isBearUnlock = true;
+                        checkGameObject.SetActive(true);
                         break;
                     case "5":
                         starHolder.sprite = stars[1];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
+                        SaveFTAGame.isOwlUnlock = true;
+                        checkGameObject.SetActive(true);
                         break;
                 }
             }
@@ -954,26 +1061,136 @@ public class FTA_GameManager : MonoBehaviour
                     case "1":
                         starHolder.sprite = stars[0];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
+                        tryAnimalBtn.SetActive(false);
                         break;
                     case "2":
                         starHolder.sprite = stars[0];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
+                        tryAnimalBtn.SetActive(false);
                         break;
                     case "3":
                         starHolder.sprite = stars[0];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
+                        tryAnimalBtn.SetActive(false);
                         break;
                     case "4":
                         starHolder.sprite = stars[0];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
+                        tryAnimalBtn.SetActive(false);
                         break;
                     case "5":
                         starHolder.sprite = stars[0];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
+                        tryAnimalBtn.SetActive(false);
                         break;
                 }
             }
         }
         SaveManager.Save(SaveFTAGame);
+    }
+    public void ClickToStart()
+    {
+        ClickAnytoStart.SetActive(true);
+    }
+    public void ToStartGame()
+    {
+        if (!guideTutorialisDone)
+        {
+            InstructionGamePanel.SetActive(false);
+            startGame = true;
+            FTAHelpButton();
+        }
+        else
+        {
+            if (startGame == false && ClickAnytoStart.activeSelf == true)
+            {
+                InstructionGamePanel.SetActive(false);
+                startGame = true;
+            }
+        }   
+    }
+
+    public GameObject confirmationToARCanvas;
+    public TextMeshProUGUI animalToUnlockName;
+    public Image animalImg;
+    public Sprite[] animalSprites;
+    public GameObject checkGameObject;
+    public GameObject tryAnimalBtn;
+
+    public void TryAnimalARButton()
+    {
+        confirmationToARCanvas.SetActive(true);
+    }
+    public void ConfirmYesTryAnimalARButton()
+    {
+        SceneManager.LoadScene("Animal Selector AR");
+    }
+    public void ConfirmNoTryAnimalARButton()
+    {
+        confirmationToARCanvas.SetActive(false);
+    }
+    void AnimaltoUnlock()
+    {
+        switch (SelectedLevel)
+        {
+            case "1":
+                animalToUnlockName.text = "Leopard";
+                animalImg.sprite = animalSprites[0];
+                break;
+            case "2":
+                animalToUnlockName.text = "Pigeon";
+                animalImg.sprite = animalSprites[1];
+                break;
+            case "3":
+                animalToUnlockName.text = "Piranha";
+                animalImg.sprite = animalSprites[2];
+                break;
+            case "4":
+                animalToUnlockName.text = "Bear";
+                animalImg.sprite = animalSprites[3];
+                break;
+            case "5":
+                animalToUnlockName.text = "Owl";
+                animalImg.sprite = animalSprites[4];
+                break;
+        }
+    }
+    public GameObject Guide;
+    public void FTAHelpButton()
+    {
+        isPaused = true;
+        Time.timeScale = 0f;
+        Guide.SetActive(true);
+    }
+    public TMP_Text timerStart;
+    bool isStartTimerCounting = false;
+    float countdownTimeStarts = 3.0f;
+
+    void countdownStarts()
+    {
+        if (isStartTimerCounting)
+        {
+            countdownTimeStarts -= Time.deltaTime;
+
+            if (countdownTimeStarts <= 1)
+            {
+                countdownTimeStarts = 3.0f;
+                isStartTimerCounting = true;
+                timerStart.gameObject.SetActive(false);
+            }
+            UpdateStartText();
+        }
+    }
+
+    public void StartCountdownStarts()
+    {
+        isStartTimerCounting = true;
+        countdownStarts();
+        timerStart.gameObject.SetActive(true);
+
+    }
+    private void UpdateStartText()
+    {
+        timerStart.text = Convert.ToInt16(countdownTimeStarts).ToString();
     }
 }

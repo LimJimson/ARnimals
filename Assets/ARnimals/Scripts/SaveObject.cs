@@ -20,6 +20,7 @@ public class SaveObject
     public bool animalInfoGuide = false;
     public bool mainMenuSettingsGuide = false;
     public bool GTS_GAME_GUIDE = false;
+    public bool FTA_GAME_GUIDE = false;
 
 
     //Settings

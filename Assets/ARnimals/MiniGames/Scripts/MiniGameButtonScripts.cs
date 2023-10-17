@@ -2,36 +2,94 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MiniGameButtonScripts : MonoBehaviour
 {
+    [SerializeField] private Image transitionToOutImg;
+    [SerializeField] private Image transitionToInImg;
+	
+	private string buttonCode;
 
+	
+	private void Start() 
+	{
+		transitionToInImg.gameObject.SetActive(true);
+	}
 
+	private void Update() 
+	{
+		checkIfTransitionIsDone();
+	}
+	
     public void goToMiniGamesSelect()
     {
-        SceneManager.LoadScene("MiniGamesSelect");
+		buttonCode = "MiniGamesSelect";
+        transitionToOutImg.gameObject.SetActive(true);
     }
 
     public void goToFindTheAnimal()
     {
-        SceneManager.LoadScene("FTA_lvlSelect");
+		buttonCode = "FTA";
+		transitionToOutImg.gameObject.SetActive(true);
     }
     public void goToCatchTheFood()
     {
-        SceneManager.LoadScene("CTF_LevelSelector");
+		buttonCode = "CTF";
+		transitionToOutImg.gameObject.SetActive(true);
     }
     public void goToGuessTheAnimalFromSound()
     {
-        SceneManager.LoadScene("GTAFS_lvlSelect");
+		buttonCode = "GTAFS";
+		transitionToOutImg.gameObject.SetActive(true);
     }
 
     public void goToModeSelect()
     {
-        SceneManager.LoadScene("ModeSelect");
+		buttonCode = "ModeSelect";
+		transitionToOutImg.gameObject.SetActive(true);
     }
 
     public void goToAr()
     {
-        SceneManager.LoadScene("Animal Selector AR");
+		buttonCode = "Animal Selector AR";
+        transitionToOutImg.gameObject.SetActive(true);
+    }
+	
+	private void checkIfTransitionIsDone() 
+    {
+
+        bool achievedImgPositionOut = transitionToOutImg.color.a >= 0.9999 && transitionToOutImg.color.a <= 1.0001;
+        bool achievedImgPositionIn = transitionToInImg.color.a >= -0.0001 && transitionToInImg.color.a <= 0.0001;
+
+        if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "FTA") 
+        {
+            SceneManager.LoadScene("FTA_lvlSelect");
+        }
+        else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "CTF")
+        {
+            SceneManager.LoadScene("CTF_LevelSelector");
+        }
+		else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "GTAFS")
+        {
+            SceneManager.LoadScene("GTAFS_lvlSelect");
+        }
+		else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "ModeSelect")
+		{
+			SceneManager.LoadScene("ModeSelect");
+		}
+		else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "MiniGamesSelect")
+		{
+			SceneManager.LoadScene("MiniGamesSelect");
+		}
+		else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "Animal Selector AR")
+		{
+			SceneManager.LoadScene("Animal Selector AR");
+		}
+
+        if (transitionToInImg.gameObject.activeSelf && achievedImgPositionIn) 
+        {
+            transitionToInImg.gameObject.SetActive(false);
+        }
     }
 }

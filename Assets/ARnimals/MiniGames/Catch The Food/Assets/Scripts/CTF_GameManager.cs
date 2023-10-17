@@ -91,6 +91,7 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private Image transitionToInImg;
     [SerializeField] private GameObject plainBlackPanel;
 
+
     private string buttonCode;
 	
     private void Awake()

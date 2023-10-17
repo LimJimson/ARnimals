@@ -9,6 +9,7 @@ public class CTF_TutorialManager : MonoBehaviour
 {
 
     AudioManager audioManager;
+    SaveObject so;
 
     [SerializeField] private GameObject tutorialCanvas;
     [SerializeField] private GameObject startGamePanel;
@@ -76,6 +77,7 @@ public class CTF_TutorialManager : MonoBehaviour
 
     private void Start() 
     {
+        so = SaveManager.Load();
 
         try
         {
@@ -114,10 +116,12 @@ public class CTF_TutorialManager : MonoBehaviour
         boyGuideForMenus[1].SetActive(false);
         boyGuideForMenus[2].SetActive(false);
 		boyGuideForMenus[3].SetActive(false);
+        boyGuideForMenus[4].SetActive(false);
         girlGuideForMenus[0].SetActive(false);
         girlGuideForMenus[1].SetActive(false);
         girlGuideForMenus[2].SetActive(false);
 		girlGuideForMenus[3].SetActive(false);
+        girlGuideForMenus[4].SetActive(false);
 		
         guide.sprite = spriteForGuide[guideSprite];
         dialogBox.sprite = spriteForDialogBox[dialogBoxSprite];
@@ -126,11 +130,12 @@ public class CTF_TutorialManager : MonoBehaviour
         guideForMenus[1].SetActive(true);
         guideForMenus[2].SetActive(true);
 		guideForMenus[3].SetActive(true);
+        guideForMenus[4].SetActive(true);
     } 
 
     private void checkGuide() 
     {
-        guideChosen = StateNameController.guide_chosen;
+        guideChosen = so.guideChosen;
 
         if(string.IsNullOrEmpty(guideChosen)) 
         {

@@ -7466,6 +7466,7 @@ MonoBehaviour:
   Settings: {fileID: 847886930}
   MainMenuGuide: {fileID: 277279377}
   playerName: {fileID: 223205801}
+  mainMenuSettingsGuideScript: {fileID: 822122309}
   changeGuideMale: {fileID: 1455080550}
   changeGuideFemale: {fileID: 1393492258}
   ConfirmGuideChange: {fileID: 227020707}

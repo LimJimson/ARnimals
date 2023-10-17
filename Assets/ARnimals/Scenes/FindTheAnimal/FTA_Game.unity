@@ -489,8 +489,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 308.54572, y: 233.44366}
-  m_SizeDelta: {x: 593.653, y: 441.1158}
+  m_AnchoredPosition: {x: 341.58804, y: 259.14423}
+  m_SizeDelta: {x: 648.0358, y: 489.0736}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &21397206
 MonoBehaviour:
@@ -1830,7 +1830,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -496, y: -268}
+  m_AnchoredPosition: {x: -470.99997, y: -238}
   m_SizeDelta: {x: 6156.0146, y: 2926.6006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &81578977
@@ -1882,8 +1882,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 480
-  m_fontSizeBase: 480
+  m_fontSize: 570
+  m_fontSizeBase: 570
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 37.47
@@ -3785,7 +3785,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -103, y: -58.947}
-  m_SizeDelta: {x: 855.2585, y: 117.8949}
+  m_SizeDelta: {x: 775.0923, y: 117.8949}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &162842694
 MonoBehaviour:
@@ -3807,7 +3807,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You have one <color=green>60 seconds</color> find all the <color=lightblue>animals</color>,
+  m_text: You have <color=green>60 seconds</color> find all the <color=lightblue>animals</color>,
     so let's hurry up!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
@@ -3921,8 +3921,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -496, y: -268}
-  m_SizeDelta: {x: 6156.0146, y: 2926.6006}
+  m_AnchoredPosition: {x: -470.99997, y: -268}
+  m_SizeDelta: {x: 6737.2373, y: 3414.8276}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &171497687
 MonoBehaviour:
@@ -3973,8 +3973,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 480
-  m_fontSizeBase: 480
+  m_fontSize: 550
+  m_fontSizeBase: 550
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 37.47
@@ -4658,7 +4658,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 76f0b8a729fc0bf40aad42d332b8313f, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -5779,7 +5779,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -266.99997, y: -203.00003}
+  m_AnchoredPosition: {x: -269, y: -233}
   m_SizeDelta: {x: 198.4195, y: 177.7548}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &287600676
@@ -6439,8 +6439,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -506, y: -249}
-  m_SizeDelta: {x: 6156.0146, y: 2926.6006}
+  m_AnchoredPosition: {x: -471, y: -237.99998}
+  m_SizeDelta: {x: 6853.4775, y: 3252.0854}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &330010577
 MonoBehaviour:
@@ -6462,8 +6462,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is a timer! If you do not find the animals in 1 minute, you will fail,
-    but it is okay because we can retry it again!
+  m_text: This is the timer! If you do not find the animals within 60 seconds, you
+    will fail, but it's okay because we can retry it! Cheer up!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,
@@ -6491,8 +6491,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 480
-  m_fontSizeBase: 480
+  m_fontSize: 500
+  m_fontSizeBase: 500
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 37.47
@@ -6770,7 +6770,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19.527, y: -208.05}
+  m_AnchoredPosition: {x: 72, y: -221}
   m_SizeDelta: {x: 1949.2816, y: 855.0098}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &347529126
@@ -9121,6 +9121,7 @@ Transform:
   - {fileID: 1703846056}
   - {fileID: 468277928}
   - {fileID: 1774892046}
+  - {fileID: 1650409192}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9439,7 +9440,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 661a7b033bd2fe94a980c60798349ed3, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -12631,8 +12632,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -496, y: -268}
-  m_SizeDelta: {x: 6156.0146, y: 2926.6006}
+  m_AnchoredPosition: {x: -471, y: -247}
+  m_SizeDelta: {x: 6853.4814, y: 2926.6006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &633728052
 MonoBehaviour:
@@ -12683,8 +12684,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 480
-  m_fontSizeBase: 480
+  m_fontSize: 550
+  m_fontSizeBase: 550
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 37.47
@@ -13823,8 +13824,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -496, y: -249}
-  m_SizeDelta: {x: 6156.0146, y: 2926.6006}
+  m_AnchoredPosition: {x: -471, y: -229}
+  m_SizeDelta: {x: 6760.4854, y: 2926.6006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &664303969
 MonoBehaviour:
@@ -13875,8 +13876,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 480
-  m_fontSizeBase: 480
+  m_fontSize: 550
+  m_fontSizeBase: 550
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 37.47
@@ -15922,7 +15923,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 3078e7319aa1c17409cf8727b275506e, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -16763,8 +16764,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 319, y: 227}
-  m_SizeDelta: {x: 631.9082, y: 481.9232}
+  m_AnchoredPosition: {x: 353, y: 252}
+  m_SizeDelta: {x: 689.7957, y: 534.3176}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &860739167
 MonoBehaviour:
@@ -17588,8 +17589,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 102, y: -550}
-  m_SizeDelta: {x: 324.0132, y: 171.1954}
+  m_AnchoredPosition: {x: 83, y: -557.6742}
+  m_SizeDelta: {x: 277.9678, y: 155.847}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &898672504
 MonoBehaviour:
@@ -18055,6 +18056,7 @@ MonoBehaviour:
   InstructionGamePanel: {fileID: 1703846055}
   ClickAnytoStart: {fileID: 1828023507}
   startGame: 0
+  CheckIfFisrtItemGuide: 0
   panelGameOver: {fileID: 1582851790}
   panelFinish: {fileID: 70344266}
   settingsMenuObject: {fileID: 57040108}
@@ -18118,7 +18120,7 @@ MonoBehaviour:
   - {x: 932, y: -8, z: 0}
   - {x: -555, y: -220.6, z: 0}
   - {x: 350, y: -402, z: 0}
-  - {x: 0, y: -8, z: 0}
+  - {x: 52, y: -402, z: 0}
   AnimalPositionLvl3:
   - {x: 1130, y: -553, z: 0}
   - {x: 1011, y: -379.63, z: 0}
@@ -18153,6 +18155,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ae38a092ef27db84193a9b555477ca1a, type: 3}
   - {fileID: 21300000, guid: a7d2a4677e3a19b4ab23441f0a192f00, type: 3}
   - {fileID: 21300000, guid: 53d38bb464c2dcb4ab0e3c84b137e2e2, type: 3}
+  clickToContinue: {fileID: 1461916987}
   isGuideClicked: 0
   guideScript: {fileID: 1750624384}
   confirmationToARCanvas: {fileID: 1774892045}
@@ -18166,6 +18169,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3c0ea20a3f052fe4fb92555807e29e96, type: 3}
   checkGameObject: {fileID: 658946666}
   tryAnimalBtn: {fileID: 2000274818}
+  BoyARGuide: {fileID: 100212351}
+  GirlARGuide: {fileID: 104580516}
   Guide: {fileID: 255548992}
   timerStart: {fileID: 862839903}
 --- !u!114 &914153268
@@ -22567,8 +22572,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -496, y: -249}
-  m_SizeDelta: {x: 6156.0146, y: 2926.6006}
+  m_AnchoredPosition: {x: -471, y: -238}
+  m_SizeDelta: {x: 6551.245, y: 2926.6006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1168306779
 MonoBehaviour:
@@ -22590,8 +22595,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is your heart! If you find the wrong animal, it will lose heart. Remember
-    that you have only 3 lives!
+  m_text: This is your heart! If you choose the wrong animal, you will lose a life.
+    Remember, you have only three lives!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,
@@ -22619,8 +22624,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 480
-  m_fontSizeBase: 480
+  m_fontSize: 520
+  m_fontSizeBase: 520
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 37.47
@@ -22839,7 +22844,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 220, y: -62}
+  m_AnchoredPosition: {x: 289, y: -86}
   m_SizeDelta: {x: 1548.3354, y: 562.9028}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1176733771
@@ -23205,8 +23210,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -88.05, y: -237}
-  m_SizeDelta: {x: 176.1001, y: 210.3}
+  m_AnchoredPosition: {x: -98, y: -230.28503}
+  m_SizeDelta: {x: 164.5889, y: 196.8701}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1205592682
 MonoBehaviour:
@@ -25507,8 +25512,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -349.00006, y: -334.00003}
-  m_SizeDelta: {x: 283.0568, y: 230.8943}
+  m_AnchoredPosition: {x: -355, y: -335}
+  m_SizeDelta: {x: 206.3146, y: 213.6273}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1327930055
 MonoBehaviour:
@@ -25791,7 +25796,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -496, y: -268}
+  m_AnchoredPosition: {x: -471.00003, y: -238}
   m_SizeDelta: {x: 6156.0146, y: 2926.6006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1334588392
@@ -25843,8 +25848,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 480
-  m_fontSizeBase: 480
+  m_fontSize: 570
+  m_fontSizeBase: 570
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 37.47
@@ -27141,7 +27146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1461916988
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29797,7 +29802,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1623550914
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29815,8 +29820,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -496.0001, y: -268}
-  m_SizeDelta: {x: 6156.0146, y: 2926.6006}
+  m_AnchoredPosition: {x: -471, y: -247}
+  m_SizeDelta: {x: 6853.4834, y: 2926.6006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1623550915
 MonoBehaviour:
@@ -29867,8 +29872,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 480
-  m_fontSizeBase: 480
+  m_fontSize: 550
+  m_fontSizeBase: 550
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 37.47
@@ -30090,6 +30095,37 @@ RectTransform:
   m_AnchoredPosition: {x: -22, y: -56}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1650409191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1650409192}
+  m_Layer: 0
+  m_Name: TriviaAfterGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1650409192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650409191}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 453068813}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1654540100
 GameObject:
   m_ObjectHideFlags: 0
@@ -30585,8 +30621,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 983, y: -439.37}
-  m_SizeDelta: {x: 252.3799, y: 168.24}
+  m_AnchoredPosition: {x: 950.38464, y: -438.4107}
+  m_SizeDelta: {x: 198.6604, y: 147.1359}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1683240141
 MonoBehaviour:
@@ -32018,7 +32054,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -267, y: -203}
+  m_AnchoredPosition: {x: -269.00003, y: -232.99997}
   m_SizeDelta: {x: 198.4195, y: 177.7548}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1777754559
@@ -37493,8 +37529,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 529, y: -266}
-  m_SizeDelta: {x: 353.1313, y: 178.5}
+  m_AnchoredPosition: {x: 544, y: -262}
+  m_SizeDelta: {x: 168.95, y: 178.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2089042323
 MonoBehaviour:

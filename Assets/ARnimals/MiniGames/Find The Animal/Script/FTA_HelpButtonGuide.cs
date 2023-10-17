@@ -46,6 +46,7 @@ public class FTA_HelpButtonGuide : MonoBehaviour
         CheckPageNumber();
         GuideBoyorGirl();
     }
+    
 
     void Update()
     {
@@ -148,6 +149,12 @@ public class FTA_HelpButtonGuide : MonoBehaviour
             Guideoff.SetActive(false);
             gameManager.ResumeGame();
             CheckPageNumber();
+            if (gameManager.CheckIfFisrtItemGuide)
+            {
+                gameManager.InstructionGamePanel.SetActive(true);
+                gameManager.Invoke("StartCountdownStarts", 0.8f);
+                gameManager.Invoke("ClickToStart", 3f);
+            }
             GuideLoadData.FTA_GAME_GUIDE = true;
             SaveManager.Save(GuideLoadData);
             AudioManager.guideSource.Stop();
@@ -165,6 +172,12 @@ public class FTA_HelpButtonGuide : MonoBehaviour
         Guideoff.SetActive(false);
         gameManager.ResumeGame();
         CheckPageNumber();
+        if (gameManager.CheckIfFisrtItemGuide)
+        {
+            gameManager.InstructionGamePanel.SetActive(true);
+            gameManager.Invoke("StartCountdownStarts", 0.8f);
+            gameManager.Invoke("ClickToStart", 3f);
+        }
         GuideLoadData.FTA_GAME_GUIDE = true;
         SaveManager.Save(GuideLoadData);
         AudioManager.guideSource.Stop();

@@ -44,14 +44,12 @@ public class FTA_GameManager : MonoBehaviour
 
     AudioManager audioManager;
 
-    bool guideTutorialisDone;
-
     private Vector3[] positions;
 
+    public bool CheckIfFisrtItemGuide;
     private void Start()
     {
         SaveFTAGame = SaveManager.Load();
-        guideTutorialisDone = SaveFTAGame.FTA_GAME_GUIDE;
         try
         {
             audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
@@ -68,7 +66,7 @@ public class FTA_GameManager : MonoBehaviour
         {
             Debug.Log("No AudioManager");
         }
-        
+
         guide_chosen = SaveFTAGame.guideChosen;
         HintsLeft = 1;
         SelectedLevel = PlayerPrefs.GetString("FTA_SelectedLevel");
@@ -81,6 +79,14 @@ public class FTA_GameManager : MonoBehaviour
         settingsMenuObject.SetActive(false);
         InstructionGamePanel.SetActive(true);
         Invoke("StartCountdownStarts", 0.8f);
+        if (!SaveFTAGame.FTA_GAME_GUIDE)
+        {
+            SaveFTAGame.FTA_GAME_GUIDE = true;
+            SaveManager.Save(SaveFTAGame);
+            CheckIfFisrtItemGuide = true;
+            InstructionGamePanel.SetActive(false);
+            FTAHelpButton();
+        }
     }
     private void Update()
     {
@@ -98,6 +104,15 @@ public class FTA_GameManager : MonoBehaviour
             if (timer >= timeLimit)
             {
                 GameOver();
+                try
+                {
+                    audioManager.PlaySFX(audioManager.loseLevel);
+                    audioManager.musicSource.Stop();
+                }
+                catch
+                {
+
+                }
             }
         }
         countdownHints();
@@ -1088,28 +1103,24 @@ public class FTA_GameManager : MonoBehaviour
         }
         SaveManager.Save(SaveFTAGame);
     }
+    public GameObject clickToContinue;
     public void ClickToStart()
     {
         ClickAnytoStart.SetActive(true);
+        clickToContinue.SetActive(true);
     }
     public bool isGuideClicked;
     public FTA_HelpButtonGuide guideScript;
     public void ToStartGame()
     {
-        if (!guideTutorialisDone)
+        if (ClickAnytoStart.activeSelf == true)
         {
+            CheckIfFisrtItemGuide = false;
             InstructionGamePanel.SetActive(false);
             startGame = true;
-            FTAHelpButton();
+            Debug.Log(startGame + "HEYGUMANAKANA");
+            ResumeGame();
         }
-        else
-        {
-            if (startGame == false && ClickAnytoStart.activeSelf == true)
-            {
-                InstructionGamePanel.SetActive(false);
-                startGame = true;
-            }
-        }   
     }
 
     public GameObject confirmationToARCanvas;
@@ -1119,8 +1130,21 @@ public class FTA_GameManager : MonoBehaviour
     public GameObject checkGameObject;
     public GameObject tryAnimalBtn;
 
+    public GameObject BoyARGuide;
+    public GameObject GirlARGuide;
+
     public void TryAnimalARButton()
     {
+        if (guide_chosen == "boy_guide")
+        {
+            BoyARGuide.SetActive(true);
+            GirlARGuide.SetActive(false);
+        }
+        else if (guide_chosen == "girl_guide")
+        {
+            GirlARGuide.SetActive(true);
+            BoyARGuide.SetActive(false);
+        }
         confirmationToARCanvas.SetActive(true);
     }
     public void ConfirmYesTryAnimalARButton()

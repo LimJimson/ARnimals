@@ -20,8 +20,13 @@ public class FTA_LevelManager : MonoBehaviour
 
     AudioManager audioManager;
 
+    SaveObject SaveARGuide;
+
+    string GuideARChosen;
     public void Start()
     {
+        SaveARGuide = SaveManager.Load();
+        GuideARChosen = SaveARGuide.guideChosen;
         checkIfLevelIsUnlocked();
         SelectedLevel = PlayerPrefs.GetString("FTA_SelectedLevel", "1");
         checkStar();
@@ -170,8 +175,22 @@ public class FTA_LevelManager : MonoBehaviour
     {
         SceneManager.LoadScene("MiniGamesSelect");
     }
+
+    public GameObject GuideBoyARConfirm;
+    public GameObject GuideGirlARConfirm;
+
     public void TryAnimalARButton()
     {
+        if (GuideARChosen == "boy_guide")
+        {
+            GuideBoyARConfirm.SetActive(true);
+            GuideGirlARConfirm.SetActive(false);
+        }
+        else if (GuideARChosen == "girl_guide")
+        {
+            GuideBoyARConfirm.SetActive(false);
+            GuideGirlARConfirm.SetActive(true);
+        }
         confirmationToARCanvas.SetActive(true);
     }
     public void ConfirmYesTryAnimalARButton()

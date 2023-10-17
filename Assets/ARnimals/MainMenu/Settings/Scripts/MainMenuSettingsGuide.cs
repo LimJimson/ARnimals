@@ -53,7 +53,6 @@ public class MainMenuSettingsGuide : MonoBehaviour
     public GameObject guideHighlight;
 
     AudioManager audioManager;
-
     void Start()
     {
         loaddata = SaveManager.Load();
@@ -61,18 +60,26 @@ public class MainMenuSettingsGuide : MonoBehaviour
         isSettingsClicked = false;
         try { audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); } catch { }
         
-        if (!StateNameController.mainMenuSettingsGuide)
+
+    }
+
+    public void settingsGuide()
+    {
+        if (!StateNameController.mainMenuSettingsGuide && isSettingsClicked)
         {
             _MainMenuSettingsGuide();
-            
-            StateNameController.mainMenuSettingsGuide = true;
         }
+        loaddata.mainMenuSettingsGuide = true;
+        StateNameController.mainMenuSettingsGuide = true;
+        SaveManager.Save(loaddata);
+
     }
 
     // Update is called once per frame
     void Update()
     {
         showDialogs();
+        
 
     }
     public void returnBGMVol()
@@ -214,6 +221,7 @@ public class MainMenuSettingsGuide : MonoBehaviour
     }
     public void skipTutorial()
     {
+
         pageNumPos1.text = "1/10";
         pageNumPos2.text = "1/10";
         _touchToNextMainMenuSettings.setPageCtr(1);
@@ -221,11 +229,10 @@ public class MainMenuSettingsGuide : MonoBehaviour
         disableAllGuideGameObjects();
         Settings_GO.SetActive(false);
 
-        if (!loaddata.mainMenuSettingsGuide)
-        {
-            loaddata.mainMenuSettingsGuide = true;
-            SaveManager.Save(loaddata);
-        }
+
+        loaddata.mainMenuSettingsGuide = true;
+        SaveManager.Save(loaddata);
+
     }
 
     public void GuideBack()

@@ -54,41 +54,54 @@ public class MainMenuSettings : MonoBehaviour
 
     public void LoadSettings()
     {
+        try
+        {
+            audioManager.musicVol = loaddata.MusicVolume;
 
-        audioManager.musicVol = loaddata.MusicVolume;
+            audioManager.musicSource.volume = audioManager.musicVol;
+            musicSlider.value = loaddata.MusicVolume * 100;
 
-        audioManager.musicSource.volume = audioManager.musicVol;
-        musicSlider.value = loaddata.MusicVolume * 100;
+            audioManager.sfxSource.volume = loaddata.SFXVolume;
+            sfxSlider.value = loaddata.SFXVolume * 100;
 
-        audioManager.sfxSource.volume = loaddata.SFXVolume;
-        sfxSlider.value = loaddata.SFXVolume * 100;
+            audioManager.animalSndVol = loaddata.AnimalSndVolume;
+            AnimalVolSlider.value = loaddata.AnimalSndVolume * 100;
 
-        audioManager.animalSndVol = loaddata.AnimalSndVolume;
-        AnimalVolSlider.value = loaddata.AnimalSndVolume * 100;
-
-        audioManager.guideSource.volume = loaddata.GuideVolume;
-        guideSlider.value = loaddata.GuideVolume * 100;
+            audioManager.guideSource.volume = loaddata.GuideVolume;
+            guideSlider.value = loaddata.GuideVolume * 100;
 
 
-        musicSliderGuide.value = musicSlider.value;
-        sfxSliderGuide.value = sfxSlider.value;
-        guideSliderGuide.value = guideSlider.value;
-        AnimalVolSliderGuide.value = AnimalVolSlider.value;
+            musicSliderGuide.value = musicSlider.value;
+            sfxSliderGuide.value = sfxSlider.value;
+            guideSliderGuide.value = guideSlider.value;
+            AnimalVolSliderGuide.value = AnimalVolSlider.value;
 
-        UpdateVolumeMusicText();
-        UpdateVolumeSFXText();
-        UpdateVolumeAnimalSndText();
-        UpdateVolumeGuideText();
+            UpdateVolumeMusicText();
+            UpdateVolumeSFXText();
+            UpdateVolumeAnimalSndText();
+            UpdateVolumeGuideText();
+        }
+        catch
+        {
+
+        }
     }
     public void saveSettings()
     {
-        loaddata.MusicVolume = audioManager.musicSource.volume;
-        loaddata.SFXVolume = audioManager.sfxSource.volume;
-        loaddata.AnimalSndVolume = AnimalVolSlider.value/100f;
-        loaddata.GuideVolume = audioManager.guideSource.volume;
-        SaveManager.Save(loaddata);
+        try
+        {
+            loaddata.MusicVolume = audioManager.musicSource.volume;
+            loaddata.SFXVolume = audioManager.sfxSource.volume;
+            loaddata.AnimalSndVolume = AnimalVolSlider.value / 100f;
+            loaddata.GuideVolume = audioManager.guideSource.volume;
+            SaveManager.Save(loaddata);
 
-        LoadSettings();
+            LoadSettings();
+        }
+        catch
+        {
+
+        }
     }
 
     private void ChangeVolumeMusic(float value)

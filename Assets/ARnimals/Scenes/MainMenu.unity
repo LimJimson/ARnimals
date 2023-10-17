@@ -505,7 +505,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -6.36145, y: -192.69998}
+  m_AnchoredPosition: {x: -6.3615723, y: -192.69995}
   m_SizeDelta: {x: 146.3154, y: -166.55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &44760688
@@ -2783,18 +2783,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 822122306}
-        m_TargetAssemblyTypeName: StartAR, Assembly-CSharp
-        m_MethodName: goToSettingsMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 822122309}
         m_TargetAssemblyTypeName: MainMenuSettingsGuide, Assembly-CSharp
         m_MethodName: _isSettingsClicked
@@ -2806,6 +2794,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 822122306}
+        m_TargetAssemblyTypeName: StartAR, Assembly-CSharp
+        m_MethodName: goToSettingsMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 822122310}
         m_TargetAssemblyTypeName: MainMenuSettings, Assembly-CSharp
@@ -4829,7 +4829,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -226.9, y: -106.1}
+  m_AnchoredPosition: {x: -229, y: -166}
   m_SizeDelta: {x: 133.9475, y: 56.9855}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &621868695
@@ -7466,8 +7466,6 @@ MonoBehaviour:
   Settings: {fileID: 847886930}
   MainMenuGuide: {fileID: 277279377}
   playerName: {fileID: 223205801}
-  _touchToNextMainMenuSettingsScript: {fileID: 1104084946}
-  _MainMenuSettingsGuideScript: {fileID: 822122309}
   changeGuideMale: {fileID: 1455080550}
   changeGuideFemale: {fileID: 1393492258}
   ConfirmGuideChange: {fileID: 227020707}

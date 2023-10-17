@@ -20,10 +20,11 @@ public class StartAR : MonoBehaviour
     public TMP_Text playerName;
     AudioManager audioManager;
 
+    public MainMenuSettingsGuide mainMenuSettingsGuideScript;
+    bool isGuideFinished;
+
     void Start()
     {
-        _touchToNextMainMenuSettingsScript.enabled = false;
-        _MainMenuSettingsGuideScript.enabled = false;
 
         try
         {
@@ -45,7 +46,7 @@ public class StartAR : MonoBehaviour
 
         
         loaddata = SaveManager.Load();
-        guide_chosen = StateNameController.guide_chosen;
+        guide_chosen = loaddata.guideChosen;
         if (string.IsNullOrEmpty(guide_chosen))
         {
             guide_chosen = "boy_guide";
@@ -73,16 +74,12 @@ public class StartAR : MonoBehaviour
         SceneManager.LoadScene("Animal_Information");
     }
 
-    public touchToNextMainMenuSettings _touchToNextMainMenuSettingsScript;
-    public MainMenuSettingsGuide _MainMenuSettingsGuideScript;
-
     public void goToSettingsMenu()
     {
-        _touchToNextMainMenuSettingsScript.enabled = true;
-        _MainMenuSettingsGuideScript.enabled = true;
+        mainMenuSettingsGuideScript.settingsGuide();
+
         Settings.gameObject.SetActive(true);
         MainMenu.gameObject.SetActive(false);
-
     }
 
 

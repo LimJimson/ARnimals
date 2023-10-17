@@ -108,17 +108,20 @@ public class touchToNextMainMenuSettings : MonoBehaviour, IPointerDownHandler
         }
         else
         {
+            if (!existingSO.mainMenuSettingsGuide)
+            {
+                existingSO.mainMenuSettingsGuide = true;
+                SaveManager.Save(existingSO);
+                Debug.Log("main menu settings = true!");
+            }
+
             pageCounter = 1;
             pageNum.text = "1/10";
 
             MainMenuSettingsGuideGO.SetActive(false);
             _MainMenuSettingsGuideScript.returnBGMVol();
             _MainMenuSettingsGuideScript.stopGuideVoice();
-            if (!existingSO.mainMenuSettingsGuide)
-            {
-                existingSO.mainMenuSettingsGuide = true;
-                SaveManager.Save(existingSO);
-            }
+
         }
     }
 }

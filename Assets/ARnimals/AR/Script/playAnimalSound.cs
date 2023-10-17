@@ -14,13 +14,14 @@ public class playAnimalSound : MonoBehaviour
     public AudioClip[] clip;
 
     public GameObject animalSndBtn;
+    AudioManager audioManager;
 
 
 
     private void Awake()
     {
         animalIndex = _arPlacementScript.getAnimalIndex();
-
+        try { audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); } catch { }
     }
 
     private void Start()
@@ -49,8 +50,9 @@ public class playAnimalSound : MonoBehaviour
         if (!audioSrc.isPlaying)
         {
             audioSrc.PlayOneShot(clip[animalIndex]);
+            audioManager.guideSource.UnPause();
+            audioManager.musicSource.UnPause();
         }
-
     }
 
     public void stopSound()
@@ -62,10 +64,11 @@ public class playAnimalSound : MonoBehaviour
 
     }
     public TMP_Text timerSndTxt;
+    public TMP_Text timerSndTxt2;
     bool isSndTimerCounting = false;
     float countdownTime = 3.0f;
     public Button playSndBtn;
-
+    public Button playSndBtn2;
     void countdownSnd()
     {
         if (isSndTimerCounting)
@@ -77,9 +80,10 @@ public class playAnimalSound : MonoBehaviour
                 countdownTime = 3.0f;
                 isSndTimerCounting = false;
                 timerSndTxt.gameObject.SetActive(false);
+                timerSndTxt2.gameObject.SetActive(false);
                 playSndBtn.interactable = true;
-
-            }
+                playSndBtn2.interactable = true;
+}
 
             UpdateTimerText();
         }
@@ -91,10 +95,13 @@ public class playAnimalSound : MonoBehaviour
         countdownSnd();
         timerSndTxt.gameObject.SetActive(true);
         playSndBtn.interactable = false;
+        timerSndTxt2.gameObject.SetActive(true);
+        playSndBtn2.interactable = false;
 
     }
     private void UpdateTimerText()
     {
         timerSndTxt.text = Convert.ToInt16(countdownTime).ToString();
+        timerSndTxt2.text = Convert.ToInt16(countdownTime).ToString();
     }
 }

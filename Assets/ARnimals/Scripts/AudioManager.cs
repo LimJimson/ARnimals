@@ -62,6 +62,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] FTA_Patrick;
     public AudioClip[] FTA_Sandy;
 
+    public AudioClip[] AR_Narration_Patrick;
+    public AudioClip[] AR_Narration_Sandy;
+
     public float musicVol;
     public float sfxVol;
     public float guideVol;

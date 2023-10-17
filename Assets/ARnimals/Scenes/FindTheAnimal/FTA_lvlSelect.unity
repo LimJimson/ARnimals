@@ -5323,6 +5323,8 @@ MonoBehaviour:
   checkGameObject: {fileID: 152642495}
   tryAnimalBtn: {fileID: 560313130}
   confirmationToARCanvas: {fileID: 1020696347}
+  GuideBoyARConfirm: {fileID: 592929352}
+  GuideGirlARConfirm: {fileID: 1123282979}
 --- !u!1 &1680627383
 GameObject:
   m_ObjectHideFlags: 0

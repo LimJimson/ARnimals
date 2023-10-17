@@ -52,10 +52,11 @@ public class animalInfoBook : MonoBehaviour
     {
         _AnimalInfoCanvas.SetActive(false);
     }
+    public GameObject speakerBtn;
     public void _showAnimalInfo()
     {
+        speakerBtn.SetActive(true);
         animalIndex = _animalInfoScript.chosenAnimalIndex;
-
         animalHabitat1Img.gameObject.SetActive(true);
         animalHabitat1Txt.gameObject.SetActive(true);
         animalHabitat2Img.gameObject.SetActive(true);
@@ -222,6 +223,7 @@ public class animalInfoBook : MonoBehaviour
                 break;
 
             case 15:
+                speakerBtn.SetActive(false);
                 animalHabitat1Img.gameObject.SetActive(false);
                 animalHabitat1Txt.gameObject.SetActive(false);
                 animalHabitat2Img.gameObject.SetActive(false);
@@ -230,9 +232,11 @@ public class animalInfoBook : MonoBehaviour
                 animalHabitat3Txt.gameObject.SetActive(true);
                 animalHabitat3Img.sprite = animalHabitat[9];
                 animalHabitat3Txt.text = animalHabitatTxt[9];
+                
                 break;
 
             case 16:
+                speakerBtn.SetActive(false);
                 animalHabitat1Img.gameObject.SetActive(false);
                 animalHabitat1Txt.gameObject.SetActive(false);
                 animalHabitat2Img.gameObject.SetActive(false);
@@ -241,16 +245,20 @@ public class animalInfoBook : MonoBehaviour
                 animalHabitat3Txt.gameObject.SetActive(true);
                 animalHabitat3Img.sprite = animalHabitat[2];
                 animalHabitat3Txt.text = animalHabitatTxt[2];
+                
                 break;
 
             case 17:
+                speakerBtn.SetActive(false);
                 animalHabitat1Img.sprite = animalHabitat[2];
                 animalHabitat1Txt.text = animalHabitatTxt[2];
                 animalHabitat2Img.sprite = animalHabitat[5];
                 animalHabitat2Txt.text = animalHabitatTxt[5];
+                
                 break;
 
             case 18:
+                speakerBtn.SetActive(false);
                 animalHabitat1Img.gameObject.SetActive(false);
                 animalHabitat1Txt.gameObject.SetActive(false);
                 animalHabitat2Img.gameObject.SetActive(false);
@@ -259,9 +267,11 @@ public class animalInfoBook : MonoBehaviour
                 animalHabitat3Txt.gameObject.SetActive(true);
                 animalHabitat3Img.sprite = animalHabitat[8];
                 animalHabitat3Txt.text = animalHabitatTxt[8];
+                
                 break;
 
             case 19:
+                speakerBtn.SetActive(false);
                 animalHabitat1Img.sprite = animalHabitat[2];
                 animalHabitat1Txt.text = animalHabitatTxt[2];
                 animalHabitat2Img.sprite = animalHabitat[5];

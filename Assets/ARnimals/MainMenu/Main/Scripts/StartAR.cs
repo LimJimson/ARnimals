@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
+using UnityEngine.UI;
 
 public class StartAR : MonoBehaviour
 {
@@ -19,6 +20,12 @@ public class StartAR : MonoBehaviour
 
     public TMP_Text playerName;
     AudioManager audioManager;
+	
+	[Header("Fade Transition")]
+	[SerializeField] private Image transitionToOutImg;
+    [SerializeField] private Image transitionToInImg;
+	
+	private string buttonCode;
 
     public MainMenuSettingsGuide mainMenuSettingsGuideScript;
     bool isGuideFinished;
@@ -60,18 +67,47 @@ public class StartAR : MonoBehaviour
         ConfirmGuideChange.gameObject.SetActive(false);
         ConfirmResetGame.gameObject.SetActive(false);
         ConfirmQuit.SetActive(false);
+		
+		transitionToInImg.gameObject.SetActive(true);
+    }
+	
+	private void Update() 
+	{
+		checkIfTransitionIsDone();
+	}
+	
+	private void checkIfTransitionIsDone() 
+    {
+
+        bool achievedImgPositionOut = transitionToOutImg.color.a >= 0.9999 && transitionToOutImg.color.a <= 1.0001;
+        bool achievedImgPositionIn = transitionToInImg.color.a >= -0.0001 && transitionToInImg.color.a <= 0.0001;
+
+        if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "Animal_Information") 
+        {
+            SceneManager.LoadScene("Animal_Information");
+        }
+		else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "ModeSelect")
+		{
+			SceneManager.LoadScene("ModeSelect");
+		}
+
+        if (transitionToInImg.gameObject.activeSelf && achievedImgPositionIn) 
+        {
+            transitionToInImg.gameObject.SetActive(false);
+        }
     }
 
     // Button Scripts
     public void goToModeSelect()
     {
-        SceneManager.LoadScene("ModeSelect");
+		buttonCode = "ModeSelect";
+        transitionToOutImg.gameObject.SetActive(true);
     }
 
     public void goToAnimalSelectionScene()
     {
-
-        SceneManager.LoadScene("Animal_Information");
+		buttonCode = "Animal_Information";
+        transitionToOutImg.gameObject.SetActive(true);
     }
 
     public void goToSettingsMenu()

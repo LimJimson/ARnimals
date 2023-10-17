@@ -35132,11 +35132,13 @@ MonoBehaviour:
   - {fileID: 591881394}
   - {fileID: 109962966}
   - {fileID: 788949259}
+  - {fileID: 1687712277}
   girlGuideForMenus:
   - {fileID: 1339609520}
   - {fileID: 1045989793}
   - {fileID: 1202460224}
   - {fileID: 502828604}
+  - {fileID: 757017798}
   pageNum: 0
 --- !u!1 &1478299763
 GameObject:

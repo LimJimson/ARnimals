@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ModeSelectGuide : MonoBehaviour
 {
@@ -33,6 +34,12 @@ public class ModeSelectGuide : MonoBehaviour
     public GameObject dialog_maleGuide;
     public GameObject femaleGuide;
     public GameObject dialog_femaleGuide;
+	
+	[Header("Fade Transition")]
+	[SerializeField] private Image transitionToOutImg;
+    [SerializeField] private Image transitionToInImg;
+	
+	private string buttonCode;
 
     AudioManager audioManager;
     void Start()
@@ -62,12 +69,15 @@ public class ModeSelectGuide : MonoBehaviour
 
             StateNameController.modeSelectGuide = true;
         }
+		
+		transitionToInImg.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
         showDialogs();
+		checkIfTransitionIsDone();
     }
     public void guideVoiceOver()
     {
@@ -143,17 +153,20 @@ public class ModeSelectGuide : MonoBehaviour
 
     public void goToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+		buttonCode = "MainMenu";
+        transitionToOutImg.gameObject.SetActive(true);
     }
 
     public void goToARExp()
     {
-        SceneManager.LoadScene("Animal Selector AR");
+		buttonCode = "Animal Selector AR";
+        transitionToOutImg.gameObject.SetActive(true);
     }
 
     public void goToMiniGames()
     {
-        SceneManager.LoadScene("MiniGamesSelect");
+		buttonCode = "MiniGamesSelect";
+        transitionToOutImg.gameObject.SetActive(true);
     }
     public void _modeSelectGuide()
     {
@@ -282,4 +295,29 @@ public class ModeSelectGuide : MonoBehaviour
             guide_txt.SetActive(true);
         }
     }
+	
+	private void checkIfTransitionIsDone() 
+    {
+
+        bool achievedImgPositionOut = transitionToOutImg.color.a >= 0.9999 && transitionToOutImg.color.a <= 1.0001;
+        bool achievedImgPositionIn = transitionToInImg.color.a >= -0.0001 && transitionToInImg.color.a <= 0.0001;
+
+        if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "MainMenu") 
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+        else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "Animal Selector AR")
+        {
+            SceneManager.LoadScene("Animal Selector AR");
+        }
+		else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "MiniGamesSelect")
+        {
+            SceneManager.LoadScene("MiniGamesSelect");
+        }
+
+        if (transitionToInImg.gameObject.activeSelf && achievedImgPositionIn) 
+        {
+            transitionToInImg.gameObject.SetActive(false);
+        }
+	}
 }

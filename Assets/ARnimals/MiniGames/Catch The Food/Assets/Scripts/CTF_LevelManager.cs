@@ -3,9 +3,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;	
 
 public class CTF_LevelManager : MonoBehaviour
 {
+
+    SaveObject so;
 
     [SerializeField] private Button level1Button;
     [SerializeField] private Button level2Button;
@@ -22,6 +25,7 @@ public class CTF_LevelManager : MonoBehaviour
     [SerializeField] private Image transitionToOutImg;
     [SerializeField] private GameObject transitionToIn;
     [SerializeField] private Image transitionToInImg;
+	[SerializeField] private GameObject plainBlackPanel;
 
     [Header("Confirm Play")]
 
@@ -45,14 +49,21 @@ public class CTF_LevelManager : MonoBehaviour
     private string selectedAnimal;
     private string selectedLevel;
 
+    private string guide_chosen;
+
+    [SerializeField] private GameObject boyGuide;
+    [SerializeField] private GameObject girlGuide;
+
     private string buttonCode;
 
     private void Start()
     {		
+        so = SaveManager.Load();
 		selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel", "1");
 		checkIfLevelIsUnlocked();
 		checkStar();
-        transitionToIn.SetActive(true);
+		plainBlackPanel.SetActive(true);
+        StartCoroutine(showTransitionAfterDelay());
 		
 		try
 		{
@@ -113,6 +124,13 @@ public class CTF_LevelManager : MonoBehaviour
         {
 
         }
+	}
+	
+	private IEnumerator showTransitionAfterDelay() 
+	{
+		yield return new WaitForSeconds(0.05f);
+		plainBlackPanel.SetActive(false);
+		transitionToIn.SetActive(true);
 	}
 
     private void checkIfTransitionIsDone() 
@@ -256,6 +274,20 @@ public class CTF_LevelManager : MonoBehaviour
 	
 	public void TryAnimalBtnFunction() 
 	{
+        guide_chosen = so.guideChosen;
+
+        switch(guide_chosen)
+        {
+            case "boy_guide":
+                boyGuide.SetActive(true);
+                girlGuide.SetActive(false);
+                break;
+            case "girl_guide":
+                boyGuide.SetActive(false);
+                girlGuide.SetActive(true);
+                break;
+        }
+
 		confirmationToARCanvas.SetActive(true);
 	}
 	public void ConfirmationToARYes() 

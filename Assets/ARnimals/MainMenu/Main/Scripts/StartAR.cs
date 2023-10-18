@@ -24,6 +24,7 @@ public class StartAR : MonoBehaviour
 	[Header("Fade Transition")]
 	[SerializeField] private Image transitionToOutImg;
     [SerializeField] private Image transitionToInImg;
+	[SerializeField] private GameObject plainBlackPanel;
 	
 	private string buttonCode;
 
@@ -67,8 +68,8 @@ public class StartAR : MonoBehaviour
         ConfirmGuideChange.gameObject.SetActive(false);
         ConfirmResetGame.gameObject.SetActive(false);
         ConfirmQuit.SetActive(false);
-		
-		transitionToInImg.gameObject.SetActive(true);
+	
+		StartCoroutine(showTransitionAfterDelay());
     }
 	
 	private void Update() 
@@ -76,6 +77,14 @@ public class StartAR : MonoBehaviour
 		checkIfTransitionIsDone();
 	}
 	
+	private IEnumerator showTransitionAfterDelay() 
+	{
+		plainBlackPanel.SetActive(true);
+		yield return new WaitForSeconds(0.1f);
+		plainBlackPanel.SetActive(false);
+		transitionToInImg.gameObject.SetActive(true);
+	}
+
 	private void checkIfTransitionIsDone() 
     {
 

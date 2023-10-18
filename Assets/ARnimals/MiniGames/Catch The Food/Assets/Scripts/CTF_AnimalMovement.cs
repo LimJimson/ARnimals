@@ -69,6 +69,7 @@ public class CTF_AnimalMovement : MonoBehaviour
         else if (collision.gameObject.CompareTag("heart")) 
         {
             healthManager.IncreaseHealth(1);
+			audioManager.playPowerUpSFX();
             Destroy(collision.gameObject);
         }
         else if (collision.gameObject.CompareTag("shield")) 

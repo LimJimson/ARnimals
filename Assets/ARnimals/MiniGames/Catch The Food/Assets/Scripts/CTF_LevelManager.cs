@@ -184,8 +184,6 @@ public class CTF_LevelManager : MonoBehaviour
 				break;
 			case 2:
 				starsImg.sprite = starsSprites[2];
-				checkGameObject.SetActive(true);
-				tryAnimalBtn.SetActive(true);
 				break;
 			case 3:
 				starsImg.sprite = starsSprites[3];

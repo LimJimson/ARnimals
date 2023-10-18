@@ -40,6 +40,8 @@ public class CTF_GameManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI finalScoreText;
     [SerializeField] private TextMeshProUGUI highScoreListTxt;
+    [SerializeField] private Button nextLevelBtn;
+    [SerializeField] private TextMeshProUGUI playAgainTxt;
     private int minimumScoreToWin = 10;
 
     [Header("PowerUps")]
@@ -310,6 +312,11 @@ public class CTF_GameManager : MonoBehaviour
     private void UnlockedNextLevel() 
     {
         PlayerPrefs.SetInt("CTF_Lvl" + selectedLevel, 1);
+
+        if (selectedLevel == "5") 
+        {
+            nextLevelBtn.interactable = false;
+        }
     }
 
     public void IncreaseScore(int amount)
@@ -420,7 +427,6 @@ public class CTF_GameManager : MonoBehaviour
 
                 addStar(finalScore);
                 SetMaxStars();
-                UnlockedNextLevel();
                 finalScoreText.text = finalScore.ToString();
                 highScoreManager.SaveHighScore(scoreManager.GetScore());
                 addHighScores(finalScore);
@@ -535,34 +541,51 @@ public class CTF_GameManager : MonoBehaviour
             PlayerPrefs.SetInt("CTF_Lvl" + selectedLevel + "StarsCount", newStarsCount);
         }
 
-        if (PlayerPrefs.GetInt("CTF_Lvl" + selectedLevel + "StarsCount") >= 2) 
-        {
-            checkGameObject.SetActive(true);
-			tryAnimalBtn.SetActive(true);
+        
 
-            switch(selectedLevel) 
-            {
-                case "1":
-                    existingSo.isOctopusUnlock = true;
-					animalToUnlockName.text = "Octopus";
-                    break;
-                case "2":
-                    existingSo.isDeerUnlock = true;
-					animalToUnlockName.text = "Deer";
-                    break;
-                case "3":
-                    existingSo.isSeagullUnlock = true;
-					animalToUnlockName.text = "Seagull";
-                    break;
-                case "4":
-                    existingSo.isSharkUnlock = true;
-					animalToUnlockName.text = "Shark";
-                    break;
-                case "5":
-                    existingSo.isDuckUnlock = true;
-					animalToUnlockName.text = "Duck";
-                    break;
-            }
+        switch(PlayerPrefs.GetInt("CTF_Lvl" + selectedLevel + "StarsCount", 0)) 
+        {
+            case 1:
+                playAgainTxt.text = "Do you want to keep playing in order to unlock the <color=yellow>next level</color> and the animal for <color=yellow>AR</color>?";
+                nextLevelBtn.interactable = false;
+                break;
+            case 2:
+                playAgainTxt.text = "Are you sure you want to <color=yellow>RE-PLAY</color> this level again instead of going to the <color=yellow>next level</color>?";
+                UnlockedNextLevel();
+                nextLevelBtn.interactable = true;
+                break;
+            case 3:
+                playAgainTxt.text = "Are you sure you want to <color=yellow>RE-PLAY</color> this level again instead of going to the <color=yellow>next level</color>?";
+                UnlockedNextLevel();
+                checkGameObject.SetActive(true);
+                tryAnimalBtn.SetActive(true);
+
+                switch(selectedLevel) 
+                {
+                    case "1":
+                        existingSo.isOctopusUnlock = true;
+                        animalToUnlockName.text = "Octopus";
+                        break;
+                    case "2":
+                        existingSo.isDeerUnlock = true;
+                        animalToUnlockName.text = "Deer";
+                        break;
+                    case "3":
+                        existingSo.isSeagullUnlock = true;
+                        animalToUnlockName.text = "Seagull";
+                        break;
+                    case "4":
+                        existingSo.isSharkUnlock = true;
+                        animalToUnlockName.text = "Shark";
+                        break;
+                    case "5":
+                        existingSo.isDuckUnlock = true;
+                        animalToUnlockName.text = "Duck";
+                        playAgainTxt.text = "Are you sure you want to <color=yellow>RE-PLAY</color> this level again? There will be no rewards from now on";
+                        break;
+                }
+
+                break;
         }
 
         animalImg.sprite = animalSprites[int.Parse(selectedLevel)];

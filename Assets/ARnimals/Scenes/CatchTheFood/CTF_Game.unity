@@ -31181,6 +31181,8 @@ MonoBehaviour:
   highScoreCanvas: {fileID: 1380291719}
   finalScoreText: {fileID: 223088580}
   highScoreListTxt: {fileID: 822533562}
+  nextLevelBtn: {fileID: 287641934}
+  playAgainTxt: {fileID: 1357375413}
   shield: {fileID: 1220765347}
   points2X: {fileID: 1890530342}
   shieldImg: {fileID: 10345680}
@@ -32845,7 +32847,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Are you sure you want to <color="yellow">RE-PLAY</color> this level again
+  m_text: Are you sure you want to <color=yellow>RE-PLAY</color> this level again
     instead of going to the <color=yellow>next level</color>?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
@@ -35891,7 +35893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 47688667}
-  maxTime: 60
+  maxTime: 15
 --- !u!1 &1505412144
 GameObject:
   m_ObjectHideFlags: 0
@@ -41904,7 +41906,7 @@ GameObject:
   - component: {fileID: 1785934460}
   - component: {fileID: 1785934459}
   m_Layer: 5
-  m_Name: 2StarsToUnlockedTxt
+  m_Name: 3StarsToUnlockedTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41950,7 +41952,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2 stars to unlock
+  m_text: 3 stars to unlock
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
   m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,

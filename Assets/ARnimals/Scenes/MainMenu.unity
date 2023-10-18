@@ -6265,8 +6265,6 @@ GameObject:
   - component: {fileID: 700376876}
   - component: {fileID: 700376875}
   - component: {fileID: 700376874}
-  - component: {fileID: 700376879}
-  - component: {fileID: 700376878}
   m_Layer: 5
   m_Name: MainMenuCanvas
   m_TagString: Untagged
@@ -6363,38 +6361,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!95 &700376878
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 700376873}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: aac7859e9943f234f9d799f609bd0764, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
---- !u!225 &700376879
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 700376873}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &700629720
 GameObject:
   m_ObjectHideFlags: 0
@@ -7696,6 +7662,7 @@ MonoBehaviour:
   playerName: {fileID: 223205801}
   transitionToOutImg: {fileID: 1937493232}
   transitionToInImg: {fileID: 2079395801}
+  plainBlackPanel: {fileID: 1989846859}
   mainMenuSettingsGuideScript: {fileID: 822122309}
   changeGuideMale: {fileID: 1455080550}
   changeGuideFemale: {fileID: 1393492258}

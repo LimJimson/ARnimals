@@ -24,11 +24,15 @@ public class touchToNextAR : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (pageCounter != 2)
+        if (pageCounter == 2)
         {
+            _ARGuideScript.guideVoiceOver();
+        }
+        else {
             pageCounter++;
             _ARGuideScript.guideVoiceOver();
         }
+        
 
 
     }

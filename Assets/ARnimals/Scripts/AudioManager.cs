@@ -134,11 +134,13 @@ public class AudioManager : MonoBehaviour
     {
         sfxSource.PlayOneShot(clip); 
     }
+
     public void PlayGuide(AudioClip clip)
     {
         
         guideSource.Stop();
-        guideSource.PlayOneShot(clip);
+        guideSource.clip = clip;
+        guideSource.Play();
     }
 
 

@@ -14,11 +14,7 @@ public class GTS_LevelSelect : MonoBehaviour
     string guide_chosen;
     public GameObject[] locklevel; //index 0 at lvl 2
     public Button[] lvlBtns; //index 0 at lvl 2
-    int currentStarsLvl1;
-    int currentStarsLvl2;
-    int currentStarsLvl3;
-    int currentStarsLvl4;
-    int currentStarsLvl5;
+    int currentStars;
     int unlockedLvl;
 
     AudioManager audioManager;
@@ -123,38 +119,64 @@ public class GTS_LevelSelect : MonoBehaviour
     public TMP_Text animalName;
     public Button tryAnimal;
 
+    public GameObject mainNextLevelUnlockGO;
+    public Image levelToUnlockImg;
+    public Sprite[] levelsSprite;
+    public GameObject levelUnlockGO;
+    public TMP_Text allLevelsUnlockedTxt;
+    public GameObject checkImgUnlockedLevelBoard;
+
     void checkCurrentStars()
     {
-        if (currentStarsLvl1 == 3)
+        if (currentStars == 3)
         {
+            //Animal
             CurrentStarsImg.sprite = starsSpriteContainer[0];
             unlockAnimalImg.color = new Color32(142, 142, 142, 255);
             tryAnimal.gameObject.SetActive(true);
             checkImg.SetActive(true);
-        }
-        else if (currentStarsLvl1 == 2)
-        {
-            CurrentStarsImg.sprite = starsSpriteContainer[1];
-            unlockAnimalImg.color = new Color32(142, 142, 142, 255);
-            tryAnimal.gameObject.SetActive(true);
-            checkImg.SetActive(true);
 
+            // unlockLevelBoard
+            checkImgUnlockedLevelBoard.SetActive(true);
         }
-        else if (currentStarsLvl1 == 1)
+        else if (currentStars == 2)
         {
+            //Animal
+            CurrentStarsImg.sprite = starsSpriteContainer[1];
+            unlockAnimalImg.color = new Color32(255, 255, 255, 255);
+            checkImg.SetActive(false);// animal
+            tryAnimal.gameObject.SetActive(false);
+
+
+            // unlockLevelBoard
+            checkImgUnlockedLevelBoard.SetActive(true);
+        }
+        else if (currentStars == 1)
+        {
+            //Animal
             CurrentStarsImg.sprite = starsSpriteContainer[2];
             unlockAnimalImg.color = new Color32(255, 255, 255, 255);
-            checkImg.SetActive(false);
+            checkImg.SetActive(false);// animal
             tryAnimal.gameObject.SetActive(false);
+
+            // unlockLevelBoard
+            checkImgUnlockedLevelBoard.SetActive(false);
+
         }
         else
         {
+            //Animal
             CurrentStarsImg.sprite = starsSpriteContainer[3];
             unlockAnimalImg.color = new Color32(255, 255, 255, 255);
-            checkImg.SetActive(false);
+            checkImg.SetActive(false);// animal
             tryAnimal.gameObject.SetActive(false);
+
+            // unlockLevelBoard
+            checkImgUnlockedLevelBoard.SetActive(false);
+
         }
     }
+
     void changePlayConfirmVariables()
     {
         switch (levelNumber)
@@ -162,38 +184,74 @@ public class GTS_LevelSelect : MonoBehaviour
             case 1:
                 levelSelectedImg.sprite = levelSpriteContainer[0];
                 unlockAnimalImg.sprite = unlockAnimalImgSprites[0];
-                currentStarsLvl1 = loadedData.GTS_lvl1_star;
+                currentStars = loadedData.GTS_lvl1_star;
                 animalName.text = "Rhinoceros";
+
+                // unlockLevelBoard
+                levelUnlockGO.SetActive(true);
+                allLevelsUnlockedTxt.gameObject.SetActive(false);
+                levelToUnlockImg.sprite = levelsSprite[0];
                 checkCurrentStars();
+
+
                 break;
             case 2:
                 levelSelectedImg.sprite = levelSpriteContainer[1];
-                currentStarsLvl2 = loadedData.GTS_lvl2_star;
+                currentStars = loadedData.GTS_lvl2_star;
                 unlockAnimalImg.sprite = unlockAnimalImgSprites[1];
-
                 animalName.text = "Camel";
+
+                // unlockLevelBoard
+                levelUnlockGO.SetActive(true);
+                allLevelsUnlockedTxt.gameObject.SetActive(false);
+                levelToUnlockImg.sprite = levelsSprite[1];
+
                 checkCurrentStars();
+
+
                 break;
             case 3:
                 levelSelectedImg.sprite = levelSpriteContainer[2];
                 unlockAnimalImg.sprite = unlockAnimalImgSprites[2];
-                currentStarsLvl3 = loadedData.GTS_lvl3_star;
+                currentStars = loadedData.GTS_lvl3_star;
                 animalName.text = "Bat";
+
+                // unlockLevelBoard
+                levelUnlockGO.SetActive(true);
+                allLevelsUnlockedTxt.gameObject.SetActive(false);
+                levelToUnlockImg.sprite = levelsSprite[2];
+
                 checkCurrentStars();
+
                 break;
             case 4:
                 levelSelectedImg.sprite = levelSpriteContainer[3];
                 unlockAnimalImg.sprite = unlockAnimalImgSprites[3];
-                currentStarsLvl4 = loadedData.GTS_lvl4_star;
+                currentStars = loadedData.GTS_lvl4_star;
                 animalName.text = "Koi";
+
+                // unlockLevelBoard
+                levelUnlockGO.SetActive(true);
+                allLevelsUnlockedTxt.gameObject.SetActive(false);
+                levelToUnlockImg.sprite = levelsSprite[3];
+
                 checkCurrentStars();
+
+
                 break;
             case 5:
                 levelSelectedImg.sprite = levelSpriteContainer[4];
                 unlockAnimalImg.sprite = unlockAnimalImgSprites[4];
-                currentStarsLvl5 = loadedData.GTS_lvl5_star;
+                currentStars = loadedData.GTS_lvl5_star;
                 animalName.text = "Crab";
+
+
+                // unlockLevelBoard
+                levelUnlockGO.SetActive(false);
+                allLevelsUnlockedTxt.gameObject.SetActive(true);
+
                 checkCurrentStars();
+
                 break;
         }
     }

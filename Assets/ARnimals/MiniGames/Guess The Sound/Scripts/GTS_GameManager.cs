@@ -126,25 +126,11 @@ public class GTS_GameManager : MonoBehaviour
 
         if (audioSrc.isPlaying)
         {
-            try
-            {
-                audioManager.musicSource.Pause();
-            }
-            catch
-            {
-
-            }
+            try{audioManager.musicSource.Pause();}catch{}
         }
         else
         {
-            try
-            {
-                audioManager.musicSource.UnPause();
-            }
-            catch
-            {
-
-            }
+            try{audioManager.musicSource.UnPause();}catch{}
         }
     }
     public TMP_Text hintsTxt;
@@ -395,13 +381,8 @@ public class GTS_GameManager : MonoBehaviour
         {
             audioManager.PlaySFX(audioManager.winLevel);
             audioManager.musicSource.Stop();
-        }
-        catch
-        {
+        }catch { }
 
-        }
-        winLevel.SetActive(true);
-        lvlCompleted.text = "LEVEL <color=yellow><b>" + levelSelected.ToString()+ "</b></color> COMPLETED!";
 
         if(life == 3)
         {
@@ -434,8 +415,7 @@ public class GTS_GameManager : MonoBehaviour
         else if(life == 2)
         {
             _starWin.sprite = starsSprites[2];
-            unlockAnimal();
-            tryARBtn.SetActive(true);
+            tryARBtn.SetActive(false);
             showAnimalReward();
             if (currentStar < life)
             {
@@ -465,6 +445,7 @@ public class GTS_GameManager : MonoBehaviour
             _starWin.sprite = starsSprites[1];
             showAnimalReward();
             tryARBtn.SetActive(false);
+            
             if (currentStar <= life)
             {
                 switch (levelSelected)
@@ -500,6 +481,8 @@ public class GTS_GameManager : MonoBehaviour
                 compareCurrentLvl_UnlockLvl();
                 showNextLvlBtn();
                 checkStar();
+                unlockLevelBoard();
+
             }
         }
         else if(levelSelected == 2)
@@ -511,6 +494,7 @@ public class GTS_GameManager : MonoBehaviour
                 compareCurrentLvl_UnlockLvl();
                 showNextLvlBtn();
                 checkStar();
+                unlockLevelBoard();
             }
         }
         else if (levelSelected == 3)
@@ -522,6 +506,7 @@ public class GTS_GameManager : MonoBehaviour
                 compareCurrentLvl_UnlockLvl();
                 showNextLvlBtn();
                 checkStar();
+                unlockLevelBoard();
             }
         }
         else if (levelSelected == 4)
@@ -533,6 +518,7 @@ public class GTS_GameManager : MonoBehaviour
                 compareCurrentLvl_UnlockLvl();
                 showNextLvlBtn();
                 checkStar();
+                unlockLevelBoard();
             }
         }
         else if (levelSelected == 5)
@@ -544,10 +530,97 @@ public class GTS_GameManager : MonoBehaviour
                 compareCurrentLvl_UnlockLvl();
                 showNextLvlBtn();
                 checkStar();
+                unlockLevelBoard();
             }
         }
-    }
 
+
+    }
+    public GameObject mainNextLevelUnlockGO;
+    public Image levelToUnlockImg;
+    public Sprite[] levelsSprite;
+    public GameObject levelUnlockGO;
+    public TMP_Text allLevelsUnlockedTxt;
+    public GameObject checkImgUnlockedLevelBoard;
+    void unlockLevelBoard()
+    {
+        checkCurrentStar();
+        switch (levelSelected)
+        {
+            case 1:
+                levelToUnlockImg.sprite = levelsSprite[0];
+                levelUnlockGO.SetActive(true);
+                allLevelsUnlockedTxt.gameObject.SetActive(false);
+                if (currentStar == 1)
+                {
+                    nextLvlBtn.interactable = false;
+                    checkImgUnlockedLevelBoard.SetActive(false);
+                }
+                else if(currentStar >= 2)
+                {
+                    nextLvlBtn.interactable = true;
+                    checkImgUnlockedLevelBoard.SetActive(true);
+                }
+                break;
+            case 2:
+                levelToUnlockImg.sprite = levelsSprite[1];
+                levelUnlockGO.SetActive(true);
+                allLevelsUnlockedTxt.gameObject.SetActive(false);
+
+                if (currentStar == 1)
+                {
+                    nextLvlBtn.interactable = false;
+                    checkImgUnlockedLevelBoard.SetActive(false);
+                }
+                else if (currentStar >= 2)
+                {
+                    nextLvlBtn.interactable = true;
+                    checkImgUnlockedLevelBoard.SetActive(true);
+                }
+                break;
+            case 3:
+                levelToUnlockImg.sprite = levelsSprite[2];
+                levelUnlockGO.SetActive(true);
+                allLevelsUnlockedTxt.gameObject.SetActive(false);
+
+                if (currentStar == 1)
+                {
+                    nextLvlBtn.interactable = false;
+                    checkImgUnlockedLevelBoard.SetActive(false);
+                }
+                else if (currentStar >= 2)
+                {
+                    nextLvlBtn.interactable = true;
+                    checkImgUnlockedLevelBoard.SetActive(true);
+                }
+                break;
+            case 4:
+                levelToUnlockImg.sprite = levelsSprite[3];
+                levelUnlockGO.SetActive(true);
+                allLevelsUnlockedTxt.gameObject.SetActive(false);
+
+                if (currentStar == 1)
+                {
+                    nextLvlBtn.interactable = false;
+                    checkImgUnlockedLevelBoard.SetActive(false);
+                }
+                else if (currentStar >= 2)
+                {
+                    nextLvlBtn.interactable = true;
+                    checkImgUnlockedLevelBoard.SetActive(true);
+                }
+                break;
+            case 5:
+                levelUnlockGO.SetActive(false);
+                allLevelsUnlockedTxt.gameObject.SetActive(true);
+                nextLvlBtn.interactable = false;
+                break;
+        }
+
+        winLevel.SetActive(true);
+        lvlCompleted.text = "LEVEL <color=yellow><b>" + levelSelected.ToString() + "</b></color> COMPLETED!";
+
+    }
     void unlockAnimal()
     {
         switch (levelSelected)
@@ -570,16 +643,12 @@ public class GTS_GameManager : MonoBehaviour
 
         }
     }
-    public GameObject nextLvlBtn;
+    public Button nextLvlBtn;
     void showNextLvlBtn()
     {
-        if (levelSelected < 5)
+        if (levelSelected == 5)
         {
-            nextLvlBtn.SetActive(true);
-        }
-        else
-        {
-            nextLvlBtn.SetActive(false);
+            nextLvlBtn.gameObject.SetActive(false);
         }
     }
     public void nextLevel()
@@ -597,7 +666,7 @@ public class GTS_GameManager : MonoBehaviour
         else if (existingSO.getUnlockedLevelMG2() == 5)
         {
         }
-        else if (levelSelected >= existingSO.getUnlockedLevelMG2())
+        else if (levelSelected >= existingSO.getUnlockedLevelMG2() && life >= 2)
         {
             existingSO.setUnlockedLevelMG2(1);
             SaveManager.Save(existingSO);

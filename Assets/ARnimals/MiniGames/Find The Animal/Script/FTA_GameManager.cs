@@ -306,7 +306,6 @@ public class FTA_GameManager : MonoBehaviour
         {
             checkStar();
             GameWin();
-            PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel, 1);
         }
     }
 
@@ -984,6 +983,11 @@ public class FTA_GameManager : MonoBehaviour
     [Header("Stars")]
     [SerializeField] private Image starHolder;
     [SerializeField] private Sprite[] stars;
+    [SerializeField] private GameObject checkGameObjectlvl;
+    [SerializeField] private Image levelbordercompletedholder;
+    [SerializeField] private Sprite[] levelborderimages;
+    [SerializeField] private TextMeshProUGUI twostarstounlock;
+    [SerializeField] private TextMeshProUGUI NoAvailLevel;
     int currentStar;
     void checkStar()
     {
@@ -991,6 +995,7 @@ public class FTA_GameManager : MonoBehaviour
         {
             if (currentStar < countHealth)
             {
+                PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel, 1);
                 switch (SelectedLevel)
                 {
                     case "1":
@@ -998,30 +1003,50 @@ public class FTA_GameManager : MonoBehaviour
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
                         SaveFTAGame.isLeopardUnlock = true;
                         checkGameObject.SetActive(true);
+                        checkGameObjectlvl.SetActive(true);
+                        NextLevelBtn.interactable = true;
+                        levelbordercompletedholder.sprite = levelborderimages[0];
+                        NoAvailLevel.enabled = false;
                         break;
                     case "2":
                         starHolder.sprite = stars[2];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
                         SaveFTAGame.isPigeonUnlock = true;
                         checkGameObject.SetActive(true);
+                        checkGameObjectlvl.SetActive(true);
+                        NextLevelBtn.interactable = true;
+                        levelbordercompletedholder.sprite = levelborderimages[1];
+                        NoAvailLevel.enabled = false;
                         break;
                     case "3":
                         starHolder.sprite = stars[2];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
                         SaveFTAGame.isPiranhaUnlock = true;
                         checkGameObject.SetActive(true);
+                        checkGameObjectlvl.SetActive(true);
+                        NextLevelBtn.interactable = true;
+                        levelbordercompletedholder.sprite = levelborderimages[2];
+                        NoAvailLevel.enabled = false;
                         break;
                     case "4":
                         starHolder.sprite = stars[2];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
                         SaveFTAGame.isBearUnlock = true;
                         checkGameObject.SetActive(true);
+                        checkGameObjectlvl.SetActive(true);
+                        NextLevelBtn.interactable = true;
+                        levelbordercompletedholder.sprite = levelborderimages[3];
+                        NoAvailLevel.enabled = false;
                         break;
                     case "5":
                         starHolder.sprite = stars[2];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
                         SaveFTAGame.isOwlUnlock = true;
                         checkGameObject.SetActive(true);
+                        checkGameObjectlvl.SetActive(false);
+                        NextLevelBtn.interactable = true;
+                        twostarstounlock.enabled = false;
+                        levelbordercompletedholder.enabled = false;
                         break;
                 }
             }
@@ -1030,37 +1055,53 @@ public class FTA_GameManager : MonoBehaviour
         {
             if (currentStar < countHealth)
             {
+                PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel, 1);
                 switch (SelectedLevel)
                 {
                     case "1":
                         starHolder.sprite = stars[1];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
-                        SaveFTAGame.isLeopardUnlock = true;
-                        checkGameObject.SetActive(true);
+                        tryAnimalBtn.SetActive(false);
+                        checkGameObjectlvl.SetActive(true);
+                        NextLevelBtn.interactable = true;
+                        levelbordercompletedholder.sprite = levelborderimages[0];
+                        NoAvailLevel.enabled = false;
                         break;
                     case "2":
                         starHolder.sprite = stars[1];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
-                        SaveFTAGame.isPigeonUnlock = true;
-                        checkGameObject.SetActive(true);
+                        tryAnimalBtn.SetActive(false);
+                        checkGameObjectlvl.SetActive(true);
+                        NextLevelBtn.interactable = true;
+                        levelbordercompletedholder.sprite = levelborderimages[1];
+                        NoAvailLevel.enabled = false;
                         break;
                     case "3":
                         starHolder.sprite = stars[1];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
-                        SaveFTAGame.isPiranhaUnlock = true;
-                        checkGameObject.SetActive(true);
+                        tryAnimalBtn.SetActive(false);
+                        checkGameObjectlvl.SetActive(true);
+                        NextLevelBtn.interactable = true;
+                        levelbordercompletedholder.sprite = levelborderimages[2];
+                        NoAvailLevel.enabled = false;
                         break;
                     case "4":
                         starHolder.sprite = stars[1];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
-                        SaveFTAGame.isBearUnlock = true;
-                        checkGameObject.SetActive(true);
+                        tryAnimalBtn.SetActive(false);
+                        checkGameObjectlvl.SetActive(true);
+                        NextLevelBtn.interactable = true;
+                        levelbordercompletedholder.sprite = levelborderimages[3];
+                        NoAvailLevel.enabled = false;
                         break;
                     case "5":
                         starHolder.sprite = stars[1];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
-                        SaveFTAGame.isOwlUnlock = true;
-                        checkGameObject.SetActive(true);
+                        tryAnimalBtn.SetActive(false);
+                        checkGameObjectlvl.SetActive(false);
+                        NextLevelBtn.interactable = true;
+                        twostarstounlock.enabled = false;
+                        levelbordercompletedholder.enabled = false;
                         break;
                 }
             }
@@ -1077,26 +1118,41 @@ public class FTA_GameManager : MonoBehaviour
                         starHolder.sprite = stars[0];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
                         tryAnimalBtn.SetActive(false);
+                        NextLevelBtn.interactable = false;
+                        levelbordercompletedholder.sprite = levelborderimages[0];
+                        NoAvailLevel.enabled = false;
                         break;
                     case "2":
                         starHolder.sprite = stars[0];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
                         tryAnimalBtn.SetActive(false);
+                        NextLevelBtn.interactable = false;
+                        levelbordercompletedholder.sprite = levelborderimages[1];
+                        NoAvailLevel.enabled = false;
                         break;
                     case "3":
                         starHolder.sprite = stars[0];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
                         tryAnimalBtn.SetActive(false);
+                        NextLevelBtn.interactable = false;
+                        levelbordercompletedholder.sprite = levelborderimages[2];
+                        NoAvailLevel.enabled = false;
                         break;
                     case "4":
                         starHolder.sprite = stars[0];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
                         tryAnimalBtn.SetActive(false);
+                        NextLevelBtn.interactable = false;
+                        levelbordercompletedholder.sprite = levelborderimages[3];
+                        NoAvailLevel.enabled = false;
                         break;
                     case "5":
                         starHolder.sprite = stars[0];
                         PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
                         tryAnimalBtn.SetActive(false);
+                        NextLevelBtn.interactable = false;
+                        twostarstounlock.enabled = false;
+                        levelbordercompletedholder.enabled = false;
                         break;
                 }
             }

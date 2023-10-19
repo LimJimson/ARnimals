@@ -25,6 +25,13 @@ public class animalSelection : MonoBehaviour
 
     AudioManager audioManager;
 
+    [Header("Fade Transition")]
+	[SerializeField] private Image transitionToOutImg;
+    [SerializeField] private Image transitionToInImg;
+	[SerializeField] private GameObject plainBlackPanel;
+	
+	private string buttonCode;
+
     void Start()
     {
         try
@@ -51,10 +58,42 @@ public class animalSelection : MonoBehaviour
         AnimalNameTxt.gameObject.SetActive(false);
         AnimalNameTxt.text = "";
         disableAllAnimalImgs();
+        StartCoroutine(showTransitionAfterDelay());
     }
 
-    private void Update() {
+    private void Update() 
+    {
+        checkIfTransitionIsDone();    
+    }
 
+        private IEnumerator showTransitionAfterDelay() 
+        {
+            plainBlackPanel.SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+            plainBlackPanel.SetActive(false);
+            transitionToInImg.gameObject.SetActive(true);
+        }
+
+
+    private void checkIfTransitionIsDone() 
+    {
+
+        bool achievedImgPositionOut = transitionToOutImg.color.a >= 0.9999 && transitionToOutImg.color.a <= 1.0001;
+        bool achievedImgPositionIn = transitionToInImg.color.a >= -0.0001 && transitionToInImg.color.a <= 0.0001;
+
+        if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "ModeSelect") 
+        {
+            SceneManager.LoadScene("ModeSelect");
+        }
+        else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "AR") 
+        {
+            StartCoroutine(LoadAsyncWithDelay());
+        }
+
+        if (transitionToInImg.gameObject.activeSelf && achievedImgPositionIn) 
+        {
+            transitionToInImg.gameObject.SetActive(false);
+        }
     }
 
     public void resetSelection()
@@ -127,7 +166,8 @@ public class animalSelection : MonoBehaviour
 
     public void goToModeSelect()
     {
-        SceneManager.LoadScene("ModeSelect");
+        buttonCode = "ModeSelect";
+        transitionToOutImg.gameObject.SetActive(true);
     }
 
     //LOADING UI
@@ -136,7 +176,8 @@ public class animalSelection : MonoBehaviour
     public TMP_Text progressTxt;
     public void LoadLevelAR()
     {
-        StartCoroutine(LoadAsyncWithDelay());
+        buttonCode = "AR";
+        transitionToOutImg.gameObject.SetActive(true);
     }
 
     IEnumerator LoadAsyncWithDelay()

@@ -33,6 +33,13 @@ public class AnimalInfoScript : MonoBehaviour
     AudioManager audioManager;
     public GameObject backAndGuideBtns;
 
+    [Header("Fade Transition")]
+	[SerializeField] private Image transitionToOutImg;
+    [SerializeField] private Image transitionToInImg;
+	[SerializeField] private GameObject plainBlackPanel;
+	
+	private string buttonCode;
+
     private void Start()
     {
         try
@@ -55,6 +62,7 @@ public class AnimalInfoScript : MonoBehaviour
         isExploreBtnClicked = StateNameController.isGTSExploreClicked;
         
         checkIfGTS_ExploreBtnClicked();
+        StartCoroutine(showTransitionAfterDelay());
     }
     private void OnDisable()
     {
@@ -93,7 +101,34 @@ public class AnimalInfoScript : MonoBehaviour
         checkIfPlayerIsPlaying();
 		DisableToggleHideButtonIfNotFullScreen();
 		delayTimerForHidingButtons();
+        checkIfTransitionIsDone();
     }
+
+    private void checkIfTransitionIsDone() 
+    {
+
+        bool achievedImgPositionOut = transitionToOutImg.color.a >= 0.9999 && transitionToOutImg.color.a <= 1.0001;
+        bool achievedImgPositionIn = transitionToInImg.color.a >= -0.0001 && transitionToInImg.color.a <= 0.0001;
+
+        if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "MainMenu") 
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+
+        if (transitionToInImg.gameObject.activeSelf && achievedImgPositionIn) 
+        {
+            transitionToInImg.gameObject.SetActive(false);
+        }
+    }
+
+    private IEnumerator showTransitionAfterDelay() 
+	{
+		plainBlackPanel.SetActive(true);
+		yield return new WaitForSeconds(0.1f);
+		plainBlackPanel.SetActive(false);
+		transitionToInImg.gameObject.SetActive(true);
+	}
+
     void checkIfGTS_ExploreBtnClicked()
     {
         if (isExploreBtnClicked)
@@ -192,7 +227,8 @@ public class AnimalInfoScript : MonoBehaviour
 
     public void goToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        buttonCode = "MainMenu";
+        transitionToOutImg.gameObject.SetActive(true);
     }
     public void showAnimalInfo()
     {

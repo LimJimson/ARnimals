@@ -99,6 +99,24 @@ public class StartAR : MonoBehaviour
 		{
 			SceneManager.LoadScene("ModeSelect");
 		}
+        else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "GuideSelector")
+		{
+			SceneManager.LoadScene("GuideSelector");
+		}
+        else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "Settings")
+		{
+            Settings.gameObject.SetActive(true);
+            MainMenu.gameObject.SetActive(false);
+            transitionToOutImg.gameObject.SetActive(false);
+            StartCoroutine(showTransitionAfterDelay());
+		}
+        else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "MainMenu")
+		{
+            Settings.gameObject.SetActive(false);
+            MainMenu.gameObject.SetActive(true);
+            transitionToOutImg.gameObject.SetActive(false);
+            StartCoroutine(showTransitionAfterDelay());
+		}
 
         if (transitionToInImg.gameObject.activeSelf && achievedImgPositionIn) 
         {
@@ -123,16 +141,16 @@ public class StartAR : MonoBehaviour
     {
         mainMenuSettingsGuideScript.settingsGuide();
 
-        Settings.gameObject.SetActive(true);
-        MainMenu.gameObject.SetActive(false);
+        buttonCode = "Settings";
+
+        transitionToOutImg.gameObject.SetActive(true);
     }
 
 
     public void goToMainMenu()
     {
-
-        Settings.gameObject.SetActive(false);
-        MainMenu.gameObject.SetActive(true);
+        buttonCode = "MainMenu";
+        transitionToOutImg.gameObject.SetActive(true);
     }
 
     // -----CHANGE GUIDE CONFIRMATION -----
@@ -164,7 +182,8 @@ public class StartAR : MonoBehaviour
 
     public void goToGuideSelect()
     {
-        SceneManager.LoadScene("GuideSelector");
+        buttonCode = "GuideSelector";
+        transitionToOutImg.gameObject.SetActive(true);
     }
 
     // -----RESET GAME CONFIRMATION -----

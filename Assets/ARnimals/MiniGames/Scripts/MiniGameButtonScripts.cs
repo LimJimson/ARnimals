@@ -8,19 +8,28 @@ public class MiniGameButtonScripts : MonoBehaviour
 {
     [SerializeField] private Image transitionToOutImg;
     [SerializeField] private Image transitionToInImg;
+    [SerializeField] private GameObject plainBlackPanel;
 	
 	private string buttonCode;
 
 	
 	private void Start() 
 	{
-		transitionToInImg.gameObject.SetActive(true);
+		StartCoroutine(showTransitionAfterDelay());
 	}
 
 	private void Update() 
 	{
 		checkIfTransitionIsDone();
 	}
+
+        private IEnumerator showTransitionAfterDelay() 
+        {
+            plainBlackPanel.SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+            plainBlackPanel.SetActive(false);
+            transitionToInImg.gameObject.SetActive(true);
+        }
 	
     public void goToMiniGamesSelect()
     {

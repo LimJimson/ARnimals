@@ -42,6 +42,12 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI highScoreListTxt;
     [SerializeField] private Button nextLevelBtn;
     [SerializeField] private TextMeshProUGUI playAgainTxt;
+    [SerializeField] private GameObject checkImgForLvlToUnlock;
+    [SerializeField] private GameObject allLevelsUnlockGO;
+    [SerializeField] private GameObject starsToUnlockGO;
+    [SerializeField] private Image lvlToUnlockImg;
+    [SerializeField] private Sprite[] lvlToUnlockSprites;
+
     private int minimumScoreToWin = 10;
 
     [Header("PowerUps")]
@@ -315,7 +321,7 @@ public class CTF_GameManager : MonoBehaviour
 
         if (selectedLevel == "5") 
         {
-            nextLevelBtn.interactable = false;
+            nextLevelBtn.gameObject.SetActive(false);
         }
     }
 
@@ -482,50 +488,50 @@ public class CTF_GameManager : MonoBehaviour
     }
 
     public void UpdateHighScoreList()
-{
-    string formattedScores = "";
-
-    List<SaveObject.CTF_HighScore> highScores = null;
-    switch (selectedLevel)
     {
-        case "1":
-            highScores = existingSo.ctf_HighScoresLvl1;
-            break;
-        case "2":
-            highScores = existingSo.ctf_HighScoresLvl2;
-            break;
-        case "3":
-            highScores = existingSo.ctf_HighScoresLvl3;
-            break;
-        case "4":
-            highScores = existingSo.ctf_HighScoresLvl4;
-            break;
-        case "5":
-            highScores = existingSo.ctf_HighScoresLvl5;
-            break;
-    }
+        string formattedScores = "";
 
-    if (highScores != null)
-    {
-        for (int i = 0; i < highScores.Count; i++)
+        List<SaveObject.CTF_HighScore> highScores = null;
+        switch (selectedLevel)
         {
-            string rank = (i == 9) ? "10" : (i + 1).ToString();
+            case "1":
+                highScores = existingSo.ctf_HighScoresLvl1;
+                break;
+            case "2":
+                highScores = existingSo.ctf_HighScoresLvl2;
+                break;
+            case "3":
+                highScores = existingSo.ctf_HighScoresLvl3;
+                break;
+            case "4":
+                highScores = existingSo.ctf_HighScoresLvl4;
+                break;
+            case "5":
+                highScores = existingSo.ctf_HighScoresLvl5;
+                break;
+        }
 
-            if (rank == "10") 
+        if (highScores != null)
+        {
+            for (int i = 0; i < highScores.Count; i++)
             {
-                formattedScores += $"{rank}.    {highScores[i].score}     -     {highScores[i].dateAchieved}\n";
-            }
-            else 
-            {
-                formattedScores += $"{rank}.     {highScores[i].score}     -     {highScores[i].dateAchieved}\n";
+                string rank = (i == 9) ? "10" : (i + 1).ToString();
+
+                if (rank == "10") 
+                {
+                    formattedScores += $"{rank}.    {highScores[i].score}     -     {highScores[i].dateAchieved}\n";
+                }
+                else 
+                {
+                    formattedScores += $"{rank}.     {highScores[i].score}     -     {highScores[i].dateAchieved}\n";
+                }
             }
         }
-    }
 
-    // Set the formatted scores in the UI Text element
-    highScoreListTxt.text = formattedScores;
-    Debug.Log("High Score List: " + formattedScores);
-}
+        // Set the formatted scores in the UI Text element
+        highScoreListTxt.text = formattedScores;
+        Debug.Log("High Score List: " + formattedScores);
+    }
 
 
     private void SetMaxStars() 
@@ -533,32 +539,45 @@ public class CTF_GameManager : MonoBehaviour
         int currentMaxStarsCount = PlayerPrefs.GetInt("CTF_Lvl" + selectedLevel + "StarsCount", 0);
         int newStarsCount = starsCount;
 
-        checkGameObject.SetActive(false);
-		tryAnimalBtn.SetActive(false);
-
         if (newStarsCount > currentMaxStarsCount) 
         {
             PlayerPrefs.SetInt("CTF_Lvl" + selectedLevel + "StarsCount", newStarsCount);
         }
 
-        
+        unlockRewards();
+    }
+
+    private void unlockRewards() 
+    {
+        checkGameObject.SetActive(false);
+		tryAnimalBtn.SetActive(false);
+
+        checkImgForLvlToUnlock.SetActive(false);
+        allLevelsUnlockGO.SetActive(false);
+        starsToUnlockGO.SetActive(false);
 
         switch(PlayerPrefs.GetInt("CTF_Lvl" + selectedLevel + "StarsCount", 0)) 
         {
             case 1:
                 playAgainTxt.text = "Do you want to keep playing in order to unlock the <color=yellow>next level</color> and the animal for <color=yellow>AR</color>?";
                 nextLevelBtn.interactable = false;
+                starsToUnlockGO.SetActive(true);
+                checkImgForLvlToUnlock.SetActive(false);
                 break;
             case 2:
                 playAgainTxt.text = "Are you sure you want to <color=yellow>RE-PLAY</color> this level again instead of going to the <color=yellow>next level</color>?";
                 UnlockedNextLevel();
                 nextLevelBtn.interactable = true;
+                starsToUnlockGO.SetActive(true);
+                checkImgForLvlToUnlock.SetActive(true);
                 break;
             case 3:
                 playAgainTxt.text = "Are you sure you want to <color=yellow>RE-PLAY</color> this level again instead of going to the <color=yellow>next level</color>?";
                 UnlockedNextLevel();
                 checkGameObject.SetActive(true);
                 tryAnimalBtn.SetActive(true);
+                starsToUnlockGO.SetActive(true);
+                checkImgForLvlToUnlock.SetActive(true);
 
                 switch(selectedLevel) 
                 {
@@ -585,6 +604,28 @@ public class CTF_GameManager : MonoBehaviour
                         break;
                 }
 
+                break;
+        }
+
+        switch(selectedLevel) 
+        {
+            case "1":
+                lvlToUnlockImg.sprite = lvlToUnlockSprites[0];
+                break;
+            case "2":
+                lvlToUnlockImg.sprite = lvlToUnlockSprites[1];
+                break;
+            case "3":
+                lvlToUnlockImg.sprite = lvlToUnlockSprites[2];
+                break;
+            case "4":
+                lvlToUnlockImg.sprite = lvlToUnlockSprites[3];
+                break;
+            case "5":
+                allLevelsUnlockGO.SetActive(true);
+                starsToUnlockGO.SetActive(false);
+                lvlToUnlockImg.gameObject.SetActive(false);
+                checkImgForLvlToUnlock.SetActive(false);
                 break;
         }
 

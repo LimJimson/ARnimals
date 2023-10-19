@@ -1828,10 +1828,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 565409b4cd9906e4c9a56c1d0ca7c0e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionToOut: {fileID: 930158840}
   transitionToOutImg: {fileID: 930158843}
-  transitionToIn: {fileID: 727936062}
   transitionToInImg: {fileID: 727936065}
+  plainBlackPanel: {fileID: 902470457}
 --- !u!4 &364042934
 Transform:
   m_ObjectHideFlags: 0

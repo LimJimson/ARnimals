@@ -28,6 +28,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip winLevel;
     public AudioClip loseLevel;
 	public AudioClip CTF_PowerUps;
+    public AudioClip TriviaShowEffect;
 
     [Header("GUIDE")]
     public AudioClip[] GuideSelector;

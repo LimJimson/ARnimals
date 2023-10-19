@@ -87,6 +87,7 @@ public class FTA_GameManager : MonoBehaviour
             InstructionGamePanel.SetActive(false);
             FTAHelpButton();
         }
+        randomNum = UnityEngine.Random.Range(0, 2);
     }
     private void Update()
     {
@@ -159,7 +160,6 @@ public class FTA_GameManager : MonoBehaviour
             array[j] = temp;
         }
     }
-
     private void RandomlyAssignSprites()
     {
         ShuffleSprites(SelectedArraySprites());
@@ -170,10 +170,10 @@ public class FTA_GameManager : MonoBehaviour
         for (int i = 0; i < numberOfshadowImgs; i++)
         {
             shadowImgs[i].sprite = SelectedArraySprites()[i];
+            shadowImgContainerTrivia[i].sprite = SelectedArraySprites()[i];
             GuideshadowImgs[i].sprite = SelectedArraySprites()[i];
         }
     }
-
     // Shuffle the array using Fisher-Yates algorithm
     private void ShuffleSprites(Sprite[] array)
     {
@@ -305,7 +305,8 @@ public class FTA_GameManager : MonoBehaviour
         if (shadowImgs[0].color == enableCorrectAnswer && shadowImgs[1].color == enableCorrectAnswer && shadowImgs[2].color == enableCorrectAnswer)
         {
             checkStar();
-            GameWin();
+            openTriviaCanvas();
+            //GameWin();
         }
     }
 
@@ -334,8 +335,6 @@ public class FTA_GameManager : MonoBehaviour
         {
 
         }
-        isGameOver = true;
-        timer = Mathf.Min(timer, timeLimit);
         panelFinish.SetActive(true);
     }
     public void PauseGame()
@@ -1276,5 +1275,343 @@ public class FTA_GameManager : MonoBehaviour
     private void UpdateStartText()
     {
         timerStart.text = Convert.ToInt16(countdownTimeStarts).ToString();
+    }
+
+    //----------TRIVIA---------//
+    public GameObject triviaGameCanvas;
+    public Image[] shadowImgContainerTrivia;
+    public TMP_Text AnimalNameTrivia;
+    public TMP_Text TriviaTextInfo;
+    public Image AnimalImageTriva;
+
+    public void openTriviaCanvas()
+    {
+        isGameOver = true;
+        timer = Mathf.Min(timer, timeLimit);
+        clickAnimalShadow(shadowImgContainerTrivia[0].gameObject);
+        triviaGameCanvas.SetActive(true);
+        try
+        {
+            audioManager.PlaySFX(audioManager.TriviaShowEffect);
+            audioManager.musicSource.Stop();
+        }
+        catch
+        {
+
+        }
+
+    }
+    public void closeTriviaCanvas()
+    {
+        triviaGameCanvas.SetActive(false);
+        GameWin();
+    }
+
+    public void clickAnimalShadow(GameObject clickedAnimal)
+    {
+        foreach (Image shadowImgs in shadowImgContainerTrivia)
+        {
+            shadowImgs.color = Color.black;
+        }
+        Image clickedAnimalImg = clickedAnimal.GetComponent<Image>();
+        Color enableCorrectAnswer = new Color(1.0f, 1.0f, 1.0f);
+        clickedAnimalImg.color = enableCorrectAnswer;
+        AnimalImageTriva.sprite = clickedAnimalImg.sprite;
+        AnimalNameTrivia.text = SelectedArraySprites()[_index].name;
+        generateRandomTrivia();
+    }
+    public int _index;
+    public void getIndex(int index)
+    {
+        _index = index;
+    }
+    public string animalGetAnimalName;
+    int randomNum;
+    public void generateRandomTrivia()
+    {
+        animalGetAnimalName = AnimalNameTrivia.text;
+        switch (animalGetAnimalName)
+        {
+            case "Leopard":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "1";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "2";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "3";
+                        break;
+                }
+                break;
+            case "Tiger":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "4";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "5";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "6";
+                        break;
+                }
+                break;
+            case "Zebra":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "7";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "8";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "9";
+                        break;
+                }
+                break;
+            case "Crab":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "10";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "11";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "12";
+                        break;
+                }
+                break;
+            case "Piranha":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "13";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "14";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "15";
+                        break;
+                }
+                break;
+            case "Koi":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "16";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "17";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "18";
+                        break;
+                }
+                break;
+            case "Duck":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "19";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "20";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "21";
+                        break;
+                }
+                break;
+            case "Owl":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "22";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "23";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "24";
+                        break;
+                }
+                break;
+            case "Pigeon":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "25";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "26";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "27";
+                        break;
+                }
+                break;
+            case "Camel":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "28";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "29";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "30";
+                        break;
+                }
+                break;
+            case "Elephant":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "31";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "32";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "33";
+                        break;
+                }
+                break;
+            case "Seagull":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "34";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "35";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "36";
+                        break;
+                }
+                break;
+            case "Bear":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "37";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "38";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "39";
+                        break;
+                }
+                break;
+            case "Rhinoceros":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "40";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "41";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "42";
+                        break;
+                }
+                break;
+            case "Bat":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "43";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "44";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "45";
+                        break;
+                }
+                break;
+            case "Crocodile":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "46";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "47";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "48";
+                        break;
+                }
+                break;
+            case "Deer":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "49";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "50";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "51";
+                        break;
+                }
+                break;
+            case "Octopus":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "52";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "53";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "54";
+                        break;
+                }
+                break;
+            case "Shark":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "55";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "56";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "57";
+                        break;
+                }
+                break;
+            case "Horse":
+                switch (randomNum)
+                {
+                    case 0:
+                        TriviaTextInfo.text = "58";
+                        break;
+                    case 1:
+                        TriviaTextInfo.text = "59";
+                        break;
+                    case 2:
+                        TriviaTextInfo.text = "60";
+                        break;
+                }
+                break;
+        }
     }
 }

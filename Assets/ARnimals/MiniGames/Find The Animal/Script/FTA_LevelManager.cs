@@ -53,6 +53,9 @@ public class FTA_LevelManager : MonoBehaviour
         animalToUnlockName.text = "Leopard";
         checkStar();
         playConfirmGameObject.SetActive(true);
+        levelbordercompletedholder.sprite = levelborderimages[0];
+        levelbordercompletedholder.gameObject.SetActive(true);
+        twostarstounlock.gameObject.SetActive(true);
     }
 
     public void Level2isCLicked()
@@ -61,6 +64,9 @@ public class FTA_LevelManager : MonoBehaviour
         animalToUnlockName.text = "Pigeon";
         checkStar();
         playConfirmGameObject.SetActive(true);
+        levelbordercompletedholder.sprite = levelborderimages[1];
+        levelbordercompletedholder.gameObject.SetActive(true);
+        twostarstounlock.gameObject.SetActive(true);
     }
 
     public void Level3isCLicked()
@@ -69,6 +75,9 @@ public class FTA_LevelManager : MonoBehaviour
         animalToUnlockName.text = "Piranha";
         checkStar();
         playConfirmGameObject.SetActive(true);
+        levelbordercompletedholder.sprite = levelborderimages[2];
+        levelbordercompletedholder.gameObject.SetActive(true);
+        twostarstounlock.gameObject.SetActive(true);
     }
 
     public void Level4isCLicked()
@@ -77,6 +86,9 @@ public class FTA_LevelManager : MonoBehaviour
         animalToUnlockName.text = "Bear";
         checkStar();
         playConfirmGameObject.SetActive(true);
+        levelbordercompletedholder.sprite = levelborderimages[3];
+        levelbordercompletedholder.gameObject.SetActive(true);
+        twostarstounlock.gameObject.SetActive(true);
     }
 
     public void Level5isCLicked()
@@ -85,6 +97,10 @@ public class FTA_LevelManager : MonoBehaviour
         animalToUnlockName.text = "Owl";
         checkStar();
         playConfirmGameObject.SetActive(true);
+        levelbordercompletedholder.gameObject.SetActive(false);
+        checkGameObjectlvl.SetActive(false);
+        twostarstounlock.gameObject.SetActive(false);
+        NoAvailLevel.gameObject.SetActive(true);
     }
     public void LoadNextLevel()
     {
@@ -133,6 +149,12 @@ public class FTA_LevelManager : MonoBehaviour
     [SerializeField] private GameObject tryAnimalBtn;
     [SerializeField] private GameObject confirmationToARCanvas;
 
+    [SerializeField] private GameObject checkGameObjectlvl;
+    [SerializeField] private Image levelbordercompletedholder;
+    [SerializeField] private Sprite[] levelborderimages;
+    [SerializeField] private TextMeshProUGUI twostarstounlock;
+    [SerializeField] private TextMeshProUGUI NoAvailLevel;
+
     public void checkStar()
     {
 
@@ -144,6 +166,8 @@ public class FTA_LevelManager : MonoBehaviour
 
         checkGameObject.SetActive(false);
         tryAnimalBtn.SetActive(false);
+        checkGameObjectlvl.SetActive(false);
+        NoAvailLevel.gameObject.SetActive(false);
 
         Debug.Log("Level: " + SelectedLevel + "\n" + "currentStar: " + currentStar);
 
@@ -157,13 +181,13 @@ public class FTA_LevelManager : MonoBehaviour
                 break;
             case 2:
                 starsImg.sprite = starsSprites[2];
-                checkGameObject.SetActive(true);
-                tryAnimalBtn.SetActive(true);
+                checkGameObjectlvl.SetActive(true);
                 break;
             case 3:
                 starsImg.sprite = starsSprites[3];
                 checkGameObject.SetActive(true);
                 tryAnimalBtn.SetActive(true);
+                checkGameObjectlvl.SetActive(true);
                 break;
         }
     }

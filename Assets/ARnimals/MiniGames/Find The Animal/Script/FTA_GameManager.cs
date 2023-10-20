@@ -66,7 +66,7 @@ public class FTA_GameManager : MonoBehaviour
         {
             Debug.Log("No AudioManager");
         }
-
+        
         guide_chosen = SaveFTAGame.guideChosen;
         HintsLeft = 1;
         SelectedLevel = PlayerPrefs.GetString("FTA_SelectedLevel");
@@ -87,7 +87,7 @@ public class FTA_GameManager : MonoBehaviour
             InstructionGamePanel.SetActive(false);
             FTAHelpButton();
         }
-        randomNum = UnityEngine.Random.Range(0, 2);
+        
     }
     private void Update()
     {
@@ -304,6 +304,7 @@ public class FTA_GameManager : MonoBehaviour
         Color enableCorrectAnswer = new Color(1.0f, 1.0f, 1.0f);
         if (shadowImgs[0].color == enableCorrectAnswer && shadowImgs[1].color == enableCorrectAnswer && shadowImgs[2].color == enableCorrectAnswer)
         {
+            randomNum = UnityEngine.Random.Range(0, 2);
             checkStar();
             openTriviaCanvas();
             //GameWin();
@@ -1173,7 +1174,6 @@ public class FTA_GameManager : MonoBehaviour
             CheckIfFisrtItemGuide = false;
             InstructionGamePanel.SetActive(false);
             startGame = true;
-            Debug.Log(startGame + "HEYGUMANAKANA");
             ResumeGame();
         }
     }
@@ -1286,9 +1286,9 @@ public class FTA_GameManager : MonoBehaviour
 
     public void openTriviaCanvas()
     {
-        isGameOver = true;
-        timer = Mathf.Min(timer, timeLimit);
+
         clickAnimalShadow(shadowImgContainerTrivia[0].gameObject);
+        
         triviaGameCanvas.SetActive(true);
         try
         {
@@ -1299,6 +1299,8 @@ public class FTA_GameManager : MonoBehaviour
         {
 
         }
+        isGameOver = true;
+        timer = Mathf.Min(timer, timeLimit);
 
     }
     public void closeTriviaCanvas()
@@ -1318,6 +1320,7 @@ public class FTA_GameManager : MonoBehaviour
         clickedAnimalImg.color = enableCorrectAnswer;
         AnimalImageTriva.sprite = clickedAnimalImg.sprite;
         AnimalNameTrivia.text = SelectedArraySprites()[_index].name;
+        animalGetAnimalName = AnimalNameTrivia.text;
         generateRandomTrivia();
     }
     public int _index;
@@ -1329,7 +1332,7 @@ public class FTA_GameManager : MonoBehaviour
     int randomNum;
     public void generateRandomTrivia()
     {
-        animalGetAnimalName = AnimalNameTrivia.text;
+        Debug.Log("Animal Trivia!");
         switch (animalGetAnimalName)
         {
             case "Leopard":

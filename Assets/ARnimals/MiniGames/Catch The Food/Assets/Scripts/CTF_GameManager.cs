@@ -53,22 +53,20 @@ public class CTF_GameManager : MonoBehaviour
     [Header("PowerUps")]
     [SerializeField] private GameObject shield;
     [SerializeField] private GameObject points2X;
-    [SerializeField] private GameObject shieldImg;
-    [SerializeField] private GameObject points2XImg;
+    [SerializeField] private GameObject luck;
     [SerializeField] private GameObject shieldContainer;
     [SerializeField] private GameObject points2XContainer;
-    [SerializeField] private GameObject shieldDurationGameObject;
-    [SerializeField] private GameObject points2XDurationGameObject;
+    [SerializeField] private GameObject luckContainer;
     [SerializeField] private TextMeshProUGUI shieldDurationTxt;
     [SerializeField] private TextMeshProUGUI points2XDurationTxt;
+    [SerializeField] private TextMeshProUGUI luckDurationTxt;
     [SerializeField] private GameObject [] animalShieldState;
     [SerializeField] private GameObject [] animalX2State;
-    [SerializeField] private Animator [] powerUpFadeAnimator;
+    [SerializeField] private GameObject [] animalLuckState;
+    [SerializeField] private Image [] animalIdleState;
     [SerializeField] private Image starHolder;
     [SerializeField] private Sprite[] stars;
     [SerializeField] private TextMeshProUGUI levelCompletedTxt;
-    [SerializeField] private RectTransform[] x2Orders;
-    [SerializeField] private RectTransform[] shieldsOrders;
 	
     private int finalScore;
 
@@ -80,9 +78,11 @@ public class CTF_GameManager : MonoBehaviour
 
     [SerializeField] private bool inX2PointsState = false;
     [SerializeField] private bool inShieldState = false;
+    [SerializeField] private bool inLuckState = false;
 
     private float shieldDuration = 10f;
     private float points2XDuration = 10f;
+    private float luckDuration = 10f;
 	
 	[Header("Try Animal")]
 	[SerializeField] private TextMeshProUGUI animalToUnlockName;
@@ -98,8 +98,7 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private GameObject transitionToIn;
     [SerializeField] private Image transitionToInImg;
     [SerializeField] private GameObject plainBlackPanel;
-
-
+    [SerializeField] private Sprite[] powerUpSprites;
     private string buttonCode;
 	
     private void Awake()
@@ -125,8 +124,10 @@ public class CTF_GameManager : MonoBehaviour
     {
         ShieldDurationTimer();
         X2PointsDurationTimer();
-        UpdatePowerUpsUI();
+        LuckDurationTimer();
         checkIfTransitionIsDone();
+        enablePowerUpState();
+        removePowerUpState();
     }
 
     private IEnumerator showTransitionAfterDelay() 
@@ -148,6 +149,12 @@ public class CTF_GameManager : MonoBehaviour
         set { points2XDuration = value; }
     }
 
+    public float LuckDuration 
+    {
+        get { return luckDuration; }
+        set { luckDuration = value; }
+    }
+
     public bool InShieldState
     {
         get { return inShieldState; } 
@@ -158,6 +165,12 @@ public class CTF_GameManager : MonoBehaviour
     {
         get { return inX2PointsState; }
         set { inX2PointsState = value; } 
+    }
+
+    public bool InLuckState
+    {
+        get { return inLuckState; }
+        set { inLuckState = value; }
     }
 
     public IEnumerator DisableShieldAfterdelay(float delay) 
@@ -174,18 +187,34 @@ public class CTF_GameManager : MonoBehaviour
         points2X.SetActive(true);
     }
 
+    public IEnumerator DisableLuckAfterdelay(float delay) 
+    {
+        yield return new WaitForSeconds(delay);
+        InLuckState = false;
+        luck.SetActive(true);
+    }
     private void ShieldDurationTimer() 
     {
         if (InShieldState) 
         {
-			
-			
             shieldContainer.SetActive(true);
             shieldDuration -= Time.deltaTime;
 
-            for(int i = 0; i < animalShieldState.Length ; i++) 
+            if (!inLuckState && !inX2PointsState) 
             {
-                animalShieldState[i].SetActive(true);
+                foreach (var idleState in animalIdleState) 
+                {
+                    idleState.sprite = powerUpSprites[0];
+                    idleState.gameObject.SetActive(true);
+                }
+            }
+            else 
+            {
+                foreach (var idleState in animalIdleState) 
+                {
+                    idleState.sprite = powerUpSprites[0];
+                    idleState.gameObject.SetActive(false);
+                }
             }
 
             if (shieldDuration <= 0) 
@@ -217,14 +246,26 @@ public class CTF_GameManager : MonoBehaviour
     {
         if (InX2PointsState) 
         {
-			
-			
+
             points2XContainer.SetActive(true);
             points2XDuration -= Time.deltaTime;
 
-            for(int i = 0; i < animalX2State.Length ; i++) 
+            if (!inLuckState && !inShieldState) 
             {
-                animalX2State[i].SetActive(true);
+
+                foreach (var idleState in animalIdleState) 
+                {
+                    idleState.sprite = powerUpSprites[1];
+                    idleState.gameObject.SetActive(true);
+                }
+            }
+            else 
+            {
+                foreach (var idleState in animalIdleState) 
+                {
+                    idleState.sprite = powerUpSprites[1];
+                    idleState.gameObject.SetActive(false);
+                }
             }
 
             if (points2XDuration <= 0) 
@@ -252,65 +293,177 @@ public class CTF_GameManager : MonoBehaviour
         }
     }
 
-    private void PowerUpsUIPosition(GameObject firstPowerUp, GameObject firstText, GameObject secondPowerUp, GameObject secondText) 
+    private void LuckDurationTimer() 
     {
-        Vector3 firstPositionForIcon = new Vector3(-416f, 457f, 0f);
-        Vector3 secondPositionForIcon = new Vector3(-246.5f, 458.5f, 0f);
+        if (InLuckState) 
+        {	
+            luckContainer.SetActive(true);
+            luckDuration -= Time.deltaTime;
 
-        Vector3 firstPositionForText = new Vector3(-332.3f, 459.1f, 0f);
-        Vector3 secondPositionForText = new Vector3(-162.6f, 460.9f, 0f);
-
-        firstPowerUp.transform.localPosition = firstPositionForIcon;
-        firstText.transform.localPosition = firstPositionForText;
-
-        secondPowerUp.transform.localPosition = secondPositionForIcon;
-        secondText.transform.localPosition = secondPositionForText;
-    }
-
-    private void UpdatePowerUpsUI() 
-    {
-
-        if (points2XContainer.activeSelf == true && shieldContainer.activeSelf == false) 
-        {
-            PowerUpsUIPosition(points2XImg, points2XDurationGameObject, shieldImg, shieldDurationGameObject);
-
-        }
-        else if (shieldContainer.activeSelf == true && points2XContainer.activeSelf == false) 
-        {
-            PowerUpsUIPosition(shieldImg, shieldDurationGameObject, points2XImg, points2XDurationGameObject);
-
-        }
-        else if (shieldContainer.activeSelf == true && points2XContainer.activeSelf == true) 
-        {
-            if (shieldDuration < points2XDuration) 
+            if (!inShieldState && !inX2PointsState) 
             {
-                PowerUpsUIPosition(shieldImg, shieldDurationGameObject, points2XImg, points2XDurationGameObject);
-
-                for (int i = 0; i < powerUpFadeAnimator.Length ; i++) 
+                foreach (var idleState in animalIdleState) 
                 {
-                    shieldsOrders[i].SetAsFirstSibling();
-                    x2Orders[i].SetAsLastSibling();
-
-                    if (powerUpFadeAnimator[i].isActiveAndEnabled) 
-                    {
-                        powerUpFadeAnimator[i].SetTrigger("X2FadeFirst");
-                    }
+                    idleState.sprite = powerUpSprites[2];
+                    idleState.gameObject.SetActive(true);
                 }
             }
             else 
             {
-                PowerUpsUIPosition(points2XImg, points2XDurationGameObject, shieldImg, shieldDurationGameObject);
-
-                for (int i = 0; i < powerUpFadeAnimator.Length ; i++) 
+                foreach (var idleState in animalIdleState) 
                 {
-                    x2Orders[i].SetAsFirstSibling();
-                    shieldsOrders[i].SetAsLastSibling();
-
-                    if (powerUpFadeAnimator[i].isActiveAndEnabled) 
-                    {
-                        powerUpFadeAnimator[i].SetTrigger("ShieldFadeFirst");
-                    }
+                    idleState.sprite = powerUpSprites[2];
+                    idleState.gameObject.SetActive(false);
                 }
+            }
+
+            if (luckDuration <= 0) 
+            {
+                luckContainer.SetActive(false);
+
+                for(int i = 0; i < animalLuckState.Length ; i++) 
+                {
+                    animalLuckState[i].SetActive(false);
+                }
+            }
+            else 
+            {
+                luckDurationTxt.text = luckDuration.ToString("F0");
+            }
+        }
+        else 
+        {
+            luckContainer.SetActive(false);
+
+            for(int i = 0; i < animalLuckState.Length ; i++) 
+            {
+                animalLuckState[i].SetActive(false);
+            }
+        }
+    }
+
+    private void enablePowerUpState() 
+    {
+
+        if (inShieldState && inX2PointsState) 
+        {
+            if (shieldDuration < points2XDuration) 
+            {
+                for(int i = 0; i < animalShieldState.Length ; i++) 
+                {
+                    animalShieldState[i].SetActive(true);
+                    animalX2State[i].SetActive(true);
+                    animalShieldState[i].transform.SetAsFirstSibling();
+                    animalX2State[i].transform.SetAsLastSibling();
+                }
+            }
+            else 
+            {
+                for(int i = 0; i < animalShieldState.Length ; i++) 
+                {
+                    animalShieldState[i].SetActive(true);
+                    animalX2State[i].SetActive(true);
+                    animalX2State[i].transform.SetAsFirstSibling();
+                    animalShieldState[i].transform.SetAsLastSibling();
+                }
+            }
+        }
+        else if (inShieldState && inLuckState) 
+        {
+            if (shieldDuration < luckDuration) 
+            {
+                for(int i = 0; i < animalShieldState.Length ; i++) 
+                {
+                    animalShieldState[i].SetActive(true);
+                    animalLuckState[i].SetActive(true);
+                    animalShieldState[i].transform.SetAsLastSibling();
+                    animalLuckState[i].transform.SetAsLastSibling();
+                }
+            }
+            else 
+            {
+                for(int i = 0; i < animalShieldState.Length ; i++) 
+                {
+                    animalShieldState[i].SetActive(true);
+                    animalLuckState[i].SetActive(true);
+                    animalLuckState[i].transform.SetAsFirstSibling();
+                    animalShieldState[i].transform.SetAsLastSibling();
+                }
+            }
+        }
+        else if (inLuckState && inX2PointsState) 
+        {
+            if (luckDuration < points2XDuration) 
+            {
+                for(int i = 0; i < animalShieldState.Length ; i++) 
+                {
+                    animalX2State[i].SetActive(true);
+                    animalLuckState[i].SetActive(true);
+                    animalLuckState[i].transform.SetSiblingIndex(0);
+                    animalX2State[i].transform.SetSiblingIndex(1);
+                }
+            }
+            else 
+            {
+                for(int i = 0; i < animalShieldState.Length ; i++) 
+                {
+                    animalX2State[i].SetActive(true);
+                    animalLuckState[i].SetActive(true);
+                    animalX2State[i].transform.SetSiblingIndex(0);
+                    animalLuckState[i].transform.SetSiblingIndex(1);
+                }
+            }
+        }
+        else if (inLuckState && inX2PointsState && inShieldState) 
+        {
+
+            float highest = Mathf.Max(luckDuration, Mathf.Max(shieldDuration, points2XDuration));
+
+            if (highest == luckDuration) 
+            {
+                for(int i = 0; i < animalShieldState.Length ; i++) 
+                {
+                    animalX2State[i].SetActive(true);
+                    animalLuckState[i].SetActive(true);
+                    animalShieldState[i].SetActive(true);
+                    animalLuckState[i].transform.SetAsFirstSibling();
+                    animalShieldState[i].transform.SetAsLastSibling();
+                    animalX2State[i].transform.SetAsLastSibling();
+                }
+            }
+            else if (highest == shieldDuration)
+            {
+                for(int i = 0; i < animalShieldState.Length ; i++) 
+                {
+                    animalX2State[i].SetActive(true);
+                    animalLuckState[i].SetActive(true);
+                    animalShieldState[i].SetActive(true);
+                    animalShieldState[i].transform.SetAsFirstSibling();
+                    animalX2State[i].transform.SetAsLastSibling();
+                    animalLuckState[i].transform.SetAsLastSibling();
+                }
+            }
+            else if (highest == points2XDuration) 
+            {
+                for(int i = 0; i < animalShieldState.Length ; i++) 
+                {
+                    animalX2State[i].SetActive(true);
+                    animalLuckState[i].SetActive(true);
+                    animalShieldState[i].SetActive(true);
+                    animalX2State[i].transform.SetAsFirstSibling();
+                    animalLuckState[i].transform.SetAsLastSibling();
+                    animalShieldState[i].transform.SetAsLastSibling();
+                }
+            }
+        }
+    }
+    private void removePowerUpState() 
+    {
+        if (!inLuckState && !inShieldState && !inX2PointsState) 
+        {
+            foreach (var idleState in animalIdleState) 
+            {
+                idleState.gameObject.SetActive(false);
             }
         }
     }
@@ -324,7 +477,6 @@ public class CTF_GameManager : MonoBehaviour
             nextLevelBtn.gameObject.SetActive(false);
         }
     }
-
     public void IncreaseScore(int amount)
     {
         if (!isGameOver)
@@ -349,7 +501,6 @@ public class CTF_GameManager : MonoBehaviour
             }
         }
     }
-
     private void showRandomTrivia() 
     {
 
@@ -364,7 +515,7 @@ public class CTF_GameManager : MonoBehaviour
         string [] pigeonTrivia = 
         {
             "<color=green>Did you know?</color> <color=yellow>Pigeons</color> can do math! Researchers found that pigeons can learn abstract math rules and even understand concepts like zero.",
-            "<color=green>Did you know?</color> <color=yellow>Pigeons</color> have <color=#F86768>'super'</color> vision. They see ultra#FF0046 light, which we can't, helping them navigate and spot hidden things.",
+            "<color=green>Did you know?</color> <color=yellow>Pigeons</color> have <color=#F86768>'super'</color> vision. They see ultraviolet light, which we can't, helping them navigate and spot hidden things.",
             "<color=green>Did you know?</color> <color=yellow>Pigeons</color> can recognize all 26 letters of the alphabet. They've even learned to tell them apart and spell simple words in studies!",
             "<color=green>Did you know?</color> In some cultures, <color=yellow>pigeons</color> are considered symbols of love and peace. They've even been used in weddings to carry love notes.",
             "<color=green>Did you know?</color> <color=yellow>Pigeons</color> show love with a cute dance called <color=#FF0046>'pigeon courtship'</color> to their feathered friend."
@@ -519,11 +670,25 @@ public class CTF_GameManager : MonoBehaviour
 
                 if (rank == "10") 
                 {
-                    formattedScores += $"{rank}.    {highScores[i].score}     -     {highScores[i].dateAchieved}\n";
+                    if (highScores[i].score >= 100) 
+                    {
+                        formattedScores += $"{rank}.    {highScores[i].score}    -     {highScores[i].dateAchieved}\n";
+                    }
+                    else 
+                    {
+                        formattedScores += $"{rank}.    {highScores[i].score}     -     {highScores[i].dateAchieved}\n";
+                    } 
                 }
                 else 
                 {
-                    formattedScores += $"{rank}.     {highScores[i].score}     -     {highScores[i].dateAchieved}\n";
+                    if (highScores[i].score >= 100) 
+                    {
+                        formattedScores += $"{rank}.     {highScores[i].score}    -     {highScores[i].dateAchieved}\n";
+                    }
+                    else 
+                    {
+                        formattedScores += $"{rank}.     {highScores[i].score}     -     {highScores[i].dateAchieved}\n";
+                    }
                 }
             }
         }

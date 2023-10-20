@@ -74,21 +74,19 @@ public class animalSelection : MonoBehaviour
             transitionToInImg.gameObject.SetActive(true);
         }
 
-
+    bool achievedImgPositionOut;
+    bool achievedImgPositionIn;
     private void checkIfTransitionIsDone() 
     {
 
-        bool achievedImgPositionOut = transitionToOutImg.color.a >= 0.9999 && transitionToOutImg.color.a <= 1.0001;
-        bool achievedImgPositionIn = transitionToInImg.color.a >= -0.0001 && transitionToInImg.color.a <= 0.0001;
+        achievedImgPositionOut = transitionToOutImg.color.a >= 0.9999 && transitionToOutImg.color.a <= 1.0001;
+        achievedImgPositionIn = transitionToInImg.color.a >= -0.0001 && transitionToInImg.color.a <= 0.0001;
 
         if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "ModeSelect") 
         {
             SceneManager.LoadScene("ModeSelect");
         }
-        else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "AR") 
-        {
-            StartCoroutine(LoadAsyncWithDelay());
-        }
+
 
         if (transitionToInImg.gameObject.activeSelf && achievedImgPositionIn) 
         {
@@ -160,7 +158,8 @@ public class animalSelection : MonoBehaviour
     {
         if (animalClicked == true)
         {
-            LoadLevelAR();
+            StartCoroutine(LoadAsyncWithDelay());
+            //LoadLevelAR();
         }
     }
 
@@ -180,12 +179,24 @@ public class animalSelection : MonoBehaviour
         transitionToOutImg.gameObject.SetActive(true);
     }
 
+    public GameObject blckPanelFadeOut;
+    public Animator blckPanel;
     IEnumerator LoadAsyncWithDelay()
     {
         backBtn.SetActive(false);
         guideBtn.SetActive(false);
+        blckPanelFadeOut.SetActive(true);
+        yield return new WaitForSeconds(0.3f);
         loadingScreen.SetActive(true);
+        yield return new WaitForSeconds(1.3f);
+        while (!blckPanel.GetCurrentAnimatorStateInfo(0).IsName("blckPanelIdle1"))
+        {
+            yield return null;
+            
+        }
+        
 
+        blckPanelFadeOut.SetActive(false);
         // Load the scene in the background without activating it.
         AsyncOperation operation = SceneManager.LoadSceneAsync("AR");
         operation.allowSceneActivation = false;
@@ -199,14 +210,26 @@ public class animalSelection : MonoBehaviour
             // Check if the loading progress is nearly complete.
             if (operation.progress >= 0.9f)
             {
-                // Wait for an additional delay (2 seconds in your case) before activating the scene.
-                yield return new WaitForSeconds(2.0f);
+                blckPanel.SetTrigger("fadeOut");
+                // Wait for an additional delay before activating the scene.
+                yield return new WaitForSeconds(1f);
+                while (!blckPanel.GetCurrentAnimatorStateInfo(0).IsName("blckPanelIdle2"))
+                {
+                    yield return new WaitForSeconds(1f);
 
-                // Activate the loaded scene.
-                operation.allowSceneActivation = true;
+                    // Activate the loaded scene.
+                    operation.allowSceneActivation = true;
+
+                    yield return null;
+
+                }
+
             }
 
-            yield return null;
+            
         }
+
+
+
     }
 }

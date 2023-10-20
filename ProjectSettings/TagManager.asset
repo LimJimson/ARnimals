@@ -12,6 +12,7 @@ TagManager:
   - shield
   - x2Points
   - Audio
+  - luck
   layers:
   - Default
   - TransparentFX

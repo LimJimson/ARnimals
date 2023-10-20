@@ -17,6 +17,7 @@ public class CTF_AnimalMovement : MonoBehaviour
     [Header("PowerUps")]
     [SerializeField] private GameObject shield;
     [SerializeField] private GameObject points2X;
+    [SerializeField] private GameObject luck;
 	
 	[Header("Musics")]
 	[SerializeField] private AudioSource wrongFoodMusic;
@@ -90,6 +91,15 @@ public class CTF_AnimalMovement : MonoBehaviour
             points2X.SetActive(false);
             gameManager.Points2XDuration = 10f;
             StartCoroutine(gameManager.DisableX2PointsAfterdelay(10));
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.CompareTag("luck")) 
+        {
+            audioManager.playPowerUpSFX();
+            gameManager.InLuckState = true;
+            luck.SetActive(false);
+            gameManager.LuckDuration = 10f;
+            StartCoroutine(gameManager.DisableLuckAfterdelay(10));
             Destroy(collision.gameObject);
         }
     }

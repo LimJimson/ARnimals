@@ -7,6 +7,7 @@ public class CTF_FoodSpawner : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private float spawnInterval = 1f;
     [SerializeField] private float spawnForce = 1f;
+    [SerializeField] private CTF_GameManager gameManager;
 
     [SerializeField] private float spawnTimer;
 
@@ -55,7 +56,7 @@ public class CTF_FoodSpawner : MonoBehaviour
 
         Debug.Log("Random Value: " + randomValue);
 
-        if (randomValue <= 0.05f)
+        if (randomValue <= 0.067f)
         {
 
             Debug.Log("Available PowerUps: " + enabledPowerUps.Length);
@@ -74,8 +75,16 @@ public class CTF_FoodSpawner : MonoBehaviour
         }
         else
         {
-            Debug.Log("Spawned Food");
-            SpawnRandomFoodOrPowerUp(enabledFoods);
+            if (gameManager.InLuckState) 
+            {
+                GameObject[] correctFoods = System.Array.FindAll(enabledFoods, food => food.CompareTag("Correct"));
+                SpawnRandomFoodOrPowerUp(correctFoods);
+            }
+            else 
+            {
+                Debug.Log("Spawned Food");
+                SpawnRandomFoodOrPowerUp(enabledFoods);
+            }
         }
     }
 

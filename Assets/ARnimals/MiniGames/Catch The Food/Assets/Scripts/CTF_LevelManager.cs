@@ -18,8 +18,6 @@ public class CTF_LevelManager : MonoBehaviour
 
     [SerializeField] private GameObject [] locks;
 
-    [SerializeField] private GameObject [] buttonBlocks;
-
     [SerializeField] private Button backBtn;
     [SerializeField] private GameObject transitionToOut;
     [SerializeField] private Image transitionToOutImg;
@@ -108,25 +106,25 @@ public class CTF_LevelManager : MonoBehaviour
         {
             locks[0].SetActive(false);
             level2Button.onClick.AddListener(OnLevel2ButtonClick);
-            buttonBlocks[0].SetActive(false);
+            level2Button.interactable = true;
         }
         if  (PlayerPrefs.GetInt("CTF_Lvl2", 0) == 1) 
         {
             locks[1].SetActive(false);
             level3Button.onClick.AddListener(OnLevel3ButtonClick);
-            buttonBlocks[1].SetActive(false);
+            level3Button.interactable = true;
         }
         if  (PlayerPrefs.GetInt("CTF_Lvl3", 0) == 1) 
         {
             locks[2].SetActive(false);
             level4Button.onClick.AddListener(OnLevel4ButtonClick);
-            buttonBlocks[2].SetActive(false);
+            level4Button.interactable = true;
         }
         if  (PlayerPrefs.GetInt("CTF_Lvl4", 0) == 1) 
         {
             locks[3].SetActive(false);
             level5Button.onClick.AddListener(OnLevel5ButtonClick);
-            buttonBlocks[3].SetActive(false);
+            level5Button.interactable = true;
         }
         if  (PlayerPrefs.GetInt("CTF_Lvl5", 0) == 1) 
         {

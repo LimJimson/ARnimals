@@ -1336,13 +1336,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "1";
+                        TriviaTextInfo.text = "Leopards are renowned for their ability to blend into their surroundings due to their spotted coat.";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "2";
+                        TriviaTextInfo.text = "Their spots, called rosettes, provide excellent camouflage in various habitats.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "3";
+                        TriviaTextInfo.text = "Leopards have one of the most extensive geographical ranges of any big cat.";
                         break;
                 }
                 break;
@@ -1350,13 +1350,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "4";
+                        TriviaTextInfo.text = "Tigers are the largest big cat species in the world.";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "5";
+                        TriviaTextInfo.text = "Tigers are primarily nocturnal hunters. Their night vision is six times better than that of humans.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "6";
+                        TriviaTextInfo.text = "Tigers are good swimmers and often enjoy bathing in water to cool down in hot weather.";
                         break;
                 }
                 break;
@@ -1364,13 +1364,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "7";
+                        TriviaTextInfo.text = "Zebras are known for their distinctive black and white stripes.";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "8";
+                        TriviaTextInfo.text = "Zebras are social animals that often form herds for protection against predators.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "9";
+                        TriviaTextInfo.text = "Each zebra's stripe pattern is unique, much like human fingerprints.";
                         break;
                 }
                 break;
@@ -1378,13 +1378,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "10";
+                        TriviaTextInfo.text = "Crabs have a hard exoskeleton that protects their body and provides structural support.";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "11";
+                        TriviaTextInfo.text = "Crabs have the ability to regenerate lost limbs if they are damaged or severed.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "12";
+                        TriviaTextInfo.text = "Crabs are known for their distinctive sideways or crabwise walking.";
                         break;
                 }
                 break;
@@ -1392,13 +1392,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "13";
+                        TriviaTextInfo.text = "Piranhas are well-known for their sharp, interlocking teeth, which they use to rip apart prey.";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "14";
+                        TriviaTextInfo.text = "Piranhas are primarily found in the rivers and tributaries of the Amazon Basin in South America.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "15";
+                        TriviaTextInfo.text = "Piranhas often hunt in groups, which can make them more effective predators.";
                         break;
                 }
                 break;
@@ -1406,13 +1406,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "16";
+                        TriviaTextInfo.text = "Koi fish, particularly the brightly colored varieties, have deep cultural and symbolic significance in Japan.";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "17";
+                        TriviaTextInfo.text = "Koi have a relatively long lifespan compared to many other fish.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "18";
+                        TriviaTextInfo.text = "Koi come in a wide range of color varieties, including red, orange, yellow, blue, black, and white.";
                         break;
                 }
                 break;
@@ -1420,13 +1420,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "19";
+                        TriviaTextInfo.text = "Ducks have a special gland near their tails called the uropygial gland that produces oil.";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "20";
+                        TriviaTextInfo.text = "Ducks have a varied diet and are omnivorous, eating aquatic plants, small fish, insects, and other small organisms.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "21";
+                        TriviaTextInfo.text = "There are over 120 different species of ducks, each with unique characteristics and behaviors.";
                         break;
                 }
                 break;
@@ -1434,13 +1434,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "22";
+                        TriviaTextInfo.text = "The structure of owl eyes allows them to see well in low light, making them skilled nocturnal hunters.";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "23";
+                        TriviaTextInfo.text = "Despite their often stoic appearance, owls can exhibit a wide range of facial expressions, from curious to fierce.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "24";
+                        TriviaTextInfo.text = "The heart-shaped facial disk of barn owls helps channel sound to their ears, making them exceptional hunters.";
                         break;
                 }
                 break;
@@ -1448,13 +1448,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "25";
+                        TriviaTextInfo.text = "Pigeons are known for forming strong, monogamous pair bonds. Mated pairs often stay together for life.";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "26";
+                        TriviaTextInfo.text = "Pigeons are known for their distinctive cooing sounds, and their calls can vary among different breeds.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "27";
+                        TriviaTextInfo.text = "Pigeons have cultural and symbolic significance in various societies, often representing peace and love.";
                         break;
                 }
                 break;
@@ -1462,13 +1462,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "28";
+                        TriviaTextInfo.text = "Camels are often called ships of the desert because of their remarkable ability to store water.";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "29";
+                        TriviaTextInfo.text = "Camels can live for up to 40 years, depending on their care and environment.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "30";
+                        TriviaTextInfo.text = "Camels have cultural importance in many societies, particularly in regions where they are essential for daily life.";
                         break;
                 }
                 break;
@@ -1476,13 +1476,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "31";
+                        TriviaTextInfo.text = "Elephants are known for their remarkable memory.";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "32";
+                        TriviaTextInfo.text = "Adult African elephants can weigh up to 14,000 pounds (6,350 kg).";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "33";
+                        TriviaTextInfo.text = "Some elephant populations have been observed using tools, such as sticks, to scratch themselves or reach food.";
                         break;
                 }
                 break;
@@ -1490,13 +1490,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "34";
+                        TriviaTextInfo.text = "Seagulls are highly adaptable and can thrive in various environments, from coastal areas to urban settings.";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "35";
+                        TriviaTextInfo.text = "Seagulls often gather in flocks, particularly when searching for food or resting.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "36";
+                        TriviaTextInfo.text = "Seagulls are known for their distinctive and often loud calls, which can vary among different species.";
                         break;
                 }
                 break;
@@ -1504,13 +1504,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "37";
+                        TriviaTextInfo.text = "Bears are known for their ability to hibernate during the winter months.";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "38";
+                        TriviaTextInfo.text = "In the wild, bears have varied lifespans depending on their species. Some can live up to 20-30 years or more in captivity.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "39";
+                        TriviaTextInfo.text = "Some bears can recognize themselves in a mirror.";
                         break;
                 }
                 break;
@@ -1518,13 +1518,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "40";
+                        TriviaTextInfo.text = "Rhinoceroses are known for their thick, tough skin, which can be as much as 1.5 inches (3.8 cm) thick.";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "41";
+                        TriviaTextInfo.text = "This skin helps protect them from thorns, branches, and insect bites.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "42";
+                        TriviaTextInfo.text = "Rhinoceroses have ancient ancestors and share a distant common lineage with horses and tapirs.";
                         break;
                 }
                 break;
@@ -1532,13 +1532,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "43";
+                        TriviaTextInfo.text = "There are over 1,400 species of bats, making them one of the most diverse mammalian orders.";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "44";
+                        TriviaTextInfo.text = "Bats emit high-pitched sounds and listen for the echoes to determine the location and shape of objects.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "45";
+                        TriviaTextInfo.text = "Bats are known for their relatively long lifespans, with some species living up to 30 years or more in the wild.";
                         break;
                 }
                 break;
@@ -1546,13 +1546,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "46";
+                        TriviaTextInfo.text = "Crocodiles are ancient reptiles that have been around for millions of years. ";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "47";
+                        TriviaTextInfo.text = "Crocodiles can sprint at speeds of up to 10 miles per hour (16 kilometers per hour) on land.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "48";
+                        TriviaTextInfo.text = "Crocodiles have been on Earth for over 200 million years";
                         break;
                 }
                 break;
@@ -1560,13 +1560,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "49";
+                        TriviaTextInfo.text = "There are over 90 species of deer, including the white-tailed deer, red deer, and reindeer.";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "50";
+                        TriviaTextInfo.text = "Deer are herbivores, primarily feeding on plants, leaves, twigs, and grasses.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "51";
+                        TriviaTextInfo.text = "Deer have excellent senses, including keen hearing and a strong sense of smell, which help them detect predators.";
                         break;
                 }
                 break;
@@ -1574,13 +1574,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "52";
+                        TriviaTextInfo.text = "Octopuses are considered one of the most intelligent invertebrates.";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "53";
+                        TriviaTextInfo.text = "Most octopus species have relatively short lifespans, typically living only a few years.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "54";
+                        TriviaTextInfo.text = "Octopuses have three hearts, one for pumping blood to the body and two for sending it to the gills.";
                         break;
                 }
                 break;
@@ -1588,13 +1588,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "55";
+                        TriviaTextInfo.text = "Sharks are ancient creatures that have been around for over 400 million years";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "56";
+                        TriviaTextInfo.text = "Shark attacks on humans are rare, and most shark species are not interested in humans as prey.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "57";
+                        TriviaTextInfo.text = "Sharks can go through thousands of teeth in their lifetime. Their teeth are continuously replaced.";
                         break;
                 }
                 break;
@@ -1602,13 +1602,13 @@ public class FTA_GameManager : MonoBehaviour
                 switch (randomNum)
                 {
                     case 0:
-                        TriviaTextInfo.text = "58";
+                        TriviaTextInfo.text = "Horses are known for their speed, and thoroughbred racehorses can reach speeds of over 40 miles per hour (65 km/h).";
                         break;
                     case 1:
-                        TriviaTextInfo.text = "59";
+                        TriviaTextInfo.text = "Horses have played a crucial role in human history, from transportation to agriculture and warfare.";
                         break;
                     case 2:
-                        TriviaTextInfo.text = "60";
+                        TriviaTextInfo.text = "The average lifespan of a horse is around 25-30 years, though some have been known to live well into their 40s.";
                         break;
                 }
                 break;

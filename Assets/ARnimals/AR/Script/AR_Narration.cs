@@ -81,19 +81,18 @@ public class AR_Narration : MonoBehaviour
                 items.SetActive(false);
             }
         }
-        else if (!audiomanager.guideSource.isPlaying && !isNarrationActive && hideNarrateCanvas)
-        {
-            NarrateCanvas.SetActive(false);
-            foreach (GameObject items in GameObjectsToHideARNarration)
-            {
-                items.SetActive(true);
-            }
-        }
 
         if(!audiomanager.guideSource.isPlaying && isNarrationActive && !isNarrationPaused)
         {
             isNarrationActive = false;
             audiomanager.musicSource.UnPause();
+
+            NarrateCanvas.SetActive(false);
+            foreach (GameObject items in GameObjectsToHideARNarration)
+            {
+                items.SetActive(true);
+            }
+
         }
 
     }
@@ -114,33 +113,39 @@ public class AR_Narration : MonoBehaviour
     }
     public void NarrateBtn()
     {
-        if(isNarrationActive)
+
+        animalIndex = _arPlacementScript.getAnimalIndex();
+        isNarrationActive = true;
+        hideNarrateCanvas = false;
+
+        if (guide_chosen == "boy_guide")
         {
-            isNarrationActive = false;
-            hideNarrateCanvas = true;
-            try { audiomanager.guideSource.Stop(); } catch { }
+            try { audiomanager.PlayGuide(audiomanager.AR_Narration_Patrick[animalIndex]);  } catch { }
+
+
         }
-        else
+        else if (guide_chosen == "girl_guide")
         {
-            animalIndex = _arPlacementScript.getAnimalIndex();
-            isNarrationActive = true;
-            hideNarrateCanvas = false;
-
-            if (guide_chosen == "boy_guide")
-            {
-                try { audiomanager.PlayGuide(audiomanager.AR_Narration_Patrick[animalIndex]);  } catch { }
+            try { audiomanager.PlayGuide(audiomanager.AR_Narration_Sandy[animalIndex]); } catch { }
 
 
-            }
-            else if (guide_chosen == "girl_guide")
-            {
-                try { audiomanager.PlayGuide(audiomanager.AR_Narration_Sandy[animalIndex]); } catch { }
-
-
-            }
+        }
             
-        }
 
+    }
+
+    public void exitNarration()
+    {
+        isNarrationActive = false;
+        audiomanager.musicSource.UnPause();
+
+        try { audiomanager.guideSource.Stop(); } catch { }
+
+        NarrateCanvas.SetActive(false);
+        foreach (GameObject items in GameObjectsToHideARNarration)
+        {
+            items.SetActive(true);
+        }
     }
 
 

@@ -171,11 +171,23 @@ public class animalSelectorGuide : MonoBehaviour
         _TouchToNextASGuideScript.setPageCtr(1);
         stopGuideVoice();
         disableAllGuideGameObjects();
+        selectAnimal_txt.SetActive(true);
         animalSelectGuide.SetActive(false);
         if (!loaddata.AnimalSelectTutorialDone)
         {
             loaddata.AnimalSelectTutorialDone = true;
             SaveManager.Save(loaddata);
+        }
+
+        tryAnimalAR();
+    }
+
+    public void tryAnimalAR()
+    {
+        if (StateNameController.isTryAnimalARClicked)
+        {
+            _animalSelectionScript.selectedAnimal(StateNameController.tryAnimalAnimalIndex);
+            StateNameController.isTryAnimalARClicked = false;
         }
     }
     public void GuideBack()

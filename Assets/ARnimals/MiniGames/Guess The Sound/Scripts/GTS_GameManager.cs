@@ -283,21 +283,27 @@ public class GTS_GameManager : MonoBehaviour
         {
             case 1:
                 currentStar = existingSO.GTS_lvl1_star;
+                ARanimalIndex = 14;
                 break;
             case 2:
                 currentStar = existingSO.GTS_lvl2_star;
+                ARanimalIndex = 2;
                 break;
             case 3:
                 currentStar = existingSO.GTS_lvl3_star;
+                ARanimalIndex = 0; 
                 break;
             case 4:
                 currentStar = existingSO.GTS_lvl4_star;
+                ARanimalIndex = 9;
                 break;
             case 5:
                 currentStar = existingSO.GTS_lvl5_star;
+                ARanimalIndex = 3;
                 break;
         }
     }
+
     public Sprite[] animalImgToUnlockSprite;
     public Image animalImg;
     public GameObject checkImg;
@@ -944,7 +950,7 @@ public class GTS_GameManager : MonoBehaviour
         }
 
     }
-
+    
     public void goToAnimalInfo()
     {
         audioManager.musicSource.Stop();
@@ -1018,10 +1024,12 @@ public class GTS_GameManager : MonoBehaviour
         confirmGoToARExp.SetActive(false);
     }
 
-
+    int ARanimalIndex;
     public void goToAR()
     {
         audioManager.musicSource.Stop();
+        StateNameController.tryAnimalAnimalIndex = ARanimalIndex;
+        StateNameController.isTryAnimalARClicked = true;
         SceneManager.LoadScene("Animal Selector AR");
     }
 

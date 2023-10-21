@@ -25,8 +25,11 @@ public class buttonScripts : MonoBehaviour
 
     public GameObject animalBook;
 
+    AudioManager audioManager;
+
     private void Start()
     {
+        try { audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); } catch { }
         OptionsUI.SetActive(false);
         GalleryVidUI.SetActive(false);
         GalleryImgUI.SetActive(false);
@@ -81,6 +84,7 @@ public class buttonScripts : MonoBehaviour
     }
     public void returnToAnimalSelectBTN()
     {
+        try { audioManager.guideSource.Stop(); }catch { }
         SceneManager.LoadScene("Animal Selector AR");
     }
 

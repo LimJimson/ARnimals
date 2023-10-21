@@ -59,8 +59,17 @@ public class animalSelection : MonoBehaviour
         AnimalNameTxt.text = "";
         disableAllAnimalImgs();
         StartCoroutine(showTransitionAfterDelay());
+
+        if (StateNameController.isTryAnimalARClicked && StateNameController.animalSelectGuide)
+        {
+            selectedAnimal(StateNameController.tryAnimalAnimalIndex);
+        }
     }
 
+    private void OnDisable()
+    {
+        StateNameController.isTryAnimalARClicked = false;
+    }
     private void Update() 
     {
         checkIfTransitionIsDone();    

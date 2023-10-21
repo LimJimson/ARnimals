@@ -17,6 +17,7 @@ public class GTS_LevelSelect : MonoBehaviour
     int currentStars;
     int unlockedLvl;
 
+    public MiniGameButtonScripts _minigamebuttonscript;
     AudioManager audioManager;
     void Start()
     {
@@ -186,7 +187,7 @@ public class GTS_LevelSelect : MonoBehaviour
                 unlockAnimalImg.sprite = unlockAnimalImgSprites[0];
                 currentStars = loadedData.GTS_lvl1_star;
                 animalName.text = "Rhinoceros";
-
+                _minigamebuttonscript.setIndex(14);
                 // unlockLevelBoard
                 levelUnlockGO.SetActive(true);
                 allLevelsUnlockedTxt.gameObject.SetActive(false);
@@ -200,7 +201,7 @@ public class GTS_LevelSelect : MonoBehaviour
                 currentStars = loadedData.GTS_lvl2_star;
                 unlockAnimalImg.sprite = unlockAnimalImgSprites[1];
                 animalName.text = "Camel";
-
+                _minigamebuttonscript.setIndex(2);
                 // unlockLevelBoard
                 levelUnlockGO.SetActive(true);
                 allLevelsUnlockedTxt.gameObject.SetActive(false);
@@ -214,6 +215,7 @@ public class GTS_LevelSelect : MonoBehaviour
                 levelSelectedImg.sprite = levelSpriteContainer[2];
                 unlockAnimalImg.sprite = unlockAnimalImgSprites[2];
                 currentStars = loadedData.GTS_lvl3_star;
+                _minigamebuttonscript.setIndex(0);
                 animalName.text = "Bat";
 
                 // unlockLevelBoard
@@ -229,7 +231,7 @@ public class GTS_LevelSelect : MonoBehaviour
                 unlockAnimalImg.sprite = unlockAnimalImgSprites[3];
                 currentStars = loadedData.GTS_lvl4_star;
                 animalName.text = "Koi";
-
+                _minigamebuttonscript.setIndex(9);
                 // unlockLevelBoard
                 levelUnlockGO.SetActive(true);
                 allLevelsUnlockedTxt.gameObject.SetActive(false);
@@ -244,7 +246,7 @@ public class GTS_LevelSelect : MonoBehaviour
                 unlockAnimalImg.sprite = unlockAnimalImgSprites[4];
                 currentStars = loadedData.GTS_lvl5_star;
                 animalName.text = "Crab";
-
+                _minigamebuttonscript.setIndex(3);
 
                 // unlockLevelBoard
                 levelUnlockGO.SetActive(false);

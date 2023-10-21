@@ -102,6 +102,7 @@ public class TouchToNextASGuide : MonoBehaviour, IPointerDownHandler
             selectAnimal_txt.gameObject.SetActive(true);
             startBtnNoHighlight.gameObject.SetActive(false);
             animalExampleNoHighlight.gameObject.SetActive(false);
+            _animalSelectorGuideScript.tryAnimalAR();
 
             if (!existingSO.AnimalSelectTutorialDone)
             {

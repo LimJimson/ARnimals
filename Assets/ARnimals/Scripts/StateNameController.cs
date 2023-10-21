@@ -28,4 +28,7 @@ public class StateNameController : MonoBehaviour
 
     public static int failedAnimal;
     public static bool isGTSExploreClicked;
+
+    public static int tryAnimalAnimalIndex;
+    public static bool isTryAnimalARClicked;
 }

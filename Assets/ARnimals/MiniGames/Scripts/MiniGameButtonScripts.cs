@@ -58,10 +58,17 @@ public class MiniGameButtonScripts : MonoBehaviour
 		buttonCode = "ModeSelect";
 		transitionToOutImg.gameObject.SetActive(true);
     }
+    int animalIndex;
+    public void setIndex (int index)
+    {
+        animalIndex = index;
+    }
 
     public void goToAr()
     {
 		buttonCode = "Animal Selector AR";
+        StateNameController.tryAnimalAnimalIndex = animalIndex;
+        StateNameController.isTryAnimalARClicked = true;
         transitionToOutImg.gameObject.SetActive(true);
     }
 	

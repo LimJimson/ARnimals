@@ -62,14 +62,16 @@ public class CTF_LevelManager : MonoBehaviour
 
     private string buttonCode;
 
+    private bool transitionInDone = false;
+
+    private int ARanimalIndex;
+
     private void Start()
     {		
         so = SaveManager.Load();
 		selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel", "1");
 		checkIfLevelIsUnlocked();
 		checkStar();
-		plainBlackPanel.SetActive(true);
-        StartCoroutine(showTransitionAfterDelay());
 		
 		try
 		{
@@ -92,6 +94,11 @@ public class CTF_LevelManager : MonoBehaviour
 
     private void Update() 
     {
+        if (!transitionInDone) 
+        {
+            StartCoroutine(showTransitionAfterDelay());
+            transitionInDone = true;
+        }
         checkIfTransitionIsDone();
     }
 	
@@ -134,7 +141,8 @@ public class CTF_LevelManager : MonoBehaviour
 	
 	private IEnumerator showTransitionAfterDelay() 
 	{
-		yield return new WaitForSeconds(0.05f);
+        plainBlackPanel.SetActive(true);
+		yield return new WaitForSeconds(0.2f);
 		plainBlackPanel.SetActive(false);
 		transitionToIn.SetActive(true);
 	}
@@ -209,6 +217,7 @@ public class CTF_LevelManager : MonoBehaviour
     {
         selectedAnimal = "Elephant";
         selectedLevel = "1";
+        ARanimalIndex = 11;
         checkStar();
         lvlToUnlockImg.sprite = lvlToUnlockSprites[0];
         animalToUnlockName.text = "Octopus";
@@ -219,6 +228,7 @@ public class CTF_LevelManager : MonoBehaviour
     {
         selectedAnimal = "Pigeon";
         selectedLevel = "2";
+        ARanimalIndex = 5;
         checkStar();
         lvlToUnlockImg.sprite = lvlToUnlockSprites[1];
         animalToUnlockName.text = "Deer";
@@ -229,6 +239,7 @@ public class CTF_LevelManager : MonoBehaviour
     {
         selectedAnimal = "Koi";
         selectedLevel = "3";
+        ARanimalIndex = 15;
         animalToUnlockName.text = "Seagull";
         checkStar();
         lvlToUnlockImg.sprite = lvlToUnlockSprites[2];
@@ -239,6 +250,7 @@ public class CTF_LevelManager : MonoBehaviour
     {
         selectedAnimal = "Camel";
         selectedLevel = "4";
+        ARanimalIndex = 16;
         checkStar();
         lvlToUnlockImg.sprite = lvlToUnlockSprites[3];
         animalToUnlockName.text = "Shark";
@@ -249,6 +261,7 @@ public class CTF_LevelManager : MonoBehaviour
     {
         selectedAnimal = "Crab";
         selectedLevel = "5";
+        ARanimalIndex = 6;
         checkStar();
         allLevelsUnlockGO.SetActive(true);
         starsToUnlockGO.SetActive(false);
@@ -310,6 +323,8 @@ public class CTF_LevelManager : MonoBehaviour
 	public void ConfirmationToARYes() 
 	{
 		buttonCode = "tryAnimalButton";
+        StateNameController.tryAnimalAnimalIndex = ARanimalIndex;
+        StateNameController.isTryAnimalARClicked = true;
 		transitionToOut.SetActive(true);
 	}
 	public void ConfirmationToARNo() 

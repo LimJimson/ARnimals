@@ -100,6 +100,10 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private GameObject plainBlackPanel;
     [SerializeField] private Sprite[] powerUpSprites;
     private string buttonCode;
+
+    private int ARanimalIndex;
+
+    private bool transitionInDone = false;
 	
     private void Awake()
     {
@@ -107,8 +111,6 @@ public class CTF_GameManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
-
-        plainBlackPanel.SetActive(true);
     }
 
     private void Start() 
@@ -128,11 +130,18 @@ public class CTF_GameManager : MonoBehaviour
         checkIfTransitionIsDone();
         enablePowerUpState();
         removePowerUpState();
+
+        if (!transitionInDone) 
+        {
+            StartCoroutine(showTransitionAfterDelay());
+            transitionInDone = true;
+        }
     }
 
     private IEnumerator showTransitionAfterDelay() 
     {
-        yield return new WaitForSeconds(0.1f);
+        plainBlackPanel.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
         plainBlackPanel.SetActive(false);
         transitionToIn.SetActive(true);
     }
@@ -749,22 +758,27 @@ public class CTF_GameManager : MonoBehaviour
                     case "1":
                         existingSo.isOctopusUnlock = true;
                         animalToUnlockName.text = "Octopus";
+                        ARanimalIndex = 11;
                         break;
                     case "2":
                         existingSo.isDeerUnlock = true;
                         animalToUnlockName.text = "Deer";
+                        ARanimalIndex = 5;
                         break;
                     case "3":
                         existingSo.isSeagullUnlock = true;
                         animalToUnlockName.text = "Seagull";
+                        ARanimalIndex = 15;
                         break;
                     case "4":
                         existingSo.isSharkUnlock = true;
                         animalToUnlockName.text = "Shark";
+                        ARanimalIndex = 16;
                         break;
                     case "5":
                         existingSo.isDuckUnlock = true;
                         animalToUnlockName.text = "Duck";
+                        ARanimalIndex = 6;
                         playAgainTxt.text = "Are you sure you want to <color=yellow>RE-PLAY</color> this level again? There will be no rewards from now on";
                         break;
                 }
@@ -1022,6 +1036,8 @@ public class CTF_GameManager : MonoBehaviour
 	public void ConfirmationToARYes() 
 	{
 		buttonCode = "tryAnimalButton";
+        StateNameController.tryAnimalAnimalIndex = ARanimalIndex;
+        StateNameController.isTryAnimalARClicked = true;
 		transitionToOut.SetActive(true);
 	}
 	

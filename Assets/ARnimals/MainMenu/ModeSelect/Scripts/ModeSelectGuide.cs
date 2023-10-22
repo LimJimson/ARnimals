@@ -41,6 +41,8 @@ public class ModeSelectGuide : MonoBehaviour
 	
 	private string buttonCode;
 
+    private bool transitionInDone = false;
+
     AudioManager audioManager;
     void Start()
     {
@@ -70,13 +72,19 @@ public class ModeSelectGuide : MonoBehaviour
             StateNameController.modeSelectGuide = true;
         }
 		
-		transitionToInImg.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
         showDialogs();
+
+        if (!transitionInDone) 
+        {
+            transitionToInImg.gameObject.SetActive(true);
+            transitionInDone = true;
+        }
+
 		checkIfTransitionIsDone();
     }
     public void guideVoiceOver()

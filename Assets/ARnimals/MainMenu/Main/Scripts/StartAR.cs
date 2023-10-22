@@ -28,6 +28,8 @@ public class StartAR : MonoBehaviour
 	
 	private string buttonCode;
 
+    private bool transitionInDone = false;
+
     public MainMenuSettingsGuide mainMenuSettingsGuideScript;
     bool isGuideFinished;
 
@@ -68,19 +70,22 @@ public class StartAR : MonoBehaviour
         ConfirmGuideChange.gameObject.SetActive(false);
         ConfirmResetGame.gameObject.SetActive(false);
         ConfirmQuit.SetActive(false);
-	
-		StartCoroutine(showTransitionAfterDelay());
     }
 	
 	private void Update() 
 	{
+        if (!transitionInDone) 
+        {
+            StartCoroutine(showTransitionAfterDelay());
+            transitionInDone = true;
+        }
 		checkIfTransitionIsDone();
 	}
 	
 	private IEnumerator showTransitionAfterDelay() 
 	{
 		plainBlackPanel.SetActive(true);
-		yield return new WaitForSeconds(0.1f);
+		yield return new WaitForSeconds(0.2f);
 		plainBlackPanel.SetActive(false);
 		transitionToInImg.gameObject.SetActive(true);
 	}

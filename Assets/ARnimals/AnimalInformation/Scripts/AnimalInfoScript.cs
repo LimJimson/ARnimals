@@ -40,6 +40,8 @@ public class AnimalInfoScript : MonoBehaviour
 	
 	private string buttonCode;
 
+    private bool transitionInDone = false;
+
     private void Start()
     {
         try
@@ -62,7 +64,6 @@ public class AnimalInfoScript : MonoBehaviour
         isExploreBtnClicked = StateNameController.isGTSExploreClicked;
         
         checkIfGTS_ExploreBtnClicked();
-        StartCoroutine(showTransitionAfterDelay());
     }
     private void OnDisable()
     {
@@ -97,6 +98,13 @@ public class AnimalInfoScript : MonoBehaviour
     }
     private void Update()
     {
+
+        if (!transitionInDone) 
+        {
+            StartCoroutine(showTransitionAfterDelay());
+            transitionInDone = true;
+        }
+
         checkIfVideoIsPlaying();
         checkIfPlayerIsPlaying();
 		DisableToggleHideButtonIfNotFullScreen();
@@ -124,7 +132,7 @@ public class AnimalInfoScript : MonoBehaviour
     private IEnumerator showTransitionAfterDelay() 
 	{
 		plainBlackPanel.SetActive(true);
-		yield return new WaitForSeconds(0.1f);
+		yield return new WaitForSeconds(0.2f);
 		plainBlackPanel.SetActive(false);
 		transitionToInImg.gameObject.SetActive(true);
 	}

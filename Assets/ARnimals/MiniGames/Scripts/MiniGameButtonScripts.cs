@@ -12,21 +12,22 @@ public class MiniGameButtonScripts : MonoBehaviour
 	
 	private string buttonCode;
 
-	
-	private void Start() 
-	{
-		StartCoroutine(showTransitionAfterDelay());
-	}
+	private bool transitionInDone = false;
 
 	private void Update() 
 	{
+        if (!transitionInDone) 
+        {
+            StartCoroutine(showTransitionAfterDelay());
+            transitionInDone = true;
+        }   
 		checkIfTransitionIsDone();
 	}
 
         private IEnumerator showTransitionAfterDelay() 
         {
             plainBlackPanel.SetActive(true);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
             plainBlackPanel.SetActive(false);
             transitionToInImg.gameObject.SetActive(true);
         }

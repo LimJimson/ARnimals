@@ -4,10 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using System.Linq;
-using static SaveObject.CTF_HighScore;
-using Unity.VisualScripting;
 using System.Collections.Generic;
-using UnityEditor.UIElements;
 
 public class CTF_GameManager : MonoBehaviour
 {
@@ -858,6 +855,7 @@ public class CTF_GameManager : MonoBehaviour
     public void confirmQuitYesButtonFunction()
     {
         confirmationQuitCanvas.SetActive(false);
+        audioManager.stopBGMusic();
         StartCoroutine(fadeSceneTransitions.FadeOut("CTF_LevelSelector"));
     }
 
@@ -916,7 +914,7 @@ public class CTF_GameManager : MonoBehaviour
                 ConfirmQuit();
                 break;
         }
-
+        audioManager.stopBGMusic();
         StartCoroutine(fadeSceneTransitions.FadeOut("CTF_Game"));
     }
 
@@ -925,6 +923,7 @@ public class CTF_GameManager : MonoBehaviour
         confirmationRetryCanvas.SetActive(false);
         confirmationPlayAgainCanvas.SetActive(false);
 		gameOverCanvas.SetActive(false);
+        audioManager.stopBGMusic();
         StartCoroutine(fadeSceneTransitions.FadeOut("CTF_Game"));
     }
 
@@ -934,6 +933,7 @@ public class CTF_GameManager : MonoBehaviour
         confirmationPlayAgainCanvas.SetActive(false);
         levelCompleteCanvas.SetActive(false);
 		gameOverCanvas.SetActive(false);
+        audioManager.stopBGMusic();
         StartCoroutine(fadeSceneTransitions.FadeOut("CTF_LevelSelector"));
     }
 	
@@ -942,14 +942,6 @@ public class CTF_GameManager : MonoBehaviour
 		confirmationPlayAgainCanvas.SetActive(false);
 		levelCompleteCanvas.SetActive(true);
 	}
-
-    private void quitTo(string sceneName) 
-    {
-        audioManager.stopBGMusic();
-        pauseManager.ResumeGame();
-        SceneManager.LoadScene(sceneName);
-    }
-
     public void helpButtonFunction() 
     {
 		audioManager.pauseBGMusic();
@@ -983,6 +975,7 @@ public class CTF_GameManager : MonoBehaviour
 	{
         StateNameController.tryAnimalAnimalIndex = ARanimalIndex;
         StateNameController.isTryAnimalARClicked = true;
+        audioManager.stopBGMusic();
 		StartCoroutine(fadeSceneTransitions.FadeOut("Animal Selector AR"));
 	}
 	

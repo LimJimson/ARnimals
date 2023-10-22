@@ -19,11 +19,6 @@ public class CTF_LevelManager : MonoBehaviour
     [SerializeField] private GameObject [] locks;
 
     [SerializeField] private Button backBtn;
-    [SerializeField] private GameObject transitionToOut;
-    [SerializeField] private Image transitionToOutImg;
-    [SerializeField] private GameObject transitionToIn;
-    [SerializeField] private Image transitionToInImg;
-	[SerializeField] private GameObject plainBlackPanel;
 
     [Header("Confirm Play")]
 
@@ -60,9 +55,7 @@ public class CTF_LevelManager : MonoBehaviour
     [SerializeField] private GameObject boyGuide;
     [SerializeField] private GameObject girlGuide;
 
-    private string buttonCode;
-
-    private bool transitionInDone = false;
+    [SerializeField] private FadeSceneTransitions fadeScene;
 
     private int ARanimalIndex;
 
@@ -89,19 +82,17 @@ public class CTF_LevelManager : MonoBehaviour
 		{
 			Debug.Log("No AudioManager");
 		}
-		
     }
 
     private void Update() 
     {
-        if (!transitionInDone) 
-        {
-            StartCoroutine(showTransitionAfterDelay());
-            transitionInDone = true;
-        }
-        checkIfTransitionIsDone();
-    }
-	
+        // if (!transitionInDone) 
+        // {
+        //     StartCoroutine(showTransitionAfterDelay());
+        //     transitionInDone = true;
+        // }
+        // checkIfTransitionIsDone();
+    }	
 	private void checkIfLevelIsUnlocked() 
 	{
 		
@@ -139,41 +130,6 @@ public class CTF_LevelManager : MonoBehaviour
         }
 	}
 	
-	private IEnumerator showTransitionAfterDelay() 
-	{
-        plainBlackPanel.SetActive(true);
-		yield return new WaitForSeconds(0.2f);
-		plainBlackPanel.SetActive(false);
-		transitionToIn.SetActive(true);
-	}
-
-    private void checkIfTransitionIsDone() 
-    {
-
-        bool achievedImgPositionOut = transitionToOutImg.color.a >= 0.9999 && transitionToOutImg.color.a <= 1.0001;
-        bool achievedImgPositionIn = transitionToInImg.color.a >= -0.0001 && transitionToInImg.color.a <= 0.0001;
-
-        if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "levelButton") 
-        {
-            SceneManager.LoadScene("CTF_Game");
-        }
-        else if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "backButton")
-        {
-            Debug.Log("Back animation");
-            SceneManager.LoadScene("MiniGamesSelect");
-        }
-		else if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "tryAnimalButton")
-        {
-            Debug.Log("Back animation");
-            SceneManager.LoadScene("Animal Selector AR");
-        }
-
-        if (transitionToIn.activeSelf && achievedImgPositionIn) 
-        {
-            transitionToIn.SetActive(false);
-        }
-    }
-
     public void checkStar() 
     { 
 
@@ -273,8 +229,7 @@ public class CTF_LevelManager : MonoBehaviour
 
     public void GoBackToMiniGamesSelection() 
     {
-        buttonCode = "backButton";
-        transitionToOut.SetActive(true);
+        StartCoroutine(fadeScene.FadeOut("MiniGamesSelect"));
     }
 
     public void closeButtonFunction() 
@@ -297,9 +252,8 @@ public class CTF_LevelManager : MonoBehaviour
         PlayerPrefs.SetString("CTF_SelectedAnimal", selectedAnimal);
         PlayerPrefs.SetString("CTF_SelectedLevel", selectedLevel);
         
-        buttonCode = "levelButton";
 		playConfirmGameObject.SetActive(false);
-        transitionToOut.SetActive(true);
+        StartCoroutine(fadeScene.FadeOut("CTF_Game"));
     }
 	
 	public void TryAnimalBtnFunction() 
@@ -322,10 +276,9 @@ public class CTF_LevelManager : MonoBehaviour
 	}
 	public void ConfirmationToARYes() 
 	{
-		buttonCode = "tryAnimalButton";
         StateNameController.tryAnimalAnimalIndex = ARanimalIndex;
         StateNameController.isTryAnimalARClicked = true;
-		transitionToOut.SetActive(true);
+		StartCoroutine(fadeScene.FadeOut("Animal Selector AR"));
 	}
 	public void ConfirmationToARNo() 
 	{

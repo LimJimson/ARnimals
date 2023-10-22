@@ -3,7 +3,6 @@ using UnityEngine;
 public class CTF_PauseManager : MonoBehaviour
 {
     [SerializeField] private bool isGamePaused = false;
-    [SerializeField] private CTF_GameManager gameManager;
     public void PauseGame()
     {
         isGamePaused = true;

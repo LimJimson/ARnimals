@@ -6,58 +6,30 @@ using UnityEngine.UI;
 
 public class MiniGameButtonScripts : MonoBehaviour
 {
-    [SerializeField] private Image transitionToOutImg;
-    [SerializeField] private Image transitionToInImg;
-    [SerializeField] private GameObject plainBlackPanel;
-	
-	private string buttonCode;
-
-	private bool transitionInDone = false;
-
-	private void Update() 
-	{
-        if (!transitionInDone) 
-        {
-            StartCoroutine(showTransitionAfterDelay());
-            transitionInDone = true;
-        }   
-		checkIfTransitionIsDone();
-	}
-
-        private IEnumerator showTransitionAfterDelay() 
-        {
-            plainBlackPanel.SetActive(true);
-            yield return new WaitForSeconds(0.2f);
-            plainBlackPanel.SetActive(false);
-            transitionToInImg.gameObject.SetActive(true);
-        }
+    [SerializeField] private FadeSceneTransitions fadeScene;
+    
 	
     public void goToMiniGamesSelect()
     {
-		buttonCode = "MiniGamesSelect";
-        transitionToOutImg.gameObject.SetActive(true);
+        StartCoroutine(fadeScene.FadeOut("MiniGamesSelect"));
     }
 
     public void goToFindTheAnimal()
     {
-		buttonCode = "FTA";
-		transitionToOutImg.gameObject.SetActive(true);
+		StartCoroutine(fadeScene.FadeOut("FTA_lvlSelect"));
     }
     public void goToCatchTheFood()
     {
-		buttonCode = "CTF";
-		transitionToOutImg.gameObject.SetActive(true);
+		StartCoroutine(fadeScene.FadeOut("CTF_LevelSelector"));
     }
     public void goToGuessTheAnimalFromSound()
     {
-		buttonCode = "GTAFS";
-		transitionToOutImg.gameObject.SetActive(true);
+		StartCoroutine(fadeScene.FadeOut("GTAFS_lvlSelect"));
     }
 
     public void goToModeSelect()
     {
-		buttonCode = "ModeSelect";
-		transitionToOutImg.gameObject.SetActive(true);
+		StartCoroutine(fadeScene.FadeOut("ModeSelect"));
     }
     int animalIndex;
     public void setIndex (int index)
@@ -67,46 +39,8 @@ public class MiniGameButtonScripts : MonoBehaviour
 
     public void goToAr()
     {
-		buttonCode = "Animal Selector AR";
         StateNameController.tryAnimalAnimalIndex = animalIndex;
         StateNameController.isTryAnimalARClicked = true;
-        transitionToOutImg.gameObject.SetActive(true);
-    }
-	
-	private void checkIfTransitionIsDone() 
-    {
-
-        bool achievedImgPositionOut = transitionToOutImg.color.a >= 0.9999 && transitionToOutImg.color.a <= 1.0001;
-        bool achievedImgPositionIn = transitionToInImg.color.a >= -0.0001 && transitionToInImg.color.a <= 0.0001;
-
-        if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "FTA") 
-        {
-            SceneManager.LoadScene("FTA_lvlSelect");
-        }
-        else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "CTF")
-        {
-            SceneManager.LoadScene("CTF_LevelSelector");
-        }
-		else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "GTAFS")
-        {
-            SceneManager.LoadScene("GTAFS_lvlSelect");
-        }
-		else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "ModeSelect")
-		{
-			SceneManager.LoadScene("ModeSelect");
-		}
-		else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "MiniGamesSelect")
-		{
-			SceneManager.LoadScene("MiniGamesSelect");
-		}
-		else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "Animal Selector AR")
-		{
-			SceneManager.LoadScene("Animal Selector AR");
-		}
-
-        if (transitionToInImg.gameObject.activeSelf && achievedImgPositionIn) 
-        {
-            transitionToInImg.gameObject.SetActive(false);
-        }
+        StartCoroutine(fadeScene.FadeOut("Animal Selector AR"));
     }
 }

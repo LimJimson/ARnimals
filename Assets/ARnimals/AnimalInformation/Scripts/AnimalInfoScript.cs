@@ -33,14 +33,7 @@ public class AnimalInfoScript : MonoBehaviour
     AudioManager audioManager;
     public GameObject backAndGuideBtns;
 
-    [Header("Fade Transition")]
-	[SerializeField] private Image transitionToOutImg;
-    [SerializeField] private Image transitionToInImg;
-	[SerializeField] private GameObject plainBlackPanel;
-	
-	private string buttonCode;
-
-    private bool transitionInDone = false;
+    [SerializeField] private FadeSceneTransitions fadeScene;
 
     private void Start()
     {
@@ -98,44 +91,11 @@ public class AnimalInfoScript : MonoBehaviour
     }
     private void Update()
     {
-
-        if (!transitionInDone) 
-        {
-            StartCoroutine(showTransitionAfterDelay());
-            transitionInDone = true;
-        }
-
         checkIfVideoIsPlaying();
         checkIfPlayerIsPlaying();
 		DisableToggleHideButtonIfNotFullScreen();
 		delayTimerForHidingButtons();
-        checkIfTransitionIsDone();
     }
-
-    private void checkIfTransitionIsDone() 
-    {
-
-        bool achievedImgPositionOut = transitionToOutImg.color.a >= 0.9999 && transitionToOutImg.color.a <= 1.0001;
-        bool achievedImgPositionIn = transitionToInImg.color.a >= -0.0001 && transitionToInImg.color.a <= 0.0001;
-
-        if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "MainMenu") 
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
-
-        if (transitionToInImg.gameObject.activeSelf && achievedImgPositionIn) 
-        {
-            transitionToInImg.gameObject.SetActive(false);
-        }
-    }
-
-    private IEnumerator showTransitionAfterDelay() 
-	{
-		plainBlackPanel.SetActive(true);
-		yield return new WaitForSeconds(0.2f);
-		plainBlackPanel.SetActive(false);
-		transitionToInImg.gameObject.SetActive(true);
-	}
 
     void checkIfGTS_ExploreBtnClicked()
     {
@@ -235,8 +195,7 @@ public class AnimalInfoScript : MonoBehaviour
 
     public void goToMainMenu()
     {
-        buttonCode = "MainMenu";
-        transitionToOutImg.gameObject.SetActive(true);
+        StartCoroutine(fadeScene.FadeOut("MainMenu"));
     }
     public void showAnimalInfo()
     {

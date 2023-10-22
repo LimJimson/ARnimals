@@ -22,16 +22,9 @@ public class FTA_LevelManager : MonoBehaviour
 
     SaveObject SaveARGuide;
 
+    [SerializeField] private FadeSceneTransitions fadeScene;
+
     string GuideARChosen;
-
-    [Header("Fade Transition")]
-	[SerializeField] private Image transitionToOutImg;
-    [SerializeField] private Image transitionToInImg;
-    [SerializeField] private GameObject plainBlackPanel;
-
-    private string buttonCode;
-
-    private bool transitionInDone = false;
 
     public void Start()
     {
@@ -57,50 +50,6 @@ public class FTA_LevelManager : MonoBehaviour
             Debug.Log("No AudioManager");
         }
     }
-
-    private void Update() 
-    {
-        if (!transitionInDone) 
-        {
-            StartCoroutine(showTransitionAfterDelay());
-            transitionInDone = true;
-        }
-        checkIfTransitionIsDone();
-    }
-
-        private IEnumerator showTransitionAfterDelay() 
-        {
-            plainBlackPanel.SetActive(true);
-            yield return new WaitForSeconds(0.2f);
-            plainBlackPanel.SetActive(false);
-            transitionToInImg.gameObject.SetActive(true);
-        }
-
-    private void checkIfTransitionIsDone() 
-    {
-
-        bool achievedImgPositionOut = transitionToOutImg.color.a >= 0.9999 && transitionToOutImg.color.a <= 1.0001;
-        bool achievedImgPositionIn = transitionToInImg.color.a >= -0.0001 && transitionToInImg.color.a <= 0.0001;
-
-        if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "MiniGamesSelect") 
-        {
-            SceneManager.LoadScene("MiniGamesSelect");
-        }
-        else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "Animal Selector AR") 
-        {
-            SceneManager.LoadScene("Animal Selector AR");
-        }
-        else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "FTA_Game") 
-        {
-            SceneManager.LoadScene("FTA_Game");
-        }
-
-        if (transitionToInImg.gameObject.activeSelf && achievedImgPositionIn) 
-        {
-            transitionToInImg.gameObject.SetActive(false);
-        }
-    }
-
     public void Level1isCLicked()
     {
         SelectedLevel = "1";
@@ -158,9 +107,8 @@ public class FTA_LevelManager : MonoBehaviour
     }
     public void LoadNextLevel()
     {
-        buttonCode = "FTA_Game";
         PlayerPrefs.SetString("FTA_SelectedLevel", SelectedLevel);
-        transitionToOutImg.gameObject.SetActive(true);
+        StartCoroutine(fadeScene.FadeOut("FTA_Game"));
         audioManager.musicSource.Stop();
         playConfirmGameObject.SetActive(false);
     }
@@ -252,8 +200,7 @@ public class FTA_LevelManager : MonoBehaviour
     }
     public void backButtonFTA()
     {
-        buttonCode = "MiniGamesSelect";
-        transitionToOutImg.gameObject.SetActive(true);
+        StartCoroutine(fadeScene.FadeOut("MiniGamesSelect"));
     }
 
     public GameObject GuideBoyARConfirm;
@@ -275,8 +222,7 @@ public class FTA_LevelManager : MonoBehaviour
     }
     public void ConfirmYesTryAnimalARButton()
     {
-        buttonCode = "Animal Selector AR"; 
-        transitionToOutImg.gameObject.SetActive(true);
+        StartCoroutine(fadeScene.FadeOut("Animal Selector AR"));
     }
     public void ConfirmNoTryAnimalARButton()
     {

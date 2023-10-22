@@ -7,6 +7,7 @@ using System.Linq;
 using static SaveObject.CTF_HighScore;
 using Unity.VisualScripting;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 
 public class CTF_GameManager : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private CTF_TutorialManager tutorialManager;
     [SerializeField] private CTF_HighScoreManager highScoreManager;
     [SerializeField] private CTF_AudioManager audioManager;
+    [SerializeField] private FadeSceneTransitions fadeSceneTransitions;
 
     [Header("Game Objects Needed")]
 
@@ -95,16 +97,10 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI triviaTxt;
 	[SerializeField] private GameObject transitionToOut;
     [SerializeField] private Image transitionToOutImg;
-    [SerializeField] private GameObject transitionToIn;
-    [SerializeField] private Image transitionToInImg;
-    [SerializeField] private GameObject plainBlackPanel;
     [SerializeField] private Sprite[] powerUpSprites;
-    private string buttonCode;
 
     private int ARanimalIndex;
 
-    private bool transitionInDone = false;
-	
     private void Awake()
     {
         if (Instance == null)
@@ -118,7 +114,6 @@ public class CTF_GameManager : MonoBehaviour
 		existingSo = SaveManager.Load();
         selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel");
         showRandomTrivia();
-        StartCoroutine(showTransitionAfterDelay());
 		UpdateHighScoreList();
     }
 
@@ -127,23 +122,8 @@ public class CTF_GameManager : MonoBehaviour
         ShieldDurationTimer();
         X2PointsDurationTimer();
         LuckDurationTimer();
-        checkIfTransitionIsDone();
         enablePowerUpState();
         removePowerUpState();
-
-        if (!transitionInDone) 
-        {
-            StartCoroutine(showTransitionAfterDelay());
-            transitionInDone = true;
-        }
-    }
-
-    private IEnumerator showTransitionAfterDelay() 
-    {
-        plainBlackPanel.SetActive(true);
-        yield return new WaitForSeconds(0.2f);
-        plainBlackPanel.SetActive(false);
-        transitionToIn.SetActive(true);
     }
 
     public float ShieldDuration 
@@ -877,9 +857,8 @@ public class CTF_GameManager : MonoBehaviour
 
     public void confirmQuitYesButtonFunction()
     {
-        buttonCode = "quitButton";
         confirmationQuitCanvas.SetActive(false);
-        transitionToOut.SetActive(true);
+        StartCoroutine(fadeSceneTransitions.FadeOut("CTF_LevelSelector"));
     }
 
     public void confirmQuitNoButtonFunction()
@@ -920,51 +899,42 @@ public class CTF_GameManager : MonoBehaviour
             case "1":
                 PlayerPrefs.SetString("CTF_SelectedLevel", "2");
                 PlayerPrefs.SetString("CTF_SelectedAnimal", "Pigeon");
-                buttonCode = "restartButton";
-                transitionToOut.SetActive(true);
                 break;
             case "2":
                 PlayerPrefs.SetString("CTF_SelectedLevel", "3");
                 PlayerPrefs.SetString("CTF_SelectedAnimal", "Koi");
-                buttonCode = "restartButton";
-                transitionToOut.SetActive(true);
                 break;
             case "3":
                 PlayerPrefs.SetString("CTF_SelectedLevel", "4");
                 PlayerPrefs.SetString("CTF_SelectedAnimal", "Camel");
-                buttonCode = "restartButton";
-                transitionToOut.SetActive(true);
                 break;
             case "4":
                 PlayerPrefs.SetString("CTF_SelectedLevel", "5");
                 PlayerPrefs.SetString("CTF_SelectedAnimal", "Crab");
-                buttonCode = "restartButton";
-                transitionToOut.SetActive(true);
                 break;
             case "5":
                 ConfirmQuit();
                 break;
         }
+
+        StartCoroutine(fadeSceneTransitions.FadeOut("CTF_Game"));
     }
 
     public void ConfirmPlayAgain() 
     {
-        buttonCode = "restartButton";
         confirmationRetryCanvas.SetActive(false);
         confirmationPlayAgainCanvas.SetActive(false);
 		gameOverCanvas.SetActive(false);
-        transitionToOut.SetActive(true);
+        StartCoroutine(fadeSceneTransitions.FadeOut("CTF_Game"));
     }
 
     public void ConfirmQuit() 
     {
-        buttonCode = "quitButton";
         confirmationQuitCanvas.SetActive(false);
         confirmationPlayAgainCanvas.SetActive(false);
         levelCompleteCanvas.SetActive(false);
 		gameOverCanvas.SetActive(false);
-		transitionToOut.SetActive(true);
-        
+        StartCoroutine(fadeSceneTransitions.FadeOut("CTF_LevelSelector"));
     }
 	
 	public void ConfirmationPlayAgainNo() 
@@ -973,30 +943,6 @@ public class CTF_GameManager : MonoBehaviour
 		levelCompleteCanvas.SetActive(true);
 	}
 
-    private void checkIfTransitionIsDone() 
-    {
-
-        bool achievedImgPositionOut = transitionToOutImg.color.a >= 0.9999 && transitionToOutImg.color.a <= 1.0001;
-        bool achievedImgPositionIn = transitionToInImg.color.a >= -0.0001 && transitionToInImg.color.a <= 0.0001;
-
-        if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "quitButton") 
-        {
-            quitTo("CTF_LevelSelector");
-        }
-        else if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "restartButton")
-        {
-            quitTo("CTF_Game");
-        }
-		else if (transitionToOut.activeSelf && achievedImgPositionOut && buttonCode == "tryAnimalButton")
-        {
-            quitTo("Animal Selector AR");
-        }
-
-        if (transitionToIn.activeSelf && achievedImgPositionIn) 
-        {
-            transitionToIn.SetActive(false);
-        }
-    }
     private void quitTo(string sceneName) 
     {
         audioManager.stopBGMusic();
@@ -1035,10 +981,9 @@ public class CTF_GameManager : MonoBehaviour
 	
 	public void ConfirmationToARYes() 
 	{
-		buttonCode = "tryAnimalButton";
         StateNameController.tryAnimalAnimalIndex = ARanimalIndex;
         StateNameController.isTryAnimalARClicked = true;
-		transitionToOut.SetActive(true);
+		StartCoroutine(fadeSceneTransitions.FadeOut("Animal Selector AR"));
 	}
 	
 	public void ConfirmationToARNo() 

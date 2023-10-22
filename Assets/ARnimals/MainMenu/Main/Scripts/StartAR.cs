@@ -20,15 +20,7 @@ public class StartAR : MonoBehaviour
 
     public TMP_Text playerName;
     AudioManager audioManager;
-	
-	[Header("Fade Transition")]
-	[SerializeField] private Image transitionToOutImg;
-    [SerializeField] private Image transitionToInImg;
-	[SerializeField] private GameObject plainBlackPanel;
-	
-	private string buttonCode;
-
-    private bool transitionInDone = false;
+    [SerializeField] private FadeSceneTransitions fadeScene;
 
     public MainMenuSettingsGuide mainMenuSettingsGuideScript;
     bool isGuideFinished;
@@ -71,91 +63,35 @@ public class StartAR : MonoBehaviour
         ConfirmResetGame.gameObject.SetActive(false);
         ConfirmQuit.SetActive(false);
     }
-	
-	private void Update() 
-	{
-        if (!transitionInDone) 
-        {
-            StartCoroutine(showTransitionAfterDelay());
-            transitionInDone = true;
-        }
-		checkIfTransitionIsDone();
-	}
-	
-	private IEnumerator showTransitionAfterDelay() 
-	{
-		plainBlackPanel.SetActive(true);
-		yield return new WaitForSeconds(0.2f);
-		plainBlackPanel.SetActive(false);
-		transitionToInImg.gameObject.SetActive(true);
-	}
-
-	private void checkIfTransitionIsDone() 
-    {
-
-        bool achievedImgPositionOut = transitionToOutImg.color.a >= 0.9999 && transitionToOutImg.color.a <= 1.0001;
-        bool achievedImgPositionIn = transitionToInImg.color.a >= -0.0001 && transitionToInImg.color.a <= 0.0001;
-
-        if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "Animal_Information") 
-        {
-            SceneManager.LoadScene("Animal_Information");
-        }
-		else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "ModeSelect")
-		{
-			SceneManager.LoadScene("ModeSelect");
-		}
-        else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "GuideSelector")
-		{
-			SceneManager.LoadScene("GuideSelector");
-		}
-        else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "Settings")
-		{
-            Settings.gameObject.SetActive(true);
-            MainMenu.gameObject.SetActive(false);
-            transitionToOutImg.gameObject.SetActive(false);
-            StartCoroutine(showTransitionAfterDelay());
-		}
-        else if (transitionToOutImg.gameObject.activeSelf && achievedImgPositionOut && buttonCode == "MainMenu")
-		{
-            Settings.gameObject.SetActive(false);
-            MainMenu.gameObject.SetActive(true);
-            transitionToOutImg.gameObject.SetActive(false);
-            StartCoroutine(showTransitionAfterDelay());
-		}
-
-        if (transitionToInImg.gameObject.activeSelf && achievedImgPositionIn) 
-        {
-            transitionToInImg.gameObject.SetActive(false);
-        }
-    }
-
     // Button Scripts
     public void goToModeSelect()
     {
-		buttonCode = "ModeSelect";
-        transitionToOutImg.gameObject.SetActive(true);
+		StartCoroutine(fadeScene.FadeOut("ModeSelect"));
     }
 
     public void goToAnimalSelectionScene()
     {
-		buttonCode = "Animal_Information";
-        transitionToOutImg.gameObject.SetActive(true);
+		StartCoroutine(fadeScene.FadeOut("Animal_Information"));
     }
 
     public void goToSettingsMenu()
     {
         mainMenuSettingsGuideScript.settingsGuide();
+        StartCoroutine(waitForTransition(fadeScene.FadeOut(MainMenu.gameObject, Settings.gameObject), fadeScene.FadeIn()));
 
-        buttonCode = "Settings";
-
-        transitionToOutImg.gameObject.SetActive(true);
     }
 
 
     public void goToMainMenu()
     {
-        buttonCode = "MainMenu";
-        transitionToOutImg.gameObject.SetActive(true);
+        StartCoroutine(waitForTransition(fadeScene.FadeOut(Settings.gameObject, MainMenu.gameObject), fadeScene.FadeIn()));
+    }
+
+    private IEnumerator waitForTransition(IEnumerator first, IEnumerator second) 
+    {
+        StartCoroutine(first);
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(second);
     }
 
     // -----CHANGE GUIDE CONFIRMATION -----
@@ -187,8 +123,7 @@ public class StartAR : MonoBehaviour
 
     public void goToGuideSelect()
     {
-        buttonCode = "GuideSelector";
-        transitionToOutImg.gameObject.SetActive(true);
+        StartCoroutine(fadeScene.FadeOut("GuideSelector"));
     }
 
     // -----RESET GAME CONFIRMATION -----

@@ -59,7 +59,7 @@ public class GTS_LevelSelect : MonoBehaviour
         }
         if (unlockedLvl == 3)
         {
-            for (int i = 0; i <= 2; i++)
+            for (int i = 0; i <= 1; i++)
             {
                 locklevel[i].SetActive(false);
                 lvlBtns[i].interactable = true;
@@ -69,7 +69,7 @@ public class GTS_LevelSelect : MonoBehaviour
         }
         if (unlockedLvl == 4)
         {
-            for (int i = 0; i <= 3; i++)
+            for (int i = 0; i <= 2; i++)
             {
                 locklevel[i].SetActive(false);
                 lvlBtns[i].interactable = true;
@@ -80,7 +80,7 @@ public class GTS_LevelSelect : MonoBehaviour
         if (unlockedLvl == 5)
         {
 
-            for (int i = 0; i <= 4; i++)
+            for (int i = 0; i <= 3; i++)
             {
                 locklevel[i].SetActive(false);
                 lvlBtns[i].interactable = true;

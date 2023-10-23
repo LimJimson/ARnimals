@@ -59,6 +59,7 @@ public class FTA_LevelManager : MonoBehaviour
         levelbordercompletedholder.sprite = levelborderimages[0];
         levelbordercompletedholder.gameObject.SetActive(true);
         twostarstounlock.gameObject.SetActive(true);
+        AnimalIndex = 10;
     }
 
     public void Level2isCLicked()
@@ -70,6 +71,7 @@ public class FTA_LevelManager : MonoBehaviour
         levelbordercompletedholder.sprite = levelborderimages[1];
         levelbordercompletedholder.gameObject.SetActive(true);
         twostarstounlock.gameObject.SetActive(true);
+        AnimalIndex = 12;
     }
 
     public void Level3isCLicked()
@@ -81,6 +83,7 @@ public class FTA_LevelManager : MonoBehaviour
         levelbordercompletedholder.sprite = levelborderimages[2];
         levelbordercompletedholder.gameObject.SetActive(true);
         twostarstounlock.gameObject.SetActive(true);
+        AnimalIndex = 13;
     }
 
     public void Level4isCLicked()
@@ -92,6 +95,7 @@ public class FTA_LevelManager : MonoBehaviour
         levelbordercompletedholder.sprite = levelborderimages[3];
         levelbordercompletedholder.gameObject.SetActive(true);
         twostarstounlock.gameObject.SetActive(true);
+        AnimalIndex = 1;
     }
 
     public void Level5isCLicked()
@@ -104,6 +108,7 @@ public class FTA_LevelManager : MonoBehaviour
         checkGameObjectlvl.SetActive(false);
         twostarstounlock.gameObject.SetActive(false);
         NoAvailLevel.gameObject.SetActive(true);
+        AnimalIndex = 17;
     }
     public void LoadNextLevel()
     {
@@ -205,6 +210,7 @@ public class FTA_LevelManager : MonoBehaviour
 
     public GameObject GuideBoyARConfirm;
     public GameObject GuideGirlARConfirm;
+    int AnimalIndex;
 
     public void TryAnimalARButton()
     {
@@ -222,6 +228,9 @@ public class FTA_LevelManager : MonoBehaviour
     }
     public void ConfirmYesTryAnimalARButton()
     {
+        audioManager.musicSource.Stop();
+        StateNameController.tryAnimalAnimalIndex = AnimalIndex;
+        StateNameController.isTryAnimalARClicked = true;
         StartCoroutine(fadeScene.FadeOut("Animal Selector AR"));
     }
     public void ConfirmNoTryAnimalARButton()

@@ -39,6 +39,7 @@ public class CTF_GameManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI finalScoreText;
     [SerializeField] private TextMeshProUGUI highScoreListTxt;
+    [SerializeField] private TextMeshProUGUI highScoreLvlTxt;
     [SerializeField] private Button nextLevelBtn;
     [SerializeField] private TextMeshProUGUI playAgainTxt;
     [SerializeField] private GameObject checkImgForLvlToUnlock;
@@ -64,6 +65,7 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private GameObject [] animalLuckState;
     [SerializeField] private Image [] animalIdleState;
     [SerializeField] private Image starHolder;
+    [SerializeField] private Image previousStarImg;
     [SerializeField] private Sprite[] stars;
     [SerializeField] private TextMeshProUGUI levelCompletedTxt;
 	
@@ -92,8 +94,6 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private GameObject checkGameObject;
 
     [SerializeField] private TextMeshProUGUI triviaTxt;
-	[SerializeField] private GameObject transitionToOut;
-    [SerializeField] private Image transitionToOutImg;
     [SerializeField] private Sprite[] powerUpSprites;
 
     private int ARanimalIndex;
@@ -110,6 +110,7 @@ public class CTF_GameManager : MonoBehaviour
     {
 		existingSo = SaveManager.Load();
         selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel");
+
         showRandomTrivia();
 		UpdateHighScoreList();
     }
@@ -628,6 +629,8 @@ public class CTF_GameManager : MonoBehaviour
     {
         string formattedScores = "";
 
+        highScoreLvlTxt.text = "Level " + selectedLevel;
+
         List<SaveObject.CTF_HighScore> highScores = null;
         switch (selectedLevel)
         {
@@ -688,6 +691,25 @@ public class CTF_GameManager : MonoBehaviour
     private void SetMaxStars() 
     {
         int currentMaxStarsCount = PlayerPrefs.GetInt("CTF_Lvl" + selectedLevel + "StarsCount", 0);
+
+        //Set previous star 
+
+        switch(currentMaxStarsCount) 
+        {
+            case 0:
+                previousStarImg.sprite = stars[0];
+                break;
+            case 1:
+                previousStarImg.sprite = stars[1];
+                break;
+            case 2:
+                previousStarImg.sprite = stars[2];
+                break;
+            case 3:
+                previousStarImg.sprite = stars[3];
+                break;
+        }
+
         int newStarsCount = starsCount;
 
         if (newStarsCount > currentMaxStarsCount) 
@@ -792,17 +814,17 @@ public class CTF_GameManager : MonoBehaviour
     {
         if (score >= 10 && score < 20) 
         {
-            starHolder.sprite = stars[0];
+            starHolder.sprite = stars[1];
             starsCount = 1;
         }
         else if (score >= 20 && score < 30) 
         {
-            starHolder.sprite = stars[1];
+            starHolder.sprite = stars[2];
             starsCount = 2;
         }
         else if (score >= 30) 
         {
-            starHolder.sprite = stars[2];
+            starHolder.sprite = stars[3];
             starsCount = 3;
         }
     }

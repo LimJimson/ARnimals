@@ -3,7 +3,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections;	
+using System.Collections;
+using System.Collections.Generic;
 
 public class CTF_LevelManager : MonoBehaviour
 {
@@ -37,7 +38,8 @@ public class CTF_LevelManager : MonoBehaviour
 	
 	[SerializeField] private TextMeshProUGUI animalToUnlockName;
 	[SerializeField] private GameObject confirmationToARCanvas;
-	[SerializeField] private GameObject tryAnimalBtn;
+	[SerializeField] private Button tryAnimalBtn;
+    [SerializeField] private GameObject tryAnimalTxt;
 	
     [Header("Unlock Level")]
 
@@ -58,6 +60,11 @@ public class CTF_LevelManager : MonoBehaviour
     [SerializeField] private FadeSceneTransitions fadeScene;
 
     private int ARanimalIndex;
+    [SerializeField] private TextMeshProUGUI highScoreListTxt;
+    [SerializeField] private TextMeshProUGUI highScoreLvlTxt;
+    [SerializeField] private GameObject highScoreCanvas;
+
+    [SerializeField] private VerticalLayoutGroup buttonsLayout;
 
     private void Start()
     {		
@@ -92,6 +99,15 @@ public class CTF_LevelManager : MonoBehaviour
         //     transitionInDone = true;
         // }
         // checkIfTransitionIsDone();
+
+        if (!tryAnimalBtn.interactable)
+        {
+            buttonsLayout.reverseArrangement = true;
+        }
+        else 
+        {
+            buttonsLayout.reverseArrangement = false;
+        }
     }	
 	private void checkIfLevelIsUnlocked() 
 	{
@@ -140,7 +156,8 @@ public class CTF_LevelManager : MonoBehaviour
         int currentStar = PlayerPrefs.GetInt("CTF_Lvl" + selectedLevel + "StarsCount", 0);
 
         checkGameObject.SetActive(false);
-		tryAnimalBtn.SetActive(false);
+		tryAnimalBtn.interactable = false;
+        tryAnimalTxt.SetActive(false);
         checkImgForLvlToUnlock.SetActive(false);
         starsToUnlockGO.SetActive(true);
         lvlToUnlockImg.gameObject.SetActive(true);
@@ -164,15 +181,79 @@ public class CTF_LevelManager : MonoBehaviour
 				starsImg.sprite = starsSprites[3];
                 checkImgForLvlToUnlock.SetActive(true);
 				checkGameObject.SetActive(true);
-				tryAnimalBtn.SetActive(true);
+				tryAnimalBtn.interactable = true;
+                tryAnimalTxt.SetActive(true);
 				break;
 		}
+    }
+
+    public void UpdateHighScoreList()
+    {
+        string formattedScores = "";
+
+        highScoreLvlTxt.text = "Level " + selectedLevel;
+
+        List<SaveObject.CTF_HighScore> highScores = null;
+        switch (selectedLevel)
+        {
+            case "1":
+                highScores = so.ctf_HighScoresLvl1;
+                break;
+            case "2":
+                highScores = so.ctf_HighScoresLvl2;
+                break;
+            case "3":
+                highScores = so.ctf_HighScoresLvl3;
+                break;
+            case "4":
+                highScores = so.ctf_HighScoresLvl4;
+                break;
+            case "5":
+                highScores = so.ctf_HighScoresLvl5;
+                break;
+        }
+
+        if (highScores != null)
+        {
+            for (int i = 0; i < highScores.Count; i++)
+            {
+                string rank = (i == 9) ? "10" : (i + 1).ToString();
+
+                if (rank == "10") 
+                {
+                    if (highScores[i].score >= 100) 
+                    {
+                        formattedScores += $"{rank}.    {highScores[i].score}    -     {highScores[i].dateAchieved}\n";
+                    }
+                    else 
+                    {
+                        formattedScores += $"{rank}.    {highScores[i].score}     -     {highScores[i].dateAchieved}\n";
+                    } 
+                }
+                else 
+                {
+                    if (highScores[i].score >= 100) 
+                    {
+                        formattedScores += $"{rank}.     {highScores[i].score}    -     {highScores[i].dateAchieved}\n";
+                    }
+                    else 
+                    {
+                        formattedScores += $"{rank}.     {highScores[i].score}     -     {highScores[i].dateAchieved}\n";
+                    }
+                }
+            }
+        }
+
+        // Set the formatted scores in the UI Text element
+        highScoreListTxt.text = formattedScores;
+        Debug.Log("High Score List: " + formattedScores);
     }
 
     public void OnLevel1ButtonClick()
     {
         selectedAnimal = "Elephant";
         selectedLevel = "1";
+        UpdateHighScoreList();
         ARanimalIndex = 11;
         checkStar();
         lvlToUnlockImg.sprite = lvlToUnlockSprites[0];
@@ -184,6 +265,7 @@ public class CTF_LevelManager : MonoBehaviour
     {
         selectedAnimal = "Pigeon";
         selectedLevel = "2";
+        UpdateHighScoreList();
         ARanimalIndex = 5;
         checkStar();
         lvlToUnlockImg.sprite = lvlToUnlockSprites[1];
@@ -195,6 +277,7 @@ public class CTF_LevelManager : MonoBehaviour
     {
         selectedAnimal = "Koi";
         selectedLevel = "3";
+        UpdateHighScoreList();
         ARanimalIndex = 15;
         animalToUnlockName.text = "Seagull";
         checkStar();
@@ -206,6 +289,7 @@ public class CTF_LevelManager : MonoBehaviour
     {
         selectedAnimal = "Camel";
         selectedLevel = "4";
+        UpdateHighScoreList();
         ARanimalIndex = 16;
         checkStar();
         lvlToUnlockImg.sprite = lvlToUnlockSprites[3];
@@ -217,6 +301,7 @@ public class CTF_LevelManager : MonoBehaviour
     {
         selectedAnimal = "Crab";
         selectedLevel = "5";
+        UpdateHighScoreList();
         ARanimalIndex = 6;
         checkStar();
         allLevelsUnlockGO.SetActive(true);
@@ -272,10 +357,12 @@ public class CTF_LevelManager : MonoBehaviour
                 break;
         }
 
+        playConfirmGameObject.SetActive(false);
 		confirmationToARCanvas.SetActive(true);
 	}
 	public void ConfirmationToARYes() 
 	{
+        confirmationToARCanvas.SetActive(false);
         StateNameController.tryAnimalAnimalIndex = ARanimalIndex;
         StateNameController.isTryAnimalARClicked = true;
 		StartCoroutine(fadeScene.FadeOut("Animal Selector AR"));
@@ -283,5 +370,18 @@ public class CTF_LevelManager : MonoBehaviour
 	public void ConfirmationToARNo() 
 	{
 		confirmationToARCanvas.SetActive(false);
+        playConfirmGameObject.SetActive(true);
 	}
+
+    public void openHighScoreCanvas() 
+    {
+        playConfirmGameObject.SetActive(false);
+        highScoreCanvas.SetActive(true);
+    }
+
+    public void closeHighScoreCanvas() 
+    {
+        highScoreCanvas.SetActive(false);
+        playConfirmGameObject.SetActive(true);
+    }
 }

@@ -61,7 +61,7 @@ public class FTA_GameManager : MonoBehaviour
             }
             else
             {
-                audioManager.playBGMMusic(audioManager.FTA_BGM);
+                audioManager.playBGMMusic(audioManager.FTA_BGM_Main);
             }
         }
         catch
@@ -115,7 +115,7 @@ public class FTA_GameManager : MonoBehaviour
                 }
                 catch
                 {
-
+                     
                 }
             }
         }

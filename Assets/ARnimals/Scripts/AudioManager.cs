@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip UnderwaterHabitat_BGM;
     public AudioClip SavannahHabitat_BGM;
     public AudioClip FTA_BGM;
+    public AudioClip FTA_BGM_Main;
 	public AudioClip CTF_BGM;
 
     [Header("SFX")]

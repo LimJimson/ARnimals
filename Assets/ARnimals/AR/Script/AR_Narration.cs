@@ -10,6 +10,7 @@ public class AR_Narration : MonoBehaviour
 {
     int animalIndex;
     public ARPlacement _arPlacementScript;
+    public AR_NarrateSubtitles narrateSubtitlesScript;
     SaveObject loaddata;
     string guide_chosen;
 
@@ -17,11 +18,7 @@ public class AR_Narration : MonoBehaviour
     public GameObject NarrateCanvas;
     public GameObject[] GameObjectsToHideARNarration;
 
-    bool isNarrationActive;
-    bool isNarrationPaused;
-
-    public Button play_pauseBtn;
-    public Sprite[] play_pauseSprite;
+    public bool isNarrationActive;
 
     public TMP_Text totalAudioTime;
     public TMP_Text currentAudioTime;
@@ -32,7 +29,6 @@ public class AR_Narration : MonoBehaviour
     {
         loaddata = SaveManager.Load();
         isNarrationActive = false;
-        isNarrationPaused = false;
         guide_chosen = loaddata.guideChosen;
         try { audiomanager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); } catch { }
         
@@ -82,7 +78,7 @@ public class AR_Narration : MonoBehaviour
             }
         }
 
-        if(!audiomanager.guideSource.isPlaying && isNarrationActive && !isNarrationPaused)
+        if(!audiomanager.guideSource.isPlaying && isNarrationActive)
         {
             isNarrationActive = false;
             audiomanager.musicSource.UnPause();
@@ -96,56 +92,47 @@ public class AR_Narration : MonoBehaviour
         }
 
     }
-    public void play_pauseNarration()
-    {
-        if (audiomanager.guideSource.isPlaying)
-        {
-            try { audiomanager.guideSource.Pause(); } catch { }
-            play_pauseBtn.image.sprite = play_pauseSprite[1];
-            isNarrationPaused = true;
-        }
-        else
-        {
-            try { audiomanager.guideSource.UnPause(); }catch { }
-            play_pauseBtn.image.sprite = play_pauseSprite[0];
-            isNarrationPaused = false;
-        }
-    }
     public void NarrateBtn()
     {
 
         animalIndex = _arPlacementScript.getAnimalIndex();
         isNarrationActive = true;
-        hideNarrateCanvas = false;
-
         if (guide_chosen == "boy_guide")
         {
             try { audiomanager.PlayGuide(audiomanager.AR_Narration_Patrick[animalIndex]);  } catch { }
-
+            narrateSubtitlesScript.animalSub();
 
         }
         else if (guide_chosen == "girl_guide")
         {
             try { audiomanager.PlayGuide(audiomanager.AR_Narration_Sandy[animalIndex]); } catch { }
-
+            narrateSubtitlesScript.animalSub();
 
         }
             
 
     }
 
+    private void OnApplicationFocus(bool focus)
+    {
+        exitNarration();
+    }
+
     public void exitNarration()
     {
-        isNarrationActive = false;
-        audiomanager.musicSource.UnPause();
+        if (isNarrationActive) {
+            isNarrationActive = false;
+            audiomanager.musicSource.UnPause();
 
-        try { audiomanager.guideSource.Stop(); } catch { }
+            try { audiomanager.guideSource.Stop(); } catch { }
 
-        NarrateCanvas.SetActive(false);
-        foreach (GameObject items in GameObjectsToHideARNarration)
-        {
-            items.SetActive(true);
+            NarrateCanvas.SetActive(false);
+            foreach (GameObject items in GameObjectsToHideARNarration)
+            {
+                items.SetActive(true);
+            }
         }
+
     }
 
 

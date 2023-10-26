@@ -81,6 +81,8 @@ public class AR_Guide : MonoBehaviour
     public GameObject backHighlight;
     public GameObject guideHighlight;
 
+    public bool isGuideActive;
+
     AudioManager audioManager;
     void Start()
     {
@@ -316,6 +318,7 @@ public class AR_Guide : MonoBehaviour
         touchToNextARScript.setPageCtr(1);
         stopGuideVoice();
         disableAllGuideGameObjects();
+        isGuideActive = false;
         ARExpGuideGO.SetActive(false);
 
         if (!loaddata.ARExpTutorialDone)
@@ -410,6 +413,7 @@ public class AR_Guide : MonoBehaviour
     public void _ARExpGuide()
     {
         ARExpGuideGO.gameObject.SetActive(true);
+        isGuideActive = true;
 
         pos1_GO.SetActive(true);
         pos2_GO.SetActive(false);

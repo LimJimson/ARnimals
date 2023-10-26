@@ -213,6 +213,7 @@ public class touchToNextAR : MonoBehaviour, IPointerDownHandler
             pageNum.text = "1/17";
 
             ARGuideGO.SetActive(false);
+            _ARGuideScript.isGuideActive = false;
             _ARGuideScript.stopGuideVoice();
 
             if (!existingSO.ARExpTutorialDone)

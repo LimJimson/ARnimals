@@ -27,6 +27,8 @@ public class buttonScripts : MonoBehaviour
 
     AudioManager audioManager;
 
+    public checkCamera _checkCamScript;
+
     private void Start()
     {
         try { audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); } catch { }
@@ -69,6 +71,7 @@ public class buttonScripts : MonoBehaviour
     public void hideNote()
     {
         noteCanvas.SetActive(false);
+        _checkCamScript.enabled = true;
     }
 
     public void openOptions()
@@ -121,10 +124,12 @@ public class buttonScripts : MonoBehaviour
         GalleryImgUI.SetActive(false);
         GalleryUI.SetActive(true);
         ARPlacementScript.resetTimerSpawnAnimal();
+        _checkCamScript.enabled = true;
     }
     public void hideGallerySelectionUI()
     {
         GalleryUI.SetActive(false);
+        _checkCamScript.enabled = false;
         _showHabitatScript.playEnvironmentBGM();
     }
     public void show_hide_UI()

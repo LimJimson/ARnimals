@@ -21,7 +21,7 @@ public class recordBTNScript : MonoBehaviour
     public TMP_Text videoCount;
     public Sprite[] play_btn; 
     private int currentVideoIndex = 0;
-    private bool isRecording = false;
+    public bool isRecording = false;
     public TMP_Text _txt;
 
     string DirPath;

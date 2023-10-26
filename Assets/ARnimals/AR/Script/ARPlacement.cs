@@ -28,7 +28,7 @@ public class ARPlacement : MonoBehaviour
     //Objects to spawn container
     public GameObject[] arModels;
     public GameObject[] arModelsCopy;
-    int modelIndex;
+    public int modelIndex;
 
     public Camera arCamera;
     public bool didAnimalSpawn = false;
@@ -182,20 +182,26 @@ public class ARPlacement : MonoBehaviour
 
     int spawnedAnimalCtr;
     GameObject spawnedAnimal;
+
+    public void removeAllAdditionalAnimals()
+    {
+        GameObject[] objectsToDestroy = GameObject.FindGameObjectsWithTag("ARMultiModelCopy");
+
+        foreach (GameObject obj in objectsToDestroy)
+        {
+            Destroy(obj);
+        }
+
+        
+        spawnedAnimalCtr = 0;
+    }
     public void respawnAnimal()
     {
 
         if (spawnedAnimalCtr >= 2)
         {
-            GameObject[] objectsToDestroy = GameObject.FindGameObjectsWithTag("ARMultiModelCopy");
-
-            foreach (GameObject obj in objectsToDestroy)
-            {
-                Destroy(obj);
-            }
-
+            removeAllAdditionalAnimals();
             showAnimalLimit();
-            spawnedAnimalCtr = 0;
             return;
         }
 

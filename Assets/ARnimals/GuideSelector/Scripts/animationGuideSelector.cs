@@ -17,6 +17,8 @@ public class animationGuideSelector : MonoBehaviour
     public Animator CloudAnim;
     public GameObject Cloud;
 
+    public Animator chooseGuide;
+
     public Button boyBtn;
     public Button girlBtn;
 
@@ -118,8 +120,11 @@ public class animationGuideSelector : MonoBehaviour
         {
             yield return null;
         }
-
+        chooseGuide.SetTrigger("chooseGuide");
         blackPnl.SetActive(false);
+
+        
+
     }
 
 }

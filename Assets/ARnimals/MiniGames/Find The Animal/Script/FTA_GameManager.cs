@@ -84,6 +84,7 @@ public class FTA_GameManager : MonoBehaviour
         Invoke("StartCountdownStarts", 0.8f);
         if (!SaveFTAGame.FTA_GAME_GUIDE)
         {
+            SaveFTAGame = SaveManager.Load();
             SaveFTAGame.FTA_GAME_GUIDE = true;
             SaveManager.Save(SaveFTAGame);
             CheckIfFisrtItemGuide = true;
@@ -321,10 +322,22 @@ public class FTA_GameManager : MonoBehaviour
     private bool isPaused = false;
     public GameObject settingsMenuObject;
     public GameObject wrongAnswerPanel;
+    public GameObject GameOverBoyGuide;
+    public GameObject GameOverGirlGuide;
     public void GameOver()
     {
         isGameOver = true;
         timer = Mathf.Min(timer, timeLimit);
+        if (guide_chosen == "boy_guide")
+        {
+            GameOverBoyGuide.SetActive(true);
+            GameOverGirlGuide.SetActive(false);
+        }
+        else if (guide_chosen == "girl_guide")
+        {
+            GameOverBoyGuide.SetActive(false);
+            GameOverGirlGuide.SetActive(true);
+        }
         panelGameOver.SetActive(true);
     }
     private void GameWin()
@@ -346,12 +359,14 @@ public class FTA_GameManager : MonoBehaviour
         isPaused = true;
         Time.timeScale = 0f;
         settingsMenuObject.SetActive(true);
+        audioManager.sfxSource.Pause();
     }
     public void ResumeGame()
     {
         isPaused = false;
         Time.timeScale = 1f;
         settingsMenuObject.SetActive(false);
+        audioManager.sfxSource.UnPause();
     }
     public void RestartGame()
     {
@@ -386,6 +401,7 @@ public class FTA_GameManager : MonoBehaviour
         try 
         {
             audioManager.musicSource.Stop();
+            audioManager.sfxSource.Stop();
         }
         catch
         {
@@ -405,6 +421,7 @@ public class FTA_GameManager : MonoBehaviour
     {
         ResumeGame();
         SceneManager.LoadScene("FTA_Game");
+        audioManager.sfxSource.Stop();
     }
     public void CloseConfirmRestart()
     {
@@ -522,6 +539,7 @@ public class FTA_GameManager : MonoBehaviour
     private float timer = 0f;
     public float timeLimit = 60f;
     public Text timerText;
+    bool tenSecondsLeft;
 
     private void DisplayTimer()
     {
@@ -529,6 +547,23 @@ public class FTA_GameManager : MonoBehaviour
         int minutes = Mathf.FloorToInt(remainingTime / 60);
         int seconds = Mathf.FloorToInt(remainingTime % 60);
         string timeText = string.Format("{0:00}:{1:00}", minutes, seconds);
+        if (!tenSecondsLeft && remainingTime <= 11.0f)
+        {
+            tenSecondsLeft = true;
+            try
+            {
+                audioManager.PlaySFX(audioManager.FTA_Countdown);
+                audioManager.musicSource.Stop();
+            }
+            catch
+            {
+
+            }
+        }
+        if (remainingTime == 0)
+        {
+            audioManager.sfxSource.Stop();
+        }
 
         if (timerText != null)
         {
@@ -994,6 +1029,7 @@ public class FTA_GameManager : MonoBehaviour
 
     void checkStar()
     {
+        SaveFTAGame = SaveManager.Load();
         if (countHealth == 3)
         {
             starHolder.sprite = stars[2];
@@ -1254,6 +1290,7 @@ public class FTA_GameManager : MonoBehaviour
         Time.timeScale = 0f;
         Guide.SetActive(true);
         guideScript.CheckPageNumber();
+        audioManager.sfxSource.Pause();
     }
     bool isStartTimerCounting = false;
     float countdownTimeStarts = 5.0f;
@@ -1284,6 +1321,13 @@ public class FTA_GameManager : MonoBehaviour
     public TMP_Text AnimalNameTrivia;
     public TMP_Text TriviaTextInfo;
     public Image AnimalImageTriva;
+    public IEnumerator stopCoundown()
+    {
+        audioManager.sfxSource.Stop();
+        audioManager.musicSource.Stop();
+        yield return new WaitForSeconds(0.1f);
+        audioManager.PlaySFX(audioManager.TriviaShowEffect);
+    }
 
     public void openTriviaCanvas()
     {
@@ -1293,8 +1337,7 @@ public class FTA_GameManager : MonoBehaviour
         triviaGameCanvas.SetActive(true);
         try
         {
-            audioManager.PlaySFX(audioManager.TriviaShowEffect);
-            audioManager.musicSource.Stop();
+            StartCoroutine(stopCoundown());
         }
         catch
         {

@@ -63,6 +63,7 @@ public class CTF_LevelManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI highScoreListTxt;
     [SerializeField] private TextMeshProUGUI highScoreLvlTxt;
     [SerializeField] private GameObject highScoreCanvas;
+    [SerializeField] private GameObject highScoreBtn;
 
     [SerializeField] private VerticalLayoutGroup buttonsLayout;
 
@@ -93,13 +94,6 @@ public class CTF_LevelManager : MonoBehaviour
 
     private void Update() 
     {
-        // if (!transitionInDone) 
-        // {
-        //     StartCoroutine(showTransitionAfterDelay());
-        //     transitionInDone = true;
-        // }
-        // checkIfTransitionIsDone();
-
         if (!tryAnimalBtn.interactable)
         {
             buttonsLayout.reverseArrangement = true;
@@ -162,6 +156,7 @@ public class CTF_LevelManager : MonoBehaviour
         starsToUnlockGO.SetActive(true);
         lvlToUnlockImg.gameObject.SetActive(true);
         allLevelsUnlockGO.SetActive(false);
+        highScoreBtn.SetActive(false);
 		
 		Debug.Log("Level: " + selectedLevel + "\n" + "currentStar: " + currentStar);
 		
@@ -172,14 +167,17 @@ public class CTF_LevelManager : MonoBehaviour
 				break;
 			case 1:
 				starsImg.sprite = starsSprites[1];
+                highScoreBtn.SetActive(true);
 				break;
 			case 2:
 				starsImg.sprite = starsSprites[2];
                 checkImgForLvlToUnlock.SetActive(true);
+                highScoreBtn.SetActive(true);
 				break;
 			case 3:
 				starsImg.sprite = starsSprites[3];
                 checkImgForLvlToUnlock.SetActive(true);
+                highScoreBtn.SetActive(true);
 				checkGameObject.SetActive(true);
 				tryAnimalBtn.interactable = true;
                 tryAnimalTxt.SetActive(true);

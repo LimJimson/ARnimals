@@ -1817,7 +1817,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62981932}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1827,7 +1827,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -150, y: -117}
+  m_AnchoredPosition: {x: -150.00006, y: -125.99999}
   m_SizeDelta: {x: 116.61088, y: 115.4682}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &62981934
@@ -2548,7 +2548,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 98520228}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2558,7 +2558,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: 91}
+  m_AnchoredPosition: {x: -10.000092, y: 82.00013}
   m_SizeDelta: {x: 631.6448, y: 201.2659}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &98520230
@@ -15341,7 +15341,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!1 &596771914
 GameObject:
@@ -16343,7 +16343,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPanel: {fileID: 1446195119}
   pauseManager: {fileID: 1432307885}
-  audioManager: {fileID: 1723323712}
   foodSpawners:
   - {fileID: 848972946}
   - {fileID: 603564418}
@@ -16543,7 +16542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &639845037
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32533,6 +32532,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d1cdb73a886749c46b7f3f26c96860d7, type: 3}
   - {fileID: 21300000, guid: 5af8d7fc17a06464fa7febcfdb8cb3c8, type: 3}
   checkGameObject: {fileID: 118938109}
+  highScoreBtn: {fileID: 639845036}
   triviaTxt: {fileID: 1817835102}
   powerUpSprites:
   - {fileID: 21300000, guid: 99d04393255e09d408e9bb04c37647e0, type: 3}
@@ -33659,7 +33659,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1339609521
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33678,7 +33678,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -433, y: -288}
+  m_AnchoredPosition: {x: -433, y: -285}
   m_SizeDelta: {x: 345.75, y: 336.5537}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1339609522
@@ -37816,6 +37816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0080489442ba41b48a214613ac7de441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 1723323712}
   timerText: {fileID: 47688667}
   maxTime: 60
 --- !u!1 &1505412144
@@ -43075,7 +43076,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1756160261}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -43085,7 +43086,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 153, y: -117}
+  m_AnchoredPosition: {x: 152.99982, y: -126}
   m_SizeDelta: {x: 116.6109, y: 115.4682}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1756160263
@@ -50491,7 +50492,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.1001453, y: 0.92300004}
   m_AnchorMax: {x: 0.104, y: 0.93144464}
-  m_AnchoredPosition: {x: -0.71447754, y: 0.4963379}
+  m_AnchoredPosition: {x: -0.7149658, y: 0.4963379}
   m_SizeDelta: {x: 64.11401, y: 52.498993}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2128654720
@@ -51148,6 +51149,16 @@ PrefabInstance:
         type: 3}
       propertyPath: blackPanelDuration
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001727054263684578, guid: 12e913212c0fabc4fbbabb06e3f56413,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -6.2714844
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001727054263684578, guid: 12e913212c0fabc4fbbabb06e3f56413,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 6.5651855
       objectReference: {fileID: 0}
     - target: {fileID: 1715675546784724324, guid: 12e913212c0fabc4fbbabb06e3f56413,
         type: 3}

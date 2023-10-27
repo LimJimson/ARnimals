@@ -188,7 +188,8 @@ public class CTF_TutorialManager : MonoBehaviour
         if (PlayerPrefs.GetInt("CTF_IsTutorialDone", 0) == 0) {
             gameResumeTimerManager.SetActive(false);
         }
-        else {
+        else 
+        {
             gameResumeTimerManager.SetActive(true);
         }
 

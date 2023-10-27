@@ -32,6 +32,7 @@ public class CTF_GameResumeTimerManager : MonoBehaviour
             resumeTimerCanvas.SetActive(false);
             gameResumeTimerManager.SetActive(false);
 			audioManager.unPauseBGMusic();
+            audioManager.unPauseCountdown();
             pauseManager.ResumeGame();
         }    
     }

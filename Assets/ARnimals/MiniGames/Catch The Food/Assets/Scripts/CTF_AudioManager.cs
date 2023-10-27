@@ -20,6 +20,12 @@ public class CTF_AudioManager : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI sfxPercentTxt;
 	[SerializeField] private TextMeshProUGUI guidePercentText;
 
+	public Slider MusicSlider 
+	{
+		get { return musicSlider; }
+        set { musicSlider = value; }
+	}
+
     void Start()
     {
         try
@@ -59,6 +65,7 @@ public class CTF_AudioManager : MonoBehaviour
 		int percentageForGuideSlider = Mathf.RoundToInt(guideSlider.value * 100);
 		guidePercentText.text = percentageForGuideSlider.ToString() + "%";
 	}
+	
 
 	public void changeMusicVolume() 
 	{	
@@ -117,10 +124,8 @@ public class CTF_AudioManager : MonoBehaviour
 
 	public float musicVolume
 	{
-		
 		set { mainAudioManager.musicVol = value; }
 		get { return mainAudioManager.musicVol; }
-
 	} 
 
 	public void stopBGMusic() 
@@ -215,11 +220,22 @@ public class CTF_AudioManager : MonoBehaviour
 	}
 
 	public void unPauseCountdown() 
-	
 	{
 		try
 		{
 			mainAudioManager.sfxSource.UnPause();
+		}
+		catch
+		{
+			Debug.Log("No AudioManager");
+		}
+	}
+
+	public void stopCountdown() 
+	{
+		try
+		{
+			mainAudioManager.sfxSource.Stop();
 		}
 		catch
 		{

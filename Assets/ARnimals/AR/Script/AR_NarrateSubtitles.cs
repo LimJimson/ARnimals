@@ -12,28 +12,41 @@ public class AR_NarrateSubtitles : MonoBehaviour
     public TMP_Text subtitleTxt;
 
     int animalIndex;
-    string guideChosen = "boy_guide";
+    string guideChosen;
 
     bool isAudioPaused;
     private void Start()
     {
-        
-        //if(StateNameController.guide_chosen == null)
-        //{
-        //    guideChosen = "boy_guide";
-        //}
-        //else
-        //{
-        //    guideChosen = StateNameController.guide_chosen;
-        //}
+
+        if (StateNameController.guide_chosen == null)
+        {
+            guideChosen = "boy_guide";
+        }
+        else
+        {
+            guideChosen = StateNameController.guide_chosen;
+        }
     }
     
     private void Update()
     {
     }
 
+    public GameObject boy_guide_narrate;
+    public GameObject girl_guide_narrate;
     public void animalSub()
     {
+
+        if(guideChosen == "boy_guide")
+        {
+            boy_guide_narrate.SetActive(true);
+            girl_guide_narrate.SetActive(false);
+        }
+        else if (guideChosen == "girl_guide")
+        {
+            boy_guide_narrate.SetActive(false);
+            girl_guide_narrate.SetActive(true);
+        }
         animalIndex = ARPlacementScript.getAnimalIndex();
         StopAllCoroutines();
         switch (animalIndex)

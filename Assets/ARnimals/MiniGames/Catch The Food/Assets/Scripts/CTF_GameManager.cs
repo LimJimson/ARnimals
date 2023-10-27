@@ -97,6 +97,8 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI triviaTxt;
     [SerializeField] private Sprite[] powerUpSprites;
 
+    private bool confirmedQuitOrRestart = false;
+
     private int ARanimalIndex;
 
     private void Awake()
@@ -122,6 +124,12 @@ public class CTF_GameManager : MonoBehaviour
         LuckDurationTimer();
         enablePowerUpState();
         removePowerUpState();
+    }
+
+    public bool ConfirmedQuitOrRestart
+    {
+        get { return confirmedQuitOrRestart; }
+        set { confirmedQuitOrRestart = value; }
     }
 
     public float ShieldDuration 
@@ -562,6 +570,7 @@ public class CTF_GameManager : MonoBehaviour
                 pauseManager.PauseGame();
                 finalScore = scoreManager.GetScore();
 				audioManager.stopBGMusic();
+                audioManager.stopCountdown();
 				audioManager.playLvlCompletedSFX();
 				Debug.Log("Level Complete PlayMusic");
 
@@ -868,12 +877,14 @@ public class CTF_GameManager : MonoBehaviour
     {
         optionsUICanvas.SetActive(false);
         gameResumeTimerManager.SetActive(true);
+        confirmedQuitOrRestart = false;
     }
 
     public void SettingsButtonFunction()
     {
         optionsUICanvas.SetActive(true);
         audioManager.pauseCountdown();
+        confirmedQuitOrRestart = true;
         pauseManager.PauseGame();
     }
 
@@ -881,6 +892,7 @@ public class CTF_GameManager : MonoBehaviour
     {
         confirmationQuitCanvas.SetActive(false);
         audioManager.stopBGMusic();
+        audioManager.stopCountdown();
         StartCoroutine(fadeSceneTransitions.FadeOut("CTF_LevelSelector"));
     }
 
@@ -940,6 +952,7 @@ public class CTF_GameManager : MonoBehaviour
                 break;
         }
         audioManager.stopBGMusic();
+        audioManager.stopCountdown();
         StartCoroutine(fadeSceneTransitions.FadeOut("CTF_Game"));
     }
 
@@ -949,6 +962,7 @@ public class CTF_GameManager : MonoBehaviour
         confirmationPlayAgainCanvas.SetActive(false);
 		gameOverCanvas.SetActive(false);
         audioManager.stopBGMusic();
+        audioManager.stopCountdown();
         StartCoroutine(fadeSceneTransitions.FadeOut("CTF_Game"));
     }
 
@@ -959,6 +973,7 @@ public class CTF_GameManager : MonoBehaviour
         levelCompleteCanvas.SetActive(false);
 		gameOverCanvas.SetActive(false);
         audioManager.stopBGMusic();
+        audioManager.stopCountdown();
         StartCoroutine(fadeSceneTransitions.FadeOut("CTF_LevelSelector"));
     }
 	
@@ -1003,6 +1018,7 @@ public class CTF_GameManager : MonoBehaviour
         StateNameController.tryAnimalAnimalIndex = ARanimalIndex;
         StateNameController.isTryAnimalARClicked = true;
         audioManager.stopBGMusic();
+        audioManager.stopCountdown();
 		StartCoroutine(fadeSceneTransitions.FadeOut("Animal Selector AR"));
 	}
 	

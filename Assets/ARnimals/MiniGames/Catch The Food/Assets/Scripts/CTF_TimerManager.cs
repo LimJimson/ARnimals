@@ -17,7 +17,9 @@ public class CTF_TimerManager : MonoBehaviour
 
     private float initialMusicVolume;
 
+    private float changedValue = 0f;
     private float currentTime;
+    private bool fadeFinished = false;
 
     public float getCurrentTime() 
     {
@@ -47,6 +49,7 @@ public class CTF_TimerManager : MonoBehaviour
         {
             initialMusicVolume = audioManager.musicVolume;
             StartCoroutine(FadeOutMusic(initialMusicVolume));
+
         }
 
         if (currentTime <= 10.0f && !tenSecondsLeft) 
@@ -54,8 +57,20 @@ public class CTF_TimerManager : MonoBehaviour
             audioManager.stopBGMusic();
             audioManager.playCountdown();
             tenSecondsLeft = true;
-            Debug.Log("Ten Seconds Left: " + tenSecondsLeft);
         }
+
+        if (currentTime <= 10.0f) 
+        {
+            if (fadeFinished && changedValue == 0) 
+            {
+                audioManager.musicVolume = initialMusicVolume;
+            }
+            else 
+            {
+                audioManager.musicVolume = changedValue;
+            }
+        }
+
     }
 
     private void UpdateTimerText()
@@ -74,8 +89,20 @@ public class CTF_TimerManager : MonoBehaviour
             float normalizedTime = currentTime / fadeDuration;
 
             float newVolume = Mathf.Lerp(initialVolume, 0f, normalizedTime);
-            audioManager.musicVolume = newVolume;
 
+            if (CTF_GameManager.Instance.ConfirmedQuitOrRestart) 
+            {
+                changedValue = audioManager.musicVolume;
+            }
+            else 
+            {
+                audioManager.musicVolume = newVolume;
+                if (newVolume <= 0f) 
+                {
+                    fadeFinished = true;
+                    Debug.Log("Fade Finished");
+                }
+            }
             yield return null;
         }
 

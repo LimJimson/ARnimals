@@ -222,7 +222,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 1
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1993,6 +1993,7 @@ MonoBehaviour:
   highScoreListTxt: {fileID: 1158179061}
   highScoreLvlTxt: {fileID: 1167145421}
   highScoreCanvas: {fileID: 755842320}
+  highScoreBtn: {fileID: 476996005}
   buttonsLayout: {fileID: 799735716}
 --- !u!4 &437298367
 Transform:
@@ -4852,7 +4853,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 1
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -7373,8 +7374,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -5.7929688, y: 14.789001}
+  m_SizeDelta: {x: 100.611, y: 91.926}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1783868565
 MonoBehaviour:
@@ -8169,7 +8170,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.31879166, y: 0.14751853}
   m_AnchorMax: {x: 0.43056253, y: 0.298}
-  m_AnchoredPosition: {x: 240.5, y: 216.99837}
+  m_AnchoredPosition: {x: 240.5, y: 216.99832}
   m_SizeDelta: {x: -115, y: -29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1992977715

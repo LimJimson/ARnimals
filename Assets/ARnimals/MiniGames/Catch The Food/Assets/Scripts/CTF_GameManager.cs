@@ -92,6 +92,7 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private Image animalImg;
     [SerializeField] private Sprite[] animalSprites;
     [SerializeField] private GameObject checkGameObject;
+    [SerializeField] private GameObject highScoreBtn;
 
     [SerializeField] private TextMeshProUGUI triviaTxt;
     [SerializeField] private Sprite[] powerUpSprites;
@@ -110,7 +111,6 @@ public class CTF_GameManager : MonoBehaviour
     {
 		existingSo = SaveManager.Load();
         selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel");
-
         showRandomTrivia();
 		UpdateHighScoreList();
     }
@@ -458,11 +458,6 @@ public class CTF_GameManager : MonoBehaviour
     private void UnlockedNextLevel() 
     {
         PlayerPrefs.SetInt("CTF_Lvl" + selectedLevel, 1);
-
-        if (selectedLevel == "5") 
-        {
-            nextLevelBtn.gameObject.SetActive(false);
-        }
     }
     public void IncreaseScore(int amount)
     {
@@ -563,6 +558,7 @@ public class CTF_GameManager : MonoBehaviour
 
             if (scoreManager.GetScore() >= minimumScoreToWin)
             {
+                existingSo = SaveManager.Load();
                 pauseManager.PauseGame();
                 finalScore = scoreManager.GetScore();
 				audioManager.stopBGMusic();
@@ -571,6 +567,7 @@ public class CTF_GameManager : MonoBehaviour
 
                 addStar(finalScore);
                 SetMaxStars();
+                unlockRewards();
                 finalScoreText.text = finalScore.ToString();
                 highScoreManager.SaveHighScore(scoreManager.GetScore());
                 addHighScores(finalScore);
@@ -627,6 +624,12 @@ public class CTF_GameManager : MonoBehaviour
 
     public void UpdateHighScoreList()
     {
+
+        if (PlayerPrefs.GetInt("CTF_Lvl" + selectedLevel + "StarsCount", 0) >= 1) 
+        {
+            highScoreBtn.SetActive(true);
+        }
+
         string formattedScores = "";
 
         highScoreLvlTxt.text = "Level " + selectedLevel;
@@ -716,8 +719,6 @@ public class CTF_GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("CTF_Lvl" + selectedLevel + "StarsCount", newStarsCount);
         }
-
-        unlockRewards();
     }
 
     private void unlockRewards() 
@@ -803,6 +804,7 @@ public class CTF_GameManager : MonoBehaviour
                 allLevelsUnlockGO.SetActive(true);
                 starsToUnlockGO.SetActive(false);
                 lvlToUnlockImg.gameObject.SetActive(false);
+                nextLevelBtn.gameObject.SetActive(false);
                 checkImgForLvlToUnlock.SetActive(false);
                 break;
         }
@@ -871,6 +873,7 @@ public class CTF_GameManager : MonoBehaviour
     public void SettingsButtonFunction()
     {
         optionsUICanvas.SetActive(true);
+        audioManager.pauseCountdown();
         pauseManager.PauseGame();
     }
 
@@ -967,6 +970,7 @@ public class CTF_GameManager : MonoBehaviour
     public void helpButtonFunction() 
     {
 		audioManager.pauseBGMusic();
+        audioManager.pauseCountdown();
         pauseAndHPCanvas.SetActive(false);
         tutorialCanvas.SetActive(true);
         int pageNum = tutorialManager.PageNum = 0;
@@ -979,6 +983,7 @@ public class CTF_GameManager : MonoBehaviour
 	public void highScoreButtonFunction() 
 	{
 		highScoreCanvas.SetActive(true);
+        audioManager.pauseCountdown();
 		pauseManager.PauseGame();
 	}
 	

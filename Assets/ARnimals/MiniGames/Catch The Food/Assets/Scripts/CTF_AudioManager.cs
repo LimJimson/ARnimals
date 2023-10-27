@@ -114,6 +114,15 @@ public class CTF_AudioManager : MonoBehaviour
 			Debug.Log("No AudioManager");
 		}
     }
+
+	public float musicVolume
+	{
+		
+		set { mainAudioManager.musicVol = value; }
+		get { return mainAudioManager.musicVol; }
+
+	} 
+
 	public void stopBGMusic() 
 	{
 		try
@@ -180,6 +189,44 @@ public class CTF_AudioManager : MonoBehaviour
 			Debug.Log("No AudioManager");
 		}
     }
+
+	public void playCountdown() 
+	{
+		try
+		{
+			mainAudioManager.PlaySFX(mainAudioManager.CTF_Countdown);
+		}
+		catch
+		{
+			Debug.Log("No AudioManager");
+		}
+	}
+
+	public void pauseCountdown() 
+	{
+		try
+		{
+			mainAudioManager.sfxSource.Pause();
+		}
+		catch
+		{
+			Debug.Log("No AudioManager");
+		}
+	}
+
+	public void unPauseCountdown() 
+	
+	{
+		try
+		{
+			mainAudioManager.sfxSource.UnPause();
+		}
+		catch
+		{
+			Debug.Log("No AudioManager");
+		}
+	}
+
     public void playCorrectFoodSFX() 
     {
         try

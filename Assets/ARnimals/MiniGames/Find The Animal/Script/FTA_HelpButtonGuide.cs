@@ -159,6 +159,7 @@ public class FTA_HelpButtonGuide : MonoBehaviour
             SaveManager.Save(GuideLoadData);
             AudioManager.guideSource.Stop();
             gameManager.isGuideClicked = false;
+            AudioManager.sfxSource.UnPause();
         }
     }
     public void BackButton()
@@ -182,6 +183,7 @@ public class FTA_HelpButtonGuide : MonoBehaviour
         SaveManager.Save(GuideLoadData);
         AudioManager.guideSource.Stop();
         gameManager.isGuideClicked = false;
+        AudioManager.sfxSource.UnPause();
     }
 
     public GameObject BoyGuide;

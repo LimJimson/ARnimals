@@ -18,7 +18,6 @@ public class AudioManager : MonoBehaviour
     public AudioClip ForestHabitat_BGM;
     public AudioClip UnderwaterHabitat_BGM;
     public AudioClip SavannahHabitat_BGM;
-    public AudioClip FTA_BGM;
     public AudioClip FTA_BGM_Main;
 	public AudioClip CTF_BGM;
 
@@ -31,6 +30,7 @@ public class AudioManager : MonoBehaviour
 	public AudioClip CTF_PowerUps;
     public AudioClip CTF_Countdown;
     public AudioClip TriviaShowEffect;
+    public AudioClip FTA_Countdown;
 
     [Header("GUIDE")]
     public AudioClip[] GuideSelector;

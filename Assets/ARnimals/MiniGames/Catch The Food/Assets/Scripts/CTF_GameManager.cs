@@ -97,7 +97,7 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI triviaTxt;
     [SerializeField] private Sprite[] powerUpSprites;
 
-    private bool confirmedQuitOrRestart = false;
+    private bool isOptionsUIOpen = false;
 
     private int ARanimalIndex;
 
@@ -126,10 +126,10 @@ public class CTF_GameManager : MonoBehaviour
         removePowerUpState();
     }
 
-    public bool ConfirmedQuitOrRestart
+    public bool IsOptionsUIOpen
     {
-        get { return confirmedQuitOrRestart; }
-        set { confirmedQuitOrRestart = value; }
+        get { return isOptionsUIOpen; }
+        set { isOptionsUIOpen = value; }
     }
 
     public float ShieldDuration 
@@ -877,14 +877,14 @@ public class CTF_GameManager : MonoBehaviour
     {
         optionsUICanvas.SetActive(false);
         gameResumeTimerManager.SetActive(true);
-        confirmedQuitOrRestart = false;
+        isOptionsUIOpen = false;
     }
 
     public void SettingsButtonFunction()
     {
         optionsUICanvas.SetActive(true);
         audioManager.pauseCountdown();
-        confirmedQuitOrRestart = true;
+        isOptionsUIOpen = true;
         pauseManager.PauseGame();
     }
 

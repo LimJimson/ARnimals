@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using UnityEngine.UIElements;
 
 public class CTF_TimerManager : MonoBehaviour
 {
@@ -19,7 +20,6 @@ public class CTF_TimerManager : MonoBehaviour
 
     private float changedValue = 0f;
     private float currentTime;
-    private bool fadeFinished = false;
 
     public float getCurrentTime() 
     {
@@ -49,7 +49,6 @@ public class CTF_TimerManager : MonoBehaviour
         {
             initialMusicVolume = audioManager.musicVolume;
             StartCoroutine(FadeOutMusic(initialMusicVolume));
-
         }
 
         if (currentTime <= 10.0f && !tenSecondsLeft) 
@@ -58,19 +57,6 @@ public class CTF_TimerManager : MonoBehaviour
             audioManager.playCountdown();
             tenSecondsLeft = true;
         }
-
-        if (currentTime <= 10.0f) 
-        {
-            if (fadeFinished && changedValue == 0) 
-            {
-                audioManager.musicVolume = initialMusicVolume;
-            }
-            else 
-            {
-                audioManager.musicVolume = changedValue;
-            }
-        }
-
     }
 
     private void UpdateTimerText()
@@ -82,6 +68,8 @@ public class CTF_TimerManager : MonoBehaviour
     {
         isVolumeFading = true;
 
+        float localInitialVolume = initialMusicVolume;
+
         float currentTime = 0;
         while (currentTime < fadeDuration)
         {
@@ -90,20 +78,34 @@ public class CTF_TimerManager : MonoBehaviour
 
             float newVolume = Mathf.Lerp(initialVolume, 0f, normalizedTime);
 
-            if (CTF_GameManager.Instance.ConfirmedQuitOrRestart) 
+            if (!CTF_GameManager.Instance.IsOptionsUIOpen) 
             {
-                changedValue = audioManager.musicVolume;
+                audioManager.musicVolume = newVolume;
             }
             else 
             {
-                audioManager.musicVolume = newVolume;
-                if (newVolume <= 0f) 
+                if (Mathf.RoundToInt(audioManager.musicVolume * 100) == Mathf.RoundToInt(newVolume * 100))  
                 {
-                    fadeFinished = true;
-                    Debug.Log("Fade Finished");
+                    changedValue = localInitialVolume;
+                    audioManager.musicVolume = changedValue;
+                }
+                else 
+                {
+                    localInitialVolume = audioManager.musicVolume;
+                    changedValue = localInitialVolume;
+                    audioManager.musicVolume = changedValue;
                 }
             }
             yield return null;
+        }
+
+        if (changedValue == 0) 
+        {
+            audioManager.musicVolume = initialMusicVolume;
+        }
+        else 
+        {
+            audioManager.musicVolume = changedValue;
         }
 
         isVolumeFading = false;

@@ -14,6 +14,9 @@ public class CTF_GameStartManager : MonoBehaviour
     [SerializeField] private GameObject clickToStart; 
 
     [SerializeField] private bool gameStarted = false;
+    [SerializeField] private TextMeshProUGUI countdownTxt;
+
+    private float countdown = 3f;
 
     public bool GetGameStarted() 
     {
@@ -49,10 +52,9 @@ public class CTF_GameStartManager : MonoBehaviour
 
     private void Update()
     {
-
         if (startPanel.activeSelf == true) 
         {
-            Invoke("activateClickToStart", 3f);
+            startCountdownForClickToStart();
         }
     }
 
@@ -74,11 +76,6 @@ public class CTF_GameStartManager : MonoBehaviour
         timerManager.SetActive(true);
     }
 
-    public void activateClickToStart() 
-    {
-        clickToStart.SetActive(true);
-    }
-
     public void StartGame()
     {
         if (gameStarted == false && clickToStart.activeSelf == true)
@@ -95,6 +92,22 @@ public class CTF_GameStartManager : MonoBehaviour
 
             gameStarted = true; // Toggle the gameStarted flag
             EnableFoodSpawnersAndScoreHealthCanvas();
+        }
+    }
+
+    private void startCountdownForClickToStart() 
+    {
+        countdownTxt.gameObject.SetActive(true);
+
+        if (countdown > 0f) 
+        {
+            countdown -= Time.deltaTime;
+            countdownTxt.text = Mathf.CeilToInt(countdown).ToString();
+        }
+        else 
+        {
+            countdownTxt.gameObject.SetActive(false);
+            clickToStart.SetActive(true);
         }
     }
 }

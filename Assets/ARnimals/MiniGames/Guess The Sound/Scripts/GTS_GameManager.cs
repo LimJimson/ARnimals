@@ -160,7 +160,7 @@ public class GTS_GameManager : MonoBehaviour
         }
 
     }
-
+    public TMP_Text numOfHints;
     void hintTxt()
     {
 
@@ -180,12 +180,13 @@ public class GTS_GameManager : MonoBehaviour
         }
         else if (HintsLeft == 0)
         {
-
+            
             hintsTxt.text = "No more hints left";
             StartCoroutine(_showHintLeft());
             try { audioManager.PlaySFX(audioManager.wrongAnswer); } catch { }
 
         }
+        numOfHints.text = HintsLeft + "/2";
     }
     IEnumerator _showHintLeft()
     {

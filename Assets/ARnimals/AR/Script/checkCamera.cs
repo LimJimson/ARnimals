@@ -22,50 +22,34 @@ public class checkCamera : MonoBehaviour
 
     void Update()
     {
-        if (arSession == null)
-        {
-            Debug.LogWarning("ARSession not found.");
-            return;
-        }
-
         ARSessionState sessionState = ARSession.state;
 
         if (sessionState == ARSessionState.SessionTracking)
         {
-            Invoke("disableCameraBlock",1f);
-
-
+            //camera is not blocked
+            disableCameraBlock();
         }
         else if (sessionState == ARSessionState.Unsupported || sessionState == ARSessionState.NeedsInstall)
         {
             Debug.LogWarning("AR is unsupported or needs installation.");
         }
+        else if (sessionState == ARSessionState.None || sessionState == ARSessionState.CheckingAvailability)
+        {
+            Debug.Log("AR system is initializing or checking availability.");
+        }
         else
         {
-            // The camera may be blocked or not functioning properly.
+            //camera is blocked
             cameraBlockGO.SetActive(true);
             if (arNarrationScript.isNarrationActive)
             {
                 arNarrationScript.exitNarration();
             }
-            
-            //if (_recordScript.isRecording)
-            //{
-            //    _recordScript.stopRecord();
-            //}
-            
-            //arPlacementScript.removeAllAdditionalAnimals();
 
-            //if (!arGuideScript.isGuideActive)
-            //{
-            //    arPlacementScript.destroyObject();
-            //}
-            
-
-            
         }
 
-        
+
+
     }
     void disableCameraBlock()
     {

@@ -47,25 +47,27 @@ public class GTS_Settings : MonoBehaviour
 
     public void LoadSettings()
     {
+        try
+        {
+            audioManager.musicVol = loaddata.MusicVolume;
 
-        audioManager.musicVol = loaddata.MusicVolume;
+            audioManager.musicSource.volume = audioManager.musicVol;
+            musicSlider.value = loaddata.MusicVolume * 100;
 
-        audioManager.musicSource.volume = audioManager.musicVol;
-        musicSlider.value = loaddata.MusicVolume * 100;
+            audioManager.sfxSource.volume = loaddata.SFXVolume;
+            sfxSlider.value = loaddata.SFXVolume * 100;
 
-        audioManager.sfxSource.volume = loaddata.SFXVolume;
-        sfxSlider.value = loaddata.SFXVolume * 100;
+            audioManager.animalSndVol = loaddata.AnimalSndVolume;
+            AnimalVolSlider.value = loaddata.AnimalSndVolume * 100;
 
-        audioManager.animalSndVol = loaddata.AnimalSndVolume;
-        AnimalVolSlider.value = loaddata.AnimalSndVolume * 100;
+            audioManager.guideSource.volume = loaddata.GuideVolume;
+            guideSlider.value = loaddata.GuideVolume * 100;
 
-        audioManager.guideSource.volume = loaddata.GuideVolume;
-        guideSlider.value = loaddata.GuideVolume * 100;
-
-        UpdateVolumeMusicText();
-        UpdateVolumeSFXText();
-        UpdateVolumeAnimalSndText();
-        UpdateVolumeGuideText();
+            UpdateVolumeMusicText();
+            UpdateVolumeSFXText();
+            UpdateVolumeAnimalSndText();
+            UpdateVolumeGuideText();
+        }catch { }
     }
     public void saveSettings()
     {

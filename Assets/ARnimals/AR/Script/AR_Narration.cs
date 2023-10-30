@@ -61,36 +61,38 @@ public class AR_Narration : MonoBehaviour
     void Update()
     {
 
-
-        if (audiomanager.guideSource.isPlaying && isNarrationActive)
+        try
         {
-
-            float currentTime = audiomanager.guideSource.time;
-            string formattedTime = FormatTime(currentTime);
-            currentAudioTime.text = formattedTime;
-
-            NarrateCanvas.SetActive(true);
-            audiomanager.musicSource.Pause();
-
-            foreach (GameObject items in GameObjectsToHideARNarration)
+            if (audiomanager.guideSource.isPlaying && isNarrationActive)
             {
-                items.SetActive(false);
-            }
-        }
 
-        if(!audiomanager.guideSource.isPlaying && isNarrationActive)
-        {
-            isNarrationActive = false;
-            audiomanager.musicSource.UnPause();
+                float currentTime = audiomanager.guideSource.time;
+                string formattedTime = FormatTime(currentTime);
+                currentAudioTime.text = formattedTime;
 
-            NarrateCanvas.SetActive(false);
-            foreach (GameObject items in GameObjectsToHideARNarration)
-            {
-                items.SetActive(true);
+                NarrateCanvas.SetActive(true);
+                audiomanager.musicSource.Pause();
+
+                foreach (GameObject items in GameObjectsToHideARNarration)
+                {
+                    items.SetActive(false);
+                }
             }
 
-        }
+            if (!audiomanager.guideSource.isPlaying && isNarrationActive)
+            {
+                isNarrationActive = false;
+                audiomanager.musicSource.UnPause();
 
+                NarrateCanvas.SetActive(false);
+                foreach (GameObject items in GameObjectsToHideARNarration)
+                {
+                    items.SetActive(true);
+                }
+
+            }
+        }
+        catch{}
     }
     public void NarrateBtn()
     {

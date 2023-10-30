@@ -124,12 +124,12 @@ public class buttonScripts : MonoBehaviour
         GalleryImgUI.SetActive(false);
         GalleryUI.SetActive(true);
         ARPlacementScript.resetTimerSpawnAnimal();
-        _checkCamScript.enabled = true;
+        _checkCamScript.enabled = false;
     }
     public void hideGallerySelectionUI()
     {
         GalleryUI.SetActive(false);
-        _checkCamScript.enabled = false;
+        _checkCamScript.enabled = true;
         _showHabitatScript.playEnvironmentBGM();
     }
     public void show_hide_UI()

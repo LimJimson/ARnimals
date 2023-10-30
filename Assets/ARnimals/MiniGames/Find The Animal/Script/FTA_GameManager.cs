@@ -1359,6 +1359,7 @@ public class FTA_GameManager : MonoBehaviour
         {
             shadowImgs.color = Color.black;
         }
+
         Image clickedAnimalImg = clickedAnimal.GetComponent<Image>();
         Color enableCorrectAnswer = new Color(1.0f, 1.0f, 1.0f);
         clickedAnimalImg.color = enableCorrectAnswer;

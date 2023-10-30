@@ -330,55 +330,55 @@ public class recordBTNScript : MonoBehaviour
     }
     //delete video script
 
-    //public void DeleteVideo()
-    //{
-    //    if (videoFiles.Length > 0)
-    //    {
-    //        if (VidPlayer.isPlaying)
-    //        {
-    //            VidPlayer.Stop();
-    //            play_pause_vid.image.sprite = play_btn[1];
-    //        }
-    //        StartCoroutine(showTextDelVid());
-    //        string pathToFile = videoFiles[currentVideoIndex];
-    //        if (File.Exists(pathToFile)) 
-    //        { 
-    //            File.Delete(pathToFile);
+    public void DeleteVideo()
+    {
+        if (videoFiles.Length > 0)
+        {
+            if (VidPlayer.isPlaying)
+            {
+                VidPlayer.Stop();
+                play_pause_vid.image.sprite = play_btn[1];
+            }
+            StartCoroutine(showTextDelVid());
+            string pathToFile = videoFiles[currentVideoIndex];
+            if (File.Exists(pathToFile))
+            {
+                File.Delete(pathToFile);
 
-    //        }
-    //        if (videoFiles.Length > 0)
-    //        {
-    //            PlayNextVideo();
-    //        }
-    //        else
-    //        {
-    //            GetVideos();
-    //        }
-    //    }
-    //    else if (videoFiles.Length <= 0)
-    //    {
-    //        StartCoroutine(showTextNoVid());
-    //    }
-    //    GetVideos();
-    //}
+            }
+            if (videoFiles.Length > 0)
+            {
+                PlayNextVideo();
+            }
+            else
+            {
+                GetVideos();
+            }
+        }
+        else if (videoFiles.Length <= 0)
+        {
+            StartCoroutine(showTextNoVid());
+        }
+        GetVideos();
+    }
 
-    //IEnumerator showTextNoVid()
-    //{
-    //    deleteBtn.interactable = false;
-    //    errorTxtNoVid.gameObject.SetActive(true);
-    //    yield return new WaitForSeconds(1f);
-    //    errorTxtNoVid.gameObject.SetActive(false);
-    //    deleteBtn.interactable = true;
-    //}
+    IEnumerator showTextNoVid()
+    {
+        deleteBtn.interactable = false;
+        errorTxtNoVid.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        errorTxtNoVid.gameObject.SetActive(false);
+        deleteBtn.interactable = true;
+    }
 
-    //IEnumerator showTextDelVid()
-    //{
-    //    deleteBtn.interactable = false;
-    //    errorTxtDelVid.gameObject.SetActive(true);
-    //    yield return new WaitForSeconds(1f);
-    //    errorTxtDelVid.gameObject.SetActive(false);
-    //    deleteBtn.interactable = true;
-    //}
+    IEnumerator showTextDelVid()
+    {
+        deleteBtn.interactable = false;
+        errorTxtDelVid.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        errorTxtDelVid.gameObject.SetActive(false);
+        deleteBtn.interactable = true;
+    }
 
 
 }

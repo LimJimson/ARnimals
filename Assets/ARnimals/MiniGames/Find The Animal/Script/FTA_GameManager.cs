@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 using TMPro;
 using System;
+using Unity.VisualScripting;
 
 public class FTA_GameManager : MonoBehaviour
 {
@@ -816,6 +817,8 @@ public class FTA_GameManager : MonoBehaviour
         }
     }
 
+    //========HINT=========//
+
     public Button ButtonHint;
     public void HintBtn()
     {
@@ -941,6 +944,7 @@ public class FTA_GameManager : MonoBehaviour
             hintTxt();
         }
     }
+    public TextMeshProUGUI HintNumbertxt;
 
     void hintTxt()
     {
@@ -966,6 +970,7 @@ public class FTA_GameManager : MonoBehaviour
             hintsTxt.text = "No more hints left";
             StartCoroutine(_showHintLeft());
         }
+        HintNumbertxt.text = HintsLeft + "/1";
     }
     IEnumerator _showHintLeft()
     {
@@ -1015,7 +1020,6 @@ public class FTA_GameManager : MonoBehaviour
     {
         timerHints.text = Convert.ToInt16(countdownTimeHints).ToString();
     }
-
 
 
     [Header("Stars")]
@@ -1331,7 +1335,7 @@ public class FTA_GameManager : MonoBehaviour
 
     public void openTriviaCanvas()
     {
-
+        TriviaGuide();
         clickAnimalShadow(shadowImgContainerTrivia[0].gameObject);
         
         triviaGameCanvas.SetActive(true);
@@ -1361,6 +1365,7 @@ public class FTA_GameManager : MonoBehaviour
         }
 
         Image clickedAnimalImg = clickedAnimal.GetComponent<Image>();
+        ShowArrowTriviaGuide(clickedAnimal.name);
         Color enableCorrectAnswer = new Color(1.0f, 1.0f, 1.0f);
         clickedAnimalImg.color = enableCorrectAnswer;
         AnimalImageTriva.sprite = clickedAnimalImg.sprite;
@@ -1368,6 +1373,47 @@ public class FTA_GameManager : MonoBehaviour
         animalGetAnimalName = AnimalNameTrivia.text;
         generateRandomTrivia();
     }
+    public GameObject Arrow1;
+    public GameObject Arrow2;
+    public GameObject Arrow3;
+    void ShowArrowTriviaGuide(string clickedAnimalImg)
+    {
+        if (clickedAnimalImg == "shadowleo")
+        {
+            Arrow1.SetActive(false);
+            Arrow2.SetActive(true);
+            Arrow3.SetActive(true);
+        }
+        else if (clickedAnimalImg == "shadowtig")
+        {
+            Arrow1.SetActive(true);
+            Arrow2.SetActive(false);
+            Arrow3.SetActive(true);
+        }
+        else if (clickedAnimalImg == "shadowzeb")
+        {
+            Arrow1.SetActive(true);
+            Arrow2.SetActive(true);
+            Arrow3.SetActive(false);
+        }
+    }
+
+    public GameObject TriviaBoyGuide;
+    public GameObject TriviaGirlGuide;
+    public void TriviaGuide()
+    {
+        if (guide_chosen == "boy_guide")
+        {
+            TriviaBoyGuide.SetActive(true);
+            TriviaGirlGuide.SetActive(false);
+        }
+        else if (guide_chosen == "girl_guide")
+        {
+            TriviaBoyGuide.SetActive(false);
+            TriviaGirlGuide.SetActive(true);
+        }
+    }
+
     public int _index;
     public void getIndex(int index)
     {

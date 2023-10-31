@@ -5,8 +5,8 @@ public class CTF_FoodSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] foods;
     [SerializeField] private Transform spawnPoint;
-    [SerializeField] private float spawnInterval = 1f;
-    [SerializeField] private float spawnForce = 1f;
+    private float spawnInterval = 1f;
+    private float spawnForce = 1f;
     [SerializeField] private CTF_GameManager gameManager;
 
     [SerializeField] private float spawnTimer;
@@ -15,6 +15,13 @@ public class CTF_FoodSpawner : MonoBehaviour
 
     [SerializeField] private GameObject[] powerUps;
 
+    private float powerUpProbability;
+
+    private void Start() 
+    {
+        string selectedLevel = PlayerPrefs.GetString("CTF_SelectedLevel");
+        spawnForcePerLvl(selectedLevel);
+    }
 
     private void Update()
     {
@@ -27,6 +34,38 @@ public class CTF_FoodSpawner : MonoBehaviour
         }
     }
 
+    private void spawnForcePerLvl(string selectedLevel) 
+    {
+        switch(selectedLevel) 
+        {
+            case "1":
+                powerUpProbability = 0.083f; //25%
+                spawnInterval = 1.3f;
+                spawnForce = 15.0f;
+                break;
+            case "2":
+                powerUpProbability = 0.067f; //20%
+                spawnInterval = 1.2f;
+                spawnForce = 17.0f;
+                break;
+            case "3":
+                powerUpProbability = 0.05f; //15%
+                spawnInterval = 1.1f;
+                spawnForce = 19.0f;
+                break;
+            case "4":
+                powerUpProbability = 0.033f; //10%
+                spawnInterval = 1.0f;
+                spawnForce = 21.0f;
+                break;
+            case "5":
+                powerUpProbability = 0.017f; //5%
+                spawnInterval = 0.9f;
+                spawnForce = 23.0f;
+                break;
+        }
+    }
+    
     private void SpawnFood()
     {
         // Filter out disabled foodPrefabs
@@ -56,7 +95,7 @@ public class CTF_FoodSpawner : MonoBehaviour
 
         Debug.Log("Random Value: " + randomValue);
 
-        if (randomValue <= 0.067f)
+        if (randomValue <= powerUpProbability)
         {
 
             Debug.Log("Available PowerUps: " + enabledPowerUps.Length);

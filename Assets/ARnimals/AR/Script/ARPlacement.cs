@@ -52,10 +52,17 @@ public class ARPlacement : MonoBehaviour
         Application.targetFrameRate = 30;
         modelIndex = StateNameController.animalIndexChosen;
 
+
     }
     void Start()
     {
-        
+        try
+        {
+            BrainCheck.ScreenRecorderBridge.SetFileNameAndDirectoryName("ARnimals", "ARnimals_Recording");
+            BrainCheck.ScreenRecorderBridge.SetUpScreenRecorder();
+        }
+        catch { }
+
         //hide GameObjects
         foreach (GameObject uiElement in GameObjectsToHide)
         {

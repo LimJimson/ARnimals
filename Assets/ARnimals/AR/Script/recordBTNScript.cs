@@ -38,37 +38,21 @@ public class recordBTNScript : MonoBehaviour
 
     void Start()
     {
-        #if UNITY_ANDROID && !UNITY_EDITOR
-           ScreenRecorderBridge.SetFileNameAndDirectoryName("ARnimals", "ARnimals_Recording");
-           ScreenRecorderBridge.SetUpScreenRecorder();
-        #endif
+
         VidPlayer.loopPointReached += OnVideoLoopPointReached;
 
-    }
-    private void FixedUpdate()
-    {
-        checkIfRecordingIsActive();
-        
     }
 
     void checkIfRecordingIsActive()
     {
         if (ScreenRecorderBridge.CheckIfRecordingInProgress() == true)
         {
-            isRecording = true;
-            _ARPlacementScript.Arrow.SetActive(false);
-            _ARPlacementScript.distanceTxt.gameObject.SetActive(false);
-            
-            stopRecordBtn.SetActive(true);
+            //isRecording = true;
             StartCountdown();
         }
         else if (ScreenRecorderBridge.CheckIfRecordingInProgress() == false)
         {
-            
             isRecording = false;
-
-            stopRecordBtn.SetActive(false);
-
         }
 
         enable_disableGameObjects();
@@ -87,18 +71,21 @@ public class recordBTNScript : MonoBehaviour
         {
             foreach (GameObject uiElement in objectsToHide)
             {
+                _ARPlacementScript.Arrow.SetActive(false);
+                _txt.gameObject.SetActive(false);
+                _ARPlacementScript.distanceTxt.gameObject.SetActive(false);
+                stopRecordBtn.SetActive(true);
                 uiElement.SetActive(false);
             }
         }
 
     }
     public TMP_Text countdownTextRecord;
-    private float countdownTime;
+    private float countdownTime = 15f;
     private bool isCountingDown = false;
 
     public void StartCountdown()
     {
-        
         isCountingDown = true;
     }
 
@@ -112,9 +99,13 @@ public class recordBTNScript : MonoBehaviour
         countdownTextRecord.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
+    private void FixedUpdate()
+    {
+        checkIfRecordingIsActive();
+    }
     private void Update()
     {
-
+        
         if (VidPlayer.isPlaying)
         {
             SetCurrentTimeUI();
@@ -147,22 +138,24 @@ public class recordBTNScript : MonoBehaviour
     public void RecordButtonOnClick()
     {
         countdownTime = 15.0f;
-        _txt.gameObject.SetActive(false);
-        StopAllCoroutines();
+        //StopAllCoroutines();
         ScreenRecorderBridge.StartScreenRecording();
+        isRecording = true;
+
     }
 
-    
+
     public void stopRecord(){
         if(isRecording){
-        ScreenRecorderBridge.StopScreenRecording();
+        BrainCheck.ScreenRecorderBridge.StopScreenRecording();
+        stopRecordBtn.SetActive(false);
         _ARPlacementScript.Arrow.SetActive(true);
         _ARPlacementScript.distanceTxt.gameObject.SetActive(true);
         _txt.gameObject.SetActive(true);
-        isRecording = false;
         StartCoroutine(txtDelay());
         }
     }
+
     string videoFileName;
 
     public void getVideoPath()
@@ -328,57 +321,4 @@ public class recordBTNScript : MonoBehaviour
         currentVideoIndex = 0;
         GetVideos();
     }
-    //delete video script
-
-    public void DeleteVideo()
-    {
-        if (videoFiles.Length > 0)
-        {
-            if (VidPlayer.isPlaying)
-            {
-                VidPlayer.Stop();
-                play_pause_vid.image.sprite = play_btn[1];
-            }
-            StartCoroutine(showTextDelVid());
-            string pathToFile = videoFiles[currentVideoIndex];
-            if (File.Exists(pathToFile))
-            {
-                File.Delete(pathToFile);
-
-            }
-            if (videoFiles.Length > 0)
-            {
-                PlayNextVideo();
-            }
-            else
-            {
-                GetVideos();
-            }
-        }
-        else if (videoFiles.Length <= 0)
-        {
-            StartCoroutine(showTextNoVid());
-        }
-        GetVideos();
-    }
-
-    IEnumerator showTextNoVid()
-    {
-        deleteBtn.interactable = false;
-        errorTxtNoVid.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        errorTxtNoVid.gameObject.SetActive(false);
-        deleteBtn.interactable = true;
-    }
-
-    IEnumerator showTextDelVid()
-    {
-        deleteBtn.interactable = false;
-        errorTxtDelVid.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        errorTxtDelVid.gameObject.SetActive(false);
-        deleteBtn.interactable = true;
-    }
-
-
 }

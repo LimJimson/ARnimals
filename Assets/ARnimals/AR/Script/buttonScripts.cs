@@ -11,6 +11,7 @@ public class buttonScripts : MonoBehaviour
     bool showUI = true;
     public ARPlacement ARPlacementScript;
     public showHabitat _showHabitatScript;
+    public recordBTNScript _recordBTNScript;
     public GameObject MainUI;
     public GameObject OptionsUI;
     public GameObject GalleryImgUI;
@@ -27,7 +28,6 @@ public class buttonScripts : MonoBehaviour
 
     AudioManager audioManager;
 
-    public checkCamera _checkCamScript;
 
     private void Start()
     {
@@ -40,7 +40,6 @@ public class buttonScripts : MonoBehaviour
         continueBtnNote.interactable = false;
         StartCoroutine(WaitForAnimation());
     }
-
     
     public void returnToMainMenu()
     {
@@ -71,7 +70,6 @@ public class buttonScripts : MonoBehaviour
     public void hideNote()
     {
         noteCanvas.SetActive(false);
-        _checkCamScript.enabled = true;
     }
 
     public void openOptions()
@@ -113,6 +111,7 @@ public class buttonScripts : MonoBehaviour
 
     public void hideVidGallery()
     {
+
         GalleryVidUI.SetActive(false);
         GalleryUI.SetActive(true);
         _showHabitatScript.unPauseMainBGM();
@@ -124,12 +123,10 @@ public class buttonScripts : MonoBehaviour
         GalleryImgUI.SetActive(false);
         GalleryUI.SetActive(true);
         ARPlacementScript.resetTimerSpawnAnimal();
-        _checkCamScript.enabled = false;
     }
     public void hideGallerySelectionUI()
     {
         GalleryUI.SetActive(false);
-        _checkCamScript.enabled = true;
         _showHabitatScript.playEnvironmentBGM();
     }
     public void show_hide_UI()

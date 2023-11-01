@@ -30,20 +30,22 @@ public class ScreenshotPreview : MonoBehaviour {
 
 	public void getPicture()
 	{
-        #if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID && !UNITY_EDITOR
             files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + " Captures", "*.png");//Directory.GetFiles(Application.persistentDataPath + "/", "*.png");
             if (files.Length > 0)
             {
                 imgCounter.gameObject.SetActive(true);
-                Image.gameObject.SetActive(true);
+                Image.gameObject.SetActive(true);  
+                fileNameImgTxt.gameObject.SetActive(true);
                 GetPictureAndShowIt();
             }
             else if (files.Length == 0)
             {
                 imgCounter.gameObject.SetActive(false);
                 Image.gameObject.SetActive(false);
+                fileNameImgTxt.gameObject.SetActive(false);
             }
-        #endif
+#endif
 
     }
     string ImgFileName;
@@ -91,7 +93,8 @@ public class ScreenshotPreview : MonoBehaviour {
 		{
             StartCoroutine(showTextNoImg());
 		}
-		getPicture();
+        whichScreenShotIsShown=0;
+        getPicture();
 
         AndroidJavaClass mediaScanner = new AndroidJavaClass("android.media.MediaScannerConnection");
         AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");

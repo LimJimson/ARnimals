@@ -22,37 +22,38 @@ public class checkCamera : MonoBehaviour
 
     void Update()
     {
-        ARSessionState sessionState = ARSession.state;
+        //    ARSessionState sessionState = ARSession.state;
 
-        if (sessionState == ARSessionState.SessionTracking)
-        {
-            //camera is not blocked
-            disableCameraBlock();
-        }
-        else if (sessionState == ARSessionState.Unsupported || sessionState == ARSessionState.NeedsInstall)
-        {
-            Debug.LogWarning("AR is unsupported or needs installation.");
-        }
-        else if (sessionState == ARSessionState.None || sessionState == ARSessionState.CheckingAvailability)
-        {
-            Debug.Log("AR system is initializing or checking availability.");
-        }
-        else
-        {
-            //camera is blocked
-            cameraBlockGO.SetActive(true);
-            if (arNarrationScript.isNarrationActive)
-            {
-                arNarrationScript.exitNarration();
-            }
+        //    if (sessionState == ARSessionState.SessionTracking)
+        //    {
+        //        //camera is not blocked
+        //        disableCameraBlock();
+        //    }
+        //    else if (sessionState == ARSessionState.Unsupported || sessionState == ARSessionState.NeedsInstall)
+        //    {
+        //        Debug.LogWarning("AR is unsupported or needs installation.");
+        //    }
+        //    else if (sessionState == ARSessionState.None || sessionState == ARSessionState.CheckingAvailability)
+        //    {
+        //        Debug.Log("AR system is initializing or checking availability.");
+        //    }
+        //    else
+        //    {
+        //        //camera is blocked
+        //        cameraBlockGO.SetActive(true);
+        //        if (arNarrationScript.isNarrationActive)
+        //        {
+        //            arNarrationScript.exitNarration();
+        //        }
 
-        }
+        //    }
 
 
 
-    }
-    void disableCameraBlock()
-    {
-        cameraBlockGO.SetActive(false);
+        //}
+        //void disableCameraBlock()
+        //{
+        //    cameraBlockGO.SetActive(false);
+        //}
     }
 }

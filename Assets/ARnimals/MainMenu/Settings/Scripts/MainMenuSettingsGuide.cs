@@ -68,10 +68,11 @@ public class MainMenuSettingsGuide : MonoBehaviour
         if (!StateNameController.mainMenuSettingsGuide && isSettingsClicked)
         {
             _MainMenuSettingsGuide();
+            loaddata.mainMenuSettingsGuide = true;
+            StateNameController.mainMenuSettingsGuide = true;
+            SaveManager.Save(loaddata);
         }
-        loaddata.mainMenuSettingsGuide = true;
-        StateNameController.mainMenuSettingsGuide = true;
-        SaveManager.Save(loaddata);
+
 
     }
 

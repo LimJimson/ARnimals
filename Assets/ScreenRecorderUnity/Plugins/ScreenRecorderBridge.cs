@@ -32,7 +32,7 @@ namespace BrainCheck {
 		}
 
 		public static void StopScreenRecording(){
-			SetupPlugin ();
+			//SetupPlugin ();
 		   	instance.Call("stopRecording");
 		}
 
@@ -47,7 +47,7 @@ namespace BrainCheck {
 		}
 
 		public static void StartScreenRecording(){
-			SetupPlugin ();
+			//SetupPlugin ();
 		   	instance.Call("startRecording");
 		}
 

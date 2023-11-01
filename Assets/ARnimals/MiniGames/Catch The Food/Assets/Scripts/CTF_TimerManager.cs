@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
-using UnityEngine.UIElements;
 
 public class CTF_TimerManager : MonoBehaviour
 {
@@ -10,6 +9,7 @@ public class CTF_TimerManager : MonoBehaviour
     [SerializeField] CTF_AudioManager audioManager;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private float maxTime = 10f;
+    [SerializeField] private Slider musicSlider;
 
     private bool tenSecondsLeft = false;
 
@@ -68,7 +68,7 @@ public class CTF_TimerManager : MonoBehaviour
     {
         isVolumeFading = true;
 
-        float localInitialVolume = initialMusicVolume;
+        changedValue = initialMusicVolume;
 
         float currentTime = 0;
         while (currentTime < fadeDuration)
@@ -84,29 +84,13 @@ public class CTF_TimerManager : MonoBehaviour
             }
             else 
             {
-                if (Mathf.RoundToInt(audioManager.musicVolume * 100) == Mathf.RoundToInt(newVolume * 100))  
-                {
-                    changedValue = localInitialVolume;
-                    audioManager.musicVolume = changedValue;
-                }
-                else 
-                {
-                    localInitialVolume = audioManager.musicVolume;
-                    changedValue = localInitialVolume;
-                    audioManager.musicVolume = changedValue;
-                }
+                changedValue = musicSlider.value;
+                audioManager.musicVolume = changedValue; 
             }
             yield return null;
         }
 
-        if (changedValue == 0) 
-        {
-            audioManager.musicVolume = initialMusicVolume;
-        }
-        else 
-        {
-            audioManager.musicVolume = changedValue;
-        }
+        audioManager.musicVolume = changedValue;
 
         isVolumeFading = false;
     }

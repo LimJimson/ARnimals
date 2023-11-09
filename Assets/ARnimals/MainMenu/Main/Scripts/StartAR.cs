@@ -62,6 +62,7 @@ public class StartAR : MonoBehaviour
         ConfirmGuideChange.gameObject.SetActive(false);
         ConfirmResetGame.gameObject.SetActive(false);
         ConfirmQuit.SetActive(false);
+
     }
     // Button Scripts
     public void goToModeSelect()
@@ -76,8 +77,9 @@ public class StartAR : MonoBehaviour
 
     public void goToSettingsMenu()
     {
-        mainMenuSettingsGuideScript.settingsGuide();
+        
         StartCoroutine(waitForTransition(fadeScene.FadeOut(MainMenu.gameObject, Settings.gameObject), fadeScene.FadeIn()));
+        mainMenuSettingsGuideScript.settingsGuide();
 
     }
 
@@ -85,6 +87,9 @@ public class StartAR : MonoBehaviour
     public void goToMainMenu()
     {
         StartCoroutine(waitForTransition(fadeScene.FadeOut(Settings.gameObject, MainMenu.gameObject), fadeScene.FadeIn()));
+        loaddata.mainMenuSettingsGuide = true;
+        SaveManager.Save(loaddata);
+
     }
 
     private IEnumerator waitForTransition(IEnumerator first, IEnumerator second) 

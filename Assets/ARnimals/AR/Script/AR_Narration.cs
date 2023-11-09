@@ -96,7 +96,7 @@ public class AR_Narration : MonoBehaviour
     }
     public void NarrateBtn()
     {
-
+        StopAllCoroutines();
         animalIndex = _arPlacementScript.getAnimalIndex();
         isNarrationActive = true;
         if (guide_chosen == "boy_guide")

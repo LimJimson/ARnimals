@@ -128,6 +128,7 @@ public class showHabitat : MonoBehaviour
 
     public void showAnimalHabitat()
     {
+        StopAllCoroutines();
         if (isHabitatEnabled)
         {
             isHabitatEnabled = false;

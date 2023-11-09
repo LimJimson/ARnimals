@@ -65,12 +65,13 @@ public class MainMenuSettingsGuide : MonoBehaviour
 
     public void settingsGuide()
     {
+        loaddata.mainMenuSettingsGuide = true;
+
         if (!StateNameController.mainMenuSettingsGuide && isSettingsClicked)
         {
             _MainMenuSettingsGuide();
-            loaddata.mainMenuSettingsGuide = true;
-            StateNameController.mainMenuSettingsGuide = true;
-            SaveManager.Save(loaddata);
+            
+
         }
 
 
@@ -222,6 +223,8 @@ public class MainMenuSettingsGuide : MonoBehaviour
     }
     public void skipTutorial()
     {
+        loaddata.mainMenuSettingsGuide = true;
+        SaveManager.Save(loaddata);
 
         pageNumPos1.text = "1/10";
         pageNumPos2.text = "1/10";
@@ -231,8 +234,7 @@ public class MainMenuSettingsGuide : MonoBehaviour
         Settings_GO.SetActive(false);
 
 
-        loaddata.mainMenuSettingsGuide = true;
-        SaveManager.Save(loaddata);
+
 
     }
 
@@ -278,6 +280,7 @@ public class MainMenuSettingsGuide : MonoBehaviour
     public bool isSettingsClicked;
     public void _MainMenuSettingsGuide()
     {
+        StateNameController.mainMenuSettingsGuide = true;
         Settings_GO.SetActive(true);
 
         pos1_GO.SetActive(true);

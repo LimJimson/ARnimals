@@ -28,6 +28,8 @@ public class buttonScripts : MonoBehaviour
 
     AudioManager audioManager;
 
+    public GameObject[] hideObj;
+
 
     private void Start()
     {
@@ -85,8 +87,25 @@ public class buttonScripts : MonoBehaviour
     }
     public void returnToAnimalSelectBTN()
     {
-        try { audioManager.guideSource.Stop(); }catch { }
+        try
+        {
+            audioManager.guideSource.Stop();
+            audioManager.musicSource.Stop();
+        }
+        catch { }
+        finally 
+        {
+            StopAllCoroutines();
+            StartCoroutine(goToAnimalSelect()); 
+
+        };
+        
+    }
+    IEnumerator goToAnimalSelect()
+    {
+        yield return new WaitForSeconds(0.3f);
         SceneManager.LoadScene("Animal Selector AR");
+
     }
 
     public void showImgGallery()
@@ -119,10 +138,15 @@ public class buttonScripts : MonoBehaviour
 
     public void showGallerySelectionUI()
     {
+        StopAllCoroutines();
         GalleryVidUI.SetActive(false);
         GalleryImgUI.SetActive(false);
         GalleryUI.SetActive(true);
         ARPlacementScript.resetTimerSpawnAnimal();
+        foreach (GameObject objToHide in hideObj) 
+        { 
+            objToHide.SetActive(false);
+        }
     }
     public void hideGallerySelectionUI()
     {

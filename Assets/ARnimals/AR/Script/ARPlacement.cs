@@ -56,12 +56,7 @@ public class ARPlacement : MonoBehaviour
     }
     void Start()
     {
-        try
-        {
-            BrainCheck.ScreenRecorderBridge.SetFileNameAndDirectoryName("ARnimals", "ARnimals_Recording");
-            BrainCheck.ScreenRecorderBridge.SetUpScreenRecorder();
-        }
-        catch { }
+
 
         //hide GameObjects
         foreach (GameObject uiElement in GameObjectsToHide)
@@ -74,6 +69,8 @@ public class ARPlacement : MonoBehaviour
         spawnAnimalContainer.SetActive(true);
         Arrow.gameObject.SetActive(false);
         distanceTxt.gameObject.SetActive(false);
+
+
     }
 
     private void Update()
@@ -83,19 +80,19 @@ public class ARPlacement : MonoBehaviour
 
     }
 
-    private void OnEnable()
-    {
-        originalResolution = new Vector2(Screen.width, Screen.height);
+    //private void OnEnable()
+    //{
+    //    originalResolution = new Vector2(Screen.width, Screen.height);
 
-        Vector2 changeRes = new Vector2(originalResolution.x / 2f, originalResolution.y / 2f);
+    //    Vector2 changeRes = new Vector2(originalResolution.x / 2f, originalResolution.y / 2f);
 
-        Screen.SetResolution((int)changeRes.x, (int)changeRes.y, true);
-    }
+    //    Screen.SetResolution((int)changeRes.x, (int)changeRes.y, true);
+    //}
 
-    private void OnDisable()
-    {
-        Screen.SetResolution((int)originalResolution.x, (int)originalResolution.y, true);
-    }
+    //private void OnDisable()
+    //{
+    //    Screen.SetResolution((int)originalResolution.x, (int)originalResolution.y, true);
+    //}
 
 
     void hide_showGameObjects()

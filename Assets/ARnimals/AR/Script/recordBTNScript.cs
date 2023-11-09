@@ -38,7 +38,12 @@ public class recordBTNScript : MonoBehaviour
 
     void Start()
     {
-
+        try
+        {
+            ScreenRecorderBridge.SetFileNameAndDirectoryName("ARnimals", "ARnimals_Recording");
+            ScreenRecorderBridge.SetUpScreenRecorder();
+        }
+        catch { }
         VidPlayer.loopPointReached += OnVideoLoopPointReached;
 
     }
@@ -47,39 +52,45 @@ public class recordBTNScript : MonoBehaviour
     {
         if (ScreenRecorderBridge.CheckIfRecordingInProgress() == true)
         {
-            //isRecording = true;
-            StartCountdown();
-        }
-        else if (ScreenRecorderBridge.CheckIfRecordingInProgress() == false)
-        {
-            isRecording = false;
-        }
+            isRecording = true;
 
-        enable_disableGameObjects();
-    }
-
-    void enable_disableGameObjects()
-    {
-        if(!isRecording && _ARPlacementScript.didAnimalSpawn)
-        {
-            foreach (GameObject uiElement in objectsToHide)
-            {
-                uiElement.SetActive(true);
-            }
-        }
-        else if (isRecording && _ARPlacementScript.didAnimalSpawn)
-        {
-            foreach (GameObject uiElement in objectsToHide)
+            if (isRecording && _ARPlacementScript.didAnimalSpawn)
             {
                 _ARPlacementScript.Arrow.SetActive(false);
                 _txt.gameObject.SetActive(false);
                 _ARPlacementScript.distanceTxt.gameObject.SetActive(false);
                 stopRecordBtn.SetActive(true);
-                uiElement.SetActive(false);
+                foreach (GameObject uiElement in objectsToHide)
+                {
+                    uiElement.SetActive(false);
+                }
+                StartCountdown();
             }
+
+            
+        }
+        else if (ScreenRecorderBridge.CheckIfRecordingInProgress() == false)
+        {
+            isRecording = false;
+            
+
+            if (!isRecording && _ARPlacementScript.didAnimalSpawn)
+            {
+                _ARPlacementScript.Arrow.SetActive(true);
+                _txt.gameObject.SetActive(true);
+                _ARPlacementScript.distanceTxt.gameObject.SetActive(true);
+                stopRecordBtn.SetActive(false);
+
+                foreach (GameObject uiElement in objectsToHide)
+                {
+                    uiElement.SetActive(true);
+                }
+            }
+
         }
 
     }
+
     public TMP_Text countdownTextRecord;
     private float countdownTime = 15f;
     private bool isCountingDown = false;
@@ -95,7 +106,6 @@ public class recordBTNScript : MonoBehaviour
         int minutes = Mathf.FloorToInt(countdownTime / 60);
         int seconds = Mathf.FloorToInt(countdownTime % 60);
 
-        // Display the countdown time in the "00:00" format
         countdownTextRecord.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
@@ -138,22 +148,18 @@ public class recordBTNScript : MonoBehaviour
     public void RecordButtonOnClick()
     {
         countdownTime = 15.0f;
-        //StopAllCoroutines();
+        StopAllCoroutines();
         ScreenRecorderBridge.StartScreenRecording();
-        isRecording = true;
-
     }
 
 
     public void stopRecord(){
-        if(isRecording){
-        BrainCheck.ScreenRecorderBridge.StopScreenRecording();
+        ScreenRecorderBridge.StopScreenRecording();
         stopRecordBtn.SetActive(false);
         _ARPlacementScript.Arrow.SetActive(true);
         _ARPlacementScript.distanceTxt.gameObject.SetActive(true);
         _txt.gameObject.SetActive(true);
         StartCoroutine(txtDelay());
-        }
     }
 
     string videoFileName;
@@ -287,7 +293,7 @@ public class recordBTNScript : MonoBehaviour
         currentVideoIndex+=1;
         if (currentVideoIndex >= videoFiles.Length)
         {
-            currentVideoIndex = 0; // Loop back to the first video
+            currentVideoIndex = 0; 
         }
         vidDuration.SetActive(false);
         play_pause_vid.image.sprite = play_btn[1];
@@ -301,7 +307,7 @@ public class recordBTNScript : MonoBehaviour
         if (currentVideoIndex < 0)
         {
 
-            currentVideoIndex = videoFiles.Length - 1; // Wrap around to the last video
+            currentVideoIndex = videoFiles.Length - 1; 
         }
         vidDuration.SetActive(false);
         play_pause_vid.image.sprite = play_btn[1];

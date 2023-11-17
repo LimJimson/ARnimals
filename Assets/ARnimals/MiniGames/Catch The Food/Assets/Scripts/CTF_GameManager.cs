@@ -34,6 +34,7 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private GameObject levelCompleteCanvas;
     [SerializeField] private GameObject confirmationPlayAgainCanvas;
 	[SerializeField] private GameObject highScoreCanvas;
+    [SerializeField] private GameObject bgPanelCanvas;
 
     [Header("UIs Needed")]
 
@@ -97,6 +98,14 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI triviaTxt;
     [SerializeField] private Sprite[] powerUpSprites;
 
+    [SerializeField] private GameObject[] levelCompleteGOs;
+
+    [SerializeField] private Animator confirmQuitAnimator;
+    [SerializeField] private Animator confirmRetryAnimator;
+    [SerializeField] private Animator confirmPlayAgainAnimator;
+    [SerializeField] private Animator confirmARAnimator;
+
+    private float enablerTimer = 0.7f;
     private bool isOptionsUIOpen = false;
 
     private int ARanimalIndex;
@@ -124,6 +133,33 @@ public class CTF_GameManager : MonoBehaviour
         LuckDurationTimer();
         enablePowerUpState();
         removePowerUpState();
+        enableLvlCompleteGOs();
+    }
+
+    private void enableLvlCompleteGOs() 
+    {
+        if(levelCompleteCanvas.activeSelf) 
+        {
+            levelCompleteGOs[0].SetActive(true);
+
+            if (enablerTimer > 0f)
+            {
+                enablerTimer -= Time.unscaledDeltaTime;
+            }
+            else 
+            {
+                if (levelCompleteGOs[1].activeSelf) 
+                {
+                    levelCompleteGOs[3].SetActive(true);
+                }
+                else 
+                {
+                    levelCompleteGOs[1].SetActive(true);
+                    levelCompleteGOs[2].SetActive(true);
+                    enablerTimer = 0.7f;
+                }
+            }
+        }
     }
 
     public bool IsOptionsUIOpen
@@ -484,6 +520,7 @@ public class CTF_GameManager : MonoBehaviour
             if (healthManager.GetHealth() <= 0)
             {
                 pauseManager.PauseGame();
+                bgPanelCanvas.SetActive(true);
                 gameOverCanvas.SetActive(true);
 				audioManager.pauseBGMusic();
 				audioManager.playGameOverSFX();
@@ -505,9 +542,9 @@ public class CTF_GameManager : MonoBehaviour
         string [] pigeonTrivia = 
         {
             "<color=green>Did you know?</color> <color=yellow>Pigeons</color> can do math! Researchers found that pigeons can learn abstract math rules and even understand concepts like zero.",
-            "<color=green>Did you know?</color> <color=yellow>Pigeons</color> have <color=#F86768>'super'</color> vision. They see ultraviolet light, which we can't, helping them navigate and spot hidden things.",
+            "<color=green>Did you know?</color> <color=yellow>Pigeons</color> have super vision. They see ultraviolet light, which we can't, helping them navigate and spot hidden things.",
             "<color=green>Did you know?</color> <color=yellow>Pigeons</color> can recognize all 26 letters of the alphabet. They've even learned to tell them apart and spell simple words in studies!",
-            "<color=green>Did you know?</color> In some cultures, <color=yellow>pigeons</color> are considered symbols of love and peace. They've even been used in weddings to carry love notes.",
+            "<color=green>Did you know?</color> In some cultures, <color=yxellow>pigeons</color> are considered symbols of love and peace. They've even been used in weddings to carry love notes.",
             "<color=green>Did you know?</color> <color=yellow>Pigeons</color> show love with a cute dance called <color=#FF0046>'pigeon courtship'</color> to their feathered friend."
         };
         string [] koiTrivia = 
@@ -582,6 +619,7 @@ public class CTF_GameManager : MonoBehaviour
                 addHighScores(finalScore);
 				SaveManager.Save(existingSo);
                 levelCompletedTxt.text = "LEVEL <color=yellow><b>"+ selectedLevel +"</b></color> COMPLETED!";
+                bgPanelCanvas.SetActive(true);
                 levelCompleteCanvas.SetActive(true);
             }
             else
@@ -591,6 +629,7 @@ public class CTF_GameManager : MonoBehaviour
 				audioManager.stopBGMusic();
 				audioManager.playGameOverSFX();
                 pauseManager.PauseGame();
+                bgPanelCanvas.SetActive(true);
                 gameOverCanvas.SetActive(true);
             }
         }
@@ -882,6 +921,7 @@ public class CTF_GameManager : MonoBehaviour
 
     public void SettingsButtonFunction()
     {
+        bgPanelCanvas.SetActive(true);
         optionsUICanvas.SetActive(true);
         audioManager.pauseCountdown();
         isOptionsUIOpen = true;
@@ -898,25 +938,14 @@ public class CTF_GameManager : MonoBehaviour
 
     public void confirmQuitNoButtonFunction()
     {
-		switch(confirmQuitCode)
-		{
-			case "OptionsUI":
-                optionsUICanvas.SetActive(true);
-                break;
-            case "GameOverUI":
-                gameOverCanvas.SetActive(true);
-                break;
-			case "LevelCompleteUI":
-				levelCompleteCanvas.SetActive(true);
-				break;
-		}	
-        confirmationQuitCanvas.SetActive(false);
+        StartCoroutine(disablePopUp());
     }
+
+    
 
     public void confirmRetryNoButtonFunction()
     {
-        confirmationRetryCanvas.SetActive(false);
-        optionsUICanvas.SetActive(true);
+        StartCoroutine(disablePopUp(confirmRetryAnimator, confirmationRetryCanvas, optionsUICanvas));
     }
 
     public void LevelCompletePlayAgainButtonFunction()
@@ -979,9 +1008,9 @@ public class CTF_GameManager : MonoBehaviour
 	
 	public void ConfirmationPlayAgainNo() 
 	{
-		confirmationPlayAgainCanvas.SetActive(false);
-		levelCompleteCanvas.SetActive(true);
+        StartCoroutine(disablePopUp(confirmPlayAgainAnimator, confirmationPlayAgainCanvas, levelCompleteCanvas));
 	}
+
     public void helpButtonFunction() 
     {
 		audioManager.pauseBGMusic();
@@ -997,6 +1026,7 @@ public class CTF_GameManager : MonoBehaviour
 	
 	public void highScoreButtonFunction() 
 	{
+        bgPanelCanvas.SetActive(true);
 		highScoreCanvas.SetActive(true);
         audioManager.pauseCountdown();
 		pauseManager.PauseGame();
@@ -1011,6 +1041,7 @@ public class CTF_GameManager : MonoBehaviour
 	public void TryAnimalBtnFunction() 
 	{
 		confirmationToAR.SetActive(true);
+        levelCompleteCanvas.SetActive(false);
 	}
 	
 	public void ConfirmationToARYes() 
@@ -1024,6 +1055,31 @@ public class CTF_GameManager : MonoBehaviour
 	
 	public void ConfirmationToARNo() 
 	{
-		confirmationToAR.SetActive(false);
+        StartCoroutine(disablePopUp(confirmARAnimator, confirmationToAR, levelCompleteCanvas));
 	}
+    private IEnumerator disablePopUp(Animator animatorToTrigger, GameObject gameObjectToDisable, GameObject gameObjectToEnable) 
+    {
+        animatorToTrigger.SetTrigger("XButton");
+        yield return new WaitForSecondsRealtime(.5f);
+        gameObjectToDisable.SetActive(false);
+        gameObjectToEnable.SetActive(true);		
+    }
+    private IEnumerator disablePopUp() 
+    {
+        confirmQuitAnimator.SetTrigger("XButton");
+        yield return new WaitForSecondsRealtime(.5f);
+        confirmationQuitCanvas.SetActive(false);
+        switch(confirmQuitCode)
+        {
+            case "OptionsUI":
+                optionsUICanvas.SetActive(true);
+                break;
+            case "GameOverUI":
+                gameOverCanvas.SetActive(true);
+                break;
+            case "LevelCompleteUI":
+                levelCompleteCanvas.SetActive(true);
+                break;
+        }        
+    }
 }

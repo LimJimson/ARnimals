@@ -41,6 +41,13 @@ public class FTA_GameManager : MonoBehaviour
     public GameObject ClickAnytoStart;
     public bool startGame;
 
+    [Header("PopUp Animators")]
+    [SerializeField] private Animator quitAnimator;
+    [SerializeField] private Animator retryAnimator;
+    [SerializeField] private Animator exploreAnimator;
+    [SerializeField] private Animator arAnimator;
+    [SerializeField] private Animator playAgainAnimator;
+
     SaveObject SaveFTAGame;
 
     AudioManager audioManager;
@@ -125,6 +132,57 @@ public class FTA_GameManager : MonoBehaviour
         if (InstructionGamePanel.activeSelf == true)
         {
             Invoke("ClickToStart", 3f);
+        }
+
+        enableGameOverGOs();
+        enableLvlCompleteGOs();
+    }
+
+    [SerializeField] private GameObject[] levelCompleteGOs;
+    private float enablerTimerLvlComplete = 0.7f;
+
+    private void enableLvlCompleteGOs() 
+    {
+        if(panelFinish.activeSelf) 
+        {
+            levelCompleteGOs[0].SetActive(true);
+
+            if (enablerTimerLvlComplete > 0f)
+            {
+                enablerTimerLvlComplete -= Time.unscaledDeltaTime;
+            }
+            else 
+            {
+                if (levelCompleteGOs[1].activeSelf) 
+                {
+                    levelCompleteGOs[2].SetActive(true);
+                }
+                else 
+                {
+                    levelCompleteGOs[1].SetActive(true);
+                    enablerTimerLvlComplete = 0.7f;
+                }
+            }
+        }
+    }
+
+    [SerializeField] private GameObject[] gameOverGOs;
+    private float enablerTimerGameOver = 0.7f;
+
+    private void enableGameOverGOs() 
+    {
+        if(panelGameOver.activeSelf) 
+        {
+            gameOverGOs[0].SetActive(true);
+
+            if (enablerTimerGameOver > 0f)
+            {
+                enablerTimerGameOver -= Time.unscaledDeltaTime;
+            }
+            else 
+            {
+                gameOverGOs[1].SetActive(true);
+            }
         }
     }
 
@@ -409,11 +467,6 @@ public class FTA_GameManager : MonoBehaviour
 
         }
     }
-    public void CloseConfirmationQuit()
-    {
-        QuitGuideConfirm.SetActive(false);
-        settingsMenuObject.SetActive(true);
-    }
 
     public GameObject RestartGuideConfirm;
     public GameObject guide_boy_restart;
@@ -426,8 +479,7 @@ public class FTA_GameManager : MonoBehaviour
     }
     public void CloseConfirmRestart()
     {
-        RestartGuideConfirm.SetActive(false);
-        settingsMenuObject.SetActive(true);
+        StartCoroutine(disablePopUp(retryAnimator, RestartGuideConfirm, settingsMenuObject));
     }
 
     private string confirmQuitCode;
@@ -457,23 +509,21 @@ public class FTA_GameManager : MonoBehaviour
             confirmQuitCode = "GameOverUI";
         }
 
+        if (panelFinish.activeSelf)
+        {
+            panelFinish.SetActive(false);
+            confirmQuitCode = "LevelCompleteUI";
+        }
+
         QuitGuideConfirm.SetActive(true);
     }
 
     public void confirmQuitNoButtonFunction()
     {
-        switch (confirmQuitCode)
-        {
-            case "OptionsUI":
-                settingsMenuObject.SetActive(true);
-                break;
-            case "GameOverUI":
-                panelGameOver.SetActive(true);
-                break;
-        }
-        QuitGuideConfirm.SetActive(false);
+        StartCoroutine(disablePopUp());
     }
 
+    
     public void GameOverPlayAgain()
     {
         ResumeGame();
@@ -489,7 +539,6 @@ public class FTA_GameManager : MonoBehaviour
         QuitGuideConfirm.SetActive(false);
         panelGameOver.SetActive(true);
     }
-
 
     public GameObject ExploreGuidePanel;
     public GameObject guide_boy_explore;
@@ -518,8 +567,7 @@ public class FTA_GameManager : MonoBehaviour
     }
     public void CloseExploreBtn()
     {
-        panelGameOver.SetActive(true);
-        ExploreGuidePanel.SetActive(false);
+        StartCoroutine(disablePopUp(exploreAnimator, ExploreGuidePanel, panelGameOver));
     }
 
     //Panel Effects
@@ -1238,7 +1286,22 @@ public class FTA_GameManager : MonoBehaviour
             BoyARGuide.SetActive(false);
         }
         confirmationToARCanvas.SetActive(true);
+        panelFinish.SetActive(false);
     }
+
+    [SerializeField] private GameObject playAgainCanvas;
+
+    public void levelCompletePlayAgain() 
+    {
+        playAgainCanvas.SetActive(true);
+        panelFinish.SetActive(false);
+    }
+
+    public void playAgainNo() 
+    {
+        StartCoroutine(disablePopUp(playAgainAnimator, playAgainCanvas, panelFinish));
+    }
+
     public void ConfirmYesTryAnimalARButton()
     {
         audioManager.musicSource.Stop();
@@ -1248,7 +1311,34 @@ public class FTA_GameManager : MonoBehaviour
     }
     public void ConfirmNoTryAnimalARButton()
     {
-        confirmationToARCanvas.SetActive(false);
+        StartCoroutine(disablePopUp(arAnimator, confirmationToARCanvas, panelFinish));
+    }
+    private IEnumerator disablePopUp(Animator animator, GameObject disable, GameObject enable) 
+    {
+        animator.SetTrigger("XButton");
+        yield return new WaitForSecondsRealtime(.5f);
+        disable.SetActive(false);
+        enable.SetActive(true);
+    }
+
+    private IEnumerator disablePopUp() 
+    {
+        quitAnimator.SetTrigger("XButton");
+        yield return new WaitForSecondsRealtime(.5f);
+        QuitGuideConfirm.SetActive(false);
+
+        switch (confirmQuitCode)
+        {
+            case "OptionsUI":
+                settingsMenuObject.SetActive(true);
+                break;
+            case "GameOverUI":
+                panelGameOver.SetActive(true);
+                break;
+            case "LevelCompleteUI":
+                panelFinish.SetActive(true);
+                break;
+        }
     }
     void AnimaltoUnlock()
     {

@@ -55,6 +55,14 @@ public class GTS_GameManager : MonoBehaviour
     [Header("play animal sound button")]
     public Button[] playSoundBtns;
 
+    [Header("PopUp Animator")]
+    [SerializeField] private Animator quitAnimator;
+    [SerializeField] private Animator retryAnimator;
+    [SerializeField] private Animator answerCorrectAnimator;
+    [SerializeField] private Animator answerWrongAnimator;
+    [SerializeField] private Animator exploreAnimator;
+    [SerializeField] private Animator playAgainAnimator;
+    [SerializeField] private Animator arAnimator;
 
     [Header("Canvas/UI")]
     public GameObject optionsUI;
@@ -123,6 +131,55 @@ public class GTS_GameManager : MonoBehaviour
     {
         countdownHints();
         pause_unpauseBGM();
+        enableGameOverGOs();
+        enableLvlCompleteGOs();
+    }
+
+    [SerializeField] private GameObject[] levelCompleteGOs;
+    private float enablerTimer = 0.7f;
+
+    private void enableLvlCompleteGOs() 
+    {
+        if(winLevel.activeSelf) 
+        {
+            levelCompleteGOs[0].SetActive(true);
+
+            if (enablerTimer > 0f)
+            {
+                enablerTimer -= Time.unscaledDeltaTime;
+            }
+            else 
+            {
+                if (levelCompleteGOs[1].activeSelf) 
+                {
+                    levelCompleteGOs[2].SetActive(true);
+                }
+                else 
+                {
+                    levelCompleteGOs[1].SetActive(true);
+                    enablerTimer = 0.7f;
+                }
+            }
+        }
+    }
+
+    [SerializeField] private GameObject[] gameOverGOs;
+
+    private void enableGameOverGOs() 
+    {
+        if(gameOver.activeSelf) 
+        {
+            gameOverGOs[0].SetActive(true);
+
+            if (enablerTimer > 0f)
+            {
+                enablerTimer -= Time.unscaledDeltaTime;
+            }
+            else 
+            {
+                gameOverGOs[1].SetActive(true);
+            }
+        }
     }
 
     void pause_unpauseBGM()
@@ -900,6 +957,9 @@ public class GTS_GameManager : MonoBehaviour
     }
     public void correctAnswer()
     {
+
+        confirmCorrect.SetActive(false);
+
         StopAllCoroutines();
         hideConfirmCorrect();
         try
@@ -934,6 +994,7 @@ public class GTS_GameManager : MonoBehaviour
     public GameObject damagePanel;
     public void wrongAnswer()
     {
+        confirmWrong.SetActive(false);
         StartCoroutine(dmgPlayer());
         hideConfirmWrong();
         life -=1;
@@ -978,6 +1039,8 @@ public class GTS_GameManager : MonoBehaviour
     public GameObject girl_guide_gameOver;
     void gameOverUI()
     {
+        confirmCorrect.SetActive(false);
+        confirmWrong.SetActive(false);
         gameOver.SetActive(true);
         audioManager.PlaySFX(audioManager.loseLevel);
         audioManager.musicSource.Stop();
@@ -1000,6 +1063,7 @@ public class GTS_GameManager : MonoBehaviour
     public GameObject girl_guide_explore;
     public void showConfirmExplore()
     {
+        gameOver.SetActive(false);
         exploreConfirm.SetActive(true);
         if (guide_chosen == "boy_guide")
         {
@@ -1050,8 +1114,9 @@ public class GTS_GameManager : MonoBehaviour
 
     public void hideConfirmExplore()
     {
-        exploreConfirm.SetActive(false);
+        StartCoroutine(disablePopUp(exploreAnimator, exploreConfirm, gameOver));
     }
+
     public void retry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -1069,6 +1134,7 @@ public class GTS_GameManager : MonoBehaviour
     public GameObject girl_guide_goToAR;
     public void showConfirmGoToAR()
     {
+        winLevel.SetActive(false);
         confirmGoToARExp.SetActive(true);
         if (guide_chosen == "boy_guide")
         {
@@ -1085,9 +1151,9 @@ public class GTS_GameManager : MonoBehaviour
 
     public void hideConfirmGoToAR()
     {
-        confirmGoToARExp.SetActive(false);
+        StartCoroutine(disablePopUp(arAnimator, confirmGoToARExp, winLevel));
     }
-
+    
     int ARanimalIndex;
     public void goToAR()
     {
@@ -1126,13 +1192,13 @@ public class GTS_GameManager : MonoBehaviour
 
     public void hideConfirmCorrect()
     {
-        confirmCorrect.SetActive(false);
+        StartCoroutine(disablePopUp(answerCorrectAnimator, confirmCorrect));
     }
-
     public GameObject boy_guide_playAgain;
     public GameObject girl_guide_playAgain;
     public void showPlayAgainConfirm()
     {
+        winLevel.SetActive(false);
         playAgainConfirm.SetActive(true);
         if (guide_chosen == "boy_guide")
         {
@@ -1148,15 +1214,15 @@ public class GTS_GameManager : MonoBehaviour
     }
     public void hidePlayAgainConfirm()
     {
-        playAgainConfirm.SetActive(false);
+        StartCoroutine(disablePopUp(playAgainAnimator, playAgainConfirm, winLevel));
     }
-
     public GameObject boy_guide_retry;
     public GameObject girl_guide_retry;
 
 
     public void showRetryAgainConfirm()
     {
+        optionsUI.SetActive(false);
         restartLevelConfirm.SetActive(true);
         if (guide_chosen == "boy_guide")
         {
@@ -1174,7 +1240,7 @@ public class GTS_GameManager : MonoBehaviour
 
     public void hideRetryAgainConfirm()
     {
-        restartLevelConfirm.SetActive(false);
+        StartCoroutine(disablePopUp(retryAnimator, restartLevelConfirm, optionsUI));
     }
     public GameObject boy_guide_wrong;
     public GameObject girl_guide_wrong;
@@ -1195,12 +1261,16 @@ public class GTS_GameManager : MonoBehaviour
     }
     public void hideConfirmWrong()
     {
-        confirmWrong.SetActive(false);
+        StartCoroutine(disablePopUp(answerWrongAnimator, confirmWrong));
     }
     public GameObject boy_guide_quit;
     public GameObject girl_guide_quit;
-    public void showConfirmQuit()
+    private string confirmQuitCode;
+    public void showConfirmQuit(string code)
     {
+        confirmQuitCode = code;
+        optionsUI.SetActive(false);
+        gameOver.SetActive(false);
         confirmationQuit.SetActive(true);
         if (guide_chosen == "boy_guide")
         {
@@ -1213,14 +1283,43 @@ public class GTS_GameManager : MonoBehaviour
             boy_guide_quit.SetActive(false);
             girl_guide_quit.SetActive(true);
         }
-        
     }
     public void hideConfirmQuit()
     {
-        confirmationQuit.SetActive(false);
+        StartCoroutine(disablePopUp());
     }
     public void stopSound()
     {
         audioSrc.Stop();
+    }
+
+    private IEnumerator disablePopUp(Animator animator, GameObject disable, GameObject enable) 
+    {
+        animator.SetTrigger("XButton");
+        yield return new WaitForSecondsRealtime(.5f);
+        disable.SetActive(false);
+        enable.SetActive(true);
+    }
+
+    private IEnumerator disablePopUp(Animator animator, GameObject disable) 
+    {
+        animator.SetTrigger("XButton");
+        yield return new WaitForSecondsRealtime(.5f);
+        disable.SetActive(false);
+    }
+    private IEnumerator disablePopUp() 
+    {
+        quitAnimator.SetTrigger("XButton");
+        yield return new WaitForSecondsRealtime(.5f);
+        confirmationQuit.SetActive(false);
+        switch(confirmQuitCode) 
+        {
+            case "OptionsUI":
+                optionsUI.SetActive(true);
+                break;
+            case "GameOver":
+                gameOver.SetActive(true);
+                break;
+        }  
     }
 }

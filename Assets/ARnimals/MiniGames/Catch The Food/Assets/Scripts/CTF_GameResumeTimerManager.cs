@@ -9,7 +9,7 @@ public class CTF_GameResumeTimerManager : MonoBehaviour
     [SerializeField] private CTF_AudioManager audioManager;
     [SerializeField] private GameObject resumeTimerCanvas;
     [SerializeField] private GameObject gameResumeTimerManager;
-    [SerializeField] private GameObject startGameCanvas;
+    [SerializeField] private GameObject bgPanelCanvas;
     [SerializeField] private CTF_PauseManager pauseManager;
     [SerializeField] private TextMeshProUGUI countdownText;
 
@@ -29,6 +29,7 @@ public class CTF_GameResumeTimerManager : MonoBehaviour
         else
         {
             resumeTime = 3f;
+            bgPanelCanvas.SetActive(false);
             resumeTimerCanvas.SetActive(false);
             gameResumeTimerManager.SetActive(false);
 			audioManager.unPauseBGMusic();

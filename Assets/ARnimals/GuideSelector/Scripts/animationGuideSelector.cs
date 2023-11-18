@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class animationGuideSelector : MonoBehaviour
@@ -22,6 +23,9 @@ public class animationGuideSelector : MonoBehaviour
     public Button boyBtn;
     public Button girlBtn;
 
+    public GameObject arrowBoy;
+    public GameObject arrowGirl;
+
     AudioManager audioManager;
 
     void Start()
@@ -29,7 +33,8 @@ public class animationGuideSelector : MonoBehaviour
         try { audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); } catch { }
         boyBtn.gameObject.SetActive(false);
         girlBtn.gameObject.SetActive(false);
-
+        arrowBoy.SetActive(false);
+        arrowGirl.SetActive(false);
 
         StartCoroutine(Animation());
         
@@ -40,6 +45,22 @@ public class animationGuideSelector : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void resetGuide()
+    {
+        SceneManager.LoadScene("GuideSelector");
+    }
+    public void skipBtn()
+    {
+        boyBtn.gameObject.SetActive(true);
+        girlBtn.gameObject.SetActive(true);
+        Cloud.SetActive(true);
+        blackPnl.SetActive(false);
+        arrowBoy.SetActive(true);
+        arrowGirl.SetActive(true);
+        try { audioManager.guideSource.Stop(); } catch { }
+        StopCoroutine(Animation());
     }
     IEnumerator Animation()
     {
@@ -122,8 +143,9 @@ public class animationGuideSelector : MonoBehaviour
         }
         chooseGuide.SetTrigger("chooseGuide");
         blackPnl.SetActive(false);
+        arrowBoy.SetActive(true);
+        arrowGirl.SetActive(true);
 
-        
 
     }
 

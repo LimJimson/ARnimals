@@ -93,15 +93,20 @@ public class CTF_TutorialManager : MonoBehaviour
         pagesContents();
         disableAllGameObjects();
         backButton.SetActive(false);
-        tutorialCanvas.SetActive(true);
-        startGamePanel.SetActive(false);
-        pauseAndHpCanvas.SetActive(false);
+        audioManager.playBGMMusic(audioManager.CTF_BGM);
         
         bool isTutorialDone = PlayerPrefs.GetInt("CTF_IsTutorialDone", 0) == 1;
         if (isTutorialDone) {
             tutorialCanvas.SetActive(false);
             startGamePanel.SetActive(true);
             pauseAndHpCanvas.SetActive(true);
+        }
+        else 
+        {
+            tutorialCanvas.SetActive(true);
+            startGamePanel.SetActive(false);
+            pauseAndHpCanvas.SetActive(false);
+            audioManager.musicSource.Pause();
         }
     }
 
@@ -187,6 +192,7 @@ public class CTF_TutorialManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("CTF_IsTutorialDone", 0) == 0) {
             gameResumeTimerManager.SetActive(false);
+            audioManager.musicSource.UnPause();
         }
         else 
         {
@@ -217,8 +223,10 @@ public class CTF_TutorialManager : MonoBehaviour
             startGamePanel.SetActive(true);
             pauseAndHpCanvas.SetActive(true);
 
-            if (PlayerPrefs.GetInt("CTF_IsTutorialDone", 0) == 0) {
-            gameResumeTimerManager.SetActive(false);
+            if (PlayerPrefs.GetInt("CTF_IsTutorialDone", 0) == 0) 
+            {
+                gameResumeTimerManager.SetActive(false);
+                audioManager.musicSource.UnPause();
             }
             else {
                 gameResumeTimerManager.SetActive(true);

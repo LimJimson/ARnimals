@@ -5,8 +5,6 @@ using UnityEngine.UI;
 public class CTF_GameStartManager : MonoBehaviour
 {
 
-    AudioManager audioManager;
-
     [SerializeField] private GameObject startPanel;
     [SerializeField] private CTF_PauseManager pauseManager;
     [SerializeField] private GameObject[] foodSpawners;
@@ -25,17 +23,6 @@ public class CTF_GameStartManager : MonoBehaviour
     
     private void Start()
     {
-
-        try
-        {
-            audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-			Debug.Log("AudioManager Available");
-        }
-        catch
-        {
-            Debug.Log("No AudioManager");
-        }
-
         if (pauseManager != null)
         {
             pauseManager.SetIsGamePaused(true); // Pause the game initially
@@ -46,8 +33,6 @@ public class CTF_GameStartManager : MonoBehaviour
         {   
             startPanel.SetActive(true); // Show the start panel
         }
-
-        audioManager.playBGMMusic(audioManager.CTF_BGM);
     }
 
     private void Update()

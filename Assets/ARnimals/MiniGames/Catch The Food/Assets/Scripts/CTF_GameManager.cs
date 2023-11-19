@@ -21,6 +21,7 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private CTF_HighScoreManager highScoreManager;
     [SerializeField] private CTF_AudioManager audioManager;
     [SerializeField] private FadeSceneTransitions fadeSceneTransitions;
+    [SerializeField] private GuidePopUpAnimation guidePopUpAnimation;
 
     [Header("Game Objects Needed")]
 
@@ -100,10 +101,12 @@ public class CTF_GameManager : MonoBehaviour
 
     [SerializeField] private GameObject[] levelCompleteGOs;
 
-    [SerializeField] private Animator confirmQuitAnimator;
-    [SerializeField] private Animator confirmRetryAnimator;
-    [SerializeField] private Animator confirmPlayAgainAnimator;
-    [SerializeField] private Animator confirmARAnimator;
+    [Header("PopUpPositions")]
+
+    [SerializeField] private RectTransform confirmQuitPos;
+    [SerializeField] private RectTransform confirmRetryPos;
+    [SerializeField] private RectTransform confirmPlayAgainPos;
+    [SerializeField] private RectTransform confirmARPos;
 
     private float enablerTimer = 0.7f;
     private bool isOptionsUIOpen = false;
@@ -522,7 +525,8 @@ public class CTF_GameManager : MonoBehaviour
                 pauseManager.PauseGame();
                 bgPanelCanvas.SetActive(true);
                 gameOverCanvas.SetActive(true);
-				audioManager.pauseBGMusic();
+				audioManager.stopBGMusic();
+                audioManager.stopCountdown();
 				audioManager.playGameOverSFX();
 				Debug.Log("Gameover PlayMusic");
             }
@@ -627,6 +631,7 @@ public class CTF_GameManager : MonoBehaviour
                 starsCount = 0;
                 SetMaxStars();
 				audioManager.stopBGMusic();
+                audioManager.stopCountdown();
 				audioManager.playGameOverSFX();
                 pauseManager.PauseGame();
                 bgPanelCanvas.SetActive(true);
@@ -902,14 +907,13 @@ public class CTF_GameManager : MonoBehaviour
 			levelCompleteCanvas.SetActive(false);
 			confirmQuitCode = "LevelCompleteUI";
 		}
-		
-        confirmationQuitCanvas.SetActive(true);
+
+        guidePopUpAnimation.showGuidePopUp(confirmQuitPos, confirmationQuitCanvas);
     }
 
     public void RestartButtonFunction()
     {
-        confirmationRetryCanvas.SetActive(true);
-        optionsUICanvas.SetActive(false);
+        guidePopUpAnimation.showGuidePopUp(confirmRetryPos, confirmationRetryCanvas, optionsUICanvas);
     }
 
     public void CloseOptionsUIButtonFunction()
@@ -938,20 +942,18 @@ public class CTF_GameManager : MonoBehaviour
 
     public void confirmQuitNoButtonFunction()
     {
-        StartCoroutine(disablePopUp());
+        GameObject[] canvasToEnable = {optionsUICanvas, gameOverCanvas, levelCompleteCanvas};
+        guidePopUpAnimation.hideGuidePopUp(confirmQuitCode, confirmQuitPos, confirmationQuitCanvas, canvasToEnable);
     }
-
-    
 
     public void confirmRetryNoButtonFunction()
     {
-        StartCoroutine(disablePopUp(confirmRetryAnimator, confirmationRetryCanvas, optionsUICanvas));
+        guidePopUpAnimation.hideGuidePopUp(confirmRetryPos, confirmationRetryCanvas, optionsUICanvas);
     }
 
     public void LevelCompletePlayAgainButtonFunction()
     {
-        confirmationPlayAgainCanvas.SetActive(true);
-        levelCompleteCanvas.SetActive(false);
+        guidePopUpAnimation.showGuidePopUp(confirmPlayAgainPos, confirmationPlayAgainCanvas, levelCompleteCanvas);
     }
 
     public void LevelCompleteResumeButtonFunction()
@@ -1008,11 +1010,12 @@ public class CTF_GameManager : MonoBehaviour
 	
 	public void ConfirmationPlayAgainNo() 
 	{
-        StartCoroutine(disablePopUp(confirmPlayAgainAnimator, confirmationPlayAgainCanvas, levelCompleteCanvas));
+        guidePopUpAnimation.hideGuidePopUp(confirmPlayAgainPos, confirmationPlayAgainCanvas, levelCompleteCanvas);
 	}
 
     public void helpButtonFunction() 
     {
+        bgPanelCanvas.SetActive(true);
 		audioManager.pauseBGMusic();
         audioManager.pauseCountdown();
         pauseAndHPCanvas.SetActive(false);
@@ -1040,8 +1043,7 @@ public class CTF_GameManager : MonoBehaviour
 	
 	public void TryAnimalBtnFunction() 
 	{
-		confirmationToAR.SetActive(true);
-        levelCompleteCanvas.SetActive(false);
+        guidePopUpAnimation.showGuidePopUp(confirmARPos, confirmationToAR, levelCompleteCanvas);
 	}
 	
 	public void ConfirmationToARYes() 
@@ -1055,31 +1057,6 @@ public class CTF_GameManager : MonoBehaviour
 	
 	public void ConfirmationToARNo() 
 	{
-        StartCoroutine(disablePopUp(confirmARAnimator, confirmationToAR, levelCompleteCanvas));
+        guidePopUpAnimation.hideGuidePopUp(confirmARPos, confirmationToAR, levelCompleteCanvas);
 	}
-    private IEnumerator disablePopUp(Animator animatorToTrigger, GameObject gameObjectToDisable, GameObject gameObjectToEnable) 
-    {
-        animatorToTrigger.SetTrigger("XButton");
-        yield return new WaitForSecondsRealtime(.5f);
-        gameObjectToDisable.SetActive(false);
-        gameObjectToEnable.SetActive(true);		
-    }
-    private IEnumerator disablePopUp() 
-    {
-        confirmQuitAnimator.SetTrigger("XButton");
-        yield return new WaitForSecondsRealtime(.5f);
-        confirmationQuitCanvas.SetActive(false);
-        switch(confirmQuitCode)
-        {
-            case "OptionsUI":
-                optionsUICanvas.SetActive(true);
-                break;
-            case "GameOverUI":
-                gameOverCanvas.SetActive(true);
-                break;
-            case "LevelCompleteUI":
-                levelCompleteCanvas.SetActive(true);
-                break;
-        }        
-    }
 }

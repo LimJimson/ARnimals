@@ -55,14 +55,15 @@ public class GTS_GameManager : MonoBehaviour
     [Header("play animal sound button")]
     public Button[] playSoundBtns;
 
-    [Header("PopUp Animator")]
-    [SerializeField] private Animator quitAnimator;
-    [SerializeField] private Animator retryAnimator;
-    [SerializeField] private Animator answerCorrectAnimator;
-    [SerializeField] private Animator answerWrongAnimator;
-    [SerializeField] private Animator exploreAnimator;
-    [SerializeField] private Animator playAgainAnimator;
-    [SerializeField] private Animator arAnimator;
+    [Header("PopUp Positions")]
+    [SerializeField] private GuidePopUpAnimation guidePopUpAnimation;
+    [SerializeField] private RectTransform confirmQuitPos;
+    [SerializeField] private RectTransform confirmRetryPos;
+    [SerializeField] private RectTransform answerCorrectPos;
+    [SerializeField] private RectTransform answerWrongPos;
+    [SerializeField] private RectTransform confirmExplorePos;
+    [SerializeField] private RectTransform confirmPlayAgainPos;
+    [SerializeField] private RectTransform confirmARPos;
 
     [Header("Canvas/UI")]
     public GameObject optionsUI;
@@ -1063,8 +1064,7 @@ public class GTS_GameManager : MonoBehaviour
     public GameObject girl_guide_explore;
     public void showConfirmExplore()
     {
-        gameOver.SetActive(false);
-        exploreConfirm.SetActive(true);
+        guidePopUpAnimation.showGuidePopUp(confirmExplorePos, exploreConfirm, gameOver);
         if (guide_chosen == "boy_guide")
         {
             boy_guide_explore.SetActive(true);
@@ -1114,7 +1114,7 @@ public class GTS_GameManager : MonoBehaviour
 
     public void hideConfirmExplore()
     {
-        StartCoroutine(disablePopUp(exploreAnimator, exploreConfirm, gameOver));
+        guidePopUpAnimation.hideGuidePopUp(confirmExplorePos, exploreConfirm, gameOver);
     }
 
     public void retry()
@@ -1134,8 +1134,7 @@ public class GTS_GameManager : MonoBehaviour
     public GameObject girl_guide_goToAR;
     public void showConfirmGoToAR()
     {
-        winLevel.SetActive(false);
-        confirmGoToARExp.SetActive(true);
+        guidePopUpAnimation.showGuidePopUp(confirmARPos, confirmGoToARExp, winLevel);
         if (guide_chosen == "boy_guide")
         {
             boy_guide_goToAR.SetActive(true);
@@ -1151,7 +1150,7 @@ public class GTS_GameManager : MonoBehaviour
 
     public void hideConfirmGoToAR()
     {
-        StartCoroutine(disablePopUp(arAnimator, confirmGoToARExp, winLevel));
+        guidePopUpAnimation.hideGuidePopUp(confirmARPos, confirmGoToARExp, winLevel);
     }
     
     int ARanimalIndex;
@@ -1176,6 +1175,7 @@ public class GTS_GameManager : MonoBehaviour
     public GameObject girl_guide_correct;
     public void showConfirmCorrect()
     {
+        guidePopUpAnimation.showGuidePopUp(answerCorrectPos, confirmCorrect);
         confirmCorrect.SetActive(true);
         if (guide_chosen == "boy_guide")
         {
@@ -1192,14 +1192,13 @@ public class GTS_GameManager : MonoBehaviour
 
     public void hideConfirmCorrect()
     {
-        StartCoroutine(disablePopUp(answerCorrectAnimator, confirmCorrect));
+        guidePopUpAnimation.hideGuidePopUp(answerCorrectPos, confirmCorrect);
     }
     public GameObject boy_guide_playAgain;
     public GameObject girl_guide_playAgain;
     public void showPlayAgainConfirm()
     {
-        winLevel.SetActive(false);
-        playAgainConfirm.SetActive(true);
+        guidePopUpAnimation.showGuidePopUp(confirmPlayAgainPos, playAgainConfirm, winLevel);
         if (guide_chosen == "boy_guide")
         {
             boy_guide_playAgain.SetActive(true);
@@ -1214,7 +1213,7 @@ public class GTS_GameManager : MonoBehaviour
     }
     public void hidePlayAgainConfirm()
     {
-        StartCoroutine(disablePopUp(playAgainAnimator, playAgainConfirm, winLevel));
+        guidePopUpAnimation.hideGuidePopUp(confirmPlayAgainPos, playAgainConfirm, winLevel);
     }
     public GameObject boy_guide_retry;
     public GameObject girl_guide_retry;
@@ -1222,8 +1221,7 @@ public class GTS_GameManager : MonoBehaviour
 
     public void showRetryAgainConfirm()
     {
-        optionsUI.SetActive(false);
-        restartLevelConfirm.SetActive(true);
+        guidePopUpAnimation.showGuidePopUp(confirmRetryPos, restartLevelConfirm, optionsUI);
         if (guide_chosen == "boy_guide")
         {
             boy_guide_retry.SetActive(true);
@@ -1240,13 +1238,13 @@ public class GTS_GameManager : MonoBehaviour
 
     public void hideRetryAgainConfirm()
     {
-        StartCoroutine(disablePopUp(retryAnimator, restartLevelConfirm, optionsUI));
+        guidePopUpAnimation.hideGuidePopUp(confirmRetryPos, restartLevelConfirm, optionsUI);
     }
     public GameObject boy_guide_wrong;
     public GameObject girl_guide_wrong;
     public void showConfirmWrong()
     {
-        confirmWrong.SetActive(true);
+        guidePopUpAnimation.showGuidePopUp(answerWrongPos, confirmWrong);
         if (guide_chosen == "boy_guide")
         {
             boy_guide_wrong.SetActive(true);
@@ -1261,7 +1259,7 @@ public class GTS_GameManager : MonoBehaviour
     }
     public void hideConfirmWrong()
     {
-        StartCoroutine(disablePopUp(answerWrongAnimator, confirmWrong));
+        guidePopUpAnimation.hideGuidePopUp(answerWrongPos, confirmWrong);
     }
     public GameObject boy_guide_quit;
     public GameObject girl_guide_quit;
@@ -1271,7 +1269,7 @@ public class GTS_GameManager : MonoBehaviour
         confirmQuitCode = code;
         optionsUI.SetActive(false);
         gameOver.SetActive(false);
-        confirmationQuit.SetActive(true);
+        guidePopUpAnimation.showGuidePopUp(confirmQuitPos, confirmationQuit);
         if (guide_chosen == "boy_guide")
         {
             boy_guide_quit.SetActive(true);
@@ -1286,40 +1284,11 @@ public class GTS_GameManager : MonoBehaviour
     }
     public void hideConfirmQuit()
     {
-        StartCoroutine(disablePopUp());
+        GameObject[] canvasToEnable = {optionsUI, gameOver};
+        guidePopUpAnimation.hideGuidePopUp(confirmQuitCode, confirmQuitPos, confirmationQuit, canvasToEnable);
     }
     public void stopSound()
     {
         audioSrc.Stop();
-    }
-
-    private IEnumerator disablePopUp(Animator animator, GameObject disable, GameObject enable) 
-    {
-        animator.SetTrigger("XButton");
-        yield return new WaitForSecondsRealtime(.5f);
-        disable.SetActive(false);
-        enable.SetActive(true);
-    }
-
-    private IEnumerator disablePopUp(Animator animator, GameObject disable) 
-    {
-        animator.SetTrigger("XButton");
-        yield return new WaitForSecondsRealtime(.5f);
-        disable.SetActive(false);
-    }
-    private IEnumerator disablePopUp() 
-    {
-        quitAnimator.SetTrigger("XButton");
-        yield return new WaitForSecondsRealtime(.5f);
-        confirmationQuit.SetActive(false);
-        switch(confirmQuitCode) 
-        {
-            case "OptionsUI":
-                optionsUI.SetActive(true);
-                break;
-            case "GameOver":
-                gameOver.SetActive(true);
-                break;
-        }  
     }
 }

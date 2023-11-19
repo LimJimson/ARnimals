@@ -41,12 +41,13 @@ public class FTA_GameManager : MonoBehaviour
     public GameObject ClickAnytoStart;
     public bool startGame;
 
-    [Header("PopUp Animators")]
-    [SerializeField] private Animator quitAnimator;
-    [SerializeField] private Animator retryAnimator;
-    [SerializeField] private Animator exploreAnimator;
-    [SerializeField] private Animator arAnimator;
-    [SerializeField] private Animator playAgainAnimator;
+    [Header("PopUp Position")]
+    [SerializeField] private GuidePopUpAnimation guidePopUpAnimation;
+    [SerializeField] private RectTransform confirmQuitPos;
+    [SerializeField] private RectTransform confirmRetryPos;
+    [SerializeField] private RectTransform confirmExplorePos;
+    [SerializeField] private RectTransform confirmPlayAgainPos;
+    [SerializeField] private RectTransform confirmARPos;
 
     SaveObject SaveFTAGame;
 
@@ -439,8 +440,8 @@ public class FTA_GameManager : MonoBehaviour
             guide_boy_restart.SetActive(false);
             guide_girl_restart.SetActive(true);
         }
-        RestartGuideConfirm.SetActive(true);
-        settingsMenuObject.SetActive(false);
+
+        guidePopUpAnimation.showGuidePopUp(confirmRetryPos, RestartGuideConfirm, settingsMenuObject);
     }
     public void QuitGame()
     {
@@ -479,7 +480,7 @@ public class FTA_GameManager : MonoBehaviour
     }
     public void CloseConfirmRestart()
     {
-        StartCoroutine(disablePopUp(retryAnimator, RestartGuideConfirm, settingsMenuObject));
+        guidePopUpAnimation.hideGuidePopUp(confirmRetryPos, RestartGuideConfirm, settingsMenuObject);
     }
 
     private string confirmQuitCode;
@@ -515,12 +516,14 @@ public class FTA_GameManager : MonoBehaviour
             confirmQuitCode = "LevelCompleteUI";
         }
 
-        QuitGuideConfirm.SetActive(true);
+        guidePopUpAnimation.showGuidePopUp(confirmQuitPos, QuitGuideConfirm);
     }
 
     public void confirmQuitNoButtonFunction()
     {
-        StartCoroutine(disablePopUp());
+
+        GameObject[] canvasToEnable = {settingsMenuObject, panelGameOver, panelFinish};
+        guidePopUpAnimation.hideGuidePopUp(confirmQuitCode, confirmQuitPos, QuitGuideConfirm, canvasToEnable);
     }
 
     
@@ -546,8 +549,7 @@ public class FTA_GameManager : MonoBehaviour
     public void ExploreBtnGuide()
     {
         ResumeGame();
-        ExploreGuidePanel.SetActive(true);
-        panelGameOver.SetActive(false);
+        guidePopUpAnimation.showGuidePopUp(confirmExplorePos, ExploreGuidePanel, panelGameOver);
         if (guide_chosen == "boy_guide")
         {
             guide_boy_explore.SetActive(true);
@@ -567,7 +569,7 @@ public class FTA_GameManager : MonoBehaviour
     }
     public void CloseExploreBtn()
     {
-        StartCoroutine(disablePopUp(exploreAnimator, ExploreGuidePanel, panelGameOver));
+        guidePopUpAnimation.hideGuidePopUp(confirmExplorePos, ExploreGuidePanel, panelGameOver);
     }
 
     //Panel Effects
@@ -1285,21 +1287,20 @@ public class FTA_GameManager : MonoBehaviour
             GirlARGuide.SetActive(true);
             BoyARGuide.SetActive(false);
         }
-        confirmationToARCanvas.SetActive(true);
-        panelFinish.SetActive(false);
+
+        guidePopUpAnimation.showGuidePopUp(confirmARPos, confirmationToARCanvas, panelFinish);
     }
 
     [SerializeField] private GameObject playAgainCanvas;
 
     public void levelCompletePlayAgain() 
     {
-        playAgainCanvas.SetActive(true);
-        panelFinish.SetActive(false);
+        guidePopUpAnimation.showGuidePopUp(confirmPlayAgainPos, playAgainCanvas, panelFinish);
     }
 
     public void playAgainNo() 
     {
-        StartCoroutine(disablePopUp(playAgainAnimator, playAgainCanvas, panelFinish));
+        guidePopUpAnimation.hideGuidePopUp(confirmPlayAgainPos, playAgainCanvas, panelFinish);
     }
 
     public void ConfirmYesTryAnimalARButton()
@@ -1311,35 +1312,9 @@ public class FTA_GameManager : MonoBehaviour
     }
     public void ConfirmNoTryAnimalARButton()
     {
-        StartCoroutine(disablePopUp(arAnimator, confirmationToARCanvas, panelFinish));
+        guidePopUpAnimation.hideGuidePopUp(confirmARPos, confirmationToARCanvas, panelFinish);
     }
-    private IEnumerator disablePopUp(Animator animator, GameObject disable, GameObject enable) 
-    {
-        animator.SetTrigger("XButton");
-        yield return new WaitForSecondsRealtime(.5f);
-        disable.SetActive(false);
-        enable.SetActive(true);
-    }
-
-    private IEnumerator disablePopUp() 
-    {
-        quitAnimator.SetTrigger("XButton");
-        yield return new WaitForSecondsRealtime(.5f);
-        QuitGuideConfirm.SetActive(false);
-
-        switch (confirmQuitCode)
-        {
-            case "OptionsUI":
-                settingsMenuObject.SetActive(true);
-                break;
-            case "GameOverUI":
-                panelGameOver.SetActive(true);
-                break;
-            case "LevelCompleteUI":
-                panelFinish.SetActive(true);
-                break;
-        }
-    }
+    
     void AnimaltoUnlock()
     {
         switch (SelectedLevel)

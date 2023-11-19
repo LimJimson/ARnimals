@@ -33,7 +33,7 @@ public class FadeSceneTransitions : MonoBehaviour
         while (currentTime < fadeDuration)
         {
             currentTime += Time.unscaledDeltaTime;
-            float alpha = 1 - (currentTime / fadeDuration);
+            float alpha = Mathf.Lerp(1f, 0f, currentTime / fadeDuration);
         // Deactivate the fadeImage when the fade-in is complete
             fadePanel.color = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
             yield return null;
@@ -45,7 +45,7 @@ public class FadeSceneTransitions : MonoBehaviour
     public IEnumerator FadeIn(Image blackPanel, float delay)
     {
         blackPanel.gameObject.SetActive(true);
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSecondsRealtime(delay);
 
         blackPanel.gameObject.SetActive(false);
 
@@ -56,7 +56,7 @@ public class FadeSceneTransitions : MonoBehaviour
         while (currentTime < fadeDuration)
         {
             currentTime += Time.unscaledDeltaTime;
-            float alpha = 1 - (currentTime / fadeDuration);
+            float alpha = Mathf.Lerp(1f, 0f, currentTime / fadeDuration);
         // Deactivate the fadeImage when the fade-in is complete
             fadePanel.color = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
             yield return null;
@@ -80,7 +80,7 @@ public class FadeSceneTransitions : MonoBehaviour
         while (currentTime < fadeDuration)
         {
             currentTime += Time.unscaledDeltaTime;
-            float alpha = currentTime / fadeDuration;
+            float alpha = Mathf.Lerp(0f, 1f, currentTime / fadeDuration);
             fadePanel.color = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
             yield return null;
         }
@@ -99,7 +99,7 @@ public class FadeSceneTransitions : MonoBehaviour
         while (currentTime < fadeDuration)
         {
             currentTime += Time.unscaledDeltaTime;
-            float alpha = currentTime / fadeDuration;
+            float alpha = Mathf.Lerp(0f, 1f, currentTime / fadeDuration);
             fadePanel.color = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
             yield return null;
         }

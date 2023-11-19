@@ -5,7 +5,6 @@ using UnityEngine;
 public class FPSController : MonoBehaviour
 {
     [SerializeField] private int targetFPS = 60;
-    private int originalTargetFPS;
     public static FPSController instance;
 
     private void Awake()
@@ -25,19 +24,14 @@ public class FPSController : MonoBehaviour
 
     void Start()
     {
-        originalTargetFPS = Application.targetFrameRate;
-
         QualitySettings.vSyncCount = 0; 
-        Application.targetFrameRate = targetFPS;
     }
 
-    void OnDisable()
+    void Update() 
     {
-        Application.targetFrameRate = originalTargetFPS;
-    }
-
-    void OnApplicationQuit() 
-    {
-        Application.targetFrameRate = originalTargetFPS;
+        if (Application.targetFrameRate != targetFPS) 
+        {
+            Application.targetFrameRate = targetFPS;
+        }
     }
 }

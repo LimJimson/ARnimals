@@ -10,6 +10,7 @@ using Unity.VisualScripting;
 
 public class FTA_GameManager : MonoBehaviour
 {
+    public FTA_MoveAnimal MoveAnimalScript;
     [Header("Hints")]
     public Image[] shadowImgs;  // Array to hold the Image components
     public Sprite[] shadowSpritesLvl1;  // Array to hold all the sprites
@@ -48,6 +49,8 @@ public class FTA_GameManager : MonoBehaviour
     [SerializeField] private RectTransform confirmExplorePos;
     [SerializeField] private RectTransform confirmPlayAgainPos;
     [SerializeField] private RectTransform confirmARPos;
+
+    
 
     SaveObject SaveFTAGame;
 
@@ -286,12 +289,12 @@ public class FTA_GameManager : MonoBehaviour
         Image clickedAnimalImg = clickedAnimal.GetComponent<Image>();
 
         Color enableCorrectAnswer = new Color(1.0f, 1.0f, 1.0f);
-
+        
         if (clickedAnimalImg.sprite == shadowImgs[0].sprite)
         {
+            MoveAnimalScript.MovingAnimal(clickedAnimal, new Vector2(-17, 250), shadowImgs[0]);
             Debug.Log("Correct");
-            shadowImgs[0].color = enableCorrectAnswer;
-            clickedAnimal.SetActive(false);
+            //clickedAnimal.SetActive(false);
             try
             {
                 audioManager.PlaySFX(audioManager.correctAnswer);
@@ -304,8 +307,8 @@ public class FTA_GameManager : MonoBehaviour
         else if (clickedAnimalImg.sprite == shadowImgs[1].sprite)
         {
             Debug.Log("Correct");
-            shadowImgs[1].color = enableCorrectAnswer;
-            clickedAnimal.SetActive(false);
+            MoveAnimalScript.MovingAnimal(clickedAnimal, new Vector2(267, 250), shadowImgs[1]);
+            //clickedAnimal.SetActive(false);
             try
             {
                 audioManager.PlaySFX(audioManager.correctAnswer);
@@ -318,8 +321,8 @@ public class FTA_GameManager : MonoBehaviour
         else if (clickedAnimalImg.sprite == shadowImgs[2].sprite)
         {
             Debug.Log("Correct");
-            shadowImgs[2].color = enableCorrectAnswer;
-            clickedAnimal.SetActive(false);
+            MoveAnimalScript.MovingAnimal(clickedAnimal, new Vector2(526, 250), shadowImgs[2]);
+            //clickedAnimal.SetActive(false);
             try
             {
                 audioManager.PlaySFX(audioManager.correctAnswer);
@@ -363,7 +366,7 @@ public class FTA_GameManager : MonoBehaviour
         }
         checkIfAllFound();
     }
-    private void checkIfAllFound()
+    public void checkIfAllFound()
     {
         Color enableCorrectAnswer = new Color(1.0f, 1.0f, 1.0f);
         if (shadowImgs[0].color == enableCorrectAnswer && shadowImgs[1].color == enableCorrectAnswer && shadowImgs[2].color == enableCorrectAnswer)
@@ -1348,6 +1351,10 @@ public class FTA_GameManager : MonoBehaviour
                 animalImg.sprite = animalSprites[4];
                 AnimalIndex = 17;
                 NoAvailLevel.gameObject.SetActive(true);
+                twostarstounlock.gameObject.SetActive(false);
+                checkGameObjectlvl.gameObject.SetActive(false);
+                levelbordercompletedholder.gameObject.SetActive(false);
+
                 break;
         }
     }

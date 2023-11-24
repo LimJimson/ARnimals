@@ -108,6 +108,11 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private RectTransform confirmPlayAgainPos;
     [SerializeField] private RectTransform confirmARPos;
 
+    [SerializeField] private GameObject starVFX;
+    [SerializeField] private GameObject lvlCompleteParticleSystems;
+
+    [SerializeField] private GameObject[] gameObjectsToClear;
+
     private float enablerTimer = 0.7f;
     private bool isOptionsUIOpen = false;
 
@@ -144,23 +149,45 @@ public class CTF_GameManager : MonoBehaviour
         if(levelCompleteCanvas.activeSelf) 
         {
             levelCompleteGOs[0].SetActive(true);
-
-            if (enablerTimer > 0f)
+            if (levelCompleteGOs[0].activeSelf && starVFX.GetComponent<ParticleSystem>().particleCount <= 70) 
             {
-                enablerTimer -= Time.unscaledDeltaTime;
+                showLvlCompleteGos();
+            }
+            if (levelCompleteGOs[0].GetComponent<CanvasGroup>().alpha == 1) 
+            {
+                StartCoroutine(delayStarVFX());
+            }
+            
+            if (starVFX.activeSelf && !starVFX.GetComponent<ParticleSystem>().isPlaying) 
+            {
+                lvlCompleteParticleSystems.SetActive(false);
+            }
+        }
+    }
+    
+    IEnumerator delayStarVFX() 
+    {
+        yield return new WaitForSecondsRealtime(0.5f); 
+        starVFX.SetActive(true);
+    }
+
+    private void showLvlCompleteGos() 
+    {
+        if (enablerTimer > 0f)
+        {
+            enablerTimer -= Time.unscaledDeltaTime;
+        }
+        else 
+        {
+            if (levelCompleteGOs[1].activeSelf) 
+            {
+                levelCompleteGOs[3].SetActive(true);
             }
             else 
             {
-                if (levelCompleteGOs[1].activeSelf) 
-                {
-                    levelCompleteGOs[3].SetActive(true);
-                }
-                else 
-                {
-                    levelCompleteGOs[1].SetActive(true);
-                    levelCompleteGOs[2].SetActive(true);
-                    enablerTimer = 0.7f;
-                }
+                levelCompleteGOs[1].SetActive(true);
+                levelCompleteGOs[2].SetActive(true);
+                enablerTimer = 0.7f;
             }
         }
     }
@@ -528,7 +555,7 @@ public class CTF_GameManager : MonoBehaviour
 				audioManager.stopBGMusic();
                 audioManager.stopCountdown();
 				audioManager.playGameOverSFX();
-				Debug.Log("Gameover PlayMusic");
+                clearGameObjectsAfterGame();
             }
         }
     }
@@ -611,10 +638,7 @@ public class CTF_GameManager : MonoBehaviour
                 pauseManager.PauseGame();
                 finalScore = scoreManager.GetScore();
 				audioManager.stopBGMusic();
-                audioManager.stopCountdown();
 				audioManager.playLvlCompletedSFX();
-				Debug.Log("Level Complete PlayMusic");
-
                 addStar(finalScore);
                 SetMaxStars();
                 unlockRewards();
@@ -631,12 +655,28 @@ public class CTF_GameManager : MonoBehaviour
                 starsCount = 0;
                 SetMaxStars();
 				audioManager.stopBGMusic();
-                audioManager.stopCountdown();
 				audioManager.playGameOverSFX();
                 pauseManager.PauseGame();
                 bgPanelCanvas.SetActive(true);
                 gameOverCanvas.SetActive(true);
             }
+
+            clearGameObjectsAfterGame();
+        }
+    }
+
+    private void clearGameObjectsAfterGame() 
+    {
+        GameObject[] clones = GameObject.FindObjectsOfType<GameObject>().Where(go => go.name.Contains("Clone")).ToArray();
+
+        foreach(GameObject clone in clones) 
+        {
+            clone.SetActive(false);
+        }
+
+        foreach(GameObject gameObjectToClear in gameObjectsToClear) 
+        {
+            gameObjectToClear.SetActive(false);
         }
     }
 
@@ -740,7 +780,6 @@ public class CTF_GameManager : MonoBehaviour
 
         // Set the formatted scores in the UI Text element
         highScoreListTxt.text = formattedScores;
-        Debug.Log("High Score List: " + formattedScores);
     }
 
 

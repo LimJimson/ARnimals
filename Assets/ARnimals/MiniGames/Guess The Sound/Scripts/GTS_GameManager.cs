@@ -64,6 +64,9 @@ public class GTS_GameManager : MonoBehaviour
     [SerializeField] private RectTransform confirmExplorePos;
     [SerializeField] private RectTransform confirmPlayAgainPos;
     [SerializeField] private RectTransform confirmARPos;
+    [SerializeField] private GameObject bgPanelCanvas;
+    [SerializeField] private GameObject starVFX;
+    [SerializeField] private GameObject lvlCompleteParticleSystems;
 
     [Header("Canvas/UI")]
     public GameObject optionsUI;
@@ -144,22 +147,44 @@ public class GTS_GameManager : MonoBehaviour
         if(winLevel.activeSelf) 
         {
             levelCompleteGOs[0].SetActive(true);
-
-            if (enablerTimer > 0f)
+            if (levelCompleteGOs[0].activeSelf && starVFX.GetComponent<ParticleSystem>().particleCount <= 70) 
             {
-                enablerTimer -= Time.unscaledDeltaTime;
+                showLvlCompleteGos();
+            }
+            if (levelCompleteGOs[0].GetComponent<CanvasGroup>().alpha == 1) 
+            {
+                StartCoroutine(delayStarVFX());
+            }
+            
+            if (starVFX.activeSelf && !starVFX.GetComponent<ParticleSystem>().isPlaying) 
+            {
+                lvlCompleteParticleSystems.SetActive(false);
+            }
+        }
+    }
+    
+    IEnumerator delayStarVFX() 
+    {
+        yield return new WaitForSecondsRealtime(0.5f); 
+        starVFX.SetActive(true);
+    }
+
+    private void showLvlCompleteGos() 
+    {
+        if (enablerTimer > 0f)
+        {
+            enablerTimer -= Time.unscaledDeltaTime;
+        }
+        else 
+        {
+            if (levelCompleteGOs[1].activeSelf) 
+            {
+                levelCompleteGOs[2].SetActive(true);
             }
             else 
             {
-                if (levelCompleteGOs[1].activeSelf) 
-                {
-                    levelCompleteGOs[2].SetActive(true);
-                }
-                else 
-                {
-                    levelCompleteGOs[1].SetActive(true);
-                    enablerTimer = 0.7f;
-                }
+                levelCompleteGOs[1].SetActive(true);
+                enablerTimer = 0.7f;
             }
         }
     }
@@ -745,6 +770,7 @@ public class GTS_GameManager : MonoBehaviour
                 break;
         }
 
+        bgPanelCanvas.SetActive(true);
         winLevel.SetActive(true);
         lvlCompleted.text = "LEVEL <color=yellow><b>" + levelSelected.ToString() + "</b></color> COMPLETED!";
 
@@ -1042,6 +1068,7 @@ public class GTS_GameManager : MonoBehaviour
     {
         confirmCorrect.SetActive(false);
         confirmWrong.SetActive(false);
+        bgPanelCanvas.SetActive(true);
         gameOver.SetActive(true);
         audioManager.PlaySFX(audioManager.loseLevel);
         audioManager.musicSource.Stop();
@@ -1164,10 +1191,12 @@ public class GTS_GameManager : MonoBehaviour
 
     public void showOptions()
     {
+        bgPanelCanvas.SetActive(true);
         optionsUI.SetActive(true);
     }
     public void hideOptions()
     {
+        bgPanelCanvas.SetActive(false);
         optionsUI.SetActive(false);
     }
 

@@ -67,6 +67,8 @@ public class GTS_GameManager : MonoBehaviour
     [SerializeField] private GameObject bgPanelCanvas;
     [SerializeField] private GameObject starVFX;
     [SerializeField] private GameObject lvlCompleteParticleSystems;
+    [SerializeField] private GameObject starVFXCorrect;
+    [SerializeField] private GameObject starVFXHint;
 
     [Header("Canvas/UI")]
     public GameObject optionsUI;
@@ -258,6 +260,7 @@ public class GTS_GameManager : MonoBehaviour
             else
             {
                 hintsTxt.text = "<color=#FFFF00>" + HintsLeft + " </color>hint left";
+                starVFXHint.gameObject.SetActive(true);
             }
             StartCoroutine(_showHintLeft());
         }
@@ -276,6 +279,7 @@ public class GTS_GameManager : MonoBehaviour
         hintsGO.SetActive(true);
         yield return new WaitForSeconds(1f);
         hintsAnim.SetTrigger("HintsOut");
+        starVFXHint.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
         hintsGO.SetActive(false);
     }
@@ -724,7 +728,6 @@ public class GTS_GameManager : MonoBehaviour
 
 
     }
-    public GameObject mainNextLevelUnlockGO;
     public Image levelToUnlockImg;
     public Sprite[] levelsSprite;
     public GameObject levelUnlockGO;
@@ -894,6 +897,7 @@ public class GTS_GameManager : MonoBehaviour
             if (!waitSndPlaying)
             {
                 audioSrc.PlayOneShot(AnimalSounds[animalIndex]);
+                
             }
         }
         else
@@ -973,12 +977,14 @@ public class GTS_GameManager : MonoBehaviour
 
     IEnumerator _showFacts()
     {
+        starVFXCorrect.SetActive(true);
         HintsButton.interactable = false;
         GTS_TriviaScript.generateTrivia();
         factsGuideGO.SetActive(true);
         yield return new WaitForSeconds(2f);
         factsGuideAnim.SetTrigger("TriviaOut");
         yield return new WaitForSeconds(1f);
+        starVFXCorrect.SetActive(false);
         factsGuideGO.SetActive(false);
         HintsButton.interactable = true;
     }

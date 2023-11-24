@@ -47,16 +47,23 @@ public class ARPlacement : MonoBehaviour
     public GameObject Arrow;
     public TMP_Text distanceTxt;
 
+    public FPSController fpsController;
     private void Awake()
     {
-        Application.targetFrameRate = 30;
+        
         modelIndex = StateNameController.animalIndexChosen;
+        try { fpsController = GameObject.FindGameObjectWithTag("FPSController").GetComponent<FPSController>(); } catch { }
+        
 
-
+    }
+    
+    private void OnDisable()
+    {
+        fpsController.enabled = true;
     }
     void Start()
     {
-
+        fpsController.enabled = false;
 
         //hide GameObjects
         foreach (GameObject uiElement in GameObjectsToHide)

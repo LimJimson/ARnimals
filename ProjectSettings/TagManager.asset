@@ -13,6 +13,7 @@ TagManager:
   - x2Points
   - Audio
   - luck
+  - FPSController
   layers:
   - Default
   - TransparentFX

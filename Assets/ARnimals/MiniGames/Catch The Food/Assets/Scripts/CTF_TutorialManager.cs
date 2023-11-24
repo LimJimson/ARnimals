@@ -533,7 +533,7 @@ public class CTF_TutorialManager : MonoBehaviour
     {
         gameObject.SetActive(true);
         canvas.overrideSorting = true;
-        canvas.sortingOrder = 5;
+        canvas.sortingOrder = 6;
     }
 
     public void disableAllGameObjects() 

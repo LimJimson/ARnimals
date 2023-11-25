@@ -10,7 +10,6 @@ using Unity.VisualScripting;
 
 public class FTA_GameManager : MonoBehaviour
 {
-    public FTA_MoveAnimal MoveAnimalScript;
     [Header("Hints")]
     public Image[] shadowImgs;  // Array to hold the Image components
     public Sprite[] shadowSpritesLvl1;  // Array to hold all the sprites
@@ -54,6 +53,7 @@ public class FTA_GameManager : MonoBehaviour
     [SerializeField] private GameObject starVFX;
     [SerializeField] private GameObject lvlCompleteParticleSystems;
 
+    public bool isCorrect;
     
 
     SaveObject SaveFTAGame;
@@ -65,6 +65,7 @@ public class FTA_GameManager : MonoBehaviour
     public bool CheckIfFisrtItemGuide;
 
     int currentStar;
+
     private void Start()
     {
         SaveFTAGame = SaveManager.Load();
@@ -308,6 +309,9 @@ public class FTA_GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("FTA_Game");
     }
+    
+    public Image shadow;
+    public Vector2 endPosition;
 
     public void checkIfCorrect(GameObject clickedAnimal)
     {
@@ -318,7 +322,10 @@ public class FTA_GameManager : MonoBehaviour
         
         if (clickedAnimalImg.sprite == shadowImgs[0].sprite)
         {
-            MoveAnimalScript.MovingAnimal(clickedAnimal, new Vector2(-17, 250), shadowImgs[0]);
+            isCorrect = true;
+            shadow = shadowImgs[0];
+            endPosition = new Vector2(-17, 250);
+            //FTA_MoveAnimal.Instance.MovingAnimal(clickedAnimal, new Vector2(-17, 250), shadowImgs[0]);
             Debug.Log("Correct");
             //clickedAnimal.SetActive(false);
             try
@@ -332,8 +339,11 @@ public class FTA_GameManager : MonoBehaviour
         }
         else if (clickedAnimalImg.sprite == shadowImgs[1].sprite)
         {
+            isCorrect = true;
+            shadow = shadowImgs[1];
+            endPosition = new Vector2(267, 250);
             Debug.Log("Correct");
-            MoveAnimalScript.MovingAnimal(clickedAnimal, new Vector2(267, 250), shadowImgs[1]);
+            //FTA_MoveAnimal.Instance.MovingAnimal(clickedAnimal, new Vector2(267, 250), shadowImgs[1]);
             //clickedAnimal.SetActive(false);
             try
             {
@@ -347,7 +357,10 @@ public class FTA_GameManager : MonoBehaviour
         else if (clickedAnimalImg.sprite == shadowImgs[2].sprite)
         {
             Debug.Log("Correct");
-            MoveAnimalScript.MovingAnimal(clickedAnimal, new Vector2(526, 250), shadowImgs[2]);
+            isCorrect = true;
+            shadow = shadowImgs[2];
+            endPosition = new Vector2(526, 250);
+            //FTA_MoveAnimal.Instance.MovingAnimal(clickedAnimal, new Vector2(526, 250), shadowImgs[2]);
             //clickedAnimal.SetActive(false);
             try
             {

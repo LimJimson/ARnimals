@@ -9223,7 +9223,6 @@ Transform:
   m_Children:
   - {fileID: 914153265}
   - {fileID: 1750624383}
-  - {fileID: 895633533}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12145,6 +12144,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198064713177833144, guid: bab2f13eaaf31454aafa3d30787c5b15,
         type: 3}
+      propertyPath: useUnscaledTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198064713177833144, guid: bab2f13eaaf31454aafa3d30787c5b15,
+        type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 8
       objectReference: {fileID: 0}
@@ -13672,52 +13676,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!1 &895633531
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 895633533}
-  - component: {fileID: 895633532}
-  m_Layer: 0
-  m_Name: MovingAnimal
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &895633532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 895633531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 471c795776445304298aa3d8777ec142, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveDuration: 0.5
-  gameManager: {fileID: 914153267}
---- !u!4 &895633533
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 895633531}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.00000023841858, y: -0.00000059604645, z: 0.000005722046}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 579122073}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &897453761
 GameObject:
   m_ObjectHideFlags: 0
@@ -13831,6 +13789,7 @@ GameObject:
   - component: {fileID: 898672506}
   - component: {fileID: 898672505}
   - component: {fileID: 898672504}
+  - component: {fileID: 898672507}
   m_Layer: 0
   m_Name: crocodile
   m_TagString: Untagged
@@ -13915,6 +13874,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 898672507}
+        m_TargetAssemblyTypeName: FTA_MoveAnimal, Assembly-CSharp
+        m_MethodName: moveAnimal
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 898672502}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &898672505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13953,6 +13924,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 898672502}
   m_CullTransparentMesh: 1
+--- !u!114 &898672507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898672502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471c795776445304298aa3d8777ec142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 914153267}
+  moveDuration: 0.5
 --- !u!1 &907494583
 GameObject:
   m_ObjectHideFlags: 0
@@ -14046,6 +14031,11 @@ PrefabInstance:
     - target: {fileID: 4286283437009128, guid: bab2f13eaaf31454aafa3d30787c5b15, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198064713177833144, guid: bab2f13eaaf31454aafa3d30787c5b15,
+        type: 3}
+      propertyPath: useUnscaledTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198064713177833144, guid: bab2f13eaaf31454aafa3d30787c5b15,
         type: 3}
@@ -14165,7 +14155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33f2feeca96b03f4db044923c87ebfb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveAnimalScript: {fileID: 895633532}
   shadowImgs:
   - {fileID: 216401037}
   - {fileID: 796414189}
@@ -14266,6 +14255,7 @@ MonoBehaviour:
   bgPanelCanvas: {fileID: 1939948395}
   starVFX: {fileID: 1345282316}
   lvlCompleteParticleSystems: {fileID: 1390177465}
+  isCorrect: 0
   CheckIfFisrtItemGuide: 0
   levelCompleteGOs:
   - {fileID: 2120926737}
@@ -14274,6 +14264,8 @@ MonoBehaviour:
   gameOverGOs:
   - {fileID: 699895130}
   - {fileID: 1944369654}
+  shadow: {fileID: 0}
+  endPosition: {x: 0, y: 0}
   panelGameOver: {fileID: 1187134427}
   panelFinish: {fileID: 61965747}
   settingsMenuObject: {fileID: 57040108}
@@ -18404,6 +18396,7 @@ GameObject:
   - component: {fileID: 1205592684}
   - component: {fileID: 1205592683}
   - component: {fileID: 1205592682}
+  - component: {fileID: 1205592685}
   m_Layer: 0
   m_Name: deer
   m_TagString: Untagged
@@ -18488,6 +18481,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1205592685}
+        m_TargetAssemblyTypeName: FTA_MoveAnimal, Assembly-CSharp
+        m_MethodName: moveAnimal
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1205592680}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1205592683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18526,6 +18531,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1205592680}
   m_CullTransparentMesh: 1
+--- !u!114 &1205592685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205592680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471c795776445304298aa3d8777ec142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 914153267}
+  moveDuration: 0.5
 --- !u!1 &1206639056
 GameObject:
   m_ObjectHideFlags: 0
@@ -20109,6 +20128,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198064713177833144, guid: bab2f13eaaf31454aafa3d30787c5b15,
         type: 3}
+      propertyPath: useUnscaledTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198064713177833144, guid: bab2f13eaaf31454aafa3d30787c5b15,
+        type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 8
       objectReference: {fileID: 0}
@@ -20336,6 +20360,7 @@ GameObject:
   - component: {fileID: 1327930057}
   - component: {fileID: 1327930056}
   - component: {fileID: 1327930055}
+  - component: {fileID: 1327930058}
   m_Layer: 0
   m_Name: zebra
   m_TagString: Untagged
@@ -20420,6 +20445,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1327930058}
+        m_TargetAssemblyTypeName: FTA_MoveAnimal, Assembly-CSharp
+        m_MethodName: moveAnimal
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1327930053}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1327930056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20458,6 +20495,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327930053}
   m_CullTransparentMesh: 1
+--- !u!114 &1327930058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327930053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471c795776445304298aa3d8777ec142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 914153267}
+  moveDuration: 0.5
 --- !u!1 &1328920476
 GameObject:
   m_ObjectHideFlags: 0
@@ -25118,6 +25169,7 @@ GameObject:
   - component: {fileID: 1683240143}
   - component: {fileID: 1683240142}
   - component: {fileID: 1683240141}
+  - component: {fileID: 1683240144}
   m_Layer: 0
   m_Name: leopard
   m_TagString: Untagged
@@ -25202,6 +25254,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1683240144}
+        m_TargetAssemblyTypeName: FTA_MoveAnimal, Assembly-CSharp
+        m_MethodName: moveAnimal
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1683240139}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1683240142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25240,6 +25304,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1683240139}
   m_CullTransparentMesh: 1
+--- !u!114 &1683240144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683240139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471c795776445304298aa3d8777ec142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 914153267}
+  moveDuration: 0.5
 --- !u!1 &1687963307
 GameObject:
   m_ObjectHideFlags: 0
@@ -30817,6 +30895,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198064713177833144, guid: bab2f13eaaf31454aafa3d30787c5b15,
         type: 3}
+      propertyPath: useUnscaledTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198064713177833144, guid: bab2f13eaaf31454aafa3d30787c5b15,
+        type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 8
       objectReference: {fileID: 0}
@@ -31283,6 +31366,7 @@ GameObject:
   - component: {fileID: 2089042325}
   - component: {fileID: 2089042324}
   - component: {fileID: 2089042323}
+  - component: {fileID: 2089042326}
   m_Layer: 0
   m_Name: tiger
   m_TagString: Untagged
@@ -31367,6 +31451,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2089042326}
+        m_TargetAssemblyTypeName: FTA_MoveAnimal, Assembly-CSharp
+        m_MethodName: moveAnimal
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2089042321}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2089042324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31405,6 +31501,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2089042321}
   m_CullTransparentMesh: 1
+--- !u!114 &2089042326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089042321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471c795776445304298aa3d8777ec142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 914153267}
+  moveDuration: 0.5
 --- !u!1 &2099086024
 GameObject:
   m_ObjectHideFlags: 0
@@ -31726,6 +31836,11 @@ PrefabInstance:
     - target: {fileID: 4286283437009128, guid: bab2f13eaaf31454aafa3d30787c5b15, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198064713177833144, guid: bab2f13eaaf31454aafa3d30787c5b15,
+        type: 3}
+      propertyPath: useUnscaledTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198064713177833144, guid: bab2f13eaaf31454aafa3d30787c5b15,
         type: 3}

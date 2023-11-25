@@ -6,8 +6,10 @@ using UnityEngine.UI;
 
 public class FTA_MoveAnimal : MonoBehaviour
 {
-    [SerializeField] private float moveDuration = 0.3f;
+    
+
     public FTA_GameManager gameManager;
+    [SerializeField] private float moveDuration = 0.3f;
     private Vector2 startPosition;
     private RectTransform rectTransform;
     private void Start()
@@ -38,8 +40,12 @@ public class FTA_MoveAnimal : MonoBehaviour
         gameManager.checkIfAllFound();
         myGameObject.SetActive(false);
     }
-    public void MovingAnimal(GameObject myGameObject, Vector2 endPosition, Image image)
+
+    public void moveAnimal(GameObject myGameObject) 
     {
-        StartCoroutine(guidePopUp(myGameObject, endPosition, image));    
+        if (gameManager.isCorrect) 
+        {
+            StartCoroutine(guidePopUp(myGameObject, gameManager.endPosition, gameManager.shadow));
+        }
     }
 }

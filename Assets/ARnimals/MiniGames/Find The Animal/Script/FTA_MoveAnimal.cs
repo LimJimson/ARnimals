@@ -10,10 +10,20 @@ public class FTA_MoveAnimal : MonoBehaviour
     [SerializeField] private float moveDuration = 0.3f;
     private Vector2 startPosition;
     private RectTransform rectTransform;
+    [SerializeField] private GameObject clickedAnimal;
+    private ParticleSystem trailEffects;
 
     private void Start()
     {
+        trailEffects = clickedAnimal.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>();
+    }
 
+    private void Update()
+    {
+        if (clickedAnimal.GetComponent<Image>().color.a == 0 && trailEffects.particleCount <= 0) 
+        {
+            clickedAnimal.SetActive(false);
+        }  
     }
 
     private IEnumerator guidePopUp(GameObject myGameObject, Vector2 endPosition, Image image)
@@ -39,12 +49,12 @@ public class FTA_MoveAnimal : MonoBehaviour
         myGameObject.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
     }
 
-    public void moveAnimal(GameObject myGameObject) 
+    public void moveAnimal() 
     {
         if (gameManager.isCorrect) 
         {
             gameManager.isCorrect = false;
-            StartCoroutine(guidePopUp(myGameObject, gameManager.endPosition, gameManager.shadow));
+            StartCoroutine(guidePopUp(clickedAnimal, gameManager.endPosition, gameManager.shadow));
         }
     }
 }

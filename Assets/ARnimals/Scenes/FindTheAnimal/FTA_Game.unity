@@ -13877,10 +13877,10 @@ MonoBehaviour:
       - m_Target: {fileID: 898672507}
         m_TargetAssemblyTypeName: FTA_MoveAnimal, Assembly-CSharp
         m_MethodName: moveAnimal
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 898672502}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -13938,6 +13938,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 914153267}
   moveDuration: 0.5
+  clickedAnimal: {fileID: 898672502}
 --- !u!1 &907494583
 GameObject:
   m_ObjectHideFlags: 0
@@ -18484,10 +18485,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1205592685}
         m_TargetAssemblyTypeName: FTA_MoveAnimal, Assembly-CSharp
         m_MethodName: moveAnimal
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1205592680}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -18545,6 +18546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 914153267}
   moveDuration: 0.5
+  clickedAnimal: {fileID: 1205592680}
 --- !u!1 &1206639056
 GameObject:
   m_ObjectHideFlags: 0
@@ -20448,10 +20450,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1327930058}
         m_TargetAssemblyTypeName: FTA_MoveAnimal, Assembly-CSharp
         m_MethodName: moveAnimal
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1327930053}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -20509,6 +20511,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 914153267}
   moveDuration: 0.5
+  clickedAnimal: {fileID: 1327930053}
 --- !u!1 &1328920476
 GameObject:
   m_ObjectHideFlags: 0
@@ -25257,10 +25260,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1683240144}
         m_TargetAssemblyTypeName: FTA_MoveAnimal, Assembly-CSharp
         m_MethodName: moveAnimal
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1683240139}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -25318,6 +25321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 914153267}
   moveDuration: 0.5
+  clickedAnimal: {fileID: 1683240139}
 --- !u!1 &1687963307
 GameObject:
   m_ObjectHideFlags: 0
@@ -31454,10 +31458,10 @@ MonoBehaviour:
       - m_Target: {fileID: 2089042326}
         m_TargetAssemblyTypeName: FTA_MoveAnimal, Assembly-CSharp
         m_MethodName: moveAnimal
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 2089042321}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -31515,6 +31519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 914153267}
   moveDuration: 0.5
+  clickedAnimal: {fileID: 2089042321}
 --- !u!1 &2099086024
 GameObject:
   m_ObjectHideFlags: 0

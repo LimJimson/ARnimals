@@ -28,7 +28,6 @@ public class CTF_TutorialManager : MonoBehaviour
     [SerializeField] private Canvas[] tutorialGameObjectsCanvas;
 
     [Header("TutorialComponents")]
-    [SerializeField] private GameObject skipButton;
     [SerializeField] private GameObject backButton;
     [SerializeField] private TextMeshProUGUI click2NextTxtRight;
     [SerializeField] private TextMeshProUGUI click2NextTxtLeft;

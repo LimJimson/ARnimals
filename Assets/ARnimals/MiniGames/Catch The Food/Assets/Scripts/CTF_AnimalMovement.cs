@@ -19,10 +19,6 @@ public class CTF_AnimalMovement : MonoBehaviour
     [SerializeField] private GameObject points2X;
     [SerializeField] private GameObject luck;
 	
-	[Header("Musics")]
-	[SerializeField] private AudioSource wrongFoodMusic;
-	[SerializeField] private AudioSource powerUpsMusic;
-
     private void Start()
     {
         mainCamera = Camera.main;

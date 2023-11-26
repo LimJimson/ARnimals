@@ -6,22 +6,20 @@ using UnityEngine.UI;
 
 public class FTA_MoveAnimal : MonoBehaviour
 {
-    
-
     public FTA_GameManager gameManager;
     [SerializeField] private float moveDuration = 0.3f;
     private Vector2 startPosition;
     private RectTransform rectTransform;
+
     private void Start()
     {
-      
+
     }
+
     private IEnumerator guidePopUp(GameObject myGameObject, Vector2 endPosition, Image image)
     {
-        Debug.Log("MoveAnimal");
         rectTransform = myGameObject.GetComponent<RectTransform>();
         startPosition = new Vector2(myGameObject.transform.localPosition.x, myGameObject.transform.localPosition.y);
-        Debug.Log("Animal Scale: " + myGameObject.transform.localScale);
 
         float currentTime = 0f;
 
@@ -38,13 +36,14 @@ public class FTA_MoveAnimal : MonoBehaviour
         rectTransform.anchoredPosition = endPosition;
         image.color = new Color(1.0f, 1.0f, 1.0f);
         gameManager.checkIfAllFound();
-        myGameObject.SetActive(false);
+        myGameObject.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
     }
 
     public void moveAnimal(GameObject myGameObject) 
     {
         if (gameManager.isCorrect) 
         {
+            gameManager.isCorrect = false;
             StartCoroutine(guidePopUp(myGameObject, gameManager.endPosition, gameManager.shadow));
         }
     }

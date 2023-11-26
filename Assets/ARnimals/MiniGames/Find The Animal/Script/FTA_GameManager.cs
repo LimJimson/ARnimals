@@ -375,6 +375,7 @@ public class FTA_GameManager : MonoBehaviour
         {
             if (countHealth > 1)
             {
+                isCorrect = false;
                 health.transform.GetChild(countHealth - 1).GetComponent<Image>().color = Color.black;
                 countHealth--;
                 DisplayWrongAnswerEffect();
@@ -389,6 +390,7 @@ public class FTA_GameManager : MonoBehaviour
             }
             else
             {
+                isCorrect = false;
                 health.transform.GetChild(countHealth - 1).GetComponent<Image>().color = Color.black;
                 countHealth--;
                 GameOver();

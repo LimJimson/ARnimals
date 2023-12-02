@@ -11,7 +11,12 @@ using Unity.VisualScripting;
 public class FTA_GameManager : MonoBehaviour
 {
     [Header("Hints")]
+    public GameObject[] shadowContainers;
     public Image[] shadowImgs;  // Array to hold the Image components
+    public Image[] shadowImgs_3_4;
+    public Image[] shadowImgs_5;
+
+    private Image[] selectedShadowImgs;
     public Sprite[] shadowSpritesLvl1;  // Array to hold all the sprites
     public Sprite[] shadowSpritesLvl2;
     public Sprite[] shadowSpritesLvl3;
@@ -25,11 +30,19 @@ public class FTA_GameManager : MonoBehaviour
     public Sprite[] CoverBackgroundSpritesLvl4;
     public Sprite[] CoverBackgroundSpritesLvl5;
 
-    public Image[] GuideshadowImgs;
+    public Image[] GuideshadowImgs_1_2;
+    public Image[] GuideshadowImgs_3_4;
+    public Image[] GuideshadowImgs_5;
+    private Image[] selectedGuideShadowImgs;
+    public GameObject[] guideShadowCont;
+    public GameObject selectedGuideShadowCont;
     public Image[] GuideCoverBackground;
 
     [Header("Items and Positions")]
     public GameObject[] items;
+    public GameObject[] items_3_4;
+    public GameObject[] items_5;
+    private GameObject[] selectedItems;
     int countItemFind;
 
     [Header("Health")]
@@ -90,10 +103,10 @@ public class FTA_GameManager : MonoBehaviour
         HintsLeft = 1;
         SelectedLevel = PlayerPrefs.GetString("FTA_SelectedLevel");
         currentStar = PlayerPrefs.GetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 0);
-        SelectedArraySprites();
         CheckLevel();
-        initializePositionsofItems();
+        SelectedArraySprites();
         RandomlyAssignSprites();
+        initializePositionsofItems();
         RandomlyAssignPositionToItems();
         countHealth = health.transform.childCount;
         settingsMenuObject.SetActive(false);
@@ -133,7 +146,7 @@ public class FTA_GameManager : MonoBehaviour
                 }
                 catch
                 {
-                     
+                
                 }
             }
         }
@@ -219,8 +232,22 @@ public class FTA_GameManager : MonoBehaviour
 
     private void initializePositionsofItems()
     {
-        positions = new Vector3[]{
-        items[0].transform.localPosition, items[1].transform.localPosition, items[2].transform.localPosition, items[3].transform.localPosition, items[4].transform.localPosition};
+
+        if (selectedItems == items) 
+        {
+            positions = new Vector3[]{
+            selectedItems[0].transform.localPosition, selectedItems[1].transform.localPosition, selectedItems[2].transform.localPosition, selectedItems[3].transform.localPosition, selectedItems[4].transform.localPosition};
+        }
+        else if (selectedItems == items_3_4) 
+        {
+            positions = new Vector3[]{
+            selectedItems[0].transform.localPosition, selectedItems[1].transform.localPosition, selectedItems[2].transform.localPosition, selectedItems[3].transform.localPosition, selectedItems[4].transform.localPosition, selectedItems[5].transform.localPosition};
+        }
+        else if (selectedItems == items_5) 
+        {
+            positions = new Vector3[]{
+            selectedItems[0].transform.localPosition, selectedItems[1].transform.localPosition, selectedItems[2].transform.localPosition, selectedItems[3].transform.localPosition, selectedItems[4].transform.localPosition, selectedItems[5].transform.localPosition, selectedItems[6].transform.localPosition};
+        }
     }
 
     private void RandomlyAssignPositionToItems()
@@ -228,11 +255,11 @@ public class FTA_GameManager : MonoBehaviour
         ShufflePositions(positions); // Shuffle the positions randomly.
 
         // Assign each shuffled position to a game object.
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < selectedItems.Length; i++)
         {
             if (i < positions.Length)
             {
-                items[i].transform.localPosition = positions[i];
+                selectedItems[i].transform.localPosition = positions[i];
             }
             else
             {
@@ -254,18 +281,23 @@ public class FTA_GameManager : MonoBehaviour
             array[j] = temp;
         }
     }
+
+    private Sprite[] correctSprites;
+
     private void RandomlyAssignSprites()
     {
+        correctSprites = new Sprite[selectedShadowImgs.Length];
         ShuffleSprites(SelectedArraySprites());
 
         // Make sure we have enough images for the sprites
-        int numberOfshadowImgs = Mathf.Min(shadowImgs.Length, SelectedArraySprites().Length);
+        int numberOfshadowImgs = Mathf.Min(selectedShadowImgs.Length, SelectedArraySprites().Length);
 
         for (int i = 0; i < numberOfshadowImgs; i++)
         {
-            shadowImgs[i].sprite = SelectedArraySprites()[i];
-            shadowImgContainerTrivia[i].sprite = SelectedArraySprites()[i];
-            GuideshadowImgs[i].sprite = SelectedArraySprites()[i];
+            correctSprites[i] = SelectedArraySprites()[i];
+            selectedShadowImgs[i].sprite = SelectedArraySprites()[i];
+            selectedShadowContTrivia[i].sprite = SelectedArraySprites()[i];
+            selectedGuideShadowImgs[i].sprite = SelectedArraySprites()[i];
         }
     }
     // Shuffle the array using Fisher-Yates algorithm
@@ -315,102 +347,116 @@ public class FTA_GameManager : MonoBehaviour
 
     public void checkIfCorrect(GameObject clickedAnimal)
     {
-
         Image clickedAnimalImg = clickedAnimal.GetComponent<Image>();
 
-        Color enableCorrectAnswer = new Color(1.0f, 1.0f, 1.0f);
-        
-        if (clickedAnimalImg.sprite == shadowImgs[0].sprite)
+        for (int i = 0; i < selectedShadowImgs.Length; i++) 
+        {
+            if (clickedAnimalImg.sprite == selectedShadowImgs[i].sprite) 
+            {
+                shadow = selectedShadowImgs[i];
+            }
+        } 
+
+        if (shadow != null && clickedAnimalImg.sprite == shadow.sprite) 
         {
             isCorrect = true;
-            shadow = shadowImgs[0];
-            endPosition = new Vector2(-17, 250);
-            //FTA_MoveAnimal.Instance.MovingAnimal(clickedAnimal, new Vector2(-17, 250), shadowImgs[0]);
-            Debug.Log("Correct");
-            //clickedAnimal.SetActive(false);
-            try
-            {
-                audioManager.PlaySFX(audioManager.correctAnswer);
-            }
-            catch
-            {
+            try {audioManager.PlaySFX(audioManager.correctAnswer);} catch{}
 
-            }
-        }
-        else if (clickedAnimalImg.sprite == shadowImgs[1].sprite)
-        {
-            isCorrect = true;
-            shadow = shadowImgs[1];
-            endPosition = new Vector2(267, 250);
-            Debug.Log("Correct");
-            //FTA_MoveAnimal.Instance.MovingAnimal(clickedAnimal, new Vector2(267, 250), shadowImgs[1]);
-            //clickedAnimal.SetActive(false);
-            try
+            if (shadow == selectedShadowImgs[0])
             {
-                audioManager.PlaySFX(audioManager.correctAnswer);
+                if (selectedShadowImgs == shadowImgs) 
+                {
+                    endPosition = new Vector2(16, 256);
+                }
+                else if (selectedShadowImgs == shadowImgs_3_4) 
+                {
+                    endPosition = new Vector2(-36, 253);
+                }
+                else if (selectedShadowImgs == shadowImgs_5) 
+                {
+                    endPosition = new Vector2(-65, 253);
+                }
             }
-            catch
+            else if (shadow == selectedShadowImgs[1])
             {
-
+                if (selectedShadowImgs == shadowImgs) 
+                {
+                    endPosition = new Vector2(272, 256);
+                }
+                else if (selectedShadowImgs == shadowImgs_3_4) 
+                {
+                    endPosition = new Vector2(152, 253);
+                }
+                else if (selectedShadowImgs == shadowImgs_5) 
+                {
+                    endPosition = new Vector2(93, 253);    
+                }
             }
-        }
-        else if (clickedAnimalImg.sprite == shadowImgs[2].sprite)
-        {
-            Debug.Log("Correct");
-            isCorrect = true;
-            shadow = shadowImgs[2];
-            endPosition = new Vector2(526, 250);
-            //FTA_MoveAnimal.Instance.MovingAnimal(clickedAnimal, new Vector2(526, 250), shadowImgs[2]);
-            //clickedAnimal.SetActive(false);
-            try
+            else if (shadow == selectedShadowImgs[2])
             {
-                audioManager.PlaySFX(audioManager.correctAnswer);
+                if (selectedShadowImgs == shadowImgs) 
+                {
+                    endPosition = new Vector2(527, 256);
+                }
+                else if (selectedShadowImgs == shadowImgs_3_4) 
+                {
+                    endPosition = new Vector2(348, 253);
+                }
+                else if (selectedShadowImgs == shadowImgs_5) 
+                {
+                    endPosition = new Vector2(252, 253);
+                }
             }
-            catch
+            else if (shadow == selectedShadowImgs[3])
             {
-
+                if (selectedShadowImgs == shadowImgs_3_4) 
+                {
+                    endPosition = new Vector2(529, 253);
+                }
+                else if (selectedShadowImgs == shadowImgs_5) 
+                {
+                    endPosition = new Vector2(414, 253);
+                }
+            }
+            else if (shadow == selectedShadowImgs[4])
+            {
+                if (selectedShadowImgs == shadowImgs_5) 
+                {
+                    endPosition = new Vector2(579, 253);
+                }
             }
         }
         else
         {
-            if (countHealth > 1)
+            if (countHealth > 0)
             {
                 isCorrect = false;
                 health.transform.GetChild(countHealth - 1).GetComponent<Image>().color = Color.black;
                 countHealth--;
-                DisplayWrongAnswerEffect();
-                try
-                {
-                    audioManager.PlaySFX(audioManager.wrongAnswer);
-                }
-                catch
-                {
 
-                }
-            }
-            else
-            {
-                isCorrect = false;
-                health.transform.GetChild(countHealth - 1).GetComponent<Image>().color = Color.black;
-                countHealth--;
-                GameOver();
-                try
+                if (countHealth <= 0) 
                 {
-                    audioManager.PlaySFX(audioManager.loseLevel);
-                    audioManager.musicSource.Stop();
+                    GameOver();
+                    try {audioManager.PlaySFX(audioManager.loseLevel);
+                    audioManager.musicSource.Stop();} catch{}
                 }
-                catch
-                {
-
+                else 
+                {   
+                    DisplayWrongAnswerEffect();
+                    
+                    try {audioManager.PlaySFX(audioManager.wrongAnswer);} catch{}
+                    
                 }
             }
         }
         checkIfAllFound();
     }
+
+    
     public void checkIfAllFound()
     {
         Color enableCorrectAnswer = new Color(1.0f, 1.0f, 1.0f);
-        if (shadowImgs[0].color == enableCorrectAnswer && shadowImgs[1].color == enableCorrectAnswer && shadowImgs[2].color == enableCorrectAnswer)
+        if (shadowImgs[0].color == enableCorrectAnswer && shadowImgs[1].color == enableCorrectAnswer && shadowImgs[2].color == enableCorrectAnswer || shadowImgs_3_4[0].color == enableCorrectAnswer && shadowImgs_3_4[1].color == enableCorrectAnswer && shadowImgs_3_4[2].color == enableCorrectAnswer && shadowImgs_3_4[3].color == enableCorrectAnswer || shadowImgs_5[0].color == enableCorrectAnswer && shadowImgs_5[1].color == enableCorrectAnswer && shadowImgs_5[2].color == enableCorrectAnswer && shadowImgs_5[3].color == enableCorrectAnswer && shadowImgs_5[4].color == enableCorrectAnswer)
         {
             randomNum = UnityEngine.Random.Range(0, 2);
             checkStar();
@@ -692,203 +738,144 @@ public class FTA_GameManager : MonoBehaviour
 
     public TMP_Text LevelCompletedText;
     public Button NextLevelBtn;
+    
 
-    Image animal1;
-    Image animal2;
-    Image animal3;
-    Image animal4;
-    Image animal5;
     private void CheckLevel()
     {
         SelectedLevel = PlayerPrefs.GetString("FTA_SelectedLevel");
-        animal1 = items[0].GetComponent<Image>();
-        animal2 = items[1].GetComponent<Image>();
-        animal3 = items[2].GetComponent<Image>();
-        animal4 = items[3].GetComponent<Image>();
-        animal5 = items[4].GetComponent<Image>();
 
         LevelCompletedText.text = "LEVEL <color=yellow><b>" + SelectedLevel + "</b></color> COMPLETED!";
 
         switch (SelectedLevel)
         {
             case "1":
+                shadowContainers[0].SetActive(true);
+                selectedShadowImgs = shadowImgs;
                 Background.sprite = BackgroundImgs[0];
-                animal1.sprite = shadowSpritesLvl1[0];
-                animal1.transform.localPosition = AnimalPositionLvl1[0];
-                animal2.sprite = shadowSpritesLvl1[1];
-                animal2.transform.localPosition = AnimalPositionLvl1[1];
-                animal3.sprite = shadowSpritesLvl1[2];
-                animal3.transform.localPosition = AnimalPositionLvl1[2];
-                animal4.sprite = shadowSpritesLvl1[3];
-                animal4.transform.localPosition = AnimalPositionLvl1[3];
-                animal5.sprite = shadowSpritesLvl1[4];
-                animal5.transform.localPosition = AnimalPositionLvl1[4];
+                selectedItems = items;
+                selectedShadowContTrivia = shadowImgContainerTrivia_1_2;
+                selectedGuideShadowImgs = GuideshadowImgs_1_2;
+                selectedGuideShadowCont = guideShadowCont[0];
+                triviaContainers[0].SetActive(true);
 
-                CoverBackground[0].sprite = CoverBackgroundSpritesLvl1[0];
-                CoverBackground[0].transform.localPosition = CoverBgPositionForLevel1[0];
-                CoverBackground[1].sprite = CoverBackgroundSpritesLvl1[1];
-                CoverBackground[1].transform.localPosition = CoverBgPositionForLevel1[1];
-                CoverBackground[2].sprite = CoverBackgroundSpritesLvl1[2];
-                CoverBackground[2].transform.localPosition = CoverBgPositionForLevel1[2];
-                CoverBackground[3].sprite = CoverBackgroundSpritesLvl1[3];
-                CoverBackground[3].transform.localPosition = CoverBgPositionForLevel1[3];
-                CoverBackground[4].sprite = CoverBackgroundSpritesLvl1[4];
-                CoverBackground[4].transform.localPosition = CoverBgPositionForLevel1[4];
+                for (int i = 0 ; i < selectedItems.Length; i++) 
+                {
+                    selectedItems[i].GetComponent<Image>().sprite = shadowSpritesLvl1[i];
+                    selectedItems[i].transform.localPosition = AnimalPositionLvl1[i];
+                }
 
-                GuideCoverBackground[0].sprite = CoverBackgroundSpritesLvl1[0];
-                GuideCoverBackground[0].transform.localPosition = CoverBgPositionForLevel1[0];
-                GuideCoverBackground[1].sprite = CoverBackgroundSpritesLvl1[1];
-                GuideCoverBackground[1].transform.localPosition = CoverBgPositionForLevel1[1];
-                GuideCoverBackground[2].sprite = CoverBackgroundSpritesLvl1[2];
-                GuideCoverBackground[2].transform.localPosition = CoverBgPositionForLevel1[2];
-                GuideCoverBackground[3].sprite = CoverBackgroundSpritesLvl1[3];
-                GuideCoverBackground[3].transform.localPosition = CoverBgPositionForLevel1[3];
-                GuideCoverBackground[4].sprite = CoverBackgroundSpritesLvl1[4];
-                GuideCoverBackground[4].transform.localPosition = CoverBgPositionForLevel1[4];
+                for (int i = 0; i < CoverBackground.Length; i++) 
+                {
+                    CoverBackground[i].sprite = CoverBackgroundSpritesLvl1[i];
+                    CoverBackground[i].transform.localPosition = CoverBgPositionForLevel1[i];
 
+                    GuideCoverBackground[i].sprite = CoverBackgroundSpritesLvl3[i];
+                    GuideCoverBackground[i].transform.localPosition = CoverBgPositionForLevel1[i];
+                }
                 break;
             case "2":
+                shadowContainers[0].SetActive(true);
+                selectedShadowImgs = shadowImgs;
                 Background.sprite = BackgroundImgs[1];
-                animal1.sprite = shadowSpritesLvl2[0];
-                animal1.transform.localPosition = AnimalPositionLvl2[0];
-                animal2.sprite = shadowSpritesLvl2[1];
-                animal2.transform.localPosition = AnimalPositionLvl2[1];
-                animal3.sprite = shadowSpritesLvl2[2];
-                animal3.transform.localPosition = AnimalPositionLvl2[2];
-                animal4.sprite = shadowSpritesLvl2[3];
-                animal4.transform.localPosition = AnimalPositionLvl2[3];
-                animal5.sprite = shadowSpritesLvl2[4];
-                animal5.transform.localPosition = AnimalPositionLvl2[4];
+                selectedItems = items;
+                selectedShadowContTrivia = shadowImgContainerTrivia_1_2;
+                selectedGuideShadowImgs = GuideshadowImgs_1_2;
+                selectedGuideShadowCont = guideShadowCont[0];
+                triviaContainers[0].SetActive(true);
 
-                CoverBackground[0].sprite = CoverBackgroundSpritesLvl2[0];
-                CoverBackground[0].transform.localPosition = CoverBgPositionForLevel2[0];
-                CoverBackground[1].sprite = CoverBackgroundSpritesLvl2[1];
-                CoverBackground[1].transform.localPosition = CoverBgPositionForLevel2[1];
-                CoverBackground[2].sprite = CoverBackgroundSpritesLvl2[2];
-                CoverBackground[2].transform.localPosition = CoverBgPositionForLevel2[2];
-                CoverBackground[3].sprite = CoverBackgroundSpritesLvl2[3];
-                CoverBackground[3].transform.localPosition = CoverBgPositionForLevel2[3];
-                CoverBackground[4].sprite = CoverBackgroundSpritesLvl2[4];
-                CoverBackground[4].transform.localPosition = CoverBgPositionForLevel2[4];
+                for (int i = 0 ; i < selectedItems.Length; i++) 
+                {
+                    selectedItems[i].GetComponent<Image>().sprite = shadowSpritesLvl2[i];
+                    selectedItems[i].transform.localPosition = AnimalPositionLvl2[i];
+                }
 
-                GuideCoverBackground[0].sprite = CoverBackgroundSpritesLvl2[0];
-                GuideCoverBackground[0].transform.localPosition = CoverBgPositionForLevel2[0];
-                GuideCoverBackground[1].sprite = CoverBackgroundSpritesLvl2[1];
-                GuideCoverBackground[1].transform.localPosition = CoverBgPositionForLevel2[1];
-                GuideCoverBackground[2].sprite = CoverBackgroundSpritesLvl2[2];
-                GuideCoverBackground[2].transform.localPosition = CoverBgPositionForLevel2[2];
-                GuideCoverBackground[3].sprite = CoverBackgroundSpritesLvl2[3];
-                GuideCoverBackground[3].transform.localPosition = CoverBgPositionForLevel2[3];
-                GuideCoverBackground[4].sprite = CoverBackgroundSpritesLvl2[4];
-                GuideCoverBackground[4].transform.localPosition = CoverBgPositionForLevel2[4];
+                for (int i = 0; i < CoverBackground.Length; i++) 
+                {
+                    CoverBackground[i].sprite = CoverBackgroundSpritesLvl2[i];
+                    CoverBackground[i].transform.localPosition = CoverBgPositionForLevel2[i];
 
+                    GuideCoverBackground[i].sprite = CoverBackgroundSpritesLvl2[i];
+                    GuideCoverBackground[i].transform.localPosition = CoverBgPositionForLevel2[i];
+                }
                 break;
             case "3":
+                shadowContainers[1].SetActive(true);
+                selectedShadowImgs = shadowImgs_3_4;
+                items_3_4[5].SetActive(true);
                 Background.sprite = BackgroundImgs[2];
-                animal1.sprite = shadowSpritesLvl3[0];
-                animal1.transform.localPosition = AnimalPositionLvl3[0];
-                animal2.sprite = shadowSpritesLvl3[1];
-                animal2.transform.localPosition = AnimalPositionLvl3[1];
-                animal3.sprite = shadowSpritesLvl3[2];
-                animal3.transform.localPosition = AnimalPositionLvl3[2];
-                animal4.sprite = shadowSpritesLvl3[3];
-                animal4.transform.localPosition = AnimalPositionLvl3[3];
-                animal5.sprite = shadowSpritesLvl3[4];
-                animal5.transform.localPosition = AnimalPositionLvl3[4];
+                selectedItems = items_3_4;
+                selectedShadowContTrivia = shadowImgContainerTrivia_3_4;
+                selectedGuideShadowImgs = GuideshadowImgs_3_4;
+                selectedGuideShadowCont = guideShadowCont[1];
+                triviaContainers[1].SetActive(true);
 
-                CoverBackground[0].sprite = CoverBackgroundSpritesLvl3[0];
-                CoverBackground[0].transform.localPosition = CoverBgPositionForLevel3[0];
-                CoverBackground[1].sprite = CoverBackgroundSpritesLvl3[1];
-                CoverBackground[1].transform.localPosition = CoverBgPositionForLevel3[1];
-                CoverBackground[2].sprite = CoverBackgroundSpritesLvl3[2];
-                CoverBackground[2].transform.localPosition = CoverBgPositionForLevel3[2];
-                CoverBackground[3].sprite = CoverBackgroundSpritesLvl3[3];
-                CoverBackground[3].transform.localPosition = CoverBgPositionForLevel3[3];
-                CoverBackground[4].sprite = CoverBackgroundSpritesLvl3[4];
-                CoverBackground[4].transform.localPosition = CoverBgPositionForLevel3[4];
+                for (int i = 0 ; i < selectedItems.Length; i++) 
+                {
+                    selectedItems[i].GetComponent<Image>().sprite = shadowSpritesLvl3[i];
+                    selectedItems[i].transform.localPosition = AnimalPositionLvl3[i];
+                }
 
-                GuideCoverBackground[0].sprite = CoverBackgroundSpritesLvl3[0];
-                GuideCoverBackground[0].transform.localPosition = CoverBgPositionForLevel3[0];
-                GuideCoverBackground[1].sprite = CoverBackgroundSpritesLvl3[1];
-                GuideCoverBackground[1].transform.localPosition = CoverBgPositionForLevel3[1];
-                GuideCoverBackground[2].sprite = CoverBackgroundSpritesLvl3[2];
-                GuideCoverBackground[2].transform.localPosition = CoverBgPositionForLevel3[2];
-                GuideCoverBackground[3].sprite = CoverBackgroundSpritesLvl3[3];
-                GuideCoverBackground[3].transform.localPosition = CoverBgPositionForLevel3[3];
-                GuideCoverBackground[4].sprite = CoverBackgroundSpritesLvl3[4];
-                GuideCoverBackground[4].transform.localPosition = CoverBgPositionForLevel3[4];
+                for (int i = 0; i < CoverBackground.Length; i++) 
+                {
+                    CoverBackground[i].sprite = CoverBackgroundSpritesLvl3[i];
+                    CoverBackground[i].transform.localPosition = CoverBgPositionForLevel3[i];
 
+                    GuideCoverBackground[i].sprite = CoverBackgroundSpritesLvl3[i];
+                    GuideCoverBackground[i].transform.localPosition = CoverBgPositionForLevel3[i];
+                }
                 break;
             case "4":
+                shadowContainers[1].SetActive(true);
+                selectedShadowImgs = shadowImgs_3_4;
+                items_3_4[5].SetActive(true);
                 Background.sprite = BackgroundImgs[3];
-                animal1.sprite = shadowSpritesLvl4[0];
-                animal1.transform.localPosition = AnimalPositionLvl4[0];
-                animal2.sprite = shadowSpritesLvl4[1];
-                animal2.transform.localPosition = AnimalPositionLvl4[1];
-                animal3.sprite = shadowSpritesLvl4[2];
-                animal3.transform.localPosition = AnimalPositionLvl4[2];
-                animal4.sprite = shadowSpritesLvl4[3];
-                animal4.transform.localPosition = AnimalPositionLvl4[3];
-                animal5.sprite = shadowSpritesLvl4[4];
-                animal5.transform.localPosition = AnimalPositionLvl4[4];
+                selectedItems = items_3_4;
+                selectedShadowContTrivia = shadowImgContainerTrivia_3_4;
+                selectedGuideShadowImgs = GuideshadowImgs_3_4;
+                selectedGuideShadowCont = guideShadowCont[1];
+                triviaContainers[1].SetActive(true);
 
-                CoverBackground[0].sprite = CoverBackgroundSpritesLvl4[0];
-                CoverBackground[0].transform.localPosition = CoverBgPositionForLevel4[0];
-                CoverBackground[1].sprite = CoverBackgroundSpritesLvl4[1];
-                CoverBackground[1].transform.localPosition = CoverBgPositionForLevel4[1];
-                CoverBackground[2].sprite = CoverBackgroundSpritesLvl4[2];
-                CoverBackground[2].transform.localPosition = CoverBgPositionForLevel4[2];
-                CoverBackground[3].sprite = CoverBackgroundSpritesLvl4[3];
-                CoverBackground[3].transform.localPosition = CoverBgPositionForLevel4[3];
-                CoverBackground[4].sprite = CoverBackgroundSpritesLvl4[4];
-                CoverBackground[4].transform.localPosition = CoverBgPositionForLevel4[4];
+                for (int i = 0 ; i < selectedItems.Length; i++) 
+                {
+                    selectedItems[i].GetComponent<Image>().sprite = shadowSpritesLvl4[i];
+                    selectedItems[i].transform.localPosition = AnimalPositionLvl4[i];
+                }
 
-                GuideCoverBackground[0].sprite = CoverBackgroundSpritesLvl4[0];
-                GuideCoverBackground[0].transform.localPosition = CoverBgPositionForLevel4[0];
-                GuideCoverBackground[1].sprite = CoverBackgroundSpritesLvl4[1];
-                GuideCoverBackground[1].transform.localPosition = CoverBgPositionForLevel4[1];
-                GuideCoverBackground[2].sprite = CoverBackgroundSpritesLvl4[2];
-                GuideCoverBackground[2].transform.localPosition = CoverBgPositionForLevel4[2];
-                GuideCoverBackground[3].sprite = CoverBackgroundSpritesLvl4[3];
-                GuideCoverBackground[3].transform.localPosition = CoverBgPositionForLevel4[3];
-                GuideCoverBackground[4].sprite = CoverBackgroundSpritesLvl4[4];
-                GuideCoverBackground[4].transform.localPosition = CoverBgPositionForLevel4[4];
+                for (int i = 0; i < CoverBackground.Length; i++) 
+                {
+                    CoverBackground[i].sprite = CoverBackgroundSpritesLvl4[i];
+                    CoverBackground[i].transform.localPosition = CoverBgPositionForLevel4[i];
 
+                    GuideCoverBackground[i].sprite = CoverBackgroundSpritesLvl4[i];
+                    GuideCoverBackground[i].transform.localPosition = CoverBgPositionForLevel4[i];
+                }
                 break;
             case "5":
+                shadowContainers[2].SetActive(true);
+                selectedShadowImgs = shadowImgs_5;
+                items_5[5].SetActive(true);
+                items_5[6].SetActive(true);
                 Background.sprite = BackgroundImgs[4];
-                animal1.sprite = shadowSpritesLvl5[0];
-                animal1.transform.localPosition = AnimalPositionLvl5[0];
-                animal2.sprite = shadowSpritesLvl5[1];
-                animal2.transform.localPosition = AnimalPositionLvl5[1];
-                animal3.sprite = shadowSpritesLvl5[2];
-                animal3.transform.localPosition = AnimalPositionLvl5[2];
-                animal4.sprite = shadowSpritesLvl5[3];
-                animal4.transform.localPosition = AnimalPositionLvl5[3];
-                animal5.sprite = shadowSpritesLvl5[4];
-                animal5.transform.localPosition = AnimalPositionLvl5[4];
+                selectedItems = items_5;
+                selectedShadowContTrivia = shadowImgContainerTrivia_5;
+                selectedGuideShadowImgs = GuideshadowImgs_5;
+                selectedGuideShadowCont = guideShadowCont[2];
+                triviaContainers[2].SetActive(true);
 
-                CoverBackground[0].sprite = CoverBackgroundSpritesLvl5[0];
-                CoverBackground[0].transform.localPosition = CoverBgPositionForLevel5[0];
-                CoverBackground[1].sprite = CoverBackgroundSpritesLvl5[1];
-                CoverBackground[1].transform.localPosition = CoverBgPositionForLevel5[1];
-                CoverBackground[2].sprite = CoverBackgroundSpritesLvl5[2];
-                CoverBackground[2].transform.localPosition = CoverBgPositionForLevel5[2];
-                CoverBackground[3].sprite = CoverBackgroundSpritesLvl5[3];
-                CoverBackground[3].transform.localPosition = CoverBgPositionForLevel5[3];
-                CoverBackground[4].sprite = CoverBackgroundSpritesLvl5[4];
-                CoverBackground[4].transform.localPosition = CoverBgPositionForLevel5[4];
+                for (int i = 0 ; i < selectedItems.Length; i++) 
+                {
+                    selectedItems[i].GetComponent<Image>().sprite = shadowSpritesLvl5[i];
+                    selectedItems[i].transform.localPosition = AnimalPositionLvl5[i];
+                }
 
-                GuideCoverBackground[0].sprite = CoverBackgroundSpritesLvl5[0];
-                GuideCoverBackground[0].transform.localPosition = CoverBgPositionForLevel5[0];
-                GuideCoverBackground[1].sprite = CoverBackgroundSpritesLvl5[1];
-                GuideCoverBackground[1].transform.localPosition = CoverBgPositionForLevel5[1];
-                GuideCoverBackground[2].sprite = CoverBackgroundSpritesLvl5[2];
-                GuideCoverBackground[2].transform.localPosition = CoverBgPositionForLevel5[2];
-                GuideCoverBackground[3].sprite = CoverBackgroundSpritesLvl5[3];
-                GuideCoverBackground[3].transform.localPosition = CoverBgPositionForLevel5[3];
-                GuideCoverBackground[4].sprite = CoverBackgroundSpritesLvl5[4];
-                GuideCoverBackground[4].transform.localPosition = CoverBgPositionForLevel5[4];
+                for (int i = 0; i < CoverBackground.Length; i++) 
+                {
+                    CoverBackground[i].sprite = CoverBackgroundSpritesLvl5[i];
+                    CoverBackground[i].transform.localPosition = CoverBgPositionForLevel5[i];
+
+                    GuideCoverBackground[i].sprite = CoverBackgroundSpritesLvl5[i];
+                    GuideCoverBackground[i].transform.localPosition = CoverBgPositionForLevel5[i];
+                }
 
                 break;
         }
@@ -924,94 +911,26 @@ public class FTA_GameManager : MonoBehaviour
     public Button ButtonHint;
     public void HintBtn()
     {
-        Color CorrectAnswerNotFound = new Color(0f, 0f, 0f);
-        if (animal1.gameObject.activeSelf && animal1.sprite == shadowImgs[0].sprite || animal1.gameObject.activeSelf && animal1.sprite == shadowImgs[1].sprite || animal1.gameObject.activeSelf && animal1.sprite == shadowImgs[2].sprite)
+        Image[] animalImgs = new Image[selectedItems.Length];
+
+        for (int i = 0; i < selectedItems.Length; i++) 
         {
-            Debug.Log("showhint");
-            if (shadowImgs[0].color == CorrectAnswerNotFound)
-            {
-                StartCoroutine(ShowHint(animal1));
-            }
-            else if (shadowImgs[1].color == CorrectAnswerNotFound)
-            {
-                StartCoroutine(ShowHint(animal1));
-            }
-            else if (shadowImgs[2].color == CorrectAnswerNotFound)
-            {
-                StartCoroutine(ShowHint(animal1));
-            }
+            animalImgs[i] = selectedItems[i].GetComponent<Image>();
         }
-        else if (animal2.gameObject.activeSelf && animal2.sprite == shadowImgs[0].sprite || animal2.gameObject.activeSelf && animal2.sprite == shadowImgs[1].sprite || animal2.gameObject.activeSelf && animal2.sprite == shadowImgs[2].sprite)
-        {
-            Debug.Log("showhint2");
-            if (shadowImgs[0].color == CorrectAnswerNotFound)
-            {
-                StartCoroutine(ShowHint(animal2));
-            }
-            else if (shadowImgs[1].color == CorrectAnswerNotFound)
-            {
-                StartCoroutine(ShowHint(animal2));
-            }
-            else if (shadowImgs[2].color == CorrectAnswerNotFound)
-            {
-                StartCoroutine(ShowHint(animal2));
-            }
-        }
-        else if (animal3.gameObject.activeSelf && animal3.sprite == shadowImgs[0].sprite || animal3.gameObject.activeSelf && animal3.sprite == shadowImgs[1].sprite || animal3.gameObject.activeSelf && animal3.sprite == shadowImgs[2].sprite)
-        {
-            Debug.Log("showhint3");
-            if (shadowImgs[0].color == CorrectAnswerNotFound)
-            {
-                StartCoroutine(ShowHint(animal3));
-            }
-            else if (shadowImgs[1].color == CorrectAnswerNotFound)
-            {
-                StartCoroutine(ShowHint(animal3));
-            }
-            else if (shadowImgs[2].color == CorrectAnswerNotFound)
-            {
-                StartCoroutine(ShowHint(animal3));
-            }
-        }
-        else if (animal4.gameObject.activeSelf && animal4.sprite == shadowImgs[0].sprite || animal4.gameObject.activeSelf && animal4.sprite == shadowImgs[1].sprite || animal4.gameObject.activeSelf && animal4.sprite == shadowImgs[2].sprite)
-        {
-            Debug.Log("showhint4");
-            if (shadowImgs[0].color == CorrectAnswerNotFound)
-            {
-                StartCoroutine(ShowHint(animal4));
-            }
-            else if (shadowImgs[1].color == CorrectAnswerNotFound)
-            {
-                StartCoroutine(ShowHint(animal4));
-            }
-            else if (shadowImgs[2].color == CorrectAnswerNotFound)
-            {
-                StartCoroutine(ShowHint(animal4));
-            }
-        }
-        else if (animal5.gameObject.activeSelf && animal5.sprite == shadowImgs[0].sprite || animal5.gameObject.activeSelf && animal5.sprite == shadowImgs[1].sprite || animal5.gameObject.activeSelf && animal5.sprite == shadowImgs[2].sprite)
-        {
-            Debug.Log("showhint5");
-            if (shadowImgs[0].color == CorrectAnswerNotFound)
-            {
-                StartCoroutine(ShowHint(animal5));
-            }
-            else if (shadowImgs[1].color == CorrectAnswerNotFound)
-            {
-                StartCoroutine(ShowHint(animal5));
-            }
-            else if (shadowImgs[2].color == CorrectAnswerNotFound)
-            {
-                StartCoroutine(ShowHint(animal5));
-            }
-        }
+
+        Image[] CorrectAnimals = animalImgs.Where(animal => correctSprites.Contains(animal.sprite)).ToArray();
+        Image[] enabledCorrectAnimals = CorrectAnimals.Where(animal => animal.gameObject.activeSelf).ToArray();
+        int randomNum = UnityEngine.Random.Range(0, enabledCorrectAnimals.Length);
+        Image selectedAnimal = enabledCorrectAnimals[randomNum];
+        StartCoroutine(ShowHint(selectedAnimal));
     }
     public IEnumerator ShowHint(Image shawdowImage)
     {
-        Vector3 originalSize = shawdowImage.transform.localScale;
-        Vector3 doubleSize = shawdowImage.transform.localScale = shawdowImage.transform.localScale * 1.5f;
+        Vector2 originalSize = shawdowImage.transform.localScale;
+        Vector2 doubleSize = shawdowImage.transform.localScale = shawdowImage.transform.localScale * 1.5f;
 
         shawdowImage.transform.localScale = doubleSize;
+        shawdowImage.transform.GetChild(1).gameObject.SetActive(true);
         yield return new WaitForSeconds(3.0f);
         shawdowImage.transform.localScale = originalSize;
     }
@@ -1442,7 +1361,10 @@ public class FTA_GameManager : MonoBehaviour
 
     //----------TRIVIA---------//
     public GameObject triviaGameCanvas;
-    public Image[] shadowImgContainerTrivia;
+    public Image[] shadowImgContainerTrivia_1_2;
+    public Image[] shadowImgContainerTrivia_3_4;
+    public Image[] shadowImgContainerTrivia_5;
+    private Image[] selectedShadowContTrivia;
     public TMP_Text AnimalNameTrivia;
     public TMP_Text TriviaTextInfo;
     public Image AnimalImageTriva;
@@ -1457,7 +1379,7 @@ public class FTA_GameManager : MonoBehaviour
     public void openTriviaCanvas()
     {
         TriviaGuide();
-        clickAnimalShadow(shadowImgContainerTrivia[0].gameObject);
+        clickAnimalShadow(selectedShadowContTrivia[0].gameObject);
         
         triviaGameCanvas.SetActive(true);
         try
@@ -1480,7 +1402,7 @@ public class FTA_GameManager : MonoBehaviour
 
     public void clickAnimalShadow(GameObject clickedAnimal)
     {
-        foreach (Image shadowImgs in shadowImgContainerTrivia)
+        foreach (Image shadowImgs in selectedShadowContTrivia)
         {
             shadowImgs.color = Color.black;
         }
@@ -1494,28 +1416,56 @@ public class FTA_GameManager : MonoBehaviour
         animalGetAnimalName = AnimalNameTrivia.text;
         generateRandomTrivia();
     }
-    public GameObject Arrow1;
-    public GameObject Arrow2;
-    public GameObject Arrow3;
+
+    public GameObject[] triviaContainers;
+    public GameObject[] Arrows_1_2;
+    public GameObject[] Arrows_3_4;
+    public GameObject[] Arrows_5;
+
     void ShowArrowTriviaGuide(string clickedAnimalImg)
     {
+
+        foreach (var arrow in Arrows_1_2) 
+        {
+            arrow.SetActive(true);
+        }
+
+        foreach (var arrow in Arrows_3_4) 
+        {
+            arrow.SetActive(true);
+        }
+
+        foreach (var arrow in Arrows_5) 
+        {
+            arrow.SetActive(true);
+        }
+
         if (clickedAnimalImg == "shadowleo")
         {
-            Arrow1.SetActive(false);
-            Arrow2.SetActive(true);
-            Arrow3.SetActive(true);
+            Arrows_1_2[0].SetActive(false);
+            Arrows_3_4[0].SetActive(false);
+            Arrows_5[0].SetActive(false);
         }
         else if (clickedAnimalImg == "shadowtig")
         {
-            Arrow1.SetActive(true);
-            Arrow2.SetActive(false);
-            Arrow3.SetActive(true);
+            Arrows_1_2[1].SetActive(false);
+            Arrows_3_4[1].SetActive(false);
+            Arrows_5[1].SetActive(false);
         }
         else if (clickedAnimalImg == "shadowzeb")
         {
-            Arrow1.SetActive(true);
-            Arrow2.SetActive(true);
-            Arrow3.SetActive(false);
+            Arrows_1_2[2].SetActive(false);
+            Arrows_3_4[2].SetActive(false);
+            Arrows_5[2].SetActive(false);
+        }
+        else if (clickedAnimalImg == "shadowzeb (1)")
+        {
+            Arrows_3_4[3].SetActive(false);
+            Arrows_5[3].SetActive(false);
+        }
+        else if (clickedAnimalImg == "shadowzeb (2)")
+        {
+            Arrows_5[4].SetActive(false);
         }
     }
 

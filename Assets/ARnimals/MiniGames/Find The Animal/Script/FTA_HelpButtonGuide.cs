@@ -65,7 +65,7 @@ public class FTA_HelpButtonGuide : MonoBehaviour
                 break;
             case 2:
                 boardshadowtxt.SetActive(true);
-                ShadowHint.SetActive(true);
+                gameManager.selectedGuideShadowCont.SetActive(true);
                 PageNumbertxt.text = "2/8";
                 BackBtn.SetActive(true);
                 NarratorGuide();
@@ -114,7 +114,7 @@ public class FTA_HelpButtonGuide : MonoBehaviour
         welcomeguidetxt.SetActive(false);
 
         boardshadowtxt.SetActive(false);
-        ShadowHint.SetActive(false);
+        gameManager.selectedGuideShadowCont.SetActive(false);
 
         hearttxt.SetActive(false);
         Health.SetActive(false);

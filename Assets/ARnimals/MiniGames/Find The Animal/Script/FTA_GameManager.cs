@@ -1054,108 +1054,115 @@ public class FTA_GameManager : MonoBehaviour
 
     void checkStar()
     {
+        
         SaveFTAGame = SaveManager.Load();
+
+        int starsToAdd = countHealth > currentStar? countHealth : currentStar; 
         if (countHealth == 3)
         {
+            Debug.Log("Level: " + SelectedLevel);
             starHolder.sprite = stars[2];
-            if (currentStar < countHealth)
-            {
+            // if (currentStar <= countHealth)
+            // {
                 PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel, 1);
                 switch (SelectedLevel)
                 {
                     case "1":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
                         SaveFTAGame.isLeopardUnlock = true;
                         levelbordercompletedholder.sprite = levelborderimages[0];
                         break;
                     case "2":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
                         SaveFTAGame.isPigeonUnlock = true;
                         levelbordercompletedholder.sprite = levelborderimages[1];
+                        Debug.Log("Case 2");
                         break;
                     case "3":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
                         SaveFTAGame.isPiranhaUnlock = true;
                         levelbordercompletedholder.sprite = levelborderimages[2];
                         break;
                     case "4":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
                         SaveFTAGame.isBearUnlock = true;
                         levelbordercompletedholder.sprite = levelborderimages[3];
                         break;
                     case "5":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 3);
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
                         SaveFTAGame.isOwlUnlock = true;
                         twostarstounlock.enabled = false;
                         levelbordercompletedholder.enabled = false;
                         break;
-                }
-            }
+                    }
+                //}
+        
         }
         else if (countHealth == 2)
         {
             starHolder.sprite = stars[1];
-            if (currentStar < countHealth)
-            {
+            // if (currentStar <= countHealth)
+            // {
                 PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel, 1);
                 switch (SelectedLevel)
                 {
                     case "1":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
                         levelbordercompletedholder.sprite = levelborderimages[0];
                         break;
                     case "2":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
                         levelbordercompletedholder.sprite = levelborderimages[1];
                         break;
                     case "3":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
                         levelbordercompletedholder.sprite = levelborderimages[2];
                         break;
                     case "4":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
                         levelbordercompletedholder.sprite = levelborderimages[3];
                         break;
                     case "5":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 2);
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
                         twostarstounlock.enabled = false;
                         levelbordercompletedholder.enabled = false;
                         break;
-                }
-            }
+            //     }
+             }
 
         }
         else if (countHealth == 1)
         {
             starHolder.sprite = stars[0];
-            if (currentStar <= countHealth)
-            {
+            // if (currentStar >= countHealth)
+            // {
                 switch (SelectedLevel)
                 {
                     case "1":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
                         levelbordercompletedholder.sprite = levelborderimages[0];
                         break;
                     case "2":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
                         levelbordercompletedholder.sprite = levelborderimages[1];
                         break;
                     case "3":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
                         levelbordercompletedholder.sprite = levelborderimages[2];
                         break;
                     case "4":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
                         levelbordercompletedholder.sprite = levelborderimages[3];
                         break;
                     case "5":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", 1);
+                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
                         twostarstounlock.enabled = false;
                         levelbordercompletedholder.enabled = false;
                         break;
-                }
-            }
+            //     }
+             }
         }
+        Debug.Log("Selected LVL: " + SelectedLevel);
         SaveManager.Save(SaveFTAGame);
     }
 

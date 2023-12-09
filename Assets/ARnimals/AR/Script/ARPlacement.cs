@@ -59,11 +59,15 @@ public class ARPlacement : MonoBehaviour
     
     private void OnDisable()
     {
-        fpsController.enabled = true;
+        try{
+            fpsController.enabled = true;
+        }catch{}
     }
     void Start()
     {
-        fpsController.enabled = false;
+        try{
+            fpsController.enabled = false;
+        }catch{}
 
         //hide GameObjects
         foreach (GameObject uiElement in GameObjectsToHide)
@@ -71,6 +75,7 @@ public class ARPlacement : MonoBehaviour
             uiElement.SetActive(false);
         }
 
+        destroyObject();
         //UI and Canvas
         AR_UI.gameObject.SetActive(true);
         spawnAnimalContainer.SetActive(true);
@@ -86,21 +91,6 @@ public class ARPlacement : MonoBehaviour
         countdownSpawnAdtnlAnimal();
 
     }
-
-    //private void OnEnable()
-    //{
-    //    originalResolution = new Vector2(Screen.width, Screen.height);
-
-    //    Vector2 changeRes = new Vector2(originalResolution.x / 2f, originalResolution.y / 2f);
-
-    //    Screen.SetResolution((int)changeRes.x, (int)changeRes.y, true);
-    //}
-
-    //private void OnDisable()
-    //{
-    //    Screen.SetResolution((int)originalResolution.x, (int)originalResolution.y, true);
-    //}
-
 
     void hide_showGameObjects()
     {

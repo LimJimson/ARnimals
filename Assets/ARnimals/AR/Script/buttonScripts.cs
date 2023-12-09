@@ -45,6 +45,7 @@ public class buttonScripts : MonoBehaviour
     
     public void returnToMainMenu()
     {
+        ARPlacementScript.destroyObject();
         SceneManager.LoadScene("MainMenu");
     }
 

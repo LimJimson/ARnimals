@@ -155,11 +155,12 @@ public class recordBTNScript : MonoBehaviour
 
     public void stopRecord(){
         ScreenRecorderBridge.StopScreenRecording();
+        StartCoroutine(txtDelay());
         stopRecordBtn.SetActive(false);
         _ARPlacementScript.Arrow.SetActive(true);
         _ARPlacementScript.distanceTxt.gameObject.SetActive(true);
         _txt.gameObject.SetActive(true);
-        StartCoroutine(txtDelay());
+        
     }
 
     string videoFileName;

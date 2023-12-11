@@ -57,7 +57,6 @@ public class recordBTNScript : MonoBehaviour
             if (isRecording && _ARPlacementScript.didAnimalSpawn)
             {
                 _ARPlacementScript.Arrow.SetActive(false);
-                _txt.gameObject.SetActive(false);
                 _ARPlacementScript.distanceTxt.gameObject.SetActive(false);
                 stopRecordBtn.SetActive(true);
                 foreach (GameObject uiElement in objectsToHide)
@@ -77,7 +76,7 @@ public class recordBTNScript : MonoBehaviour
             if (!isRecording && _ARPlacementScript.didAnimalSpawn)
             {
                 _ARPlacementScript.Arrow.SetActive(true);
-                _txt.gameObject.SetActive(true);
+                
                 _ARPlacementScript.distanceTxt.gameObject.SetActive(true);
                 stopRecordBtn.SetActive(false);
 
@@ -138,7 +137,7 @@ public class recordBTNScript : MonoBehaviour
 
             UpdateCountdownText();
 
-            if (countdownTime == 0.0f)
+            if (countdownTime == 0.0f && isRecording)
             {
                 isCountingDown = false;
                 stopRecord();
@@ -148,21 +147,33 @@ public class recordBTNScript : MonoBehaviour
     public void RecordButtonOnClick()
     {
         countdownTime = 15.0f;
-        StopAllCoroutines();
+        _txt.gameObject.SetActive(false);
         ScreenRecorderBridge.StartScreenRecording();
     }
 
 
     public void stopRecord(){
         ScreenRecorderBridge.StopScreenRecording();
-        StartCoroutine(txtDelay());
         stopRecordBtn.SetActive(false);
+        StartCoroutine(txtDelay());
         _ARPlacementScript.Arrow.SetActive(true);
         _ARPlacementScript.distanceTxt.gameObject.SetActive(true);
         _txt.gameObject.SetActive(true);
         
     }
 
+    public void stopTxtDelayCoroutine()
+    {
+        StopCoroutine(txtDelay());
+        _txt.gameObject.SetActive(false);
+    }
+    IEnumerator txtDelay()
+    {
+        _txt.text = "Saved to Gallery!";
+        yield return new WaitForSeconds(1f);
+        _txt.text = "";
+        stopTxtDelayCoroutine();
+    }
     string videoFileName;
 
     public void getVideoPath()
@@ -314,14 +325,7 @@ public class recordBTNScript : MonoBehaviour
         play_pause_vid.image.sprite = play_btn[1];
         GetVideos();
     }
-    IEnumerator txtDelay()
-    {
-        _txt.text = "Saved to Gallery!";
-        yield return new WaitForSeconds(2f);
-        _txt.text = "";
-        _txt.gameObject.SetActive(false);
 
-    }
 
     public void setVidIndex()
     {

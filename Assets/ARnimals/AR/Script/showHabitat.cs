@@ -16,6 +16,7 @@ public class showHabitat : MonoBehaviour
     public GameObject sceneLighting;
     public Camera ARCam;
     public ARCameraBackground ARCameraBGScript;
+    public recordBTNScript _recordBTNScript;
 
     public GameObject skyBox;
     AudioManager AudioManager;
@@ -126,15 +127,15 @@ public class showHabitat : MonoBehaviour
         timerHabitat.text = Convert.ToInt16(countdownTime).ToString();
     }
 
+    public GameObject _txt;
     public void showAnimalHabitat()
     {
-        //StopAllCoroutines();
+        _recordBTNScript.stopTxtDelayCoroutine();
+        _txt.gameObject.SetActive(false);
         if (isHabitatEnabled)
         {
             isHabitatEnabled = false;
-            //ARCam.clearFlags = CameraClearFlags.SolidColor;
             skyBox.gameObject.SetActive(false);
-            //ARCameraBGScript.enabled = true;
             sceneLighting.SetActive(true);
             Underwater.SetActive(false);
             Forest.SetActive(false);
@@ -144,9 +145,7 @@ public class showHabitat : MonoBehaviour
         {
             isHabitatEnabled = true;
             skyBox.gameObject.SetActive(true);
-            //ARCam.clearFlags = CameraClearFlags.Skybox;
 
-            //ARCameraBGScript.enabled = false;
             if (forestAnimals.Contains(modelIndex))
             {
                 sceneLighting.SetActive(true);

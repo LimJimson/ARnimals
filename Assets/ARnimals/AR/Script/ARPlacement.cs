@@ -1,3 +1,4 @@
+using BrainCheck;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -50,13 +51,17 @@ public class ARPlacement : MonoBehaviour
     public FPSController fpsController;
     private void Awake()
     {
-        
+
         modelIndex = StateNameController.animalIndexChosen;
-        try { fpsController = GameObject.FindGameObjectWithTag("FPSController").GetComponent<FPSController>(); } catch { }
-        
+        try { 
+            fpsController = GameObject.FindGameObjectWithTag("FPSController").GetComponent<FPSController>();
+        }
+        catch { }
+
 
     }
-    
+
+
     private void OnDisable()
     {
         try{
@@ -67,7 +72,9 @@ public class ARPlacement : MonoBehaviour
     {
         try{
             fpsController.enabled = false;
-        }catch{}
+
+        }
+        catch{}
 
         //hide GameObjects
         foreach (GameObject uiElement in GameObjectsToHide)

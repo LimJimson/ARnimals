@@ -205,7 +205,7 @@ public class FTA_GameManager : MonoBehaviour
             else 
             {
                 levelCompleteGOs[1].SetActive(true);
-                enablerTimerLvlComplete = 0.7f;
+                enablerTimerLvlComplete = 0.5f;
             }
         }
     }

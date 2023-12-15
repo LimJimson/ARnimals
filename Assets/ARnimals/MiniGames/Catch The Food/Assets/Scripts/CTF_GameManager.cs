@@ -182,7 +182,7 @@ public class CTF_GameManager : MonoBehaviour
             {
                 levelCompleteGOs[1].SetActive(true);
                 levelCompleteGOs[2].SetActive(true);
-                enablerTimer = 0.7f;
+                enablerTimer = 0.5f;
             }
         }
     }
@@ -433,7 +433,7 @@ public class CTF_GameManager : MonoBehaviour
             "<color=green>Did you know?</color> <color=yellow>Pigeons</color> can do math! Researchers found that pigeons can learn abstract math rules and even understand concepts like zero.",
             "<color=green>Did you know?</color> <color=yellow>Pigeons</color> have super vision. They see ultraviolet light, which we can't, helping them navigate and spot hidden things.",
             "<color=green>Did you know?</color> <color=yellow>Pigeons</color> can recognize all 26 letters of the alphabet. They've even learned to tell them apart and spell simple words in studies!",
-            "<color=green>Did you know?</color> In some cultures, <color=yxellow>pigeons</color> are considered symbols of love and peace. They've even been used in weddings to carry love notes.",
+            "<color=green>Did you know?</color> In some cultures, <color=yellow>pigeons</color> are considered symbols of love and peace. They've even been used in weddings to carry love notes.",
             "<color=green>Did you know?</color> <color=yellow>Pigeons</color> show love with a cute dance called <color=#FF0046>'pigeon courtship'</color> to their feathered friend."
         };
         string [] koiTrivia = 
@@ -707,27 +707,22 @@ public class CTF_GameManager : MonoBehaviour
                 {
                     case "1":
                         existingSo.isOctopusUnlock = true;
-                        animalToUnlockName.text = "Octopus";
                         ARanimalIndex = 11;
                         break;
                     case "2":
                         existingSo.isDeerUnlock = true;
-                        animalToUnlockName.text = "Deer";
                         ARanimalIndex = 5;
                         break;
                     case "3":
                         existingSo.isSeagullUnlock = true;
-                        animalToUnlockName.text = "Seagull";
                         ARanimalIndex = 15;
                         break;
                     case "4":
                         existingSo.isSharkUnlock = true;
-                        animalToUnlockName.text = "Shark";
                         ARanimalIndex = 16;
                         break;
                     case "5":
                         existingSo.isDuckUnlock = true;
-                        animalToUnlockName.text = "Duck";
                         ARanimalIndex = 6;
                         playAgainTxt.text = "Are you sure you want to <color=yellow>RE-PLAY</color> this level again? There will be no rewards from now on";
                         break;
@@ -740,15 +735,19 @@ public class CTF_GameManager : MonoBehaviour
         {
             case "1":
                 lvlToUnlockImg.sprite = lvlToUnlockSprites[0];
+                animalToUnlockName.text = "Octopus";
                 break;
             case "2":
                 lvlToUnlockImg.sprite = lvlToUnlockSprites[1];
+                animalToUnlockName.text = "Deer";
                 break;
             case "3":
                 lvlToUnlockImg.sprite = lvlToUnlockSprites[2];
+                animalToUnlockName.text = "Seagull";
                 break;
             case "4":
                 lvlToUnlockImg.sprite = lvlToUnlockSprites[3];
+                animalToUnlockName.text = "Shark";
                 break;
             case "5":
                 allLevelsUnlockGO.SetActive(true);
@@ -756,6 +755,7 @@ public class CTF_GameManager : MonoBehaviour
                 lvlToUnlockImg.gameObject.SetActive(false);
                 nextLevelBtn.gameObject.SetActive(false);
                 checkImgForLvlToUnlock.SetActive(false);
+                animalToUnlockName.text = "Duck";
                 break;
         }
 

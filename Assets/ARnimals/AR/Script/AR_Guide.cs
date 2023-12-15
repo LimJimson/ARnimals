@@ -83,7 +83,32 @@ public class AR_Guide : MonoBehaviour
 
     public bool isGuideActive;
 
+    [Header("RecordBtn Guide Note")]
+
+    public GameObject recordBtnGO;
+    public GameObject recordNoteBoyGuide;
+    public GameObject recordNoteGirlGuide;
+
     AudioManager audioManager;
+
+    public void showRecordBtnNode()
+    {
+        if (guideChosen == "boy_guide")
+        {
+            recordNoteBoyGuide.SetActive(true);
+            recordNoteGirlGuide.SetActive(false);
+        }
+        else if (guideChosen == "girl_guide")
+        {
+            recordNoteBoyGuide.SetActive(false);
+            recordNoteGirlGuide.SetActive(true);
+        }
+        recordBtnGO.SetActive(true);
+    }
+    public void hideRecordBtnNode()
+    {
+        recordBtnGO.SetActive(false);
+    }
     void Start()
     {
         try

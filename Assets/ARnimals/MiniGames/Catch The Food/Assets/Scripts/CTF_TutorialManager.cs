@@ -52,7 +52,6 @@ public class CTF_TutorialManager : MonoBehaviour
 
     [Header("Trivias")]
     [SerializeField] private GameObject[] trivias;
-    [SerializeField] private GameObject click2NxtPanelForTrivia;
     [SerializeField] private GameObject panelForTrivia;
 
     [SerializeField] private GameObject[] boyGuideForMenus;
@@ -275,7 +274,6 @@ public class CTF_TutorialManager : MonoBehaviour
             else 
             {
                 tutorial.SetActive(false);
-                click2NxtPanelForTrivia.SetActive(true);
                 panelForTrivia.SetActive(true);            
                 hideAllComponents();
 				try{audioManager.guideSource.Stop();} catch{}
@@ -315,7 +313,6 @@ public class CTF_TutorialManager : MonoBehaviour
             trivias[2].SetActive(false);
             trivias[3].SetActive(false);
             trivias[4].SetActive(false);
-            click2NxtPanelForTrivia.SetActive(false);
             panelForTrivia.SetActive(false);
 
             if (PlayerPrefs.GetInt("CTF_IsTutorialDone", 1) == 1) 

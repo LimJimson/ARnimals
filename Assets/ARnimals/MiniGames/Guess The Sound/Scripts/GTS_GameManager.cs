@@ -186,7 +186,7 @@ public class GTS_GameManager : MonoBehaviour
             else 
             {
                 levelCompleteGOs[1].SetActive(true);
-                enablerTimer = 0.7f;
+                enablerTimer = 0.5f;
             }
         }
     }

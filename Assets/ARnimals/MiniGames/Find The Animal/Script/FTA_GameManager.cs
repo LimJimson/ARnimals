@@ -79,6 +79,9 @@ public class FTA_GameManager : MonoBehaviour
 
     int currentStar;
 
+    public AudioSource audioSrc;
+    public AudioClip[] animalSnds;
+
     private void Start()
     {
         SaveFTAGame = SaveManager.Load();
@@ -121,7 +124,6 @@ public class FTA_GameManager : MonoBehaviour
             InstructionGamePanel.SetActive(false);
             FTAHelpButton();
         }
-        
     }
     private void Update()
     {
@@ -355,12 +357,24 @@ public class FTA_GameManager : MonoBehaviour
             {
                 shadow = selectedShadowImgs[i];
             }
-        } 
+        }
+
+        audioSrc.Stop();
 
         if (shadow != null && clickedAnimalImg.sprite == shadow.sprite) 
         {
             isCorrect = true;
             try {audioManager.PlaySFX(audioManager.correctAnswer);} catch{}
+
+            for (int i = 0; i < animalSnds.Length; i++) 
+            {
+                string animalsnd = animalSnds[i].name.Substring(0, 1).ToUpper() + animalSnds[i].name.Substring(1, animalSnds[i].name.Length - 2);
+
+                if (animalsnd == clickedAnimalImg.sprite.name) 
+                {
+                    audioSrc.PlayOneShot(animalSnds[i]);
+                }
+            }
 
             if (shadow == selectedShadowImgs[0])
             {
@@ -1383,6 +1397,8 @@ public class FTA_GameManager : MonoBehaviour
         audioManager.PlaySFX(audioManager.TriviaShowEffect);
     }
 
+    bool triviaFirstClicked = true;
+
     public void openTriviaCanvas()
     {
         TriviaGuide();
@@ -1404,6 +1420,7 @@ public class FTA_GameManager : MonoBehaviour
     public void closeTriviaCanvas()
     {
         triviaGameCanvas.SetActive(false);
+        audioSrc.Stop();
         GameWin();
     }
 
@@ -1413,6 +1430,22 @@ public class FTA_GameManager : MonoBehaviour
         {
             shadowImgs.color = Color.black;
         }
+
+        for (int i = 0; i < animalSnds.Length; i++) 
+        {
+            string animalsnd = animalSnds[i].name.Substring(0, 1).ToUpper() + animalSnds[i].name.Substring(1, animalSnds[i].name.Length - 2);
+
+            if (animalsnd == clickedAnimal.GetComponent<Image>().sprite.name) 
+            {
+                if (!triviaFirstClicked) 
+                {
+                    audioSrc.Stop();
+                    audioSrc.PlayOneShot(animalSnds[i]);
+                }
+            }
+        }
+
+        triviaFirstClicked = false;
 
         Image clickedAnimalImg = clickedAnimal.GetComponent<Image>();
         ShowArrowTriviaGuide(clickedAnimal.name);

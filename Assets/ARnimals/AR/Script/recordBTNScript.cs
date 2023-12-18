@@ -36,6 +36,8 @@ public class recordBTNScript : MonoBehaviour
     public GameObject stopRecordBtn;
     public GameObject[] objectsToHide;
 
+    public GameObject recordBtnNote;
+
     void Start()
     {
         try
@@ -146,6 +148,7 @@ public class recordBTNScript : MonoBehaviour
     }
     public void RecordButtonOnClick()
     {
+        recordBtnNote.SetActive(false);
         countdownTime = 15.0f;
         _txt.gameObject.SetActive(false);
         ScreenRecorderBridge.StartScreenRecording();

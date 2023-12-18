@@ -10,13 +10,17 @@ public class FTA_AudioManager : MonoBehaviour
 
     SaveObject loaddata;
 
+    public AudioSource animalAudioSrc;
+
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
     [SerializeField] private Slider guideSlider;
+    public Slider AnimalVolSlider;
 
     [SerializeField] private TextMeshProUGUI musicPercentTxt;
     [SerializeField] private TextMeshProUGUI sfxPercentTxt;
     [SerializeField] private TextMeshProUGUI guidePercentText;
+    public TextMeshProUGUI animalSndPercentText;
 
     void Start()
     {
@@ -45,10 +49,12 @@ public class FTA_AudioManager : MonoBehaviour
         mainAudioManager.musicSource.volume = loaddata.MusicVolume;
         mainAudioManager.sfxSource.volume = loaddata.SFXVolume;
         mainAudioManager.guideSource.volume = loaddata.GuideVolume;
+        mainAudioManager.animalSndVol = loaddata.AnimalSndVolume;
 
         musicSlider.value = mainAudioManager.musicSource.volume;
         sfxSlider.value = mainAudioManager.sfxSource.volume;
         guideSlider.value = mainAudioManager.guideSource.volume;
+        AnimalVolSlider.value = mainAudioManager.animalSndVol;
 
         int percentageForMusicSlider = Mathf.RoundToInt(musicSlider.value * 100);
         musicPercentTxt.text = percentageForMusicSlider.ToString() + "%";
@@ -56,6 +62,8 @@ public class FTA_AudioManager : MonoBehaviour
         sfxPercentTxt.text = percentageForSFXSlider.ToString() + "%";
         int percentageForGuideSlider = Mathf.RoundToInt(guideSlider.value * 100);
         guidePercentText.text = percentageForGuideSlider.ToString() + "%";
+        int percentageForAnimalSndSlider = Mathf.RoundToInt(AnimalVolSlider.value * 100);
+        animalSndPercentText.text = percentageForAnimalSndSlider.ToString() + "%";
     }
 
     public void changeMusicVolume()
@@ -84,153 +92,29 @@ public class FTA_AudioManager : MonoBehaviour
         guidePercentText.text = percentage.ToString() + "%";
     }
 
+    public void changeAnimalSndVolume()
+    {
+        mainAudioManager.animalSndVol = AnimalVolSlider.value;
+        animalAudioSrc.volume = mainAudioManager.animalSndVol;
+
+        int percentage = Mathf.RoundToInt(AnimalVolSlider.value * 100);
+        animalSndPercentText.text = percentage.ToString() + "%";
+    }
+
     public void saveVolume()
     {
         changeMusicVolume();
         changeSfxVolume();
         changeGuideVolume();
+        changeAnimalSndVolume();
 
         loaddata.MusicVolume = mainAudioManager.musicSource.volume;
         loaddata.SFXVolume = mainAudioManager.sfxSource.volume;
         loaddata.GuideVolume = mainAudioManager.guideSource.volume;
+        loaddata.AnimalSndVolume = mainAudioManager.animalSndVol;
 
         SaveManager.Save(loaddata);
 
         loadSavedVolume();
-    }
-
-    //Audio Methods to use for different CTF Scripts
-
-    public void pauseBGMusic()
-    {
-        try
-        {
-            mainAudioManager.musicSource.Pause();
-        }
-        catch
-        {
-            Debug.Log("No AudioManager");
-        }
-    }
-    public void stopBGMusic()
-    {
-        try
-        {
-            mainAudioManager.musicSource.Stop();
-        }
-        catch
-        {
-            Debug.Log("No AudioManager");
-        }
-    }
-    public void playLvlCompletedSFX()
-    {
-        try
-        {
-            mainAudioManager.PlaySFX(mainAudioManager.winLevel);
-        }
-        catch
-        {
-            Debug.Log("No AudioManager");
-        }
-    }
-    public void playGameOverSFX()
-    {
-        try
-        {
-            mainAudioManager.PlaySFX(mainAudioManager.loseLevel);
-        }
-        catch
-        {
-            Debug.Log("No AudioManager");
-        }
-    }
-    public void unPauseBGMusic()
-    {
-        try
-        {
-            mainAudioManager.musicSource.UnPause();
-        }
-        catch
-        {
-            Debug.Log("No AudioManager");
-        }
-    }
-    public void playBGMusic()
-    {
-        try
-        {
-            mainAudioManager.playBGMMusic(mainAudioManager.CTF_BGM);
-        }
-        catch
-        {
-            Debug.Log("No AudioManager");
-        }
-    }
-    public void playPowerUpSFX()
-    {
-        try
-        {
-            mainAudioManager.PlaySFX(mainAudioManager.CTF_PowerUps);
-        }
-        catch
-        {
-            Debug.Log("No AudioManager");
-        }
-    }
-    public void playCorrectFoodSFX()
-    {
-        try
-        {
-            mainAudioManager.PlaySFX(mainAudioManager.correctAnswer);
-        }
-        catch
-        {
-            Debug.Log("No AudioManager");
-        }
-    }
-    public void playWrongFoodSFX()
-    {
-        try
-        {
-            mainAudioManager.PlaySFX(mainAudioManager.wrongAnswer);
-        }
-        catch
-        {
-            Debug.Log("No AudioManager");
-        }
-    }
-    public void playBoyGuideVoiceOver(int index)
-    {
-        try
-        {
-            mainAudioManager.PlayGuide(mainAudioManager.CTF_Patrick[index]);
-        }
-        catch
-        {
-            Debug.Log("No AudioManager");
-        }
-    }
-    public void playGirlGuideVoiceOver(int index)
-    {
-        try
-        {
-            mainAudioManager.PlayGuide(mainAudioManager.CTF_Sandy[index]);
-        }
-        catch
-        {
-            Debug.Log("No AudioManager");
-        }
-    }
-    public void stopGuideVoiceOvers()
-    {
-        try
-        {
-            mainAudioManager.guideSource.Stop();
-        }
-        catch
-        {
-            Debug.Log("No AudioManager");
-        }
     }
 }

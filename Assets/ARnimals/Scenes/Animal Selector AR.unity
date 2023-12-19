@@ -6413,8 +6413,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Clicking the <color=#FFF933>BACK</color> button, will take you back to
-    the <color=#FFF933>Mode Select</color>. '
+  m_text: 'Clicking the <color=#FFFF00>BACK</color> button, will take you back to
+    the <color=#FFFF00>Mode Select</color>. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -8412,7 +8412,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can also click the  <color=#FFF933>GUIDE</color> button, at the <color=#FFF933>upper
+  m_text: You can also click the  <color=#FFFF00>GUIDE</color> button, at the <color=#FFFF00>upper
     center of the screen</color>, if you need me.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -9851,7 +9851,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The <color=#FFF933>Animals </color>categorized based on <color=#FFF933>Land,
+  m_text: The <color=#FFFF00>Animals </color>categorized based on <color=#FFFF00>Land,
     Air, and Sea</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -13411,8 +13411,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>ANIMAL SELECTOR</color>! Here, you get to <color=#FFF933>pick</color>
-    your favorite animal to see in our fun <color=#FFF933>AR Adventure</color>!
+  m_text: This is the <color=#FFFF00>ANIMAL SELECTOR</color>! Here, you get to <color=#FFFF00>pick</color>
+    your favorite animal to see in our fun <color=#FFFF00>AR Adventure</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -17320,8 +17320,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: When you've <color=#FFF933>chosen your favorite animal</color>, just tap
-    the <color=#FFF933>START</color> button to <color=#FFF933>begin</color> your
+  m_text: When you've <color=#FFFF00>chosen your favorite animal</color>, just tap
+    the <color=#FFFF00>START</color> button to <color=#FFFF00>begin</color> your
     fun AR adventure!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -17794,8 +17794,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <color=#FFF933>Animals </color>that are <color=#FFF933>locked</color> can
-    be <color=#FFF933>unlocked</color> by playing the <color=#FFF933>Mini-Games</color>!
+  m_text: <color=#FFFF00>Animals </color>that are <color=#FFFF00>locked</color> can
+    be <color=#FFFF00>unlocked</color> by playing the <color=#FFFF00>Mini-Games</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -18744,7 +18744,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The<color=#FFF933> SELECTED ANIMAL </color>can be found at the <color=#FFF933>right
+  m_text: The<color=#FFFF00> SELECTED ANIMAL </color>can be found at the <color=#FFFF00>right
     side of the screen</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}

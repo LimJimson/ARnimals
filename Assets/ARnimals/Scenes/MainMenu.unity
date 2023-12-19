@@ -1094,7 +1094,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clicking the <color=#E4F412>QUIT</color> button will <color=#E4F412>CLOSE</color>
+  m_text: Clicking the <color=#FFFF00>QUIT</color> button will <color=#FFFF00>CLOSE</color>
     the application.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -1867,7 +1867,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can also click the <color=#FFF933>GUIDE</color> button, at the <color=#FFF933>upper
+  m_text: You can also click the <color=#FFFF00>GUIDE</color> button, at the <color=#FFFF00>upper
     right of the screen</color>, if you need me.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -4349,8 +4349,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>Sound Effects</color> icon, you can use the
-    <color=#FFF933>slider</color> to make things like <color=#FFF933>boings, splashes,
+  m_text: This is the <color=#FFFF00>Sound Effects</color> icon, you can use the
+    <color=#FFFF00>slider</color> to make things like <color=#FFFF00>boings, splashes,
     and whooshes louder or quieter</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -4487,7 +4487,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome to the <color=#E4F412>Settings</color>, where you can make your
+  m_text: Welcome to the <color=#FFFF00>Settings</color>, where you can make your
     game just the way you like it</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -5705,7 +5705,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clicking the <color=#E4F412>START</color> button will take you to the <color=#E4F412>MODE
+  m_text: Clicking the <color=#FFFF00>START</color> button will take you to the <color=#FFFF00>MODE
     SELECTION MENU</color>.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -8941,7 +8941,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome to <color=#E4F412>ARnimals</color>. My name is <color=#FB00FF>Sandy</color>,
+  m_text: Welcome to <color=#FFFF00>ARnimals</color>. My name is <color=#FB00FF>Sandy</color>,
     and I will be your guide for today.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -9325,7 +9325,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>Reset Game</color> button, clicking it would<color=#FFF933>
+  m_text: This is the <color=#FFFF00>Reset Game</color> button, clicking it would<color=#FFFF00>
     delete your save file, and start over</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -9819,8 +9819,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>MUSIC</color> icon, You can use the slider to
-    make the <color=#FFF933>music louder or quieter</color>!
+  m_text: This is the <color=#FFFF00>MUSIC</color> icon, You can use the slider to
+    make the <color=#FFFF00>music louder or quieter</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -11883,8 +11883,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>Animal Sound</color> icon, You can use the slider
-    to make the <color=#FFF933>Animal sounds louder or quieter</color>!
+  m_text: This is the <color=#FFFF00>Animal Sound</color> icon, You can use the slider
+    to make the <color=#FFFF00>Animal sounds louder or quieter</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -12020,8 +12020,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can also click the  <color=#FFF933>GUIDE</color> button, found at the
-    <color=#E4F412>lower right of the screen</color>, if you need me.
+  m_text: You can also click the  <color=#FFFF00>GUIDE</color> button, found at the
+    <color=#FFFF00>lower right of the screen</color>, if you need me.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -15291,8 +15291,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>Guide Volume</color> icon, you can use the slider
-    to make the<color=#FFF933> guide sound louder or quieter</color>!
+  m_text: This is the <color=#FFFF00>Guide Volume</color> icon, you can use the slider
+    to make the<color=#FFFF00> guide sound louder or quieter</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -15428,8 +15428,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#E4F412>Main Menu</color>, where you can <color=#E4F412>navigate
-    </color> through various<color=#E4F412> features of the game</color>.
+  m_text: This is the <color=#FFFF00>Main Menu</color>, where you can <color=#FFFF00>navigate
+    </color> through various<color=#FFFF00> features of the game</color>.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -16716,8 +16716,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Clicking the <color=#E4F412>ANIMALS</color> button, will take you to the
-    <color=#E4F412>ANIMAL INFORMATION MENU</color>, where you can learn more about
+  m_text: "Clicking the <color=#FFFF00>ANIMALS</color> button, will take you to the
+    <color=#FFFF00>ANIMAL INFORMATION MENU</color>, where you can learn more about
     \nthe animals."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -18633,8 +18633,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clicking the <color=#E4F412>SETTINGS</color> button, will take you to the
-    <color=#E4F412>SETTINGS MENU</color>, where you can configure the sounds and
+  m_text: Clicking the <color=#FFFF00>SETTINGS</color> button, will take you to the
+    <color=#FFFF00>SETTINGS MENU</color>, where you can configure the sounds and
     other features.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -19119,8 +19119,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>Change Guide</color> button, clicking it would
-    let you<color=#FFF933> choose another guide</color>!
+  m_text: This is the <color=#FFFF00>Change Guide</color> button, clicking it would
+    let you<color=#FFFF00> choose another guide</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -19371,7 +19371,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clicking the<color=#FFF933> Back</color> button will take you to the <color=#FFF933>Main
+  m_text: Clicking the<color=#FFFF00> Back</color> button will take you to the <color=#FFFF00>Main
     Menu</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -20186,7 +20186,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome to <color=#E4F412>ARnimals</color>. My name is <color=#FF2050>Patrick</color>,
+  m_text: Welcome to <color=#FFFF00>ARnimals</color>. My name is <color=#FF2050>Patrick</color>,
     and I will be your guide for today.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -21273,7 +21273,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>Change Name</color> button, clicking it would<color=#FFF933>
+  m_text: This is the <color=#FFFF00>Change Name</color> button, clicking it would<color=#FFFF00>
     change your in-game name</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}

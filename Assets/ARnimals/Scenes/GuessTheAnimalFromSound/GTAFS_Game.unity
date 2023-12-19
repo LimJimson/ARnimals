@@ -405,7 +405,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4289134462
+    rgba: 4278776165
   m_fontColor: {r: 0.39607844, g: 0.94509804, b: 0.03137255, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -531,9 +531,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: if you need <color=#FFF933>help</color> you can <color=#FFF933>click</color>
-    the <color=#FFF933>Hint</COLOR> button. <color=#FFF933>Remember</color> you only
-    have <color=#FFF933>two hints</color> available!
+  m_text: if you need <color=#FFFF00>help</color> you can <color=#FFFF00>click</color>
+    the <color=#FFFF00>Hint</COLOR> button. <color=#FFFF00>Remember</color> you only
+    have <color=#FFFF00>two hints</color> available!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -1370,8 +1370,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: On the <color=#FFF933>left side of the screen</color>, you can <color=#FFF933>see
-    the animal</color> that you need to <color=#FFF933>guess the sound</color> of.
+  m_text: On the <color=#FFFF00>left side of the screen</color>, you can <color=#FFFF00>see
+    the animal</color> that you need to <color=#FFFF00>guess the sound</color> of.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -5855,8 +5855,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 121.12082, y: 118.63479}
-  m_SizeDelta: {x: 631.6448, y: 294.5851}
+  m_AnchoredPosition: {x: 121.12082, y: 142.462}
+  m_SizeDelta: {x: 631.645, y: 246.93}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &420256513
 MonoBehaviour:
@@ -5881,16 +5881,16 @@ MonoBehaviour:
   m_text: Are you sure you want to <color="yellow">QUIT</color> this level and go
     back to the <color="yellow">level select</color>?
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 172f7574a2a97ea4dbe2eaddbb48714b, type: 2}
-  m_sharedMaterial: {fileID: -6679733746260187255, guid: 172f7574a2a97ea4dbe2eaddbb48714b,
+  m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
+  m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4289134462
-  m_fontColor: {r: 0.49411765, g: 1, b: 0.6509804, a: 1}
+    rgba: 4278776165
+  m_fontColor: {r: 0.39607844, g: 0.94509804, b: 0.03137255, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5907,8 +5907,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55.29
-  m_fontSizeBase: 55.29
+  m_fontSize: 64.93
+  m_fontSizeBase: 64.93
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 29.5
@@ -6515,8 +6515,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: If you <color=#FFF933>guess wrong</color>, you will <color="red">lose a
-    life</color>, <color=#FFF933> remember</color> you only have <color=#FFF933>3
+  m_text: If you <color=#FFFF00>guess wrong</color>, you will <color="red">lose a
+    life</color>, <color=#FFFF00> remember</color> you only have <color=#FFFF00>3
     lives</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -9252,8 +9252,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: On the <color=#FFF933>right side of the screen</color>, you can <color=#FFF933>see
-    the choices</color> and <color=#FFF933>animal sound button</color>.
+  m_text: On the <color=#FFFF00>right side of the screen</color>, you can <color=#FFFF00>see
+    the choices</color> and <color=#FFFF00>animal sound button</color>.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -17616,7 +17616,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4289134462
+    rgba: 4278776165
   m_fontColor: {r: 0.39607844, g: 0.94509804, b: 0.03137255, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -19986,8 +19986,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome to <color=#FFF933>Guess the Animal Sound</color>, where you need
-    to <color=#FFF933>identify</color> the <color=#FFF933>sounds animal make</color>.
+  m_text: Welcome to <color=#FFFF00>Guess the Animal Sound</color>, where you need
+    to <color=#FFFF00>identify</color> the <color=#FFFF00>sounds animal make</color>.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -20455,8 +20455,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is where you can see the <color=#FFF933>remaining animals</color>
-    that you need to <color=#FFF933>guess the sound of</color>.
+  m_text: This is where you can see the <color=#FFFF00>remaining animals</color>
+    that you need to <color=#FFFF00>guess the sound of</color>.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -23465,7 +23465,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4289134462
+    rgba: 4278776165
   m_fontColor: {r: 0.39607844, g: 0.94509804, b: 0.03137255, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -24378,7 +24378,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can also click the <color=#FFF933>GUIDE</color> button, at the <color=#FFF933>upper
+  m_text: You can also click the <color=#FFFF00>GUIDE</color> button, at the <color=#FFFF00>upper
     right of the screen</color>, if you need me.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -25936,8 +25936,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: If you want to answer, you can click the <color=#FFF933>plank</color>,
-    to  <color=#FFF933>submit</color> your<color=#FFF933> answer</color>!
+  m_text: If you want to answer, you can click the <color=#FFFF00>plank</color>,
+    to  <color=#FFFF00>submit</color> your<color=#FFFF00> answer</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -27428,7 +27428,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>SETTINGS</color> button which lets you <color=#FFF933>adjust
+  m_text: This is the <color=#FFFF00>SETTINGS</color> button which lets you <color=#FFFF00>adjust
     sound volume, restart, or quit level</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -34376,8 +34376,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clicking <color=#FFF933>one of the animal sound</color> buttons will <color=#FFF933>produce</color>
-    an <color=#FFF933>animal sound</color>!
+  m_text: Clicking <color=#FFFF00one of the animal sound</color> buttons will <color=#FFFF00>produce</color>
+    an <color=#FFFF00>animal sound</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,

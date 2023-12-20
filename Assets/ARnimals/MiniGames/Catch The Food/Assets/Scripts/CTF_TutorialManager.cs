@@ -343,7 +343,7 @@ public class CTF_TutorialManager : MonoBehaviour
         else if (pageNum == 2) 
         {
             dialogText.fontSize = 38f;
-            dialogText.text = "Here are the <color=yellow>foods</color> for your animal character! Your job is to <color=green>catch the right foods</color> and <color=red>avoid the wrong ones</color> as they fall down.";
+            dialogText.text = "Here are the <color=yellow>foods</color> for your animal character! Your job is to <color=yellow>catch the right foods</color> and <color=red>avoid the wrong ones</color> as they fall down.";
 
             tutorial.transform.localPosition = (new Vector3(-81f, -272.1f, 0f));
 
@@ -360,7 +360,7 @@ public class CTF_TutorialManager : MonoBehaviour
         else if (pageNum == 3) 
         {
             dialogText.fontSize = 38f;
-            dialogText.text = "See the foods with <color=green>green borders</color>? That's what the animal loves to munch on! But the ones with <color=red>red borders</color>? Those are no-go";
+            dialogText.text = "See the foods with <color=yellow>green borders</color>? That's what the animal loves to munch on! But the ones with <color=red>red borders</color>? Those are no-go";
 
             tutorial.transform.localPosition = (new Vector3(-81f, -272.1f, 0f));
 

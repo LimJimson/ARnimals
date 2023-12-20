@@ -44,6 +44,13 @@ public class SaveObject
     public bool isKoiUnlock = false;
     public bool isCrabUnlock = false;
 
+    //GTS Unlock Badge
+    public bool level1BadgeGTS = false;
+    public bool level2BadgeGTS = false;
+    public bool level3BadgeGTS = false;
+    public bool level4BadgeGTS = false;
+    public bool level5BadgeGTS = false;
+
     //CTF Unlock Animal
     public bool isOctopusUnlock = false;
     public bool isDeerUnlock = false;

@@ -43,7 +43,7 @@ public class GTS_LevelSelect : MonoBehaviour
         unlockedLvl = loadedData.unlockedLevelMG2;
         checkUnlockLevel();
         
-        
+
     }
     void checkUnlockLevel()
     {
@@ -97,7 +97,7 @@ public class GTS_LevelSelect : MonoBehaviour
         }
     }
     void lockLvl_disableBtn()
-    { 
+    {
 
         for (int i = unlockedLvl - 1; i < locklevel.Length; i++)
         {
@@ -177,7 +177,65 @@ public class GTS_LevelSelect : MonoBehaviour
 
         }
     }
+    public Image badgeImg;
+    public Sprite[] badgeImgSprite;
+    void checkIfBadgeIsUnlocked()
+    {
+        switch (levelNumber)
+        {
+            case 1:
+                if (loadedData.level1BadgeGTS)
+                {
+                    badgeImg.sprite = badgeImgSprite[1];
+                }
+                else
+                {
+                    badgeImg.sprite = badgeImgSprite[0];
+                }
+                break;
+            case 2:
+                if (loadedData.level2BadgeGTS)
+                {
+                    badgeImg.sprite = badgeImgSprite[1];
+                }
+                else
+                {
+                    badgeImg.sprite = badgeImgSprite[0];
+                }
+                break;
+            case 3:
+                if (loadedData.level3BadgeGTS)
+                {
+                    badgeImg.sprite = badgeImgSprite[1];
+                }
+                else
+                {
+                    badgeImg.sprite = badgeImgSprite[0];
+                }
+                break;
+            case 4:
+                if (loadedData.level4BadgeGTS)
+                {
+                    badgeImg.sprite = badgeImgSprite[1];
+                }
+                else
+                {
+                    badgeImg.sprite = badgeImgSprite[0];
+                }
+                break;
+            case 5:
+                if (loadedData.level5BadgeGTS)
+                {
+                    badgeImg.sprite = badgeImgSprite[1];
+                }
+                else
+                {
+                    badgeImg.sprite = badgeImgSprite[0];
+                }
+                break;
 
+        }
+    }
     void changePlayConfirmVariables()
     {
         switch (levelNumber)
@@ -185,6 +243,9 @@ public class GTS_LevelSelect : MonoBehaviour
             case 1:
                 levelSelectedImg.sprite = levelSpriteContainer[0];
                 unlockAnimalImg.sprite = unlockAnimalImgSprites[0];
+
+                checkIfBadgeIsUnlocked();
+
                 currentStars = loadedData.GTS_lvl1_star;
                 animalName.text = "Rhinoceros";
                 _minigamebuttonscript.setIndex(14);
@@ -199,6 +260,9 @@ public class GTS_LevelSelect : MonoBehaviour
             case 2:
                 levelSelectedImg.sprite = levelSpriteContainer[1];
                 currentStars = loadedData.GTS_lvl2_star;
+
+                checkIfBadgeIsUnlocked();
+
                 unlockAnimalImg.sprite = unlockAnimalImgSprites[1];
                 animalName.text = "Camel";
                 _minigamebuttonscript.setIndex(2);
@@ -214,6 +278,9 @@ public class GTS_LevelSelect : MonoBehaviour
             case 3:
                 levelSelectedImg.sprite = levelSpriteContainer[2];
                 unlockAnimalImg.sprite = unlockAnimalImgSprites[2];
+
+                checkIfBadgeIsUnlocked();
+
                 currentStars = loadedData.GTS_lvl3_star;
                 _minigamebuttonscript.setIndex(0);
                 animalName.text = "Bat";
@@ -229,6 +296,9 @@ public class GTS_LevelSelect : MonoBehaviour
             case 4:
                 levelSelectedImg.sprite = levelSpriteContainer[3];
                 unlockAnimalImg.sprite = unlockAnimalImgSprites[3];
+
+                checkIfBadgeIsUnlocked();
+
                 currentStars = loadedData.GTS_lvl4_star;
                 animalName.text = "Koi";
                 _minigamebuttonscript.setIndex(9);
@@ -244,6 +314,9 @@ public class GTS_LevelSelect : MonoBehaviour
             case 5:
                 levelSelectedImg.sprite = levelSpriteContainer[4];
                 unlockAnimalImg.sprite = unlockAnimalImgSprites[4];
+
+                checkIfBadgeIsUnlocked();
+
                 currentStars = loadedData.GTS_lvl5_star;
                 animalName.text = "Crab";
                 _minigamebuttonscript.setIndex(3);

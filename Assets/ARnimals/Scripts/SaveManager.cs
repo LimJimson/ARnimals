@@ -56,6 +56,13 @@ public static class SaveManager
             existingSO.GTS_lvl4_star = so.GTS_lvl4_star;
             existingSO.GTS_lvl5_star = so.GTS_lvl5_star;
 
+            //GTS Unlock Badge
+            existingSO.level1BadgeGTS = so.level1BadgeGTS;
+            existingSO.level2BadgeGTS = so.level2BadgeGTS;
+            existingSO.level3BadgeGTS = so.level3BadgeGTS;
+            existingSO.level4BadgeGTS = so.level4BadgeGTS;
+            existingSO.level5BadgeGTS = so.level5BadgeGTS;
+
             //GTS Unlock Animal
             existingSO.isRhinoUnlock = so.isRhinoUnlock;
             existingSO.isCrabUnlock = so.isCrabUnlock;

@@ -1094,7 +1094,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clicking the <color=#E4F412>QUIT</color> button will <color=#E4F412>CLOSE</color>
+  m_text: Clicking the <color=#FFFF00>QUIT</color> button will <color=#FFFF00>CLOSE</color>
     the application.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -1867,7 +1867,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can also click the <color=#FFF933>GUIDE</color> button, at the <color=#FFF933>upper
+  m_text: You can also click the <color=#FFFF00>GUIDE</color> button, at the <color=#FFFF00>upper
     right of the screen</color>, if you need me.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -4349,8 +4349,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>Sound Effects</color> icon, you can use the
-    <color=#FFF933>slider</color> to make things like <color=#FFF933>boings, splashes,
+  m_text: This is the <color=#FFFF00>Sound Effects</color> icon, you can use the
+    <color=#FFFF00>slider</color> to make things like <color=#FFFF00>boings, splashes,
     and whooshes louder or quieter</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -4487,7 +4487,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome to the <color=#E4F412>Settings</color>, where you can make your
+  m_text: Welcome to the <color=#FFFF00>Settings</color>, where you can make your
     game just the way you like it</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -5705,7 +5705,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clicking the <color=#E4F412>START</color> button will take you to the <color=#E4F412>MODE
+  m_text: Clicking the <color=#FFFF00>START</color> button will take you to the <color=#FFFF00>MODE
     SELECTION MENU</color>.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -6471,7 +6471,6 @@ RectTransform:
   - {fileID: 994157086}
   - {fileID: 223205800}
   - {fileID: 1392477088}
-  - {fileID: 1268524927}
   - {fileID: 1678876043}
   - {fileID: 1700306545}
   m_Father: {fileID: 0}
@@ -7263,12 +7262,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1332615301}
+  - {fileID: 1436687027}
   m_Father: {fileID: 1858882076}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.056}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -9.6, y: -318.4}
+  m_AnchoredPosition: {x: 10, y: -317.94}
   m_SizeDelta: {x: 377.6917, y: 119.3341}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &765541278
@@ -8301,8 +8301,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -11.065}
-  m_SizeDelta: {x: 492.3661, y: 70.6234}
+  m_AnchoredPosition: {x: 0, y: -17.505}
+  m_SizeDelta: {x: 492.366, y: 57.504}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &863032402
 MonoBehaviour:
@@ -8352,10 +8352,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.53
-  m_fontSizeBase: 36
+  m_fontSize: 39.26
+  m_fontSizeBase: 39.26
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 34.53
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -8941,7 +8941,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome to <color=#E4F412>ARnimals</color>. My name is <color=#FB00FF>Sandy</color>,
+  m_text: Welcome to <color=#FFFF00>ARnimals</color>. My name is <color=#FB00FF>Sandy</color>,
     and I will be your guide for today.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -9325,7 +9325,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>Reset Game</color> button, clicking it would<color=#FFF933>
+  m_text: This is the <color=#FFFF00>Reset Game</color> button, clicking it would<color=#FFFF00>
     delete your save file, and start over</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -9819,8 +9819,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>MUSIC</color> icon, You can use the slider to
-    make the <color=#FFF933>music louder or quieter</color>!
+  m_text: This is the <color=#FFFF00>MUSIC</color> icon, You can use the slider to
+    make the <color=#FFFF00>music louder or quieter</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -11114,6 +11114,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1693436629}
+  - {fileID: 1116874024}
   m_Father: {fileID: 1858882076}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -7.46}
@@ -11416,6 +11417,82 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113169078}
+  m_CullTransparentMesh: 1
+--- !u!1 &1116874023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1116874024}
+  - component: {fileID: 1116874026}
+  - component: {fileID: 1116874025}
+  m_Layer: 5
+  m_Name: settingsIcon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1116874024
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116874023}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1090689063}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 141, y: -11}
+  m_SizeDelta: {x: 94.93, y: 99.106}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1116874025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116874023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 19b34695f2724c84c9681085dbee8859, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1116874026
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116874023}
   m_CullTransparentMesh: 1
 --- !u!1 &1132599552
 GameObject:
@@ -11883,8 +11960,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>Animal Sound</color> icon, You can use the slider
-    to make the <color=#FFF933>Animal sounds louder or quieter</color>!
+  m_text: This is the <color=#FFFF00>Animal Sound</color> icon, You can use the slider
+    to make the <color=#FFFF00>Animal sounds louder or quieter</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -12020,8 +12097,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can also click the  <color=#FFF933>GUIDE</color> button, found at the
-    <color=#E4F412>lower right of the screen</color>, if you need me.
+  m_text: You can also click the  <color=#FFFF00>GUIDE</color> button, found at the
+    <color=#FFFF00>lower right of the screen</color>, if you need me.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -12580,82 +12657,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4b6d58414f6ad444a3e3e714f2af1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1268524926
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1268524927}
-  - component: {fileID: 1268524929}
-  - component: {fileID: 1268524928}
-  m_Layer: 5
-  m_Name: probexLogo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1268524927
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1268524926}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 700376877}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 157, y: 126.58002}
-  m_SizeDelta: {x: 200, y: 200}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1268524928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1268524926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5cfb23a27bd14274e8a551b6e80afcd3, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1268524929
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1268524926}
-  m_CullTransparentMesh: 1
 --- !u!1 &1286271256
 GameObject:
   m_ObjectHideFlags: 0
@@ -14615,6 +14616,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436226346}
   m_CullTransparentMesh: 1
+--- !u!1 &1436687026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1436687027}
+  - component: {fileID: 1436687029}
+  - component: {fileID: 1436687028}
+  m_Layer: 5
+  m_Name: quitIcon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1436687027
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436687026}
+  m_LocalRotation: {x: -0, y: -0, z: 0.0016954853, w: 0.99999857}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 764717924}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.194}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -158, y: -10.114}
+  m_SizeDelta: {x: 94.93, y: 99.106}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1436687028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436687026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 19dedcb150315c542bcfb4b3c77cffc5, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1436687029
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436687026}
+  m_CullTransparentMesh: 1
 --- !u!1 &1444388929
 GameObject:
   m_ObjectHideFlags: 0
@@ -15291,8 +15368,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>Guide Volume</color> icon, you can use the slider
-    to make the<color=#FFF933> guide sound louder or quieter</color>!
+  m_text: This is the <color=#FFFF00>Guide Volume</color> icon, you can use the slider
+    to make the<color=#FFFF00> guide sound louder or quieter</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -15428,8 +15505,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#E4F412>Main Menu</color>, where you can <color=#E4F412>navigate
-    </color> through various<color=#E4F412> features of the game</color>.
+  m_text: This is the <color=#FFFF00>Main Menu</color>, where you can <color=#FFFF00>navigate
+    </color> through various<color=#FFFF00> features of the game</color>.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -16693,8 +16770,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -466, y: 620}
-  m_SizeDelta: {x: 605.24, y: 321.09}
+  m_AnchoredPosition: {x: -466, y: 613.63}
+  m_SizeDelta: {x: 605.24, y: 308.35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1650015187
 MonoBehaviour:
@@ -16716,8 +16793,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Clicking the <color=#E4F412>ANIMALS</color> button, will take you to the
-    <color=#E4F412>ANIMAL INFORMATION MENU</color>, where you can learn more about
+  m_text: "Clicking the <color=#FFFF00>ANIMALS</color> button, will take you to the
+    <color=#FFFF00>ANIMAL INFORMATION MENU</color>, where you can learn more about
     \nthe animals."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -16746,8 +16823,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 46.92
+  m_fontSizeBase: 46.92
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 3.3
@@ -16756,9 +16833,9 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: -8.7
-  m_wordSpacing: 4.9
-  m_lineSpacing: 6.4
+  m_characterSpacing: -1.9
+  m_wordSpacing: 5.49
+  m_lineSpacing: 16.53
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -17254,7 +17331,7 @@ RectTransform:
   - {fileID: 429752592}
   - {fileID: 277279374}
   m_Father: {fileID: 700376877}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -17469,7 +17546,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.38}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 16.399994, y: -13}
+  m_AnchoredPosition: {x: -16, y: -14}
   m_SizeDelta: {x: -5.5163407, y: -11.299968}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1693436630
@@ -17520,8 +17597,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 83.3
-  m_fontSizeBase: 83.3
+  m_fontSize: 65.8
+  m_fontSizeBase: 65.8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -17556,7 +17633,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 60.17227, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -17763,7 +17840,7 @@ RectTransform:
   - {fileID: 58887449}
   - {fileID: 1479211081}
   m_Father: {fileID: 700376877}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18633,8 +18710,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clicking the <color=#E4F412>SETTINGS</color> button, will take you to the
-    <color=#E4F412>SETTINGS MENU</color>, where you can configure the sounds and
+  m_text: Clicking the <color=#FFFF00>SETTINGS</color> button, will take you to the
+    <color=#FFFF00>SETTINGS MENU</color>, where you can configure the sounds and
     other features.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -19119,8 +19196,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>Change Guide</color> button, clicking it would
-    let you<color=#FFF933> choose another guide</color>!
+  m_text: This is the <color=#FFFF00>Change Guide</color> button, clicking it would
+    let you<color=#FFFF00> choose another guide</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -19371,7 +19448,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clicking the<color=#FFF933> Back</color> button will take you to the <color=#FFF933>Main
+  m_text: Clicking the<color=#FFFF00> Back</color> button will take you to the <color=#FFFF00>Main
     Menu</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -20186,7 +20263,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome to <color=#E4F412>ARnimals</color>. My name is <color=#FF2050>Patrick</color>,
+  m_text: Welcome to <color=#FFFF00>ARnimals</color>. My name is <color=#FF2050>Patrick</color>,
     and I will be your guide for today.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -21273,7 +21350,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>Change Name</color> button, clicking it would<color=#FFF933>
+  m_text: This is the <color=#FFFF00>Change Name</color> button, clicking it would<color=#FFFF00>
     change your in-game name</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -22849,7 +22926,7 @@ GameObject:
   - component: {fileID: 2073474161}
   - component: {fileID: 2073474160}
   m_Layer: 5
-  m_Name: settingsIcon (1)
+  m_Name: quitIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

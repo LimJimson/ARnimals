@@ -448,7 +448,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <color=#FFF933>Guess the animal sound</color>! Your task is to<color=#FFF933>
+  m_text: <color=#FFFF00>Guess the animal sound</color>! Your task is to<color=#FFFF00>
     listen and identify</color> the fun sounds animals make!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -1070,8 +1070,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Clicking the <color=#FFF933>BACK</color> button will take you back to
-    the <color=#FFF933>Mode Select</color>. '
+  m_text: 'Clicking the <color=#FFFF00>BACK</color> button will take you back to
+    the <color=#FFFF00>Mode Select</color>. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -1751,7 +1751,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <color=#FFF933>Find the Animal</color>! Your task is to <color=#FFF933>locate
+  m_text: <color=#FFFF00>Find the Animal</color>! Your task is to <color=#FFFF00>locate
     hidden creatures</color> and test your wildlife detective skills.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -3989,7 +3989,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <color=#FFF933>Catch the food</color>! Your mission is to <color=#FFF933>collect
+  m_text: <color=#FFFF00>Catch the food</color>! Your mission is to <color=#FFFF00>collect
     delicious meals</color> for the animals!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -4827,8 +4827,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "This is the <color=#FFF933>MINI-GAMES</color>, where you can <color=#FFF933>choose</color>
-    an <color=#FFF933>Educational \nMini-Game</color> that you want to play."
+  m_text: "This is the <color=#FFFF00>MINI-GAMES</color>, where you can <color=#FFFF00>choose</color>
+    an <color=#FFFF00>Educational \nMini-Game</color> that you want to play."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -5900,7 +5900,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can also click the  <color=#FFF933>GUIDE</color> button, at the <color=#FFF933>upper
+  m_text: You can also click the  <color=#FFFF00>GUIDE</color> button, at the <color=#FFFF00>upper
     right of the screen</color>, if you need me.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}

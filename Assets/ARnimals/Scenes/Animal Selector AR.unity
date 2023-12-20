@@ -1889,7 +1889,7 @@ RectTransform:
   - {fileID: 357412379}
   - {fileID: 51716900}
   m_Father: {fileID: 540723940}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -4592,7 +4592,7 @@ RectTransform:
   - {fileID: 1458466686}
   - {fileID: 1921632864}
   m_Father: {fileID: 540723940}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5173,7 +5173,6 @@ RectTransform:
   m_Children:
   - {fileID: 1168511647}
   - {fileID: 515483073}
-  - {fileID: 1711777898}
   - {fileID: 1680745398}
   - {fileID: 146039610}
   - {fileID: 375134399}
@@ -6413,8 +6412,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Clicking the <color=#FFF933>BACK</color> button, will take you back to
-    the <color=#FFF933>Mode Select</color>. '
+  m_text: 'Clicking the <color=#FFFF00>BACK</color> button, will take you back to
+    the <color=#FFFF00>Mode Select</color>. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -7764,7 +7763,7 @@ RectTransform:
   - {fileID: 2006454587}
   - {fileID: 548175404}
   m_Father: {fileID: 540723940}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8412,7 +8411,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can also click the  <color=#FFF933>GUIDE</color> button, at the <color=#FFF933>upper
+  m_text: You can also click the  <color=#FFFF00>GUIDE</color> button, at the <color=#FFFF00>upper
     center of the screen</color>, if you need me.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -9406,7 +9405,7 @@ RectTransform:
   - {fileID: 170416560}
   - {fileID: 2064551074}
   m_Father: {fileID: 540723940}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -9559,7 +9558,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 540723940}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 9.62}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -9851,7 +9850,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The <color=#FFF933>Animals </color>categorized based on <color=#FFF933>Land,
+  m_text: The <color=#FFFF00>Animals </color>categorized based on <color=#FFFF00>Land,
     Air, and Sea</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -13411,8 +13410,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the <color=#FFF933>ANIMAL SELECTOR</color>! Here, you get to <color=#FFF933>pick</color>
-    your favorite animal to see in our fun <color=#FFF933>AR Adventure</color>!
+  m_text: This is the <color=#FFFF00>ANIMAL SELECTOR</color>! Here, you get to <color=#FFFF00>pick</color>
+    your favorite animal to see in our fun <color=#FFFF00>AR Adventure</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -14794,7 +14793,7 @@ RectTransform:
   - {fileID: 1005521287}
   - {fileID: 173245232}
   m_Father: {fileID: 540723940}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -17019,7 +17018,7 @@ RectTransform:
   - {fileID: 325171400}
   - {fileID: 257361395}
   m_Father: {fileID: 540723940}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -17063,82 +17062,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1680745397}
-  m_CullTransparentMesh: 1
---- !u!1 &1711777897
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1711777898}
-  - component: {fileID: 1711777900}
-  - component: {fileID: 1711777899}
-  m_Layer: 5
-  m_Name: probexLogo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1711777898
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1711777897}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 540723940}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 98.933, y: -52.527}
-  m_SizeDelta: {x: 197.866, y: 182.5143}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1711777899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1711777897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ecbee12b2cd52304682ac92b2aeac53b, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1711777900
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1711777897}
   m_CullTransparentMesh: 1
 --- !u!1 &1743505148
 GameObject:
@@ -17320,8 +17243,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: When you've <color=#FFF933>chosen your favorite animal</color>, just tap
-    the <color=#FFF933>START</color> button to <color=#FFF933>begin</color> your
+  m_text: When you've <color=#FFFF00>chosen your favorite animal</color>, just tap
+    the <color=#FFFF00>START</color> button to <color=#FFFF00>begin</color> your
     fun AR adventure!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -17794,8 +17717,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <color=#FFF933>Animals </color>that are <color=#FFF933>locked</color> can
-    be <color=#FFF933>unlocked</color> by playing the <color=#FFF933>Mini-Games</color>!
+  m_text: <color=#FFFF00>Animals </color>that are <color=#FFFF00>locked</color> can
+    be <color=#FFFF00>unlocked</color> by playing the <color=#FFFF00>Mini-Games</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -18744,7 +18667,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The<color=#FFF933> SELECTED ANIMAL </color>can be found at the <color=#FFF933>right
+  m_text: The<color=#FFFF00> SELECTED ANIMAL </color>can be found at the <color=#FFFF00>right
     side of the screen</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
@@ -19183,7 +19106,7 @@ RectTransform:
   m_Children:
   - {fileID: 1405029191}
   m_Father: {fileID: 540723940}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}

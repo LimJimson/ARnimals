@@ -38,14 +38,17 @@ public class TakeScreenshot : MonoBehaviour {
     //	yield return new WaitForSeconds(2f);
     //	text.text = "";
     //   }
+    public GameObject arrow3d;
+    public GameObject pnlImgCameraTxt;
     private void Update()
     {
         countdownSS();
     }
     private IEnumerator TakeScreenshotAndSave()
     {
+        arrow3d.SetActive(false);
         AR_UI.SetActive(false);
-        text.gameObject.SetActive(true);
+        pnlImgCameraTxt.gameObject.SetActive(true);
         takingScreenshot = true;
         yield return new WaitForEndOfFrame();
 
@@ -58,11 +61,12 @@ public class TakeScreenshot : MonoBehaviour {
         Debug.Log("Permission result: " + NativeGallery.SaveImageToGallery(ss, Application.productName + " Captures", name));
         takingScreenshot = false;
         AR_UI.SetActive(true);
-        text.text = "Screenshot saved to Gallery!";
+        arrow3d.SetActive(true);
+        text.text = "Screenshot saved to <color=#FFFF00>Gallery</color>!";
 
         yield return new WaitForSeconds(2f);
         text.text = "";
-        text.gameObject.SetActive(false);
+        pnlImgCameraTxt.gameObject.SetActive(false);
         StopAllCoroutines();
     }
 

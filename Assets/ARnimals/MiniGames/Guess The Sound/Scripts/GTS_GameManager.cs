@@ -107,7 +107,7 @@ public class GTS_GameManager : MonoBehaviour
         optionsUI.SetActive(false);
         GameUI.SetActive(false);
         checkCurrentStar();
-
+        changePreviousStarSprite();
 
 
         if (levelSelected == 0)
@@ -252,6 +252,7 @@ public class GTS_GameManager : MonoBehaviour
         if (HintsLeft != 0)
         {
             playSoundCorrectAnswer();
+            starVFXHint.gameObject.SetActive(true);
             HintsLeft -= 1;
             if (HintsLeft == 0)
             {
@@ -260,7 +261,7 @@ public class GTS_GameManager : MonoBehaviour
             else
             {
                 hintsTxt.text = "<color=#FFFF00>" + HintsLeft + " </color>hint left";
-                starVFXHint.gameObject.SetActive(true);
+                
             }
             StartCoroutine(_showHintLeft());
         }
@@ -371,6 +372,24 @@ public class GTS_GameManager : MonoBehaviour
     }
     int currentStar;
     public Image previousStarRecord;
+    void changePreviousStarSprite()
+    {
+        switch (currentStar)
+        {
+            case 0:
+                previousStarRecord.sprite = starsSprites[0];
+                break;
+            case 1:
+                previousStarRecord.sprite = starsSprites[1];
+                break;
+            case 2:
+                previousStarRecord.sprite = starsSprites[2];
+                break;
+            case 3:
+                previousStarRecord.sprite = starsSprites[3];
+                break;
+        }
+    }
     void checkCurrentStar()
     {
         switch (levelSelected)
@@ -378,15 +397,18 @@ public class GTS_GameManager : MonoBehaviour
             case 1:
                 currentStar = existingSO.GTS_lvl1_star;
                 ARanimalIndex = 14;
+
                 break;
             case 2:
                 currentStar = existingSO.GTS_lvl2_star;
+
                 ARanimalIndex = 2;
 
                 break;
             case 3:
                 currentStar = existingSO.GTS_lvl3_star;
                 ARanimalIndex = 0;
+
 
                 break;
             case 4:
@@ -570,8 +592,123 @@ public class GTS_GameManager : MonoBehaviour
         }
         SaveManager.Save(existingSO);
     }
-    void winLevelLogic()
+
+    public GameObject badgeUnlockGO;
+
+    void unlockBadgeLogic()
     {
+        if(life == 3)
+            switch (levelSelected)
+            {
+                case 1:
+                    if (!existingSO.level1BadgeGTS)
+                    {
+                        existingSO.level1BadgeGTS = true;
+                        badgeUnlockGO.SetActive(true);
+                        checkIfBadisIsUnlocked();
+
+                    }
+                break;
+            case 2:
+                    if (!existingSO.level2BadgeGTS)
+                    {
+                        existingSO.level2BadgeGTS = true;
+                        badgeUnlockGO.SetActive(true);
+                        checkIfBadisIsUnlocked();
+                    }
+                    break;
+            case 3:
+                    if (!existingSO.level3BadgeGTS)
+                    {
+                        existingSO.level3BadgeGTS = true;
+                        badgeUnlockGO.SetActive(true);
+                        checkIfBadisIsUnlocked();
+                    }
+                    break;
+            case 4:
+                    if (!existingSO.level4BadgeGTS)
+                    {
+                        existingSO.level4BadgeGTS = true;
+                        badgeUnlockGO.SetActive(true);
+                        checkIfBadisIsUnlocked();
+                    }
+                    break;
+            case 5:
+                    if (!existingSO.level5BadgeGTS)
+                    {
+                        existingSO.level5BadgeGTS = true;
+                        badgeUnlockGO.SetActive(true);
+                        checkIfBadisIsUnlocked();
+                    }
+                    break;
+        }
+    }
+    public Image badgeImgWinLevel;
+    public Sprite[] badgeImgGTSSprites;
+    void checkIfBadisIsUnlocked()
+    {
+
+        switch (levelSelected)
+        {
+            case 1:
+                if (existingSO.level1BadgeGTS)
+                {
+                    badgeImgWinLevel.sprite = badgeImgGTSSprites[1];
+                }
+                else
+                {
+                    badgeImgWinLevel.sprite = badgeImgGTSSprites[0];
+                }
+                break;
+            case 2:
+                if (existingSO.level2BadgeGTS)
+                {
+                    badgeImgWinLevel.sprite = badgeImgGTSSprites[1];
+                }
+                else
+                {
+                    badgeImgWinLevel.sprite = badgeImgGTSSprites[0];
+                }
+                break;
+            case 3:
+                if (existingSO.level3BadgeGTS)
+                {
+                    badgeImgWinLevel.sprite = badgeImgGTSSprites[1];
+                }
+                else
+                {
+                    badgeImgWinLevel.sprite = badgeImgGTSSprites[0];
+                }
+                break;
+            case 4:
+                if (existingSO.level4BadgeGTS)
+                {
+                    badgeImgWinLevel.sprite = badgeImgGTSSprites[1];
+                }
+                else
+                {
+                    badgeImgWinLevel.sprite = badgeImgGTSSprites[0];
+                }
+                break;
+            case 5:
+                if (existingSO.level5BadgeGTS)
+                {
+                    badgeImgWinLevel.sprite = badgeImgGTSSprites[1];
+                }
+                else
+                {
+                    badgeImgWinLevel.sprite = badgeImgGTSSprites[0];
+                }
+                break;
+        }
+    }
+
+    public void winLevelLogic()
+    {
+        
+        badgeUnlockGO.SetActive(false);
+        winLevel.SetActive(true);
+        lvlCompleted.text = "LEVEL <color=yellow><b>" + levelSelected.ToString() + "</b></color> COMPLETED!";
         switch (currentStar)
         {
             case 0:
@@ -588,6 +725,7 @@ public class GTS_GameManager : MonoBehaviour
                 }
                 else if (life == 3)
                 {
+                    checkIfBadisIsUnlocked();
                     nextLvlBtn.interactable = true;
                     checkImgUnlockedLevelBoard.SetActive(true);
                     tryARBtn.SetActive(true);
@@ -610,6 +748,7 @@ public class GTS_GameManager : MonoBehaviour
                 }
                 else if (life == 3)
                 {
+                    checkIfBadisIsUnlocked();
                     nextLvlBtn.interactable = true;
                     checkImgUnlockedLevelBoard.SetActive(true);
                     tryARBtn.SetActive(true);
@@ -632,6 +771,7 @@ public class GTS_GameManager : MonoBehaviour
                 }
                 else if (life == 3)
                 {
+                    checkIfBadisIsUnlocked();
                     nextLvlBtn.interactable = true;
                     checkImgUnlockedLevelBoard.SetActive(true);
                     tryARBtn.SetActive(true);
@@ -642,6 +782,7 @@ public class GTS_GameManager : MonoBehaviour
                 previousStarRecord.sprite = starsSprites[3];
                 if (life == 3)
                 {
+                    checkIfBadisIsUnlocked();
                     nextLvlBtn.interactable = true;
                     checkImgUnlockedLevelBoard.SetActive(true);
                     tryARBtn.SetActive(true);
@@ -649,7 +790,7 @@ public class GTS_GameManager : MonoBehaviour
                 }
                 break;
         }
-
+        SaveManager.Save(existingSO);
 
 
     }
@@ -665,7 +806,15 @@ public class GTS_GameManager : MonoBehaviour
                 compareCurrentLvl_UnlockLvl();
                 checkStar();
                 unlockLevelBoard();
-                winLevelLogic();
+                if(life == 3 && !existingSO.level1BadgeGTS)
+                {
+                    unlockBadgeLogic();
+                }
+                else
+                {
+                    checkIfBadisIsUnlocked();
+                    winLevelLogic();
+                }
                 showNextLvlBtn();
             }
         }
@@ -679,7 +828,16 @@ public class GTS_GameManager : MonoBehaviour
                 showNextLvlBtn();
                 checkStar();
                 unlockLevelBoard();
-                winLevelLogic();
+                if (life == 3 && !existingSO.level2BadgeGTS)
+                {
+                    unlockBadgeLogic();
+                    
+                }
+                else
+                {
+                    checkIfBadisIsUnlocked();
+                    winLevelLogic();
+                }
                 showNextLvlBtn();
             }
         }
@@ -693,7 +851,15 @@ public class GTS_GameManager : MonoBehaviour
                 showNextLvlBtn();
                 checkStar();
                 unlockLevelBoard();
-                winLevelLogic();
+                if (life == 3 && !existingSO.level3BadgeGTS)
+                {
+                    unlockBadgeLogic();
+                }
+                else
+                {
+                    checkIfBadisIsUnlocked();
+                    winLevelLogic();
+                }
                 showNextLvlBtn();
             }
         }
@@ -707,7 +873,15 @@ public class GTS_GameManager : MonoBehaviour
                 showNextLvlBtn();
                 checkStar();
                 unlockLevelBoard();
-                winLevelLogic();
+                if (life == 3 && !existingSO.level4BadgeGTS)
+                {
+                    unlockBadgeLogic();
+                }
+                else
+                {
+                    checkIfBadisIsUnlocked();
+                    winLevelLogic();
+                }
                 showNextLvlBtn();
             }
         }
@@ -721,7 +895,15 @@ public class GTS_GameManager : MonoBehaviour
                 showNextLvlBtn();
                 checkStar();
                 unlockLevelBoard();
-                winLevelLogic();
+                if (life == 3 && !existingSO.level5BadgeGTS)
+                {
+                    unlockBadgeLogic();
+                }
+                else
+                {
+                    checkIfBadisIsUnlocked();
+                    winLevelLogic();
+                }
                 showNextLvlBtn();
             }
         }
@@ -774,9 +956,8 @@ public class GTS_GameManager : MonoBehaviour
         }
 
         bgPanelCanvas.SetActive(true);
-        winLevel.SetActive(true);
-        lvlCompleted.text = "LEVEL <color=yellow><b>" + levelSelected.ToString() + "</b></color> COMPLETED!";
 
+        changePreviousStarSprite();
     }
     void unlockAnimal()
     {

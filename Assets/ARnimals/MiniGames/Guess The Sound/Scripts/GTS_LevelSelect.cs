@@ -177,10 +177,12 @@ public class GTS_LevelSelect : MonoBehaviour
 
         }
     }
-    public Image badgeImg;
+    public Image badgeImg; //animal wood badge
+    public GameObject badgeImg2; //confirm wood badge
     public Sprite[] badgeImgSprite;
     void checkIfBadgeIsUnlocked()
     {
+        badgeImg2.gameObject.SetActive(true);
         switch (levelNumber)
         {
             case 1:
@@ -191,6 +193,7 @@ public class GTS_LevelSelect : MonoBehaviour
                 else
                 {
                     badgeImg.sprite = badgeImgSprite[0];
+                    badgeImg2.gameObject.SetActive(false);
                 }
                 break;
             case 2:
@@ -201,6 +204,7 @@ public class GTS_LevelSelect : MonoBehaviour
                 else
                 {
                     badgeImg.sprite = badgeImgSprite[0];
+                    badgeImg2.gameObject.SetActive(false);
                 }
                 break;
             case 3:
@@ -211,6 +215,7 @@ public class GTS_LevelSelect : MonoBehaviour
                 else
                 {
                     badgeImg.sprite = badgeImgSprite[0];
+                    badgeImg2.gameObject.SetActive(false);
                 }
                 break;
             case 4:
@@ -221,6 +226,7 @@ public class GTS_LevelSelect : MonoBehaviour
                 else
                 {
                     badgeImg.sprite = badgeImgSprite[0];
+                    badgeImg2.gameObject.SetActive(false);
                 }
                 break;
             case 5:
@@ -231,6 +237,7 @@ public class GTS_LevelSelect : MonoBehaviour
                 else
                 {
                     badgeImg.sprite = badgeImgSprite[0];
+                    badgeImg2.gameObject.SetActive(false);
                 }
                 break;
 

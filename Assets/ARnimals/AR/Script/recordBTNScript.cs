@@ -170,10 +170,13 @@ public class recordBTNScript : MonoBehaviour
         StopCoroutine(txtDelay());
         _txt.gameObject.SetActive(false);
     }
+    public GameObject pnlImgCameraTxt;
     IEnumerator txtDelay()
     {
-        _txt.text = "Saved to Gallery!";
+        pnlImgCameraTxt.SetActive(true);
+        _txt.text = "Saved to <color=#FFFF00>Gallery</color>!";
         yield return new WaitForSeconds(1f);
+        pnlImgCameraTxt.SetActive(false);
         _txt.text = "";
         stopTxtDelayCoroutine();
     }

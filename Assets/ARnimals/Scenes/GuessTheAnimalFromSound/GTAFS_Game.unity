@@ -34376,7 +34376,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clicking <color=#FFFF00one of the animal sound</color> buttons will <color=#FFFF00>produce</color>
+  m_text: Clicking <color=#FFFF00>one of the animal sound</color> buttons will <color=#FFFF00>produce</color>
     an <color=#FFFF00>animal sound</color>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}

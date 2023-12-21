@@ -36,6 +36,7 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private GameObject confirmationPlayAgainCanvas;
 	[SerializeField] private GameObject highScoreCanvas;
     [SerializeField] private GameObject bgPanelCanvas;
+    [SerializeField] private GameObject badgeCanvas;
 
     [Header("UIs Needed")]
 
@@ -108,10 +109,13 @@ public class CTF_GameManager : MonoBehaviour
     [SerializeField] private GameObject starVFX;
     [SerializeField] private GameObject lvlCompleteParticleSystems;
 
-    [SerializeField] private GameObject[] gameObjectsToClear;
+    [SerializeField] private GameObject[] gameObjectsToClear;  
 
     private float enablerTimer = 0.7f;
     private bool isOptionsUIOpen = false;
+
+    [SerializeField] private Image[] badges;
+    [SerializeField] private Sprite[] badgeSprite;
 
     private int ARanimalIndex;
 
@@ -422,43 +426,43 @@ public class CTF_GameManager : MonoBehaviour
 
         string [] elephantTrivia = 
         {
-            "<color=green>Did you know?</color> <color=yellow>Elephants</color> are the biggest land animals on Earth. They're even bigger than a school bus!",
-            "<color=green>Did you know?</color> <color=yellow>Elephants</color> have a super memory. They can remember things for a very long time, even if they met you years ago.",
-            "<color=green>Did you know?</color> <color=yellow>Elephants</color> love taking mud baths. They roll in the mud to cool down and protect their skin from the sun.",
-            "<color=green>Did you know?</color> <color=yellow>Baby elephants</color> are called calves. When they're born, they already weigh as much as a small car!",
-            "<color=green>Did you know?</color> An <color=yellow>elephant's</color> trunk has about 150,000 muscles, more than a whole human body! It can pick up tiny things and spray water."
+            "<color=#00FF95>Did you know?</color> <color=yellow>Elephants</color> are the biggest land animals on Earth. They're even bigger than a school bus!",
+            "<color=#00FF95>Did you know?</color> <color=yellow>Elephants</color> have a super memory. They can remember things for a very long time, even if they met you years ago.",
+            "<color=#00FF95>Did you know?</color> <color=yellow>Elephants</color> love taking mud baths. They roll in the mud to cool down and protect their skin from the sun.",
+            "<color=#00FF95>Did you know?</color> <color=yellow>Baby elephants</color> are called calves. When they're born, they already weigh as much as a small car!",
+            "<color=#00FF95>Did you know?</color> An <color=yellow>elephant's</color> trunk has about 150,000 muscles, more than a whole human body! It can pick up tiny things and spray water."
         };
         string [] pigeonTrivia = 
         {
-            "<color=green>Did you know?</color> <color=yellow>Pigeons</color> can do math! Researchers found that pigeons can learn abstract math rules and even understand concepts like zero.",
-            "<color=green>Did you know?</color> <color=yellow>Pigeons</color> have super vision. They see ultraviolet light, which we can't, helping them navigate and spot hidden things.",
-            "<color=green>Did you know?</color> <color=yellow>Pigeons</color> can recognize all 26 letters of the alphabet. They've even learned to tell them apart and spell simple words in studies!",
-            "<color=green>Did you know?</color> In some cultures, <color=yellow>pigeons</color> are considered symbols of love and peace. They've even been used in weddings to carry love notes.",
-            "<color=green>Did you know?</color> <color=yellow>Pigeons</color> show love with a cute dance called <color=#FF0046>'pigeon courtship'</color> to their feathered friend."
+            "<color=#00FF95>Did you know?</color> <color=yellow>Pigeons</color> can do math! Researchers found that pigeons can learn abstract math rules and even understand concepts like zero.",
+            "<color=#00FF95>Did you know?</color> <color=yellow>Pigeons</color> have super vision. They see ultraviolet light, which we can't, helping them navigate and spot hidden things.",
+            "<color=#00FF95>Did you know?</color> <color=yellow>Pigeons</color> can recognize all 26 letters of the alphabet. They've even learned to tell them apart and spell simple words in studies!",
+            "<color=#00FF95>Did you know?</color> In some cultures, <color=yellow>pigeons</color> are considered symbols of love and peace. They've even been used in weddings to carry love notes.",
+            "<color=#00FF95>Did you know?</color> <color=yellow>Pigeons</color> show love with a cute dance called <color=#FF0046>'pigeon courtship'</color> to their feathered friend."
         };
         string [] koiTrivia = 
         {
-            "<color=green>Did you know?</color> <color=yellow>Koi fish</color> can live for a very long time, sometimes more than 50 years! That's longer than most pets.",
-            "<color=green>Did you know?</color> <color=yellow>Koi fish</color> are like swimming rainbows! They come in lots of colors, including red, orange, yellow, and even sparkly metallic shades.",
-            "<color=green>Did you know?</color> <color=yellow>Koi fish</color> are excellent swimmers and can jump out of the water to catch bugs and nibble on leaves.",
-            "<color=green>Did you know?</color> <color=yellow>Koi fish</color> are very peaceful and social. They like to swim together in groups, making them wonderful pond companions.",
-            "<color=green>Did you know?</color> <color=yellow>Koi fish</color> have a special whisker on their lips called <color=#FF0046>'barbels'</color>. They use them to help sense food in the water."
+            "<color=#00FF95>Did you know?</color> <color=yellow>Koi fish</color> can live for a very long time, sometimes more than 50 years! That's longer than most pets.",
+            "<color=#00FF95>Did you know?</color> <color=yellow>Koi fish</color> are like swimming rainbows! They come in lots of colors, including red, orange, yellow, and even sparkly metallic shades.",
+            "<color=#00FF95>Did you know?</color> <color=yellow>Koi fish</color> are excellent swimmers and can jump out of the water to catch bugs and nibble on leaves.",
+            "<color=#00FF95>Did you know?</color> <color=yellow>Koi fish</color> are very peaceful and social. They like to swim together in groups, making them wonderful pond companions.",
+            "<color=#00FF95>Did you know?</color> <color=yellow>Koi fish</color> have a special whisker on their lips called <color=#FF0046>'barbels'</color>. They use them to help sense food in the water."
         };
         string [] camelTrivia = 
         {
-            "<color=green>Did you know?</color> <color=yellow>Camels</color> are often called the <color=#FF0046>'ships of the desert'</color> because they're great at carrying heavy loads, just like a ship carries cargo on the sea.",
-            "<color=green>Did you know?</color> <color=yellow>Camels</color> have humps, not filled with water, but with fat that provides energy when they can't find food.",
-            "<color=green>Did you know?</color> <color=yellow>Camels</color> make funny noises, like grunts and moans, to communicate with each other. It's their way of talking!",
-            "<color=green>Did you know?</color> <color=yellow>Camels</color> can close their nostrils during sandstorms to protect themselves from the blowing sand.",
-            "<color=green>Did you know?</color> <color=yellow>Camels</color> can go a long time without drinking water. They can survive up to two weeks without a sip!"
+            "<color=#00FF95>Did you know?</color> <color=yellow>Camels</color> are often called the <color=#FF0046>'ships of the desert'</color> because they're great at carrying heavy loads, just like a ship carries cargo on the sea.",
+            "<color=#00FF95>Did you know?</color> <color=yellow>Camels</color> have humps, not filled with water, but with fat that provides energy when they can't find food.",
+            "<color=#00FF95>Did you know?</color> <color=yellow>Camels</color> make funny noises, like grunts and moans, to communicate with each other. It's their way of talking!",
+            "<color=#00FF95>Did you know?</color> <color=yellow>Camels</color> can close their nostrils during sandstorms to protect themselves from the blowing sand.",
+            "<color=#00FF95>Did you know?</color> <color=yellow>Camels</color> can go a long time without drinking water. They can survive up to two weeks without a sip!"
         };
         string [] crabTrivia = 
         {
-            "<color=green>Did you know?</color> <color=yellow>Crabs</color> have a superpower - they can regenerate lost limbs! If they lose a claw or leg, they can grow it back over time.",
-            "<color=green>Did you know?</color> Some <color=yellow>crabs</color> are amazing architects, crafting intricate underwater homes from sand, shells, and more.",
-            "<color=green>Did you know?</color> Some <color=yellow>Crabs</color> wear tiny hats! Well, not real hats, but they put small things like shells or sponges on their heads to hide from predators.",
-            "<color=green>Did you know?</color> <color=yellow>Crabs</color> are skilled swimmers and masters at sideways walking, which helps them move swiftly and evade danger.",
-            "<color=green>Did you know?</color> <color=yellow>Crabs</color> have a special trick called <color=#FF0046>molting</color>. They shed their old shells and grow new, bigger ones when they get too tight."
+            "<color=#00FF95>Did you know?</color> <color=yellow>Crabs</color> have a superpower - they can regenerate lost limbs! If they lose a claw or leg, they can grow it back over time.",
+            "<color=#00FF95>Did you know?</color> Some <color=yellow>crabs</color> are amazing architects, crafting intricate underwater homes from sand, shells, and more.",
+            "<color=#00FF95>Did you know?</color> Some <color=yellow>Crabs</color> wear tiny hats! Well, not real hats, but they put small things like shells or sponges on their heads to hide from predators.",
+            "<color=#00FF95>Did you know?</color> <color=yellow>Crabs</color> are skilled swimmers and masters at sideways walking, which helps them move swiftly and evade danger.",
+            "<color=#00FF95>Did you know?</color> <color=yellow>Crabs</color> have a special trick called <color=#FF0046>molting</color>. They shed their old shells and grow new, bigger ones when they get too tight."
         };
 
         int randomIndex = Random.Range(0, 5);
@@ -496,7 +500,6 @@ public class CTF_GameManager : MonoBehaviour
                 pauseManager.PauseGame();
                 finalScore = scoreManager.GetScore();
 				audioManager.stopBGMusic();
-				audioManager.playLvlCompletedSFX();
                 addStar(finalScore);
                 SetMaxStars();
                 unlockRewards();
@@ -506,7 +509,19 @@ public class CTF_GameManager : MonoBehaviour
 				SaveManager.Save(existingSo);
                 levelCompletedTxt.text = "LEVEL <color=yellow><b>"+ selectedLevel +"</b></color> COMPLETED!";
                 bgPanelCanvas.SetActive(true);
-                levelCompleteCanvas.SetActive(true);
+
+
+                if (firstBadge)
+                {
+                    audioManager.stopCountdown();
+                    audioManager.playBadgeSFX();
+                    badgeCanvas.SetActive(true);
+                }
+                else 
+                {
+                    levelCompleteCanvas.SetActive(true);
+                    audioManager.playLvlCompletedSFX();
+                }
             }
             else
             {
@@ -640,10 +655,12 @@ public class CTF_GameManager : MonoBehaviour
         highScoreListTxt.text = formattedScores;
     }
 
+    int newStarsCount;
+    int currentMaxStarsCount;
 
     private void SetMaxStars() 
     {
-        int currentMaxStarsCount = PlayerPrefs.GetInt("CTF_Lvl" + selectedLevel + "StarsCount", 0);
+        currentMaxStarsCount = PlayerPrefs.GetInt("CTF_Lvl" + selectedLevel + "StarsCount", 0);
 
         //Set previous star 
 
@@ -663,13 +680,15 @@ public class CTF_GameManager : MonoBehaviour
                 break;
         }
 
-        int newStarsCount = starsCount;
+         newStarsCount = starsCount;
 
         if (newStarsCount > currentMaxStarsCount) 
         {
             PlayerPrefs.SetInt("CTF_Lvl" + selectedLevel + "StarsCount", newStarsCount);
         }
     }
+
+    bool firstBadge = false;
 
     private void unlockRewards() 
     {
@@ -679,6 +698,8 @@ public class CTF_GameManager : MonoBehaviour
         checkImgForLvlToUnlock.SetActive(false);
         allLevelsUnlockGO.SetActive(false);
         starsToUnlockGO.SetActive(false);
+        badges[0].gameObject.SetActive(false);
+        badges[1].sprite = badgeSprite[0];
 
         switch(PlayerPrefs.GetInt("CTF_Lvl" + selectedLevel + "StarsCount", 0)) 
         {
@@ -702,8 +723,10 @@ public class CTF_GameManager : MonoBehaviour
                 tryAnimalBtn.SetActive(true);
                 starsToUnlockGO.SetActive(true);
                 checkImgForLvlToUnlock.SetActive(true);
+                badges[0].gameObject.SetActive(true);
+                badges[1].sprite = badgeSprite[1];
 
-                switch(selectedLevel) 
+                switch (selectedLevel) 
                 {
                     case "1":
                         existingSo.isOctopusUnlock = true;
@@ -760,6 +783,11 @@ public class CTF_GameManager : MonoBehaviour
         }
 
         animalImg.sprite = animalSprites[int.Parse(selectedLevel)];
+
+        if (newStarsCount == 3 && currentMaxStarsCount == 2 || newStarsCount == 3 && currentMaxStarsCount == 1 || newStarsCount == 3 && currentMaxStarsCount == 0)
+        {
+            firstBadge = true;
+        }
     }
 
     public void addStar(int score) 
@@ -956,4 +984,11 @@ public class CTF_GameManager : MonoBehaviour
 	{
         guidePopUpAnimation.hideGuidePopUp(confirmARPos, confirmationToAR, levelCompleteCanvas);
 	}
+
+    public void hideBadgeAnim() 
+    {
+        badgeCanvas.SetActive(false);
+        audioManager.playLvlCompletedSFX();
+        levelCompleteCanvas.SetActive(true);
+    }
 }

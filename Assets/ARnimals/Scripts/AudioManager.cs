@@ -31,6 +31,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip CTF_Countdown;
     public AudioClip TriviaShowEffect;
     public AudioClip FTA_Countdown;
+    public AudioClip badgeSFX;
 
     [Header("GUIDE")]
     public AudioClip[] GuideSelector;

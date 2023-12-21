@@ -265,6 +265,17 @@ public class CTF_AudioManager : MonoBehaviour
 			Debug.Log("No AudioManager");
 		}
     }
+    public void playBadgeSFX()
+    {
+        try
+        {
+            mainAudioManager.PlaySFX(mainAudioManager.badgeSFX);
+        }
+        catch
+        {
+            Debug.Log("No AudioManager");
+        }
+    }
     public void playBoyGuideVoiceOver(int index) 
     {
         try

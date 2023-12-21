@@ -36,7 +36,6 @@ public class TakeScreenshot : MonoBehaviour {
 
         // Save the screenshot to Gallery/Photos
         string name = string.Format("{0}_Capture_{1}.png", Application.productName, System.DateTime.Now.ToString("yyyy -MM-dd_HH-mm-ss"));
-        Debug.Log("Permission result: " + NativeGallery.SaveImageToGallery(ss, Application.productName + " Captures", name));
         takingScreenshot = false;
         AR_UI.SetActive(true);
         arrow3d.SetActive(true);
@@ -48,21 +47,7 @@ public class TakeScreenshot : MonoBehaviour {
         StopAllCoroutines();
     }
 
-    //IEnumerator CaptureIt()
-    //{
-    //	AR_UI.SetActive (false);
-    //	string timeStamp = System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss");
-    //	string fileName = "ARnimals_SS_" + timeStamp + ".png";
-    //	string pathToSave = fileName;
 
-    //	ScreenCapture.CaptureScreenshot(pathToSave);
-    //	yield return new WaitForEndOfFrame();
-    //       AR_UI.SetActive(true);
-    //	text.text = "Screenshot saved to Gallery!";
-
-    //	yield return new WaitForSeconds(2f);
-    //	text.text = "";
-    //   }
     public GameObject arrow3d;
     public GameObject pnlImgCameraTxt;
     private void Update()

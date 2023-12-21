@@ -81,6 +81,8 @@ public class GTS_Guide : MonoBehaviour
     {
         if (!StateNameController.GTS_GAME_GUIDE)
         {
+            loaddata.GTS_GAME_GUIDE = true;
+            SaveManager.Save(loaddata);
             GTS_GUIDE();
 
             StateNameController.GTS_GAME_GUIDE = true;

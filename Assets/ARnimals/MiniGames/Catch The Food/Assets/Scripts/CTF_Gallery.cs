@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GTS_Gallery : MonoBehaviour
+public class CTF_Gallery : MonoBehaviour
 {
     [SerializeField]
     GameObject Image;
@@ -27,7 +27,7 @@ public class GTS_Gallery : MonoBehaviour
         errorTxtNoImg.gameObject.SetActive(false);
         errorTxtDelImg.gameObject.SetActive(false);
 
-        getPicture();   
+        getPicture();
     }
 
     public void getPicture()
@@ -35,25 +35,26 @@ public class GTS_Gallery : MonoBehaviour
         try
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
-            files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + " GTSCaptures", "*.png");
-            if (files.Length > 0)
-            {
-                imgCounter.gameObject.SetActive(true);
-                Image.gameObject.SetActive(true);  
-                fileNameImgTxt.gameObject.SetActive(true);
-                GetPictureAndShowIt();
-            }
-            else if (files.Length == 0)
-            {
-                imgCounter.gameObject.SetActive(false);
-                Image.gameObject.SetActive(false);
-                fileNameImgTxt.gameObject.SetActive(false);
-            }
+                    files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + "CTFCaptures", "*.png");
+                    if (files.Length > 0)
+                    {
+                        imgCounter.gameObject.SetActive(true);
+                        Image.gameObject.SetActive(true);  
+                        fileNameImgTxt.gameObject.SetActive(true);
+                        GetPictureAndShowIt();
+                    }
+                    else if (files.Length == 0)
+                    {
+                        imgCounter.gameObject.SetActive(false);
+                        Image.gameObject.SetActive(false);
+                        fileNameImgTxt.gameObject.SetActive(false);
+                    }
 #endif
+
         }
         catch
         {
-            Debug.Log("No Folder Found! GTSCaptures");
+            Debug.Log("No Folder Found! CTFCaptures");
         }
 
     }
@@ -85,14 +86,14 @@ public class GTS_Gallery : MonoBehaviour
 
     public void DeleteImage()
     {
-        string galleryPath = "/storage/emulated/0/DCIM/" + Application.productName + " GTSCaptures/";
+        string galleryPath = "/storage/emulated/0/DCIM/" + Application.productName + "CTFCaptures/";
         if (files.Length > 0)
         {
             StartCoroutine(showTextDelImg());
             string pathToFile = files[whichScreenShotIsShown];
             if (File.Exists(pathToFile))
                 File.Delete(pathToFile);
-            files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + " GTSCaptures", "*.png");
+            files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + "CTFCaptures", "*.png");
             if (files.Length > 0)
                 NextPicture();
             else
@@ -115,7 +116,7 @@ public class GTS_Gallery : MonoBehaviour
     {
         deleteBtn.interactable = false;
         errorTxtNoImg.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSecondsRealtime(1f);
         errorTxtNoImg.gameObject.SetActive(false);
         deleteBtn.interactable = true;
     }
@@ -123,7 +124,7 @@ public class GTS_Gallery : MonoBehaviour
     {
         deleteBtn.interactable = false;
         errorTxtDelImg.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSecondsRealtime(1f);
         errorTxtDelImg.gameObject.SetActive(false);
         deleteBtn.interactable = true;
     }

@@ -21,19 +21,19 @@ public class GTS_Gallery : MonoBehaviour
 
 
     public GameObject ImgGallery;
-    // Use this for initialization
+
     void Start()
     {
         errorTxtNoImg.gameObject.SetActive(false);
         errorTxtDelImg.gameObject.SetActive(false);
 
-        getPicture();
+        getPicture();   
     }
 
     public void getPicture()
     {
         #if UNITY_ANDROID && !UNITY_EDITOR
-            files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + " _GTSCaptures", "*.png");
+            files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + " GTSCaptures", "*.png");
             if (files.Length > 0)
             {
                 imgCounter.gameObject.SetActive(true);
@@ -61,8 +61,6 @@ public class GTS_Gallery : MonoBehaviour
         Sprite sp = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),
             new Vector2(0.5f, 0.5f));
         Image.GetComponent<Image>().sprite = sp;
-
-
     }
 
     Texture2D GetScreenshotImage(string filePath)
@@ -77,16 +75,17 @@ public class GTS_Gallery : MonoBehaviour
         }
         return texture;
     }
+
     public void DeleteImage()
     {
-        string galleryPath = "/storage/emulated/0/DCIM/" + Application.productName + " _GTSCaptures/";
+        string galleryPath = "/storage/emulated/0/DCIM/" + Application.productName + " GTSCaptures/";
         if (files.Length > 0)
         {
             StartCoroutine(showTextDelImg());
             string pathToFile = files[whichScreenShotIsShown];
             if (File.Exists(pathToFile))
                 File.Delete(pathToFile);
-            files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + " _GTSCaptures", "*.png");
+            files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + " GTSCaptures", "*.png");
             if (files.Length > 0)
                 NextPicture();
             else
@@ -159,15 +158,7 @@ public class GTS_Gallery : MonoBehaviour
 
     public void showImgGallery()
     {
-        try
-        {
-            getPicture();
-            ImgGallery.SetActive(true);
-        }
-        catch
-        {
-
-        }
-        
+        getPicture();
+        ImgGallery.SetActive(true);
     }
 }

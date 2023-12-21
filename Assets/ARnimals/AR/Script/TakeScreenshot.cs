@@ -22,6 +22,31 @@ public class TakeScreenshot : MonoBehaviour {
 
         }
 	}
+    private IEnumerator TakeScreenshotAndSave()
+    {
+        arrow3d.SetActive(false);
+        AR_UI.SetActive(false);
+        pnlImgCameraTxt.gameObject.SetActive(true);
+        takingScreenshot = true;
+        yield return new WaitForEndOfFrame();
+
+        Texture2D ss = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        ss.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+        ss.Apply();
+
+        // Save the screenshot to Gallery/Photos
+        string name = string.Format("{0}_Capture_{1}.png", Application.productName, System.DateTime.Now.ToString("yyyy -MM-dd_HH-mm-ss"));
+        Debug.Log("Permission result: " + NativeGallery.SaveImageToGallery(ss, Application.productName + " Captures", name));
+        takingScreenshot = false;
+        AR_UI.SetActive(true);
+        arrow3d.SetActive(true);
+        text.text = "Screenshot saved to <color=#FFFF00>Gallery</color>!";
+
+        yield return new WaitForSeconds(2f);
+        text.text = "";
+        pnlImgCameraTxt.gameObject.SetActive(false);
+        StopAllCoroutines();
+    }
 
     //IEnumerator CaptureIt()
     //{
@@ -44,31 +69,7 @@ public class TakeScreenshot : MonoBehaviour {
     {
         countdownSS();
     }
-    private IEnumerator TakeScreenshotAndSave()
-    {
-        arrow3d.SetActive(false);
-        AR_UI.SetActive(false);
-        pnlImgCameraTxt.gameObject.SetActive(true);
-        takingScreenshot = true;
-        yield return new WaitForEndOfFrame();
 
-        Texture2D ss = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
-        ss.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
-        ss.Apply();
-
-        // Save the screenshot to Gallery/Photos
-        string name = string.Format("{0}_Capture_{1}.png", Application.productName ,System.DateTime.Now.ToString("yyyy -MM-dd_HH-mm-ss"));
-        Debug.Log("Permission result: " + NativeGallery.SaveImageToGallery(ss, Application.productName + " Captures", name));
-        takingScreenshot = false;
-        AR_UI.SetActive(true);
-        arrow3d.SetActive(true);
-        text.text = "Screenshot saved to <color=#FFFF00>Gallery</color>!";
-
-        yield return new WaitForSeconds(2f);
-        text.text = "";
-        pnlImgCameraTxt.gameObject.SetActive(false);
-        StopAllCoroutines();
-    }
 
     public TMP_Text timerSSTxt;
     bool isSSTimerCounting = false;

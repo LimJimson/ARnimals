@@ -30,22 +30,22 @@ public class ScreenshotPreview : MonoBehaviour {
 
 	public void getPicture()
 	{
-#if UNITY_ANDROID && !UNITY_EDITOR
-            files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + " Captures", "*.png");//Directory.GetFiles(Application.persistentDataPath + "/", "*.png");
-            if (files.Length > 0)
-            {
-                imgCounter.gameObject.SetActive(true);
-                Image.gameObject.SetActive(true);  
-                fileNameImgTxt.gameObject.SetActive(true);
-                GetPictureAndShowIt();
-            }
-            else if (files.Length == 0)
-            {
-                imgCounter.gameObject.SetActive(false);
-                Image.gameObject.SetActive(false);
-                fileNameImgTxt.gameObject.SetActive(false);
-            }
-#endif
+        #if UNITY_ANDROID && !UNITY_EDITOR
+                    files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + " Captures", "*.png");//Directory.GetFiles(Application.persistentDataPath + "/", "*.png");
+                    if (files.Length > 0)
+                    {
+                        imgCounter.gameObject.SetActive(true);
+                        Image.gameObject.SetActive(true);  
+                        fileNameImgTxt.gameObject.SetActive(true);
+                        GetPictureAndShowIt();
+                    }
+                    else if (files.Length == 0)
+                    {
+                        imgCounter.gameObject.SetActive(false);
+                        Image.gameObject.SetActive(false);
+                        fileNameImgTxt.gameObject.SetActive(false);
+                    }
+        #endif
 
     }
     string ImgFileName;

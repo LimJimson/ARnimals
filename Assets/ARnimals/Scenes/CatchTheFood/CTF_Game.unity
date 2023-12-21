@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -34278,27 +34278,27 @@ PrefabInstance:
     - target: {fileID: 4829353546821303177, guid: d01feb4f6ce60884eb7788df2dce5c84,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4829741979700535077, guid: d01feb4f6ce60884eb7788df2dce5c84,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4829741979749545324, guid: d01feb4f6ce60884eb7788df2dce5c84,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4829741979921874311, guid: d01feb4f6ce60884eb7788df2dce5c84,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4829741980371409052, guid: d01feb4f6ce60884eb7788df2dce5c84,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d01feb4f6ce60884eb7788df2dce5c84, type: 3}
@@ -45686,8 +45686,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.9624634, y: 131.40103}
-  m_SizeDelta: {x: 762.83, y: 584.714}
+  m_AnchoredPosition: {x: 2.613, y: 135.754}
+  m_SizeDelta: {x: 787.781, y: 574.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1817835102
 MonoBehaviour:
@@ -45709,9 +45709,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <color=#00FF95>Did you know?</color> Some <color=yellow>Crabs</color> wear
-    tiny hats! Well, not real hats, but they put small things like shells or sponges
-    on their heads to hide from predators.
+  m_text: <color=#00FF95>Did you know?</color> <color=yellow>Koi fish</color> have
+    a special whisker on their lips called <color=#FFA3E7>'barbels'</color>. They
+    use them to help sense food in the water.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8b6a69a92a2d9d40837d0c39a165d74, type: 2}
   m_sharedMaterial: {fileID: 3576429999523128743, guid: e8b6a69a92a2d9d40837d0c39a165d74,
@@ -45739,12 +45739,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 77.25
   m_fontSizeBase: 63
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 77.25
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
@@ -45775,7 +45775,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -6.9724274, z: 0, w: 0}
+  m_margin: {x: 0, y: 2.7971342, z: 0.00006111655, w: -3.37677}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

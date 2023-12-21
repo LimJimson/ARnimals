@@ -55,6 +55,7 @@ public class FTA_LevelManager : MonoBehaviour
         SelectedLevel = "1";
         animalToUnlockName.text = "Leopard";
         checkStar();
+        BadgeLevelSelectorLogic();
         playConfirmGameObject.SetActive(true);
         levelbordercompletedholder.sprite = levelborderimages[0];
         levelbordercompletedholder.gameObject.SetActive(true);
@@ -67,6 +68,7 @@ public class FTA_LevelManager : MonoBehaviour
         SelectedLevel = "2";
         animalToUnlockName.text = "Pigeon";
         checkStar();
+        BadgeLevelSelectorLogic();
         playConfirmGameObject.SetActive(true);
         levelbordercompletedholder.sprite = levelborderimages[1];
         levelbordercompletedholder.gameObject.SetActive(true);
@@ -79,6 +81,7 @@ public class FTA_LevelManager : MonoBehaviour
         SelectedLevel = "3";
         animalToUnlockName.text = "Piranha";
         checkStar();
+        BadgeLevelSelectorLogic();
         playConfirmGameObject.SetActive(true);
         levelbordercompletedholder.sprite = levelborderimages[2];
         levelbordercompletedholder.gameObject.SetActive(true);
@@ -91,6 +94,7 @@ public class FTA_LevelManager : MonoBehaviour
         SelectedLevel = "4";
         animalToUnlockName.text = "Bear";
         checkStar();
+        BadgeLevelSelectorLogic();
         playConfirmGameObject.SetActive(true);
         levelbordercompletedholder.sprite = levelborderimages[3];
         levelbordercompletedholder.gameObject.SetActive(true);
@@ -103,6 +107,7 @@ public class FTA_LevelManager : MonoBehaviour
         SelectedLevel = "5";
         animalToUnlockName.text = "Owl";
         checkStar();
+        BadgeLevelSelectorLogic();
         playConfirmGameObject.SetActive(true);
         levelbordercompletedholder.gameObject.SetActive(false);
         checkGameObjectlvl.SetActive(false);
@@ -236,5 +241,86 @@ public class FTA_LevelManager : MonoBehaviour
     public void ConfirmNoTryAnimalARButton()
     {
         confirmationToARCanvas.SetActive(false);
+    }
+
+    public GameObject BadgeShowCongrats;
+    public GameObject BadgeBTN;
+    public Image BadgeLevelBorder;
+    public Sprite[] BadgeSpriteLevelBorder;
+    void BadgeLevelSelectorLogic()
+    {
+        switch (SelectedLevel)
+        {
+            case "1":
+                if (SaveARGuide.level1BadgeFTA)
+                {
+                    BadgeBTN.SetActive(true);
+                    BadgeLevelBorder.sprite = BadgeSpriteLevelBorder[1];
+                }
+                else
+                {
+                    BadgeBTN.SetActive(false);
+                    BadgeLevelBorder.sprite = BadgeSpriteLevelBorder[0];
+                }
+                break;
+            case "2":
+                if (SaveARGuide.level2BadgeFTA)
+                {
+                    BadgeBTN.SetActive(true);
+                    BadgeLevelBorder.sprite = BadgeSpriteLevelBorder[1];
+                }
+                else
+                {
+                    BadgeBTN.SetActive(false);
+                    BadgeLevelBorder.sprite = BadgeSpriteLevelBorder[0];
+                }
+                break;
+            case "3":
+                if (SaveARGuide.level3BadgeFTA)
+                {
+                    BadgeBTN.SetActive(true);
+                    BadgeLevelBorder.sprite = BadgeSpriteLevelBorder[1];
+                }
+                else
+                {
+                    BadgeBTN.SetActive(false);
+                    BadgeLevelBorder.sprite = BadgeSpriteLevelBorder[0];
+                }
+                break;
+            case "4":
+                if (SaveARGuide.level4BadgeFTA)
+                {
+                    BadgeBTN.SetActive(true);
+                    BadgeLevelBorder.sprite = BadgeSpriteLevelBorder[1];
+                }
+                else
+                {
+                    BadgeBTN.SetActive(false);
+                    BadgeLevelBorder.sprite = BadgeSpriteLevelBorder[0];
+                }
+                break;
+            case "5":
+                if (SaveARGuide.level5BadgeFTA)
+                {
+                    BadgeBTN.SetActive(true);
+                    BadgeLevelBorder.sprite = BadgeSpriteLevelBorder[1];
+                }
+                else
+                {
+                    BadgeBTN.SetActive(false);
+                    BadgeLevelBorder.sprite = BadgeSpriteLevelBorder[0];
+                }
+                break;
+        }
+    }
+    public void BadgeButtonCongratsOn()
+    {
+        playConfirmGameObject.SetActive(false);
+        BadgeShowCongrats.SetActive(true);
+    }
+    public void BadgeButtonCongratsOff()
+    {
+        playConfirmGameObject.SetActive(true);
+        BadgeShowCongrats.SetActive(false);
     }
 }

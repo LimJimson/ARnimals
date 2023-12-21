@@ -61,13 +61,13 @@ public class FTA_GameManager : MonoBehaviour
     [SerializeField] private RectTransform confirmExplorePos;
     [SerializeField] private RectTransform confirmPlayAgainPos;
     [SerializeField] private RectTransform confirmARPos;
-    
+
     [SerializeField] private GameObject bgPanelCanvas;
     [SerializeField] private GameObject starVFX;
     [SerializeField] private GameObject lvlCompleteParticleSystems;
 
     public bool isCorrect;
-    
+
 
     SaveObject SaveFTAGame;
 
@@ -101,7 +101,7 @@ public class FTA_GameManager : MonoBehaviour
         {
             Debug.Log("No AudioManager");
         }
-        
+
         guide_chosen = SaveFTAGame.guideChosen;
         HintsLeft = 1;
         SelectedLevel = PlayerPrefs.GetString("FTA_SelectedLevel");
@@ -148,7 +148,7 @@ public class FTA_GameManager : MonoBehaviour
                 }
                 catch
                 {
-                
+
                 }
             }
         }
@@ -165,46 +165,46 @@ public class FTA_GameManager : MonoBehaviour
     [SerializeField] private GameObject[] levelCompleteGOs;
     private float enablerTimerLvlComplete = 0.7f;
 
-    private void enableLvlCompleteGOs() 
+    private void enableLvlCompleteGOs()
     {
-        if(panelFinish.activeSelf) 
+        if (panelFinish.activeSelf)
         {
             levelCompleteGOs[0].SetActive(true);
-            if (levelCompleteGOs[0].activeSelf && starVFX.GetComponent<ParticleSystem>().particleCount <= 70) 
+            if (levelCompleteGOs[0].activeSelf && starVFX.GetComponent<ParticleSystem>().particleCount <= 70)
             {
                 showLvlCompleteGos();
             }
-            if (levelCompleteGOs[0].GetComponent<CanvasGroup>().alpha == 1) 
+            if (levelCompleteGOs[0].GetComponent<CanvasGroup>().alpha == 1)
             {
                 StartCoroutine(delayStarVFX());
             }
-            
-            if (starVFX.activeSelf && !starVFX.GetComponent<ParticleSystem>().isPlaying) 
+
+            if (starVFX.activeSelf && !starVFX.GetComponent<ParticleSystem>().isPlaying)
             {
                 lvlCompleteParticleSystems.SetActive(false);
             }
         }
     }
-    
-    IEnumerator delayStarVFX() 
+
+    IEnumerator delayStarVFX()
     {
-        yield return new WaitForSecondsRealtime(0.5f); 
+        yield return new WaitForSecondsRealtime(0.5f);
         starVFX.SetActive(true);
     }
 
-    private void showLvlCompleteGos() 
+    private void showLvlCompleteGos()
     {
         if (enablerTimerLvlComplete > 0f)
         {
             enablerTimerLvlComplete -= Time.unscaledDeltaTime;
         }
-        else 
+        else
         {
-            if (levelCompleteGOs[1].activeSelf) 
+            if (levelCompleteGOs[1].activeSelf)
             {
                 levelCompleteGOs[2].SetActive(true);
             }
-            else 
+            else
             {
                 levelCompleteGOs[1].SetActive(true);
                 enablerTimerLvlComplete = 0.5f;
@@ -215,9 +215,9 @@ public class FTA_GameManager : MonoBehaviour
     [SerializeField] private GameObject[] gameOverGOs;
     private float enablerTimerGameOver = 0.7f;
 
-    private void enableGameOverGOs() 
+    private void enableGameOverGOs()
     {
-        if(panelGameOver.activeSelf) 
+        if (panelGameOver.activeSelf)
         {
             gameOverGOs[0].SetActive(true);
 
@@ -225,7 +225,7 @@ public class FTA_GameManager : MonoBehaviour
             {
                 enablerTimerGameOver -= Time.unscaledDeltaTime;
             }
-            else 
+            else
             {
                 gameOverGOs[1].SetActive(true);
             }
@@ -235,17 +235,17 @@ public class FTA_GameManager : MonoBehaviour
     private void initializePositionsofItems()
     {
 
-        if (selectedItems == items) 
+        if (selectedItems == items)
         {
             positions = new Vector3[]{
             selectedItems[0].transform.localPosition, selectedItems[1].transform.localPosition, selectedItems[2].transform.localPosition, selectedItems[3].transform.localPosition, selectedItems[4].transform.localPosition};
         }
-        else if (selectedItems == items_3_4) 
+        else if (selectedItems == items_3_4)
         {
             positions = new Vector3[]{
             selectedItems[0].transform.localPosition, selectedItems[1].transform.localPosition, selectedItems[2].transform.localPosition, selectedItems[3].transform.localPosition, selectedItems[4].transform.localPosition, selectedItems[5].transform.localPosition};
         }
-        else if (selectedItems == items_5) 
+        else if (selectedItems == items_5)
         {
             positions = new Vector3[]{
             selectedItems[0].transform.localPosition, selectedItems[1].transform.localPosition, selectedItems[2].transform.localPosition, selectedItems[3].transform.localPosition, selectedItems[4].transform.localPosition, selectedItems[5].transform.localPosition, selectedItems[6].transform.localPosition};
@@ -343,7 +343,7 @@ public class FTA_GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("FTA_Game");
     }
-    
+
     public Image shadow;
     public Vector2 endPosition;
 
@@ -351,9 +351,9 @@ public class FTA_GameManager : MonoBehaviour
     {
         Image clickedAnimalImg = clickedAnimal.GetComponent<Image>();
 
-        for (int i = 0; i < selectedShadowImgs.Length; i++) 
+        for (int i = 0; i < selectedShadowImgs.Length; i++)
         {
-            if (clickedAnimalImg.sprite == selectedShadowImgs[i].sprite) 
+            if (clickedAnimalImg.sprite == selectedShadowImgs[i].sprite)
             {
                 shadow = selectedShadowImgs[i];
             }
@@ -361,16 +361,16 @@ public class FTA_GameManager : MonoBehaviour
 
         audioSrc.Stop();
 
-        if (shadow != null && clickedAnimalImg.sprite == shadow.sprite) 
+        if (shadow != null && clickedAnimalImg.sprite == shadow.sprite)
         {
             isCorrect = true;
-            try {audioManager.PlaySFX(audioManager.correctAnswer);} catch{}
+            try { audioManager.PlaySFX(audioManager.correctAnswer); } catch { }
 
-            for (int i = 0; i < animalSnds.Length; i++) 
+            for (int i = 0; i < animalSnds.Length; i++)
             {
                 string animalsnd = animalSnds[i].name.Substring(0, 1).ToUpper() + animalSnds[i].name.Substring(1, animalSnds[i].name.Length - 2);
 
-                if (animalsnd == clickedAnimalImg.sprite.name) 
+                if (animalsnd == clickedAnimalImg.sprite.name)
                 {
                     audioSrc.PlayOneShot(animalSnds[i]);
                 }
@@ -378,63 +378,63 @@ public class FTA_GameManager : MonoBehaviour
 
             if (shadow == selectedShadowImgs[0])
             {
-                if (selectedShadowImgs == shadowImgs) 
+                if (selectedShadowImgs == shadowImgs)
                 {
                     endPosition = new Vector2(16, 256);
                 }
-                else if (selectedShadowImgs == shadowImgs_3_4) 
+                else if (selectedShadowImgs == shadowImgs_3_4)
                 {
                     endPosition = new Vector2(-36, 253);
                 }
-                else if (selectedShadowImgs == shadowImgs_5) 
+                else if (selectedShadowImgs == shadowImgs_5)
                 {
                     endPosition = new Vector2(-65, 253);
                 }
             }
             else if (shadow == selectedShadowImgs[1])
             {
-                if (selectedShadowImgs == shadowImgs) 
+                if (selectedShadowImgs == shadowImgs)
                 {
                     endPosition = new Vector2(272, 256);
                 }
-                else if (selectedShadowImgs == shadowImgs_3_4) 
+                else if (selectedShadowImgs == shadowImgs_3_4)
                 {
                     endPosition = new Vector2(152, 253);
                 }
-                else if (selectedShadowImgs == shadowImgs_5) 
+                else if (selectedShadowImgs == shadowImgs_5)
                 {
-                    endPosition = new Vector2(93, 253);    
+                    endPosition = new Vector2(93, 253);
                 }
             }
             else if (shadow == selectedShadowImgs[2])
             {
-                if (selectedShadowImgs == shadowImgs) 
+                if (selectedShadowImgs == shadowImgs)
                 {
                     endPosition = new Vector2(527, 256);
                 }
-                else if (selectedShadowImgs == shadowImgs_3_4) 
+                else if (selectedShadowImgs == shadowImgs_3_4)
                 {
                     endPosition = new Vector2(348, 253);
                 }
-                else if (selectedShadowImgs == shadowImgs_5) 
+                else if (selectedShadowImgs == shadowImgs_5)
                 {
                     endPosition = new Vector2(252, 253);
                 }
             }
             else if (shadow == selectedShadowImgs[3])
             {
-                if (selectedShadowImgs == shadowImgs_3_4) 
+                if (selectedShadowImgs == shadowImgs_3_4)
                 {
                     endPosition = new Vector2(529, 253);
                 }
-                else if (selectedShadowImgs == shadowImgs_5) 
+                else if (selectedShadowImgs == shadowImgs_5)
                 {
                     endPosition = new Vector2(414, 253);
                 }
             }
             else if (shadow == selectedShadowImgs[4])
             {
-                if (selectedShadowImgs == shadowImgs_5) 
+                if (selectedShadowImgs == shadowImgs_5)
                 {
                     endPosition = new Vector2(579, 253);
                 }
@@ -448,25 +448,25 @@ public class FTA_GameManager : MonoBehaviour
                 health.transform.GetChild(countHealth - 1).GetComponent<Image>().color = Color.black;
                 countHealth--;
 
-                if (countHealth <= 0) 
+                if (countHealth <= 0)
                 {
                     GameOver();
-                    try {audioManager.PlaySFX(audioManager.loseLevel);
-                    audioManager.musicSource.Stop();} catch{}
+                    try { audioManager.PlaySFX(audioManager.loseLevel);
+                        audioManager.musicSource.Stop(); } catch { }
                 }
-                else 
-                {   
+                else
+                {
                     DisplayWrongAnswerEffect();
-                    
-                    try {audioManager.PlaySFX(audioManager.wrongAnswer);} catch{}
-                    
+
+                    try { audioManager.PlaySFX(audioManager.wrongAnswer); } catch { }
+
                 }
             }
         }
         checkIfAllFound();
     }
 
-    
+
     public void checkIfAllFound()
     {
         Color enableCorrectAnswer = new Color(1.0f, 1.0f, 1.0f);
@@ -507,6 +507,7 @@ public class FTA_GameManager : MonoBehaviour
     }
     private void GameWin()
     {
+        BadgeLogic();
         AnimaltoUnlock();
         try
         {
@@ -557,7 +558,7 @@ public class FTA_GameManager : MonoBehaviour
         audioManager.musicSource.Stop();
     }
 
-    public void closeBGPanel() 
+    public void closeBGPanel()
     {
         bgPanelCanvas.SetActive(false);
     }
@@ -570,7 +571,7 @@ public class FTA_GameManager : MonoBehaviour
     {
         ResumeGame();
         SceneManager.LoadScene("FTA_lvlSelect");
-        try 
+        try
         {
             audioManager.musicSource.Stop();
             audioManager.sfxSource.Stop();
@@ -634,11 +635,11 @@ public class FTA_GameManager : MonoBehaviour
     public void confirmQuitNoButtonFunction()
     {
 
-        GameObject[] canvasToEnable = {settingsMenuObject, panelGameOver, panelFinish};
+        GameObject[] canvasToEnable = { settingsMenuObject, panelGameOver, panelFinish };
         guidePopUpAnimation.hideGuidePopUp(confirmQuitCode, confirmQuitPos, QuitGuideConfirm, canvasToEnable);
     }
 
-    
+
     public void GameOverPlayAgain()
     {
         ResumeGame();
@@ -752,7 +753,7 @@ public class FTA_GameManager : MonoBehaviour
 
     public TMP_Text LevelCompletedText;
     public Button NextLevelBtn;
-    
+
 
     private void CheckLevel()
     {
@@ -772,13 +773,13 @@ public class FTA_GameManager : MonoBehaviour
                 selectedGuideShadowCont = guideShadowCont[0];
                 triviaContainers[0].SetActive(true);
 
-                for (int i = 0 ; i < selectedItems.Length; i++) 
+                for (int i = 0; i < selectedItems.Length; i++)
                 {
                     selectedItems[i].GetComponent<Image>().sprite = shadowSpritesLvl1[i];
                     selectedItems[i].transform.localPosition = AnimalPositionLvl1[i];
                 }
 
-                for (int i = 0; i < CoverBackground.Length; i++) 
+                for (int i = 0; i < CoverBackground.Length; i++)
                 {
                     CoverBackground[i].sprite = CoverBackgroundSpritesLvl1[i];
                     CoverBackground[i].transform.localPosition = CoverBgPositionForLevel1[i];
@@ -797,13 +798,13 @@ public class FTA_GameManager : MonoBehaviour
                 selectedGuideShadowCont = guideShadowCont[0];
                 triviaContainers[0].SetActive(true);
 
-                for (int i = 0 ; i < selectedItems.Length; i++) 
+                for (int i = 0; i < selectedItems.Length; i++)
                 {
                     selectedItems[i].GetComponent<Image>().sprite = shadowSpritesLvl2[i];
                     selectedItems[i].transform.localPosition = AnimalPositionLvl2[i];
                 }
 
-                for (int i = 0; i < CoverBackground.Length; i++) 
+                for (int i = 0; i < CoverBackground.Length; i++)
                 {
                     CoverBackground[i].sprite = CoverBackgroundSpritesLvl2[i];
                     CoverBackground[i].transform.localPosition = CoverBgPositionForLevel2[i];
@@ -823,13 +824,13 @@ public class FTA_GameManager : MonoBehaviour
                 selectedGuideShadowCont = guideShadowCont[1];
                 triviaContainers[1].SetActive(true);
 
-                for (int i = 0 ; i < selectedItems.Length; i++) 
+                for (int i = 0; i < selectedItems.Length; i++)
                 {
                     selectedItems[i].GetComponent<Image>().sprite = shadowSpritesLvl3[i];
                     selectedItems[i].transform.localPosition = AnimalPositionLvl3[i];
                 }
 
-                for (int i = 0; i < CoverBackground.Length; i++) 
+                for (int i = 0; i < CoverBackground.Length; i++)
                 {
                     CoverBackground[i].sprite = CoverBackgroundSpritesLvl3[i];
                     CoverBackground[i].transform.localPosition = CoverBgPositionForLevel3[i];
@@ -849,13 +850,13 @@ public class FTA_GameManager : MonoBehaviour
                 selectedGuideShadowCont = guideShadowCont[1];
                 triviaContainers[1].SetActive(true);
 
-                for (int i = 0 ; i < selectedItems.Length; i++) 
+                for (int i = 0; i < selectedItems.Length; i++)
                 {
                     selectedItems[i].GetComponent<Image>().sprite = shadowSpritesLvl4[i];
                     selectedItems[i].transform.localPosition = AnimalPositionLvl4[i];
                 }
 
-                for (int i = 0; i < CoverBackground.Length; i++) 
+                for (int i = 0; i < CoverBackground.Length; i++)
                 {
                     CoverBackground[i].sprite = CoverBackgroundSpritesLvl4[i];
                     CoverBackground[i].transform.localPosition = CoverBgPositionForLevel4[i];
@@ -876,13 +877,13 @@ public class FTA_GameManager : MonoBehaviour
                 selectedGuideShadowCont = guideShadowCont[2];
                 triviaContainers[2].SetActive(true);
 
-                for (int i = 0 ; i < selectedItems.Length; i++) 
+                for (int i = 0; i < selectedItems.Length; i++)
                 {
                     selectedItems[i].GetComponent<Image>().sprite = shadowSpritesLvl5[i];
                     selectedItems[i].transform.localPosition = AnimalPositionLvl5[i];
                 }
 
-                for (int i = 0; i < CoverBackground.Length; i++) 
+                for (int i = 0; i < CoverBackground.Length; i++)
                 {
                     CoverBackground[i].sprite = CoverBackgroundSpritesLvl5[i];
                     CoverBackground[i].transform.localPosition = CoverBgPositionForLevel5[i];
@@ -927,7 +928,7 @@ public class FTA_GameManager : MonoBehaviour
     {
         Image[] animalImgs = new Image[selectedItems.Length];
 
-        for (int i = 0; i < selectedItems.Length; i++) 
+        for (int i = 0; i < selectedItems.Length; i++)
         {
             animalImgs[i] = selectedItems[i].GetComponent<Image>();
         }
@@ -1068,81 +1069,81 @@ public class FTA_GameManager : MonoBehaviour
 
     void checkStar()
     {
-        
+
         SaveFTAGame = SaveManager.Load();
 
-        int starsToAdd = countHealth > currentStar? countHealth : currentStar; 
+        int starsToAdd = countHealth > currentStar ? countHealth : currentStar;
         if (countHealth == 3)
         {
             Debug.Log("Level: " + SelectedLevel);
             starHolder.sprite = stars[2];
             // if (currentStar <= countHealth)
             // {
-                PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel, 1);
-                switch (SelectedLevel)
-                {
-                    case "1":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
-                        SaveFTAGame.isLeopardUnlock = true;
-                        levelbordercompletedholder.sprite = levelborderimages[0];
-                        break;
-                    case "2":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
-                        SaveFTAGame.isPigeonUnlock = true;
-                        levelbordercompletedholder.sprite = levelborderimages[1];
-                        Debug.Log("Case 2");
-                        break;
-                    case "3":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
-                        SaveFTAGame.isPiranhaUnlock = true;
-                        levelbordercompletedholder.sprite = levelborderimages[2];
-                        break;
-                    case "4":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
-                        SaveFTAGame.isBearUnlock = true;
-                        levelbordercompletedholder.sprite = levelborderimages[3];
-                        break;
-                    case "5":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
-                        SaveFTAGame.isOwlUnlock = true;
-                        twostarstounlock.enabled = false;
-                        levelbordercompletedholder.enabled = false;
-                        break;
-                    }
-                //}
-        
+            PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel, 1);
+            switch (SelectedLevel)
+            {
+                case "1":
+                    PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
+                    SaveFTAGame.isLeopardUnlock = true;
+                    levelbordercompletedholder.sprite = levelborderimages[0];
+                    break;
+                case "2":
+                    PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
+                    SaveFTAGame.isPigeonUnlock = true;
+                    levelbordercompletedholder.sprite = levelborderimages[1];
+                    Debug.Log("Case 2");
+                    break;
+                case "3":
+                    PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
+                    SaveFTAGame.isPiranhaUnlock = true;
+                    levelbordercompletedholder.sprite = levelborderimages[2];
+                    break;
+                case "4":
+                    PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
+                    SaveFTAGame.isBearUnlock = true;
+                    levelbordercompletedholder.sprite = levelborderimages[3];
+                    break;
+                case "5":
+                    PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
+                    SaveFTAGame.isOwlUnlock = true;
+                    twostarstounlock.enabled = false;
+                    levelbordercompletedholder.enabled = false;
+                    break;
+            }
+            //}
+
         }
         else if (countHealth == 2)
         {
             starHolder.sprite = stars[1];
             // if (currentStar <= countHealth)
             // {
-                PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel, 1);
-                switch (SelectedLevel)
-                {
-                    case "1":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
-                        levelbordercompletedholder.sprite = levelborderimages[0];
-                        break;
-                    case "2":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
-                        levelbordercompletedholder.sprite = levelborderimages[1];
-                        break;
-                    case "3":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
-                        levelbordercompletedholder.sprite = levelborderimages[2];
-                        break;
-                    case "4":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
-                        levelbordercompletedholder.sprite = levelborderimages[3];
-                        break;
-                    case "5":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
-                        twostarstounlock.enabled = false;
-                        levelbordercompletedholder.enabled = false;
-                        break;
-            //     }
-             }
+            PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel, 1);
+            switch (SelectedLevel)
+            {
+                case "1":
+                    PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
+                    levelbordercompletedholder.sprite = levelborderimages[0];
+                    break;
+                case "2":
+                    PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
+                    levelbordercompletedholder.sprite = levelborderimages[1];
+                    break;
+                case "3":
+                    PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
+                    levelbordercompletedholder.sprite = levelborderimages[2];
+                    break;
+                case "4":
+                    PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
+                    levelbordercompletedholder.sprite = levelborderimages[3];
+                    break;
+                case "5":
+                    PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
+                    twostarstounlock.enabled = false;
+                    levelbordercompletedholder.enabled = false;
+                    break;
+                    //     }
+            }
 
         }
         else if (countHealth == 1)
@@ -1150,31 +1151,31 @@ public class FTA_GameManager : MonoBehaviour
             starHolder.sprite = stars[0];
             // if (currentStar >= countHealth)
             // {
-                switch (SelectedLevel)
-                {
-                    case "1":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
-                        levelbordercompletedholder.sprite = levelborderimages[0];
-                        break;
-                    case "2":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
-                        levelbordercompletedholder.sprite = levelborderimages[1];
-                        break;
-                    case "3":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
-                        levelbordercompletedholder.sprite = levelborderimages[2];
-                        break;
-                    case "4":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
-                        levelbordercompletedholder.sprite = levelborderimages[3];
-                        break;
-                    case "5":
-                        PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
-                        twostarstounlock.enabled = false;
-                        levelbordercompletedholder.enabled = false;
-                        break;
-            //     }
-             }
+            switch (SelectedLevel)
+            {
+                case "1":
+                    PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
+                    levelbordercompletedholder.sprite = levelborderimages[0];
+                    break;
+                case "2":
+                    PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
+                    levelbordercompletedholder.sprite = levelborderimages[1];
+                    break;
+                case "3":
+                    PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
+                    levelbordercompletedholder.sprite = levelborderimages[2];
+                    break;
+                case "4":
+                    PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
+                    levelbordercompletedholder.sprite = levelborderimages[3];
+                    break;
+                case "5":
+                    PlayerPrefs.SetInt("FTA_Lvl" + SelectedLevel + "StarsCount", starsToAdd);
+                    twostarstounlock.enabled = false;
+                    levelbordercompletedholder.enabled = false;
+                    break;
+                    //     }
+            }
         }
         Debug.Log("Selected LVL: " + SelectedLevel);
         SaveManager.Save(SaveFTAGame);
@@ -1285,12 +1286,12 @@ public class FTA_GameManager : MonoBehaviour
 
     [SerializeField] private GameObject playAgainCanvas;
 
-    public void levelCompletePlayAgain() 
+    public void levelCompletePlayAgain()
     {
         guidePopUpAnimation.showGuidePopUp(confirmPlayAgainPos, playAgainCanvas, panelFinish);
     }
 
-    public void playAgainNo() 
+    public void playAgainNo()
     {
         guidePopUpAnimation.hideGuidePopUp(confirmPlayAgainPos, playAgainCanvas, panelFinish);
     }
@@ -1306,7 +1307,7 @@ public class FTA_GameManager : MonoBehaviour
     {
         guidePopUpAnimation.hideGuidePopUp(confirmARPos, confirmationToARCanvas, panelFinish);
     }
-    
+
     void AnimaltoUnlock()
     {
         switch (SelectedLevel)
@@ -1403,7 +1404,7 @@ public class FTA_GameManager : MonoBehaviour
     {
         TriviaGuide();
         clickAnimalShadow(selectedShadowContTrivia[0].gameObject);
-        
+
         triviaGameCanvas.SetActive(true);
         try
         {
@@ -1421,7 +1422,73 @@ public class FTA_GameManager : MonoBehaviour
     {
         triviaGameCanvas.SetActive(false);
         audioSrc.Stop();
-        GameWin();
+
+        if (countHealth == 3)
+        {
+            switch (SelectedLevel)
+            {
+                case "1":
+                    if (!SaveFTAGame.level1BadgeFTA)
+                    {
+                        ShowBadgeAnimal();
+                        SaveFTAGame.level1BadgeFTA = true;
+                    }
+                    else
+                    {
+                        GameWin();
+                    }
+                    break;
+                case "2":
+                    if (!SaveFTAGame.level2BadgeFTA)
+                    {
+                        ShowBadgeAnimal();
+                        SaveFTAGame.level2BadgeFTA = true;
+                    }
+                    else
+                    {
+                        GameWin();
+                    }
+                    break;
+                case "3":
+                    if (!SaveFTAGame.level3BadgeFTA)
+                    {
+                        ShowBadgeAnimal();
+                        SaveFTAGame.level3BadgeFTA = true;
+                    }
+                    else
+                    {
+                        GameWin();
+                    }
+                    break;
+                case "4":
+                    if (!SaveFTAGame.level4BadgeFTA)
+                    {
+                        ShowBadgeAnimal();
+                        SaveFTAGame.level4BadgeFTA = true;
+                    }
+                    else
+                    {
+                        GameWin();
+                    }
+                    break;
+                case "5":
+                    if (!SaveFTAGame.level5BadgeFTA)
+                    {
+                        ShowBadgeAnimal();
+                        SaveFTAGame.level5BadgeFTA = true;
+                    }
+                    else
+                    {
+                        GameWin();
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            GameWin();
+        }
+        SaveManager.Save(SaveFTAGame);
     }
 
     public void clickAnimalShadow(GameObject clickedAnimal)
@@ -1431,13 +1498,13 @@ public class FTA_GameManager : MonoBehaviour
             shadowImgs.color = Color.black;
         }
 
-        for (int i = 0; i < animalSnds.Length; i++) 
+        for (int i = 0; i < animalSnds.Length; i++)
         {
             string animalsnd = animalSnds[i].name.Substring(0, 1).ToUpper() + animalSnds[i].name.Substring(1, animalSnds[i].name.Length - 2);
 
-            if (animalsnd == clickedAnimal.GetComponent<Image>().sprite.name) 
+            if (animalsnd == clickedAnimal.GetComponent<Image>().sprite.name)
             {
-                if (!triviaFirstClicked) 
+                if (!triviaFirstClicked)
                 {
                     audioSrc.Stop();
                     audioSrc.PlayOneShot(animalSnds[i]);
@@ -1465,17 +1532,17 @@ public class FTA_GameManager : MonoBehaviour
     void ShowArrowTriviaGuide(string clickedAnimalImg)
     {
 
-        foreach (var arrow in Arrows_1_2) 
+        foreach (var arrow in Arrows_1_2)
         {
             arrow.SetActive(true);
         }
 
-        foreach (var arrow in Arrows_3_4) 
+        foreach (var arrow in Arrows_3_4)
         {
             arrow.SetActive(true);
         }
 
-        foreach (var arrow in Arrows_5) 
+        foreach (var arrow in Arrows_5)
         {
             arrow.SetActive(true);
         }
@@ -1817,6 +1884,41 @@ public class FTA_GameManager : MonoBehaviour
                         break;
                 }
                 break;
+        }
+    }
+    public GameObject BadgeUnlock;
+    public GameObject BadgeEnable_Disable;
+    public Image BadgeChangeSprte;
+    public Sprite[] BadgeSprite;
+    void ShowBadgeAnimal()
+    {
+        BadgeUnlock.SetActive(true);
+        try
+        {
+            audioManager.PlaySFX(audioManager.badgeSFX);
+        }
+        catch 
+        {
+
+        }
+    }
+    public void HideBadgeAnimal()
+    {
+        BadgeUnlock.SetActive(false);
+        GameWin();
+    }
+    public void BadgeLogic()
+    {
+        SaveFTAGame = SaveManager.Load();
+        if (countHealth == 3 || SaveFTAGame.level1BadgeFTA || SaveFTAGame.level2BadgeFTA || SaveFTAGame.level3BadgeFTA || SaveFTAGame.level4BadgeFTA || SaveFTAGame.level5BadgeFTA)
+        {
+            BadgeEnable_Disable.SetActive(true);
+            BadgeChangeSprte.sprite = BadgeSprite[1];
+        }
+        else if (countHealth == 2 || countHealth == 1 || currentStar == 0)
+        {
+            BadgeEnable_Disable.SetActive(false);
+            BadgeChangeSprte.sprite = BadgeSprite[0];
         }
     }
 }

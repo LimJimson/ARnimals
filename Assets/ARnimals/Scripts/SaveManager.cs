@@ -85,6 +85,13 @@ public static class SaveManager
             existingSO.isBearUnlock = so.isBearUnlock;
             existingSO.isOwlUnlock = so.isOwlUnlock;
 
+            //FTA Unlock Badge
+            existingSO.level1BadgeFTA = so.level1BadgeFTA;
+            existingSO.level2BadgeFTA = so.level2BadgeFTA;
+            existingSO.level3BadgeFTA = so.level3BadgeFTA;
+            existingSO.level4BadgeFTA = so.level4BadgeFTA;
+            existingSO.level5BadgeFTA = so.level5BadgeFTA;
+
             //CTF_HighScores
             existingSO.ctf_HighScoresLvl1 = so.ctf_HighScoresLvl1;
             existingSO.ctf_HighScoresLvl2 = so.ctf_HighScoresLvl2;

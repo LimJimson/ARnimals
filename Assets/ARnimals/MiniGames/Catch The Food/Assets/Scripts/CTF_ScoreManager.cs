@@ -5,7 +5,7 @@ using TMPro;
 public class CTF_ScoreManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText;
-    private int score = 0;
+    [SerializeField]private int score = 0;
 
     private void Start()
     {

@@ -67,6 +67,9 @@ public class CTF_LevelManager : MonoBehaviour
 
     [SerializeField] private VerticalLayoutGroup buttonsLayout;
 
+    [SerializeField] private Image[] badges;
+    [SerializeField] private Sprite[] badgeSprite;
+
     private void Start()
     {		
         so = SaveManager.Load();
@@ -157,8 +160,10 @@ public class CTF_LevelManager : MonoBehaviour
         lvlToUnlockImg.gameObject.SetActive(true);
         allLevelsUnlockGO.SetActive(false);
         highScoreBtn.SetActive(false);
-		
-		Debug.Log("Level: " + selectedLevel + "\n" + "currentStar: " + currentStar);
+        badges[0].gameObject.SetActive(false);
+        badges[1].sprite = badgeSprite[0];
+
+        Debug.Log("Level: " + selectedLevel + "\n" + "currentStar: " + currentStar);
 		
 		switch(currentStar) 
 		{
@@ -181,7 +186,9 @@ public class CTF_LevelManager : MonoBehaviour
 				checkGameObject.SetActive(true);
 				tryAnimalBtn.interactable = true;
                 tryAnimalTxt.SetActive(true);
-				break;
+                badges[0].gameObject.SetActive(true);
+                badges[1].sprite = badgeSprite[1];
+                break;
 		}
     }
 
@@ -381,5 +388,19 @@ public class CTF_LevelManager : MonoBehaviour
     {
         highScoreCanvas.SetActive(false);
         playConfirmGameObject.SetActive(true);
+    }
+
+    [SerializeField] private GameObject badgeUnlock;
+
+    public void showBadge() 
+    {
+        playConfirmGameObject.SetActive(false);
+        badgeUnlock.SetActive(true);
+    }
+
+    public void hideBadge() 
+    {
+        playConfirmGameObject.SetActive(true);
+        badgeUnlock.SetActive(false);
     }
 }

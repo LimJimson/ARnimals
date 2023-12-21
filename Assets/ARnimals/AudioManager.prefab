@@ -69,6 +69,7 @@ MonoBehaviour:
   CTF_Countdown: {fileID: 8300000, guid: 967bf4e58b8cc84418c63a6ea41e61bb, type: 3}
   TriviaShowEffect: {fileID: 8300000, guid: 52ca64ada5ef58c469b56912d0a627c4, type: 3}
   FTA_Countdown: {fileID: 8300000, guid: cb4b1c2403d69bd479d08e31343393bc, type: 3}
+  badgeSFX: {fileID: 8300000, guid: 55522eb4915d3a34da8a488151555f19, type: 3}
   GuideSelector:
   - {fileID: 8300000, guid: 3c52041a5659b0f4aa02c5501c4784b4, type: 3}
   - {fileID: 8300000, guid: eac2109a8814fd144b8f73d1b1c6618e, type: 3}

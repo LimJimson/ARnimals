@@ -2508,8 +2508,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GTS_Gallery, Assembly-CSharp
+      - m_Target: {fileID: 1630385232}
+        m_TargetAssemblyTypeName: FTA_Gallery, Assembly-CSharp
         m_MethodName: showImgGallery
         m_Mode: 1
         m_Arguments:

@@ -1675,7 +1675,7 @@ public class GTS_GameManager : MonoBehaviour
 
         // Save the screenshot to Gallery/Photos
         string name = string.Format("{0}_Capture_{1}.png", Application.productName, System.DateTime.Now.ToString("yyyy -MM-dd_HH-mm-ss"));
-        Debug.Log("Permission result: " + NativeGallery.SaveImageToGallery(ss, Application.productName + " GTSCaptures", name));
+        Debug.Log("Permission result: " + NativeGallery.SaveImageToGallery(ss, Application.productName + "GTSCaptures", name));
 
         foreach (GameObject items in GameObjectsCameraMode)
         {

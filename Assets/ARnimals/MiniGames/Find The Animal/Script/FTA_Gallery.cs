@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GTS_Gallery : MonoBehaviour
+public class FTA_Gallery : MonoBehaviour
 {
     [SerializeField]
     GameObject Image;
@@ -27,34 +27,35 @@ public class GTS_Gallery : MonoBehaviour
         errorTxtNoImg.gameObject.SetActive(false);
         errorTxtDelImg.gameObject.SetActive(false);
 
-        getPicture();   
+        getPicture();
     }
 
     public void getPicture()
     {
         try
         {
-#if UNITY_ANDROID && !UNITY_EDITOR
-            files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + " GTSCaptures", "*.png");
-            if (files.Length > 0)
-            {
-                imgCounter.gameObject.SetActive(true);
-                Image.gameObject.SetActive(true);  
-                fileNameImgTxt.gameObject.SetActive(true);
-                GetPictureAndShowIt();
-            }
-            else if (files.Length == 0)
-            {
-                imgCounter.gameObject.SetActive(false);
-                Image.gameObject.SetActive(false);
-                fileNameImgTxt.gameObject.SetActive(false);
-            }
-#endif
+            #if UNITY_ANDROID && !UNITY_EDITOR
+                                files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + "FTACaptures", "*.png");
+                                if (files.Length > 0)
+                                {
+                                    imgCounter.gameObject.SetActive(true);
+                                    Image.gameObject.SetActive(true);  
+                                    fileNameImgTxt.gameObject.SetActive(true);
+                                    GetPictureAndShowIt();
+                                }
+                                else if (files.Length == 0)
+                                {
+                                    imgCounter.gameObject.SetActive(false);
+                                    Image.gameObject.SetActive(false);
+                                    fileNameImgTxt.gameObject.SetActive(false);
+                                }
+            #endif
         }
         catch
         {
-            Debug.Log("No Folder Found! GTSCaptures");
+            Debug.Log("No Folder Found! FTACaptures");
         }
+
 
     }
     string ImgFileName;
@@ -85,14 +86,14 @@ public class GTS_Gallery : MonoBehaviour
 
     public void DeleteImage()
     {
-        string galleryPath = "/storage/emulated/0/DCIM/" + Application.productName + " GTSCaptures/";
+        string galleryPath = "/storage/emulated/0/DCIM/" + Application.productName + "FTACaptures/";
         if (files.Length > 0)
         {
             StartCoroutine(showTextDelImg());
             string pathToFile = files[whichScreenShotIsShown];
             if (File.Exists(pathToFile))
                 File.Delete(pathToFile);
-            files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + " GTSCaptures", "*.png");
+            files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + "FTACaptures", "*.png");
             if (files.Length > 0)
                 NextPicture();
             else

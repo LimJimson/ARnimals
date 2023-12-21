@@ -991,4 +991,121 @@ public class CTF_GameManager : MonoBehaviour
         audioManager.playLvlCompletedSFX();
         levelCompleteCanvas.SetActive(true);
     }
+
+    public RawImage cameraFeedImage;
+
+    private WebCamTexture frontCameraTexture;
+
+    public GameObject[] GameObjectsCameraMode;
+
+    public Button snapshotBtn;
+    public GameObject saveToGalleryGO;
+
+    public GameObject cameraModeCanvas;
+    public GameObject levelcompleteUI;
+
+    public TMP_Text playerDesc;
+
+    public Image starSnapshot;
+
+    public void openSnapshotCamera()
+    {
+
+        playerDesc.text = "<color=yellow>" + existingSo.name + "</color> HAS COMPLETED LEVEL <color=yellow>" + selectedLevel + "</color>";
+
+        if ( newStarsCount == 3)
+        {
+            starSnapshot.sprite = stars[3];
+        }
+        else if (newStarsCount == 2)
+        {
+            starSnapshot.sprite = stars[2];
+        }
+        else
+        {
+            starSnapshot.sprite = stars[1];
+        }
+
+        // Find the front camera device index
+        int frontCameraIndex = -1;
+        for (int i = 0; i < WebCamTexture.devices.Length; i++)
+        {
+            if (WebCamTexture.devices[i].isFrontFacing)
+            {
+                frontCameraIndex = i;
+                break;
+            }
+        }
+
+        // Use the front camera if available
+        if (frontCameraIndex != -1)
+        {
+            frontCameraTexture = new WebCamTexture(WebCamTexture.devices[frontCameraIndex].name);
+            cameraFeedImage.texture = frontCameraTexture;
+            frontCameraTexture.Play();
+        }
+        else
+        {
+            Debug.LogError("Front camera not found.");
+        }
+
+        levelcompleteUI.SetActive(false);
+        cameraModeCanvas.SetActive(true);
+    }
+
+
+    public void TakeAShot()
+    {
+        try
+        {
+            StopAllCoroutines();
+            StartCoroutine(TakeScreenshotAndSave());
+        }
+        catch
+        {
+
+        }
+    }
+
+    private IEnumerator TakeScreenshotAndSave()
+    {
+        foreach (GameObject items in GameObjectsCameraMode)
+        {
+            items.SetActive(false);
+        }
+        snapshotBtn.interactable = false;
+        yield return new WaitForEndOfFrame();
+
+        Texture2D ss = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        ss.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+        ss.Apply();
+
+        // Save the screenshot to Gallery/Photos
+        string name = string.Format("{0}_Capture_{1}.png", Application.productName, System.DateTime.Now.ToString("yyyy -MM-dd_HH-mm-ss"));
+        Debug.Log("Permission result: " + NativeGallery.SaveImageToGallery(ss, Application.productName + "CTFCaptures", name));
+        foreach (GameObject items in GameObjectsCameraMode)
+        {
+            items.SetActive(true);
+        }
+        snapshotBtn.interactable = true;
+        saveToGalleryGO.SetActive(true);
+
+        yield return new WaitForSecondsRealtime(2f);
+        saveToGalleryGO.SetActive(false);
+
+
+        StopAllCoroutines();
+    }
+
+    public void StopCamera()
+    {
+        // Stop the camera feed and release resources
+        if (frontCameraTexture != null)
+        {
+            levelcompleteUI.SetActive(true);
+            cameraModeCanvas.SetActive(false);
+            frontCameraTexture.Stop();
+            frontCameraTexture = null;
+        }
+    }
 }

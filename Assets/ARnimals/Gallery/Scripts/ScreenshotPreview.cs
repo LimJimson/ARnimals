@@ -30,7 +30,10 @@ public class ScreenshotPreview : MonoBehaviour {
 
 	public void getPicture()
 	{
-        #if UNITY_ANDROID && !UNITY_EDITOR
+        try
+        {
+
+#if UNITY_ANDROID && !UNITY_EDITOR
                     files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + " Captures", "*.png");//Directory.GetFiles(Application.persistentDataPath + "/", "*.png");
                     if (files.Length > 0)
                     {
@@ -45,7 +48,13 @@ public class ScreenshotPreview : MonoBehaviour {
                         Image.gameObject.SetActive(false);
                         fileNameImgTxt.gameObject.SetActive(false);
                     }
-        #endif
+#endif
+        }
+        catch
+        {
+            Debug.Log("No Folder Found! Arnimals_Captures");
+        }
+
 
     }
     string ImgFileName;

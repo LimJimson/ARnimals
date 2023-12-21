@@ -35,7 +35,7 @@ public class CTF_Gallery : MonoBehaviour
         try
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
-                    files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + "CTFCaptures", "*.png");
+                    files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + "Captures/CatchTheFood", "*.png");
                     if (files.Length > 0)
                     {
                         imgCounter.gameObject.SetActive(true);
@@ -86,14 +86,14 @@ public class CTF_Gallery : MonoBehaviour
 
     public void DeleteImage()
     {
-        string galleryPath = "/storage/emulated/0/DCIM/" + Application.productName + "CTFCaptures/";
+        string galleryPath = "/storage/emulated/0/DCIM/" + Application.productName + "Captures/CatchTheFood/";
         if (files.Length > 0)
         {
             StartCoroutine(showTextDelImg());
             string pathToFile = files[whichScreenShotIsShown];
             if (File.Exists(pathToFile))
                 File.Delete(pathToFile);
-            files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + "CTFCaptures", "*.png");
+            files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + "Captures/CatchTheFood", "*.png");
             if (files.Length > 0)
                 NextPicture();
             else

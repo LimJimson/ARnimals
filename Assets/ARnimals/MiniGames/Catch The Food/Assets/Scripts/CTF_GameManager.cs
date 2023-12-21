@@ -1082,7 +1082,7 @@ public class CTF_GameManager : MonoBehaviour
 
         // Save the screenshot to Gallery/Photos
         string name = string.Format("{0}_Capture_{1}.png", Application.productName, System.DateTime.Now.ToString("yyyy -MM-dd_HH-mm-ss"));
-        Debug.Log("Permission result: " + NativeGallery.SaveImageToGallery(ss, Application.productName + "CTFCaptures", name));
+        Debug.Log("Permission result: " + NativeGallery.SaveImageToGallery(ss, Application.productName + "Captures/CatchTheFood", name));
         foreach (GameObject items in GameObjectsCameraMode)
         {
             items.SetActive(true);

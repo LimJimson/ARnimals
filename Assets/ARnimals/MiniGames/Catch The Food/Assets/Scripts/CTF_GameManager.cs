@@ -438,7 +438,7 @@ public class CTF_GameManager : MonoBehaviour
             "<color=#00FF95>Did you know?</color> <color=yellow>Pigeons</color> have super vision. They see ultraviolet light, which we can't, helping them navigate and spot hidden things.",
             "<color=#00FF95>Did you know?</color> <color=yellow>Pigeons</color> can recognize all 26 letters of the alphabet. They've even learned to tell them apart and spell simple words in studies!",
             "<color=#00FF95>Did you know?</color> In some cultures, <color=yellow>pigeons</color> are considered symbols of love and peace. They've even been used in weddings to carry love notes.",
-            "<color=#00FF95>Did you know?</color> <color=yellow>Pigeons</color> show love with a cute dance called <color=#FF0046>'pigeon courtship'</color> to their feathered friend."
+            "<color=#00FF95>Did you know?</color> <color=yellow>Pigeons</color> show love with a cute dance called <color=#FFA3E7>'pigeon courtship'</color> to their feathered friend."
         };
         string [] koiTrivia = 
         {
@@ -446,11 +446,11 @@ public class CTF_GameManager : MonoBehaviour
             "<color=#00FF95>Did you know?</color> <color=yellow>Koi fish</color> are like swimming rainbows! They come in lots of colors, including red, orange, yellow, and even sparkly metallic shades.",
             "<color=#00FF95>Did you know?</color> <color=yellow>Koi fish</color> are excellent swimmers and can jump out of the water to catch bugs and nibble on leaves.",
             "<color=#00FF95>Did you know?</color> <color=yellow>Koi fish</color> are very peaceful and social. They like to swim together in groups, making them wonderful pond companions.",
-            "<color=#00FF95>Did you know?</color> <color=yellow>Koi fish</color> have a special whisker on their lips called <color=#FF0046>'barbels'</color>. They use them to help sense food in the water."
+            "<color=#00FF95>Did you know?</color> <color=yellow>Koi fish</color> have a special whisker on their lips called <color=#FFA3E7>'barbels'</color>. They use them to help sense food in the water."
         };
         string [] camelTrivia = 
         {
-            "<color=#00FF95>Did you know?</color> <color=yellow>Camels</color> are often called the <color=#FF0046>'ships of the desert'</color> because they're great at carrying heavy loads, just like a ship carries cargo on the sea.",
+            "<color=#00FF95>Did you know?</color> <color=yellow>Camels</color> are often called the <color=#FFA3E7>'ships of the desert'</color> because they're great at carrying heavy loads, just like a ship carries cargo on the sea.",
             "<color=#00FF95>Did you know?</color> <color=yellow>Camels</color> have humps, not filled with water, but with fat that provides energy when they can't find food.",
             "<color=#00FF95>Did you know?</color> <color=yellow>Camels</color> make funny noises, like grunts and moans, to communicate with each other. It's their way of talking!",
             "<color=#00FF95>Did you know?</color> <color=yellow>Camels</color> can close their nostrils during sandstorms to protect themselves from the blowing sand.",
@@ -462,7 +462,7 @@ public class CTF_GameManager : MonoBehaviour
             "<color=#00FF95>Did you know?</color> Some <color=yellow>crabs</color> are amazing architects, crafting intricate underwater homes from sand, shells, and more.",
             "<color=#00FF95>Did you know?</color> Some <color=yellow>Crabs</color> wear tiny hats! Well, not real hats, but they put small things like shells or sponges on their heads to hide from predators.",
             "<color=#00FF95>Did you know?</color> <color=yellow>Crabs</color> are skilled swimmers and masters at sideways walking, which helps them move swiftly and evade danger.",
-            "<color=#00FF95>Did you know?</color> <color=yellow>Crabs</color> have a special trick called <color=#FF0046>molting</color>. They shed their old shells and grow new, bigger ones when they get too tight."
+            "<color=#00FF95>Did you know?</color> <color=yellow>Crabs</color> have a special trick called <color=#FFA3E7>molting</color>. They shed their old shells and grow new, bigger ones when they get too tight."
         };
 
         int randomIndex = Random.Range(0, 5);
@@ -513,7 +513,6 @@ public class CTF_GameManager : MonoBehaviour
 
                 if (firstBadge)
                 {
-                    audioManager.stopCountdown();
                     audioManager.playBadgeSFX();
                     badgeCanvas.SetActive(true);
                 }
@@ -779,6 +778,7 @@ public class CTF_GameManager : MonoBehaviour
                 nextLevelBtn.gameObject.SetActive(false);
                 checkImgForLvlToUnlock.SetActive(false);
                 animalToUnlockName.text = "Duck";
+                badges[0].transform.localPosition = new Vector3(-10f, -310f, 0f);
                 break;
         }
 

@@ -66,8 +66,15 @@ public class SaveObject
     public bool isBearUnlock = false;
     public bool isOwlUnlock = false;
 
+    //FTA Unlock Badge
+    public bool level1BadgeFTA = false;
+    public bool level2BadgeFTA = false;
+    public bool level3BadgeFTA = false;
+    public bool level4BadgeFTA = false;
+    public bool level5BadgeFTA = false;
+
     //CTF_HighScoreLists
-	[System.Serializable]
+    [System.Serializable]
 	public class CTF_HighScore 
     {
         public int score;

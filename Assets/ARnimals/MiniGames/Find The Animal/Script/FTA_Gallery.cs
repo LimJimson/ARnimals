@@ -34,8 +34,8 @@ public class FTA_Gallery : MonoBehaviour
     {
         try
         {
-            #if UNITY_ANDROID && !UNITY_EDITOR
-                                files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + "FTACaptures", "*.png");
+#if UNITY_ANDROID && !UNITY_EDITOR
+                                files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + "Captures/FindTheAnimal", "*.png");
                                 if (files.Length > 0)
                                 {
                                     imgCounter.gameObject.SetActive(true);
@@ -49,7 +49,7 @@ public class FTA_Gallery : MonoBehaviour
                                     Image.gameObject.SetActive(false);
                                     fileNameImgTxt.gameObject.SetActive(false);
                                 }
-            #endif
+#endif
         }
         catch
         {
@@ -86,14 +86,14 @@ public class FTA_Gallery : MonoBehaviour
 
     public void DeleteImage()
     {
-        string galleryPath = "/storage/emulated/0/DCIM/" + Application.productName + "FTACaptures/";
+        string galleryPath = "/storage/emulated/0/DCIM/" + Application.productName + "Captures/FindTheAnimal/";
         if (files.Length > 0)
         {
             StartCoroutine(showTextDelImg());
             string pathToFile = files[whichScreenShotIsShown];
             if (File.Exists(pathToFile))
                 File.Delete(pathToFile);
-            files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + "FTACaptures", "*.png");
+            files = Directory.GetFiles("/storage/emulated/0/DCIM/" + Application.productName + "Captures/FindTheAnimal", "*.png");
             if (files.Length > 0)
                 NextPicture();
             else

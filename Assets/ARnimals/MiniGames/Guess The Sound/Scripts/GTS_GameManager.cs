@@ -501,11 +501,7 @@ public class GTS_GameManager : MonoBehaviour
 
     void checkStar()
     {
-        try
-        {
-            audioManager.PlaySFX(audioManager.winLevel);
-            audioManager.musicSource.Stop();
-        } catch { }
+
 
 
         if (life == 3)
@@ -598,11 +594,13 @@ public class GTS_GameManager : MonoBehaviour
     void unlockBadgeLogic()
     {
         if(life == 3)
+            playBadgeSound();
             switch (levelSelected)
-            {
+                {
                 case 1:
                     if (!existingSO.level1BadgeGTS)
                     {
+
                         existingSO.level1BadgeGTS = true;
                         badgeUnlockGO.SetActive(true);
                         checkIfBadgeisIsUnlocked();
@@ -643,6 +641,16 @@ public class GTS_GameManager : MonoBehaviour
                     break;
         }
     }
+    void playBadgeSound()
+    {
+        try
+        {
+            audioManager.PlaySFX(audioManager.badgeSFX);
+            audioManager.musicSource.Stop();
+        }
+        catch{}
+    }
+
     public Image badgeImgWinLevel;
     public GameObject badgeWinLevelWood;
     public Sprite[] badgeImgGTSSprites;
@@ -711,7 +719,13 @@ public class GTS_GameManager : MonoBehaviour
 
     public void winLevelLogic()
     {
-        
+        try
+        {
+            audioManager.PlaySFX(audioManager.winLevel);
+            audioManager.musicSource.Stop();
+        }
+        catch { }
+
         badgeUnlockGO.SetActive(false);
         winLevel.SetActive(true);
         lvlCompleted.text = "LEVEL <color=yellow><b>" + levelSelected.ToString() + "</b></color> COMPLETED!";

@@ -385,4 +385,15 @@ public class GTS_LevelSelect : MonoBehaviour
     {
         SceneManager.LoadScene("GTAFS_Game");
     }
+    public GameObject badgePreview;
+    public void showBadge()
+    {
+        playConfirm.SetActive(false);
+        badgePreview.SetActive(true);
+    }
+    public void hideBadge()
+    {
+        playConfirm.SetActive(true);
+        badgePreview.SetActive(false);
+    }
 }
